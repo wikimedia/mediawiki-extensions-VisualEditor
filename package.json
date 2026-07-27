@@ -21,7 +21,7 @@
 		"@wdio/mocha-framework": "9.15.0",
 		"@wdio/spec-reporter": "9.23.2",
 		"api-testing": "1.7.1",
-		"eslint-config-wikimedia": "0.31.0",
+		"eslint-config-wikimedia": "0.32.4",
 		"eslint-plugin-local": "^4.2.2",
 		"grunt": "1.6.2",
 		"grunt-banana-checker": "0.13.0",
@@ -37,7 +37,7 @@
 		"selenium-webdriver": "3.6.0",
 		"stringify-object": "3.2.2",
 		"stylelint-config-wikimedia": "0.18.0",
-		"svgo": "4.0.1",
+		"svgo": "4.0.2",
 		"wdio-mediawiki": "5.1.0"
 	}
 }

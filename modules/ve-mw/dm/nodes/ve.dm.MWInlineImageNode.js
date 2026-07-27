@@ -201,10 +201,8 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 		originalClasses &&
 		ve.compare( originalClasses.trim().split( /\s+/ ).sort(), classes.sort() )
 	) {
-		// eslint-disable-next-line mediawiki/class-doc
 		container.className = originalClasses;
 	} else if ( classes.length > 0 ) {
-		// eslint-disable-next-line mediawiki/class-doc
 		container.className = classes.join( ' ' );
 	}
 
@@ -213,12 +211,10 @@ ve.dm.MWInlineImageNode.static.toDomElements = function ( dataElement, doc, conv
 	}
 
 	if ( attributes.imgWrapperClassAttr ) {
-		// eslint-disable-next-line mediawiki/class-doc
 		imgWrapper.className = attributes.imgWrapperClassAttr;
 	}
 
 	if ( attributes.imageClassAttr ) {
-		// eslint-disable-next-line mediawiki/class-doc
 		img.className = attributes.imageClassAttr;
 	}
 

@@ -158,7 +158,6 @@
 					}
 					if ( options[ 'title-message' ] ) {
 						// Not used in core
-						// eslint-disable-next-line mediawiki/msg-doc
 						title = mw.message( options[ 'title-message' ] ).text();
 					}
 					// The following messages are used here:
