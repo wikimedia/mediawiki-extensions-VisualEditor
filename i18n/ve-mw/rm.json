@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Albinfo",
+			"Bild-Sprache",
 			"Kazu89",
 			"Terfili"
 		]
@@ -10,7 +11,7 @@
 	"tooltip-ca-editsource": "Modifitgar il code da funtauna da questa pagina",
 	"tooltip-ca-createsource": "Crear il code da funtauna da questa pagina",
 	"visualeditor-advancedsettings-tool": "Configuraziun avanzada",
-	"visualeditor-ca-createlocaldescriptionsource": "Agiuntar funtauna a la descripziun locala",
+	"visualeditor-ca-createlocaldescriptionsource": "Agiuntar la funtauna per la descripziun locala",
 	"visualeditor-ca-createsource": "Crear il code",
 	"visualeditor-ca-editsource": "Modifitgar il code",
 	"visualeditor-ca-editsource-section": "modifitgar il code",

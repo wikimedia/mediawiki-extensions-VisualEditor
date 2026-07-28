@@ -28,6 +28,7 @@
 	"editcheck-dialog-addref-reject-other": "Outro",
 	"editcheck-dialog-addref-success-notify": "Grazas por engadires unha cita!",
 	"editcheck-dialog-addref-title": "Engadir unha cita",
+	"editcheck-citationneeded-footer": "Denunciado por un editor",
 	"editcheck-dialog-title": "Antes de publicares",
 	"editcheck-copyvio-title": "Contido pegado",
 	"editcheck-copyvio-description": "Evita copiar textos doutras fontes, mesmo se as reformulas ou citas. Isto adoita considerarse [{{int:editcheck-copyvio-descriptionlink}} unha violación dos dereitos de autoría ou un plaxio] e pode resultar na eliminación do contido ou no bloqueo da túa conta.",

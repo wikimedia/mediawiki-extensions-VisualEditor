@@ -39,6 +39,7 @@
 	"editcheck-dialog-addref-reject-other": "其他",
 	"editcheck-dialog-addref-success-notify": "感谢您添加引证！",
 	"editcheck-dialog-addref-title": "添加引证",
+	"editcheck-citationneeded-footer": "由编者报告",
 	"editcheck-dialog-title": "发布前",
 	"editcheck-copyvio-title": "粘贴的内容",
 	"editcheck-copyvio-description": "请避免从其他来源复制文字；即便已经改写或注明出处。此举可能被视为[{{int:editcheck-copyvio-descriptionlink}} 版权侵权或剽窃行为]，致使您的内容遭移除或账号被封禁。",
