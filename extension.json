@@ -1781,6 +1781,7 @@
 				"modules/ve-mw/ui/widgets/ve.ui.MWCategoryItemWidget.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWCategoryWidget.js",
 				"modules/ve-mw/ui/ve.ui.MWMetaDialogPageFactory.js",
+				"modules/ve-mw/ui/ve.ui.MWMetaPage.js",
 				"modules/ve-mw/ui/pages/ve.ui.MWCategoriesPage.js",
 				"modules/ve-mw/ui/pages/ve.ui.MWSettingsPage.js",
 				"modules/ve-mw/ui/pages/ve.ui.MWAdvancedSettingsPage.js",

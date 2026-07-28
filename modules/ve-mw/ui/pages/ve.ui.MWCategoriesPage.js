@@ -9,7 +9,7 @@
  * MediaWiki meta dialog categories page.
  *
  * @class
- * @extends OO.ui.PageLayout
+ * @extends ve.ui.MWMetaPage
  *
  * @constructor
  * @param {string} name Unique symbolic name of page
@@ -80,13 +80,11 @@ ve.ui.MWCategoriesPage = function VeUiMWCategoriesPage( name, config = {} ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWCategoriesPage, OO.ui.PageLayout );
+OO.inheritClass( ve.ui.MWCategoriesPage, ve.ui.MWMetaPage );
 
 /* Static Properties */
 
 ve.ui.MWCategoriesPage.static.name = 'categories';
-
-ve.ui.MWCategoriesPage.static.modes = [ 'visual' ];
 
 /* Methods */
 
@@ -224,13 +222,7 @@ ve.ui.MWCategoriesPage.prototype.getCategoryItemForInsertion = function ( item, 
 };
 
 /**
- * Setup categories page.
- *
- * @param {ve.dm.SurfaceFragment} fragment Surface fragment
- * @param {Object} [config]
- * @param {Object} [config.data] Dialog setup data
- * @param {boolean} [config.isReadOnly=false] Dialog is in read-only mode
- * @return {jQuery.Promise}
+ * @inheritdoc
  */
 ve.ui.MWCategoriesPage.prototype.setup = function ( fragment, config = {} ) {
 	this.fragment = fragment;
@@ -267,9 +259,7 @@ ve.ui.MWCategoriesPage.prototype.focus = function () {
 };
 
 /**
- * Tear down the page. This is called when the MWMetaDialog is torn down.
- *
- * @param {Object} [data] Dialog tear down data
+ * @inheritdoc
  */
 ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 	const currentDefaultSortKeyItem = this.getDefaultSortKeyItem(),
@@ -312,6 +302,9 @@ ve.ui.MWCategoriesPage.prototype.teardown = function ( data ) {
 	this.fragment = null;
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.MWCategoriesPage.prototype.getFieldsets = function () {
 	return [
 		this.categoriesFieldset,

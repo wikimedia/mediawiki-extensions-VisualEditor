@@ -9,7 +9,7 @@
  * MediaWiki meta dialog TemplatesUsed page.
  *
  * @class
- * @extends OO.ui.PageLayout
+ * @extends ve.ui.MWMetaPage
  *
  * @constructor
  * @param {string} name Unique symbolic name of page
@@ -61,7 +61,7 @@ ve.ui.MWTemplatesUsedPage = function VeUiMWTemplatesUsedPage() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWTemplatesUsedPage, OO.ui.PageLayout );
+OO.inheritClass( ve.ui.MWTemplatesUsedPage, ve.ui.MWMetaPage );
 
 /* Static Properties */
 
@@ -88,6 +88,9 @@ ve.ui.MWTemplatesUsedPage.prototype.focus = function () {
 	this.$element[ 0 ].focus();
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTemplatesUsedPage.prototype.getFieldsets = function () {
 	return [
 		this.templatesUsedFieldset

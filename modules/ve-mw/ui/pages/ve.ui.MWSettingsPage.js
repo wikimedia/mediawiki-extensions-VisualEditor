@@ -9,7 +9,7 @@
  * MediaWiki meta dialog settings page.
  *
  * @class
- * @extends OO.ui.PageLayout
+ * @extends ve.ui.MWMetaPage
  *
  * @constructor
  * @param {string} name Unique symbolic name of page
@@ -153,13 +153,11 @@ ve.ui.MWSettingsPage = function VeUiMWSettingsPage( name, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWSettingsPage, OO.ui.PageLayout );
+OO.inheritClass( ve.ui.MWSettingsPage, ve.ui.MWMetaPage );
 
 /* Static Properties */
 
 ve.ui.MWSettingsPage.static.name = 'settings';
-
-ve.ui.MWSettingsPage.static.modes = [ 'visual' ];
 
 /* Allow extra meta item checkboxes to be added by extensions etc. */
 ve.ui.MWSettingsPage.static.extraMetaCheckboxes = [];
@@ -279,13 +277,7 @@ ve.ui.MWSettingsPage.prototype.getMetaItem = function ( name ) {
 };
 
 /**
- * Setup settings page.
- *
- * @param {ve.dm.SurfaceFragment} fragment Surface fragment
- * @param {Object} config
- * @param {Object} [config.data] Dialog setup data
- * @param {boolean} [config.isReadOnly=false] Dialog is in read-only mode
- * @return {jQuery.Promise}
+ * @inheritdoc
  */
 ve.ui.MWSettingsPage.prototype.setup = function ( fragment, config ) {
 	this.fragment = fragment;
@@ -327,9 +319,7 @@ ve.ui.MWSettingsPage.prototype.setup = function ( fragment, config ) {
 };
 
 /**
- * Tear down settings page.
- *
- * @param {Object} [data] Dialog tear down data
+ * @inheritdoc
  */
 ve.ui.MWSettingsPage.prototype.teardown = function ( data = {} ) {
 	if ( data.action !== 'done' ) {

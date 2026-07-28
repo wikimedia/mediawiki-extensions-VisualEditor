@@ -96,7 +96,7 @@ ve.ui.MWMetaDialog.prototype.getAllWidgets = function () {
 
 	// eslint-disable-next-line no-jquery/no-each-util
 	$.each( this.bookletLayout.pages, ( pageName, page ) => {
-		const fieldsets = page.getFieldsets ? page.getFieldsets() : [];
+		const fieldsets = page.getFieldsets();
 		fieldsets.forEach( ( fieldset, fieldsetIndex ) => {
 			fieldset.items.forEach( ( item, itemIndex ) => {
 				const widget = item.fieldWidget;
@@ -197,7 +197,7 @@ ve.ui.MWMetaDialog.prototype.updateActions = function () {
 	this.validationToken = token;
 
 	ve.promiseAll(
-		this.pages.map( ( page ) => page.isValid ? page.isValid() : true )
+		this.pages.map( ( page ) => page.isValid() )
 	).then( ( ...validities ) => {
 		if ( this.validationToken !== token ) {
 			return;
@@ -268,11 +268,9 @@ ve.ui.MWMetaDialog.prototype.getSetupProcess = function ( data = {} ) {
 				isReadOnly: this.isReadOnly()
 			};
 
-			// Let each page set itself up (not every page needs this)
+			// Optional per-page setup
 			this.pages.forEach( ( page ) => {
-				if ( page.setup ) {
-					promises.push( page.setup( surfaceModel.getFragment(), config ) );
-				}
+				promises.push( page.setup( surfaceModel.getFragment(), config ) );
 			} );
 			return ve.promiseAll( promises );
 		} )
@@ -315,11 +313,9 @@ ve.ui.MWMetaDialog.prototype.getReadyProcess = function ( data = {} ) {
 ve.ui.MWMetaDialog.prototype.getTeardownProcess = function ( data = {} ) {
 	return ve.ui.MWMetaDialog.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
-			// Let each page tear itself down (not every page needs this)
+			// Optional per-page teardown
 			this.pages.forEach( ( page ) => {
-				if ( page.teardown ) {
-					page.teardown( { action: data.action } );
-				}
+				page.teardown( { action: data.action } );
 			} );
 
 			this.bookletLayout.setPage( this.getDefaultPageName() );

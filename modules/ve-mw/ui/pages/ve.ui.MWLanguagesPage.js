@@ -9,7 +9,7 @@
  * MediaWiki meta dialog Languages page.
  *
  * @class
- * @extends OO.ui.PageLayout
+ * @extends ve.ui.MWMetaPage
  *
  * @constructor
  * @param {string} name Unique symbolic name of page
@@ -38,13 +38,11 @@ ve.ui.MWLanguagesPage = function VeUiMWLanguagesPage() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWLanguagesPage, OO.ui.PageLayout );
+OO.inheritClass( ve.ui.MWLanguagesPage, ve.ui.MWMetaPage );
 
 /* Static Properties */
 
 ve.ui.MWLanguagesPage.static.name = 'languages';
-
-ve.ui.MWLanguagesPage.static.modes = [ 'visual' ];
 
 /* Methods */
 

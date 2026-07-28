@@ -9,7 +9,7 @@
  * MediaWiki meta dialog advanced settings page.
  *
  * @class
- * @extends OO.ui.PageLayout
+ * @extends ve.ui.MWMetaPage
  *
  * @constructor
  * @param {string} name Unique symbolic name of page
@@ -134,13 +134,11 @@ ve.ui.MWAdvancedSettingsPage = function VeUiMWAdvancedSettingsPage( name, config
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MWAdvancedSettingsPage, OO.ui.PageLayout );
+OO.inheritClass( ve.ui.MWAdvancedSettingsPage, ve.ui.MWMetaPage );
 
 /* Static Properties */
 
 ve.ui.MWAdvancedSettingsPage.static.name = 'advancedSettings';
-
-ve.ui.MWAdvancedSettingsPage.static.modes = [ 'visual' ];
 
 /* Methods */
 
@@ -191,13 +189,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.onNewSectionEditLinkOptionChange = functi
 };
 
 /**
- * Setup settings page.
- *
- * @param {ve.dm.SurfaceFragment} fragment Surface fragment
- * @param {Object} config
- * @param {Object} [config.data] Dialog setup data
- * @param {boolean} [config.isReadOnly=false] Dialog is in read-only mode
- * @return {jQuery.Promise}
+ * @inheritdoc
  */
 ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( fragment, config ) {
 	this.fragment = fragment;
@@ -243,9 +235,7 @@ ve.ui.MWAdvancedSettingsPage.prototype.setup = function ( fragment, config ) {
 };
 
 /**
- * Tear down settings page.
- *
- * @param {Object} [data] Dialog tear down data
+ * @inheritdoc
  */
 ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data = {} ) {
 	if ( data.action !== 'done' ) {
@@ -349,6 +339,9 @@ ve.ui.MWAdvancedSettingsPage.prototype.teardown = function ( data = {} ) {
 	this.fragment = null;
 };
 
+/**
+ * @inheritdoc
+ */
 ve.ui.MWAdvancedSettingsPage.prototype.getFieldsets = function () {
 	return [
 		this.advancedSettingsFieldset
