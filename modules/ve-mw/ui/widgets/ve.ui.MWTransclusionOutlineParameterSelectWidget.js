@@ -163,9 +163,13 @@ ve.ui.MWTransclusionOutlineParameterSelectWidget.prototype.onCheckboxChange = fu
 	if ( item.isSelected() !== value ) {
 		// Note: This should have been named `toggle…` as it toggles the item's selection
 		// T430672
-		ve.track( 'activity.transclusion', {
-			action: value ? 'parameter-check' : 'parameter-uncheck'
-		} );
+		const isCitation = ve.init.target.activeTemplateDialogIsCitation;
+		const action = value ? 'parameter-check' : 'parameter-uncheck';
+
+		ve.track( 'activity.transclusion', { action } );
+		if ( isCitation ) {
+			ve.track( 'activity.transclusion-cite', { action } );
+		}
 		this.chooseItem( item );
 	}
 };

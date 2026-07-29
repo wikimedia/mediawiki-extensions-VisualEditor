@@ -111,9 +111,13 @@ ve.ui.MWExpandableContentElement.prototype.reset = function () {
  */
 ve.ui.MWExpandableContentElement.prototype.onButtonClick = function () {
 	// T430672
-	ve.track( 'activity.transclusion', {
-		action: this.collapsed ? 'parameter-expand' : 'parameter-collapse'
-	} );
+	const isCitation = ve.init.target.activeTemplateDialogIsCitation;
+	const action = this.collapsed ? 'parameter-expand' : 'parameter-collapse';
+
+	ve.track( 'activity.transclusion', { action } );
+	if ( isCitation ) {
+		ve.track( 'activity.transclusion-cite', { action } );
+	}
 
 	this.collapsed = !this.collapsed;
 	this.recalculateVisuals();

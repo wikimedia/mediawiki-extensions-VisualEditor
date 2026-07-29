@@ -35,6 +35,8 @@ ve.ui.MWTemplateDialog = function VeUiMWTemplateDialog( config ) {
 	this.altered = false;
 	this.canGoBack = false;
 	this.preventReselection = false;
+	// FIXME T430672 Temporary workaround for instrumentation to distinguish citation dialogs from generic transclusion dialogs
+	this.isCitation = this.constructor.static.name === 'cite';
 
 	this.confirmDialogs = new ve.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
 	$( OO.ui.getTeleportTarget() ).append( this.confirmDialogs.$element );
@@ -329,9 +331,13 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 	if ( blankRequired.length ) {
 		// T430672
 		ve.track( 'activity.transclusion', {
-			action: 'required-field-warning-shown',
-			missingCount: blankRequired.length
+			action: 'required-field-warning-shown'
 		} );
+		if ( this.isCitation ) {
+			ve.track( 'activity.transclusion-cite', {
+				action: 'required-field-warning-shown'
+			} );
+		}
 
 		this.confirmDialogs.openWindow( 'requiredparamblankconfirm', {
 			message: mw.msg(
@@ -349,12 +355,22 @@ ve.ui.MWTemplateDialog.prototype.checkRequiredParameters = function () {
 				ve.track( 'activity.transclusion', {
 					action: 'required-field-continue'
 				} );
+				if ( this.isCitation ) {
+					ve.track( 'activity.transclusion-cite', {
+						action: 'required-field-continue'
+					} );
+				}
 				deferred.resolve();
 			} else {
 				// T430672
 				ve.track( 'activity.transclusion', {
 					action: 'required-field-go-back'
 				} );
+				if ( this.isCitation ) {
+					ve.track( 'activity.transclusion-cite', {
+						action: 'required-field-go-back'
+					} );
+				}
 				deferred.reject();
 			}
 		} );
@@ -432,6 +448,7 @@ ve.ui.MWTemplateDialog.prototype.getSetupProcess = function ( data = {} ) {
 			// Properties
 			this.loaded = false;
 			this.altered = false;
+			ve.init.target.activeTemplateDialogIsCitation = this.isCitation;
 			this.transclusionModel = new ve.dm.MWTransclusionModel( this.getFragment().getDocument() );
 
 			// Events

@@ -58,7 +58,14 @@ OO.inheritClass( ve.ui.MWFloatingHelpElement, OO.ui.Element );
 ve.ui.MWFloatingHelpElement.prototype.onClick = function () {
 	if ( !this.helpButton.hasFlag( 'primary' ) ) {
 		// T430672
-		ve.track( 'activity.transclusion', { action: 'help-dialog-open' } );
+		const isCitation = ve.init.target.activeTemplateDialogIsCitation;
+		const action = 'help-dialog-open';
+
+		ve.track( 'activity.transclusion', { action } );
+		if ( isCitation ) {
+			ve.track( 'activity.transclusion-cite', { action } );
+		}
+
 		const window = this.windowManager.openWindow( this.helpDialog );
 
 		window.opening.then( this.updateButton.bind( this, true ) );

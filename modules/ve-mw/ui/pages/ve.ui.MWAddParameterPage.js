@@ -163,6 +163,11 @@ ve.ui.MWAddParameterPage.prototype.onParameterNameSubmitted = function () {
 	ve.track( 'activity.transclusion', {
 		action: 'add-unknown-parameter'
 	} );
+	if ( ve.init.target.activeTemplateDialogIsCitation ) {
+		ve.track( 'activity.transclusion-cite', {
+			action: 'add-unknown-parameter'
+		} );
+	}
 };
 
 /**

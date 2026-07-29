@@ -301,6 +301,11 @@ ve.ui.MWParameterPage.prototype.onValueInputChange = function () {
 
 	if ( !this.edited ) {
 		ve.track( 'activity.transclusion', { action: 'edit-parameter-value' } );
+		if ( ve.init.target.activeTemplateDialogIsCitation ) {
+			ve.track( 'activity.transclusion-cite', {
+				action: 'edit-parameter-value'
+			} );
+		}
 	}
 	this.edited = true;
 	this.parameter.setValue( value );

@@ -423,7 +423,13 @@ ve.ui.MWTransclusionOutlineTemplateWidget.prototype.filterParameters = function 
 	if ( query === '' ) {
 		this.hasInput = false;
 	} else if ( !this.hasInput ) {
-		ve.track( 'activity.transclusion', { action: 'search-input' } );
+		const isCitation = ve.init.target.activeTemplateDialogIsCitation;
+		const action = 'search-input';
+
+		ve.track( 'activity.transclusion', { action } );
+		if ( isCitation ) {
+			ve.track( 'activity.transclusion-cite', { action } );
+		}
 		this.hasInput = true;
 	}
 

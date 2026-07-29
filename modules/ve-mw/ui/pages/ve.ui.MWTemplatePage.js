@@ -106,6 +106,11 @@ ve.ui.MWTemplatePage = function VeUiMWTemplatePage( template, name, config ) {
 	this.$description.find( 'a[href]' )
 		.on( 'click', () => {
 			ve.track( 'activity.transclusion', { action: 'template-doc-link-click' } );
+			if ( ve.init.target.activeTemplateDialogIsCitation ) {
+				ve.track( 'activity.transclusion-cite', {
+					action: 'template-doc-link-click'
+				} );
+			}
 		} );
 
 	this.infoFieldset.$element

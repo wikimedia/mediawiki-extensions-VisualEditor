@@ -46,9 +46,14 @@ OO.inheritClass( ve.ui.MWTransclusionOutlineToggleUnusedWidget, OO.ui.ButtonWidg
  */
 ve.ui.MWTransclusionOutlineToggleUnusedWidget.prototype.onClick = function () {
 	// T430672
-	ve.track( 'activity.transclusion', {
-		action: !this.showUnusedFields ? 'hide-unused-parameters' : 'show-all-parameters'
-	} );
+	const isCitation = ve.init.target.activeTemplateDialogIsCitation;
+	const action = this.showUnusedFields ? 'hide-unused-parameters' : 'show-all-parameters';
+
+	ve.track( 'activity.transclusion', { action } );
+	if ( isCitation ) {
+		ve.track( 'activity.transclusion-cite', { action } );
+	}
+
 	this.toggleUnusedParameters( !this.showUnusedFields, true );
 };
 
