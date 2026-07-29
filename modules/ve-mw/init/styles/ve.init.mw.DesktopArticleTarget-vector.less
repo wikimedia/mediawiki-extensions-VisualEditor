@@ -22,8 +22,7 @@
 
 	margin: 0 -1rem;
 
-	> .ve-ce-surface .ve-ce-attachedRootNode,
-	> .ve-ui-surface-placeholder {
+	> .ve-ce-surface .ve-ce-attachedRootNode {
 		padding: 0 1rem;
 	}
 
@@ -39,13 +38,6 @@
 		margin-top: 1rem;
 	}
 
-	.mw-body & > .ve-ui-surface-placeholder > * {
-		/* Fix margin overlap */
-		margin-top: 0;
-		/* Placeholder doesn't need a border as well */
-		border: 0;
-	}
-
 	.ve-ui-sidebarDialog {
 		margin-right: 1rem;
 	}
@@ -55,8 +47,7 @@
 		@media screen and ( min-width: 982px ) {
 			margin: 0 -1.5rem;
 
-			> .ve-ce-surface .ve-ce-attachedRootNode,
-			> .ve-ui-surface-placeholder {
+			> .ve-ce-surface .ve-ce-attachedRootNode {
 				padding: 0 1.5rem;
 			}
 

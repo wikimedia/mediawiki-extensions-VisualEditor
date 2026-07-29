@@ -16,10 +16,7 @@
 	}
 }
 
-.ve-ui-surface .ve-ui-surface-placeholder {
+.ve-ui-surface .ve-ce-attachedRootNode > [ data-ve-placeholder ]::before {
 	opacity: 1;
-
-	& > * {
-		color: @color-placeholder;
-	}
+	color: @color-placeholder;
 }

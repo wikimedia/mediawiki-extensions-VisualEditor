@@ -11,8 +11,7 @@
 	// (see .content styles in Minerva)
 	margin-bottom: 1em;
 
-	> .ve-ce-surface .ve-ce-attachedRootNode,
-	> .ve-ui-surface-placeholder {
+	> .ve-ce-surface .ve-ce-attachedRootNode {
 		padding: 0;
 		margin-top: 1em;
 	}
@@ -96,15 +95,6 @@
 			flex: 0;
 			min-width: 2.75em;
 		}
-	}
-}
-
-@media screen and ( max-width: 767px ) {
-	.ve-init-mw-target-surface > .ve-ui-surface-placeholder > * {
-		/* Fix margin overlap */
-		margin-top: 0;
-		/* Placeholder doesn't need a border as well */
-		border: 0;
 	}
 }
 
