@@ -46,7 +46,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 
 	this.sections = [];
 	this.navigableActions = [];
-	this.hasSuggestionInSectionInitially = false;
+	this.hasActionInSectionInitially = false;
 
 	this.scrollIntoView = new ve.ui.EditCheckScrollIntoViewWidget();
 	this.scrollIntoView.connect( this, {
@@ -62,7 +62,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
 	if ( this.sections.length ) {
-		this.showDialogWithAction( this.sections[ 0 ].actions[ 0 ], { alignToTop: true, duration: 'slow' } );
+		this.scrollToNearestAction();
 		return;
 	}
 	// if no suggestions are available in this section, then a click should open the full page editor
@@ -108,7 +108,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		this.inBeforeSave = data.inBeforeSave;
 		this.surface = data.controller.surface;
 		this.fromSection = false;
-		this.scrollToNearestSuggestionDebounced = ve.debounce( this.scrollToNearestSuggestion.bind( this ), 500 );
+		this.scrollToNearestActionDebounced = ve.debounceWithTest( () => this.fromSection, this.scrollToNearestAction.bind( this ), 500 );
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 		this.controller.on( 'position', this.onPosition, null, this );
 		this.controller.on( 'focusAction', this.onFocusAction, null, this );
@@ -175,19 +175,18 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
 };
 
 /**
- * Scroll to the suggestion nearest the user's current position, defaulting to above
+ * Scroll to the action nearest the user's current position, defaulting to above
  */
-ve.ui.GutterSidebarEditCheckDialog.prototype.scrollToNearestSuggestion = function () {
-	if ( !this.fromSection ) {
-		return;
-	}
+ve.ui.GutterSidebarEditCheckDialog.prototype.scrollToNearestAction = function () {
 	this.fromSection = false;
 	this.controller.originSection = null;
-	const nearestSuggestions = this.findNearestSurroundingSuggestions();
-	// Default to scrolling to the suggestion above, to stay consistent with the button's arrow behavior
-	const suggestionToFocus = nearestSuggestions.above ? nearestSuggestions.above : nearestSuggestions.below;
-	if ( suggestionToFocus ) {
-		this.showDialogWithAction( suggestionToFocus, { alignToTop: true } );
+	const nearestActions = this.findNearestActions();
+	if ( nearestActions ) {
+		// Default to scrolling to the action above, to stay consistent with the button's arrow behavior
+		const actionToFocus = nearestActions.above ? nearestActions.above : nearestActions.below;
+		if ( actionToFocus ) {
+			this.showDialogWithAction( actionToFocus, { alignToTop: true, duration: 'slow' } );
+		}
 	}
 };
 
@@ -202,7 +201,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.setOutsideSectionState = function (
 	}
 	this.controller.whenActionsSettled().then( () => {
 		const outsideSectionState = {
-			enabled: !this.hasSuggestionInSectionInitially,
+			enabled: !this.hasActionInSectionInitially,
 			hasAbove: !!this.controller.editFullPageIndicatorTop.isVisible(),
 			hasBelow: !!this.controller.editFullPageIndicatorBottom.isVisible()
 		};
@@ -287,8 +286,8 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 		}
 		widget.setPosition( section.rect );
 		this.widgets.push( widget );
-		if ( this.scrollIntoView && widget.actions.some( ( action ) => action.isSuggestion() ) ) {
-			this.hasSuggestionInSectionInitially = true;
+		if ( this.scrollIntoView ) {
+			this.hasActionInSectionInitially = true;
 			this.scrollIntoView.observe( widget.$element[ 0 ] );
 		}
 
@@ -310,9 +309,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 	// After the loop, so the icons' measurements don't interleave with its writes
 	this.widgets.forEach( ( widget ) => widget.updateSticky() );
 	this.setOutsideSectionState();
-	if ( this.fromSection ) {
-		this.scrollToNearestSuggestionDebounced();
-	}
+	this.scrollToNearestActionDebounced();
 };
 
 /**
@@ -342,54 +339,17 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( a
  *
  * @return {{above: mw.editcheck.EditCheckAction|null, below: mw.editcheck.EditCheckAction|null}}
  */
-ve.ui.GutterSidebarEditCheckDialog.prototype.findNearestSurroundingSuggestions = function () {
+ve.ui.GutterSidebarEditCheckDialog.prototype.findNearestActions = function () {
 	if ( !this.surface ) {
 		return null;
 	}
+	const actionRects = [];
 
-	const scrollContainer = this.controller.getTarget().$scrollContainer[ 0 ];
-	const anchorY = scrollContainer.scrollTop + ( scrollContainer.clientHeight / 2 );
-
-	let nearestSuggestionAbove = null;
-	let nearestSuggestionBelow = null;
-	let nearestDistanceAbove = Infinity;
-	let nearestDistanceBelow = Infinity;
-
+	// create action/rect pairs for the first action in all sections
 	this.sections.forEach( ( section ) => {
-		const suggestions = section.actions.filter( ( action ) => action.isSuggestion() );
-		if ( !suggestions.length ) {
-			return;
-		}
-
-		const rect = section.rect;
-
-		// Get distance from viewport center to this suggestion's rect
-		let distance = 0;
-		let isAbove = false;
-		if ( rect.bottom < anchorY ) {
-			distance = anchorY - rect.bottom;
-			isAbove = true;
-		} else if ( rect.top > anchorY ) {
-			distance = rect.top - anchorY;
-		} else {
-			// Already intersects viewport center
-			distance = 0;
-			isAbove = true;
-		}
-
-		if ( isAbove ) {
-			if ( distance < nearestDistanceAbove ) {
-				nearestDistanceAbove = distance;
-				nearestSuggestionAbove = suggestions[ 0 ];
-			}
-		} else {
-			if ( distance < nearestDistanceBelow ) {
-				nearestDistanceBelow = distance;
-				nearestSuggestionBelow = suggestions[ 0 ];
-			}
-		}
+		actionRects.push( { item: section.actions[ 0 ], rect: section.rect } );
 	} );
-	return { above: nearestSuggestionAbove, below: nearestSuggestionBelow };
+	return mw.editcheck.findNearestByRect( actionRects, this.surface );
 };
 
 /* Registration */

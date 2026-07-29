@@ -151,6 +151,50 @@ mw.editcheck.flattenArray = function ( arr, depth = 1 ) {
 };
 
 /**
+ * Given item/rect pairs, find nearest surrounding items to user's current position
+ *
+ * Note: This was created for finding the nearest EditCheckActions, but doesn't do
+ * anything specific to actions or suggestions, so we'll keep it generic.
+ *
+ * @param {Array.<{item: any, rect: DOMRect|Object}>} itemRects
+ * @param {ve.ui.Surface} surface
+ * @return {{above: any, below: any}}
+ */
+mw.editcheck.findNearestByRect = function ( itemRects, surface ) {
+	const nearest = { above: null, below: null };
+
+	const dimensions = surface.getViewportDimensions();
+	if ( !dimensions ) {
+		return nearest;
+	}
+	const anchorY = dimensions.top + dimensions.height / 2;
+
+	// Callers order by start offset of the entire action, which isn't top order once an item has several rects
+	const sorted = itemRects.slice().sort( ( a, b ) => a.rect.top - b.rect.top );
+
+	// Bottoms aren't in order, as items vary in length, so every item before the anchor
+	// stays a candidate for nearest above
+	let nearestDistance = Infinity;
+	for ( const { item, rect } of sorted ) {
+		// Sorted, so the first item starting past the anchor is the nearest below,
+		// and nothing after it can be above
+		if ( rect.top > anchorY ) {
+			nearest.below = item;
+			break;
+		}
+		// Zero when the item covers the anchor
+		const distance = Math.max( 0, anchorY - rect.bottom );
+		// <= so the latest of equally near items wins, being the one starting nearest
+		if ( distance <= nearestDistance ) {
+			nearestDistance = distance;
+			nearest.above = item;
+		}
+	}
+
+	return nearest;
+};
+
+/**
  * Apply uppercasing rules to a phrase, using another string as a model
  *
  * Either the phrase is fully uppercased, or just initial letters are uppercased, or no change,

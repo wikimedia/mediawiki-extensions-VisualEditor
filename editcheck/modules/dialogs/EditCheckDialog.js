@@ -117,7 +117,7 @@ ve.ui.EditCheckDialog.prototype.initialize = function () {
  * Handle click events from scroll-into-view's show button.
  */
 ve.ui.EditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
-	this.controller.focusAction( this.currentActions[ 0 ], true, { alignToTop: true, duration: 'slow' } );
+	this.scrollToNearestAction();
 };
 
 /**
@@ -258,7 +258,7 @@ ve.ui.EditCheckDialog.prototype.renderAction = function ( action ) {
 	action.off( 'act', this.onAct, this ).on( 'act', this.onAct, [ action, widget ], this );
 
 	this.$actions.append( widget.$element );
-	if ( this.scrollIntoView && action.isSuggestion() ) {
+	if ( this.scrollIntoView ) {
 		this.scrollIntoView.observe( widget.$element[ 0 ] );
 	}
 };
@@ -547,6 +547,46 @@ ve.ui.EditCheckDialog.prototype.navigateToAdjacentAction = function ( next ) {
 		this.controller.setIgnoreNextSelectionChange();
 		action.select( this.surface, false, false );
 	}
+};
+
+/**
+ * Scroll to the action nearest the user's current position, defaulting to above
+ */
+ve.ui.EditCheckDialog.prototype.scrollToNearestAction = function () {
+	const nearestActions = this.findNearestActions();
+	if ( nearestActions ) {
+		// Default to scrolling to the action above, to stay consistent with the button's arrow behavior
+		const actionToFocus = nearestActions.above ? nearestActions.above : nearestActions.below;
+		if ( actionToFocus ) {
+			this.controller.focusAction( actionToFocus, true, { alignToTop: true, duration: 'slow' } );
+		}
+	}
+};
+
+/**
+ * Find nearest actions above and below user's current position
+ *
+ * @return {{above: mw.editcheck.EditCheckAction|null, below: mw.editcheck.EditCheckAction|null}}
+ */
+ve.ui.EditCheckDialog.prototype.findNearestActions = function () {
+	if ( !this.surface || this.currentActions === null ) {
+		return null;
+	}
+	const actionRects = [];
+	const surfaceView = this.surface.getView();
+
+	// create action/rect pairs for all current actions
+	this.currentActions.forEach( ( action ) => {
+		action.getHighlightSelections().forEach( ( selection ) => {
+			const selectionView = ve.ce.Selection.static.newFromModel( selection, surfaceView );
+			const rect = selectionView.getSelectionBoundingRect();
+			if ( !rect ) {
+				return;
+			}
+			actionRects.push( { item: action, rect } );
+		} );
+	} );
+	return mw.editcheck.findNearestByRect( actionRects, this.surface );
 };
 
 /* Command registration */
