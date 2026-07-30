@@ -229,6 +229,16 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	ve.track( 'trace.setupToolbar.enter', { mode } );
 
+	// The first geometry read after the surface is attached pays for the whole document's style
+	// recalc and layout, so it lands in whichever phase reads first (today the toolbar's window
+	// managers). Measure it here instead, behind ve.debug as this forces an extra layout pass.
+	if ( ve.debug ) {
+		ve.track( 'trace.surfaceLayout.enter', { mode } );
+		// Reading offsetHeight flushes the pending layout
+		const surfaceHeight = surface.getView().$element[ 0 ].offsetHeight;
+		ve.track( 'trace.surfaceLayout.exit', { mode, surfaceHeight } );
+	}
+
 	// Parent method
 	ve.init.mw.DesktopArticleTarget.super.prototype.setupToolbar.call( this, surface );
 
