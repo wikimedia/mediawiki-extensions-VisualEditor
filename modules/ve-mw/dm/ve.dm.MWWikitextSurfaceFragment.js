@@ -164,9 +164,17 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertFromSource = function ( source 
 			ve.dm.Document.static.newBlankDocument()
 		).promise();
 	} else {
-		parsePromise = ve.init.target.parseWikitextFragment( source, false, this.getDocument() ).then( ( response ) => ve.dm.converter.getModelFromDom(
-			ve.createDocumentFromHtml( response.visualeditor.content )
-		) );
+		parsePromise = ve.init.target.parseWikitextFragment( source, false, this.getDocument() )
+			.then( ( response ) => ve.dm.converter.getModelFromDom(
+				ve.createDocumentFromHtml( response.visualeditor.content )
+			) )
+			// Callers cannot recover from this and none of them report it: ve.ui.WindowAction#open
+			// chains window opening off this promise with no failure handler, so a failed parse
+			// just means the window never appears. Log it so the cause is discoverable.
+			.then( null, ( ...error ) => {
+				mw.log.error( 'VisualEditor: failed to convert wikitext fragment', ...error );
+				return ve.createDeferred().reject( ...error ).promise();
+			} );
 	}
 
 	// TODO: Show progress bar without breaking WindowAction
