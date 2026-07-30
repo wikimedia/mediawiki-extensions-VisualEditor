@@ -388,6 +388,7 @@
 	"visualeditor-loaderror-wrongmode": "Düzenleyiciyi yanlış modda yüklemeyi denedi (veri türü: \"$1\", düzenleyici modu: \"$2\").",
 	"visualeditor-settings-tool": "Sayfa ayarları",
 	"visualeditor-special-characters-group-other": "Sık kullanılan",
+	"visualeditor-templatecompletion-header": "Şablon ekle:",
 	"visualeditor-templatesused-tool": "Kullanılan şablonlar",
 	"visualeditor-title-error": "Geçersiz başlık.",
 	"visualeditor-toload": "Düzenleyici şimdi yüklenecek. Birkaç saniye sonra bu iletiyi görmeye devam ederseniz, lütfen [$1 sayfayı yenileyin].",
