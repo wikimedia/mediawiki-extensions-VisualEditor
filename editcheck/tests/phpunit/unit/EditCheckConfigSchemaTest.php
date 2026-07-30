@@ -11,7 +11,7 @@ use MediaWikiUnitTestCase;
 class EditCheckConfigSchemaTest extends MediaWikiUnitTestCase {
 
 	private function loadSchema() {
-		$schemaPath = __DIR__ . '/../../../editcheck/editcheck-config.schema.json';
+		$schemaPath = __DIR__ . '/../../../editcheck-config.schema.json';
 		$schema = json_decode( file_get_contents( $schemaPath ) );
 
 		$this->assertNotFalse( $schema, 'Failed to read schema file' );

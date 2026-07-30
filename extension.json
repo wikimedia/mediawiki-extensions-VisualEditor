@@ -278,6 +278,7 @@
 		],
 		"SkinEditSectionLinks": "VisualEditorHooks",
 		"SkinTemplateNavigation::Universal": "VisualEditorHooks",
+		"UnitTestsList": "EditCheckHooks",
 		"UserLoggedIn": "VisualEditorHooks"
 	},
 	"HookHandlers": {

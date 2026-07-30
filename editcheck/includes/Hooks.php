@@ -13,6 +13,7 @@ namespace MediaWiki\Extension\VisualEditor\EditCheck;
 use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\Content\TextContent;
 use MediaWiki\Extension\VisualEditor\MediaWikiJsonSchemaValidator;
+use MediaWiki\Hook\UnitTestsListHook;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
@@ -29,8 +30,16 @@ class Hooks implements
 	ResourceLoaderRegisterModulesHook,
 	GetPreferencesHook,
 	PreferencesFormPreSaveHook,
-	MultiContentSaveHook
+	MultiContentSaveHook,
+	UnitTestsListHook
 {
+
+	/**
+	 * @param string[] &$paths
+	 */
+	public function onUnitTestsList( &$paths ) {
+		$paths[] = dirname( __DIR__ ) . '/tests/phpunit';
+	}
 
 	public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
 		$services = MediaWikiServices::getInstance();
