@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\VisualEditor\Tests;
+namespace MediaWiki\Extension\VisualEditor\EditCheck\Tests\Unit;
 
 use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\Content\JsonContent;

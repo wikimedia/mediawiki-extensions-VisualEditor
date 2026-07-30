@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\VisualEditor\Tests\Unit\EditSuggestionCounts;
+namespace MediaWiki\Extension\VisualEditor\EditCheck\Tests\Unit\EditSuggestionCounts;
 
 use InvalidArgumentException;
 use MediaWiki\Extension\VisualEditor\EditCheck\EditSuggestionCounts\EditSuggestionCountsConfig;

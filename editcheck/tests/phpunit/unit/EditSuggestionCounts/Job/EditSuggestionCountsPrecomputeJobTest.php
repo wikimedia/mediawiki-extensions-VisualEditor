@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\VisualEditor\Tests\Unit\EditSuggestionCounts\Job;
+namespace MediaWiki\Extension\VisualEditor\EditCheck\Tests\Unit\EditSuggestionCounts\Job;
 
 use MediaWiki\Extension\VisualEditor\EditCheck\EditSuggestionCounts\EditSuggestionCountsConfig;
 use MediaWiki\Extension\VisualEditor\EditCheck\EditSuggestionCounts\Job\EditSuggestionCountsPrecomputeJob;

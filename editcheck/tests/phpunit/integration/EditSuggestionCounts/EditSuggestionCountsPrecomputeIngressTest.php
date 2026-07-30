@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\VisualEditor\Tests\Integration\EditSuggestionCounts;
+namespace MediaWiki\Extension\VisualEditor\EditCheck\Tests\Integration\EditSuggestionCounts;
 
 use MediaWiki\Extension\VisualEditor\EditCheck\EditSuggestionCounts\EditSuggestionCountsConfig;
 use MediaWiki\Extension\VisualEditor\EditCheck\EditSuggestionCounts\EditSuggestionCountsPrecomputeIngress;
