@@ -48,6 +48,7 @@
 	"editcheck-reject-description": "Другим редакторам было бы важно узнать, почему вы сделали именно такой выбор.",
 	"editcheck-review-title": "Проверить изменения",
 	"tag-editcheck-reference-decline-common-knowledge": "Проверка правок (источники) отклонена (общеизвестно)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Источник EditCheck был отклонён как общеизвестный факт",
 	"tag-editcheck-reference-decline-irrelevant": "Проверка правок (источники) отклонена (неуместно)",
 	"tag-editcheck-reference-decline-other": "Проверка правок (источники) отклонена (другое)",
 	"tag-editcheck-reference-decline-uncertain": "Проверка правок (источники) отклонена (неясно)"
