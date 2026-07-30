@@ -378,9 +378,10 @@ ve.dm.MWTransclusionNode.static.escapeParameter = function ( param ) {
  *
  * @static
  * @param {Object} content MW data content
+ * @param {boolean} [skipParameters=false] Exclude parameters from result
  * @return {string} Wikitext
  */
-ve.dm.MWTransclusionNode.static.getWikitext = function ( content ) {
+ve.dm.MWTransclusionNode.static.getWikitext = function ( content, skipParameters ) {
 	let wikitext = '';
 
 	// Normalize to multi template format
@@ -394,9 +395,11 @@ ve.dm.MWTransclusionNode.static.getWikitext = function ( content ) {
 			// Template
 			const template = part.template;
 			wikitext += '{{' + template.target.wt;
-			for ( const param in template.params ) {
-				wikitext += '|' + param + '=' +
-					this.escapeParameter( template.params[ param ].wt );
+			if ( !skipParameters ) {
+				for ( const param in template.params ) {
+					wikitext += '|' + param + '=' +
+						this.escapeParameter( template.params[ param ].wt );
+				}
 			}
 			wikitext += '}}';
 		} else {
@@ -488,11 +491,12 @@ ve.dm.MWTransclusionNode.prototype.getPartsList = function () {
 /**
  * Wrapper for static method, {@link ve.dm.MWTransclusionNode.static.getWikitext} above.
  *
+ * @param {boolean} skipParameters Exclude parameters from result
  * @return {string} Wikitext
  */
-ve.dm.MWTransclusionNode.prototype.getWikitext = function () {
+ve.dm.MWTransclusionNode.prototype.getWikitext = function ( skipParameters ) {
 	try {
-		return this.constructor.static.getWikitext( this.getAttribute( 'mw' ) );
+		return this.constructor.static.getWikitext( this.getAttribute( 'mw' ), skipParameters );
 	} catch ( e ) {
 		let message;
 		const originalDomElements = this.getOriginalDomElements( this.getStore() );

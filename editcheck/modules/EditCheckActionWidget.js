@@ -40,8 +40,9 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	mw.editcheck.trackActionLinks( this.message.$element, this.name, 'click-learn-more' );
 	ve.targetLinksToNewWindow( this.message.$element[ 0 ] );
 
-	this.prompt = config.prompt && new OO.ui.LabelWidget( {
-		label: config.prompt,
+	const resolvedPrompt = OO.ui.resolveMsg( config.prompt );
+	this.prompt = resolvedPrompt && new OO.ui.LabelWidget( {
+		label: resolvedPrompt,
 		classes: [ 've-ui-editCheckActionWidget-prompt' ]
 	} );
 	this.$actions = $( '<div>' ).addClass( 've-ui-editCheckActionWidget-actions oo-ui-element-hidden' );

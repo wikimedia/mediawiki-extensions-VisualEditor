@@ -195,6 +195,24 @@ mw.editcheck.TextMatchEditCheck.static.ensureMatchRulesLoaded = function () {
 	return this.matchRulesPromise;
 };
 
+/**
+ * Create a prompt for a replacement dialog, if within length limits
+ *
+ * @param {string} foundText
+ * @param {string} replacement
+ * @return {string} prompt text
+ */
+mw.editcheck.TextMatchEditCheck.static.createReplacementPrompt = function ( foundText, replacement ) {
+	if (
+		replacement &&
+		foundText.length <= replaceTextLengthLimit &&
+		replacement.length <= replaceTextLengthLimit
+	) {
+		return ve.msg( 'editcheck-textmatch-replace', foundText, replacement );
+	}
+	return undefined;
+};
+
 /* Methods */
 
 /**
@@ -287,13 +305,16 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 									continue;
 								}
 								const term = surfaceModel.getLinearFragment( range ).getText();
-								const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
-								// To get the replacement using regex, we need to pass in the original pattern
-								let replacement = term.replace( regex, replacer );
-								if ( matchRule.preserveCase ) {
-									replacement = mw.editcheck.applyCase( replacement, term, this.lang );
+								// Regex replacements require special handling because the matched range may contain
+								// inline objects that getText() skips but that occupy positions in the linear data
+								// Note: the reason we call this here instead of act() is to display the replacement correctly in the action dialog
+								const replacementConfig = this.getRegexReplacementData( range, regex, replacer, matchRule.preserveCase, surfaceModel );
+								// if no valid replacement was generated, do nothing
+								if ( replacementConfig.replacement === undefined ) {
+									continue;
 								}
-								actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
+								const fragment = matchRule.getExpandedFragment( surfaceModel.getLinearFragment( range ) );
+								actions.push( this.buildAction( matchRule, fragment, term, tagName, replacementConfig ) );
 							}
 						} );
 						continue;
@@ -351,7 +372,7 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
 								replacement = mw.editcheck.applyCase( replacement, term, this.lang );
 							}
 						}
-						actions.push( this.buildAction( matchRule, fragment, term, replacement, tagName ) );
+						actions.push( this.buildAction( matchRule, fragment, term, tagName, { replacement } ) );
 					}
 				} catch ( e ) {
 					// Probably a regexp creation issue
@@ -366,22 +387,23 @@ mw.editcheck.TextMatchEditCheck.prototype.handleListener = function ( surfaceMod
  * Build a TextMatchEditCheckAction
  *
  * @param {mw.editcheck.TextMatchEditCheck} matchRule
- * @param {ve.dm.LinearFragment} fragment fragment that the match covers, after optional expansion
- * @param {string} term individual term that triggered the match, before optional expansion
- * @param {string} replacement word or phrase to use as the replacement, if action allows
- * @param {string} tagName unique tag name for this matchRule+term pair
+ * @param {ve.dm.LinearFragment} fragment Fragment that the match covers, after optional expansion
+ * @param {string} term Individual term that triggered the match, before optional expansion
+ * @param {string} tagName Unique tag name for this matchRule+term pair
+ * @param {Object} [replacementConfig] Configuration for the replacement
+ * @param {string} [replacementConfig.replacement] Word or phrase to use as the replacement
+ * @param {ve.dm.LinearFragment|undefined} [replacementConfig.replacementFragment] Optional fragment that the narrowed replacement covers
+ * @param {function(): (string|undefined)|undefined} [replacementConfig.defaultPrompt] Optional special prompt to display
+ *
  * @return {mw.editcheck.TextMatchEditCheckAction}
  */
-mw.editcheck.TextMatchEditCheck.prototype.buildAction = function ( matchRule, fragment, term, replacement, tagName ) {
-	let prompt;
-	const foundText = fragment.getText();
-	if ( matchRule.mode === 'replace' ) {
-		if (
-			replacement &&
-			foundText.length <= replaceTextLengthLimit &&
-			replacement.length <= replaceTextLengthLimit
-		) {
-			prompt = ve.msg( 'editcheck-textmatch-replace', foundText, replacement );
+mw.editcheck.TextMatchEditCheck.prototype.buildAction = function ( matchRule, fragment, term, tagName, replacementConfig ) {
+	const { replacement, replacementFragment, defaultPrompt } = replacementConfig || {};
+	let prompt = defaultPrompt;
+	if ( !prompt ) {
+		const foundText = fragment.getText();
+		if ( matchRule.mode === 'replace' ) {
+			prompt = this.constructor.static.createReplacementPrompt( foundText, replacement );
 		}
 	}
 	return new mw.editcheck.TextMatchEditCheckAction( {
@@ -394,7 +416,8 @@ mw.editcheck.TextMatchEditCheck.prototype.buildAction = function ( matchRule, fr
 		check: this,
 		mode: matchRule.mode,
 		matchRuleId: matchRule.id,
-		tagName
+		tagName,
+		replacementFragment
 	} );
 };
 
@@ -413,14 +436,111 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action, surfa
 			action.select( surface, true );
 			return;
 		case 'accept': {
-			const fragment = action.fragments[ 0 ];
-			fragment.insertContent( action.replacement, true );
+			const replacementFragment = action.replacementFragment || action.fragments[ 0 ];
+			replacementFragment.insertContent( action.replacement, true );
 			action.select( surface, true );
 			return;
 		}
 	}
 	// Parent method
 	return mw.editcheck.TextMatchEditCheck.super.prototype.act.apply( this, arguments );
+};
+
+/**
+ * Compute the replacement string, target fragment, and prompt for a regex match that contains objects
+ *
+ * We need special handling when the matched range contains inline objects like templates that getText() omits
+ * but that occupy positions in the linear data. To handle this, we narrow the replacement to only the portion
+ * that actually changed by chopping the parts that the term and the replacement have in common.
+ *
+ * For ex, "foo bar baz" -> "foo qux baz" would become "bar" -> "qux" only.
+ *
+ * @param {ve.Range} range Range of the match
+ * @param {RegExp} regex Compiled regex used to find the match
+ * @param {string|Function} replacer Replacement string from the matchRule
+ * @param {boolean} preserveCase If the replacement should match the case of the found term
+ * @param {ve.dm.SurfaceModel} surfaceModel
+ * @return {{ replacement: string, replacementFragment: ve.dm.SurfaceFragment, defaultPrompt: function(): (string|undefined) }|{}}
+ * (the narrowed string to insert, the narrowed fragment to insert it into, and the string to display in the prompt)
+ */
+mw.editcheck.TextMatchEditCheck.prototype.getRegexReplacementData = function ( range, regex, replacer, preserveCase, surfaceModel ) {
+	const fragment = surfaceModel.getLinearFragment( range );
+	const termWithElements = fragment.getText( '\uFFFC' );
+	// Now we can apply the substitution to the placeholder-substituted string
+	const rawReplacement = termWithElements.replace( regex, replacer );
+	const fullReplacement = preserveCase ?
+		mw.editcheck.applyCase( rawReplacement, termWithElements, this.lang ) :
+		rawReplacement;
+	if ( fullReplacement === termWithElements ) {
+		// No real change can be suggested
+		return {};
+	}
+	// Find the range where the replacement differs from the term
+	let prefix = 0, suffix = 0;
+	while ( prefix < termWithElements.length && termWithElements[ prefix ] === fullReplacement[ prefix ] ) {
+		prefix++;
+	}
+	while (
+		suffix < termWithElements.length - prefix &&
+		suffix < fullReplacement.length - prefix &&
+		termWithElements[ termWithElements.length - suffix - 1 ] === fullReplacement[ fullReplacement.length - suffix - 1 ]
+	) {
+		suffix++;
+	}
+
+	const doc = surfaceModel.getDocument();
+	// Get human-readable labels for the prompt, lazily; actions are built a lot and then
+	// discarded, and the node-lookups here are the expensive part of this.
+	// Any elements in the prompt will be represented as their template name or node type
+	const defaultPrompt = () => {
+		// The fragment translates with the document, so the offsets must be read now.
+		// The content must not have changed, or the placeholder positions in
+		// termWithElements will no longer line up with it.
+		if ( fragment.getText( '\uFFFC' ) !== termWithElements ) {
+			return undefined;
+		}
+		const currentRange = fragment.getSelection().getRange();
+		const elementLabels = [];
+		for ( let i = 0; i < termWithElements.length; i++ ) {
+			if ( termWithElements[ i ] === '\uFFFC' ) {
+				const offset = currentRange.start + i;
+				let label = '';
+				// Discard the closing tag, as we only need the open tag for grabbing template name(s)
+				if ( doc.data.isOpenElementData( offset ) ) {
+					try {
+						const node = doc.getDocumentNode().getNodeFromOffset( offset + 1 );
+						label = node instanceof ve.dm.MWTransclusionNode ? node.getWikitext( true ) : `<${ node.getType() }>`;
+					} catch ( e ) {
+						mw.log.warn( 'TextMatch edit check: Failed to get label for inline element', e );
+					}
+				}
+				elementLabels.push( label );
+			}
+		}
+		let j = 0;
+		const termForPrompt = termWithElements.replace( /\uFFFC/g, () => elementLabels[ j++ ] || '' );
+		j = 0;
+		const replacementForPrompt = fullReplacement.replace( /\uFFFC/g, () => elementLabels[ j++ ] || '' );
+		return this.constructor.static.createReplacementPrompt( termForPrompt, replacementForPrompt );
+	};
+	const newRange = new ve.Range( range.start + prefix, range.end - suffix );
+	if (
+		!doc.data.isContentOffset( newRange.start ) ||
+		!doc.data.isContentOffset( newRange.end )
+	) {
+		// A boundary landed inside an inline node
+		return {};
+	}
+	const replacement = fullReplacement.slice( prefix, fullReplacement.length - suffix );
+	if ( replacement.includes( '\uFFFC' ) ) {
+		// The replacement still references objects we can't reproduce as text
+		return {};
+	}
+	return {
+		replacement,
+		replacementFragment: surfaceModel.getLinearFragment( newRange ),
+		defaultPrompt
+	};
 };
 
 /* Registration */
@@ -442,6 +562,7 @@ mw.editcheck.editCheckFactory.register( mw.editcheck.TextMatchEditCheck );
  * @param {string} config.message Message for the action dialog
  * @param {string} config.replacement Word or phrase to use as the replacement, if action allows
  * @param {string} config.tagName Unique tag name for this matchRule+term pair
+ * @param {ve.dm.SurfaceFragment} [config.replacementFragment] Fragment to insert content into
  */
 mw.editcheck.TextMatchEditCheckAction = function MWTextMatchEditCheckAction( config ) {
 	mw.editcheck.TextMatchEditCheckAction.super.call( this, config );
@@ -452,6 +573,7 @@ mw.editcheck.TextMatchEditCheckAction = function MWTextMatchEditCheckAction( con
 	this.message = ve.deferJQueryMsg( msgkey );
 	this.replacement = config.replacement;
 	this.tagName = config.tagName;
+	this.replacementFragment = config.replacementFragment;
 };
 
 /* Inheritance */

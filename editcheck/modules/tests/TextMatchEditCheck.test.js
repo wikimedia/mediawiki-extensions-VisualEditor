@@ -81,6 +81,52 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			}
 		},
 		{
+			msg: 'Regex text replacement preserves case',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Avoid this term',
+					mode: 'replace',
+					preserveCase: true,
+					isRegExp: true,
+					query: {
+						Foo: 'Bar'
+					}
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'FOO',
+				{ type: '/paragraph' }
+			],
+			expectedActions: 1,
+			expectedTerms: [ 'FOO' ],
+			expectedData: ( data ) => {
+				data.splice( 1, 3, ...'BAR' );
+			}
+		},
+		{
+			msg: 'Regex replacement that only differs by case suggests nothing',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Avoid this term',
+					mode: 'replace',
+					preserveCase: true,
+					isRegExp: true,
+					query: {
+						foo: 'Foo'
+					}
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				...'FOO',
+				{ type: '/paragraph' }
+			],
+			expectedActions: 0
+		},
+		{
 			msg: 'Default to preserving case when case sensitive is not set',
 			matchRules: {
 				bad: {
@@ -257,6 +303,57 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			expectedData: ( data ) => {
 				data.splice( 5, 1 );
 			}
+		},
+		{
+			msg: 'Regex with replacements and objects',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Punctuation error.',
+					query: {
+						'([^\\d\\s]+)(—|\\s—|—\\s)([^\\d\\s]+)': '$1 — $3'
+					},
+					mode: 'replace',
+					isRegExp: true
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				{ type: 'alienInline' },
+				{ type: '/alienInline' },
+				'—',
+				{ type: 'alienInline' },
+				{ type: '/alienInline' },
+				{ type: '/paragraph' }
+			],
+			expectedTerms: [ '—' ],
+			expectedActions: 1,
+			expectedData: ( data ) => {
+				data.splice( 3, 1, ...' — ' );
+			}
+		},
+		{
+			msg: 'Regex with replacements and objects, both ends of the match change',
+			matchRules: {
+				bad: {
+					title: 'Bad',
+					message: 'Use guillemets',
+					query: {
+						'"([^"]*)"': '«$1»'
+					},
+					mode: 'replace',
+					isRegExp: true
+				}
+			},
+			data: [
+				{ type: 'paragraph' },
+				'"',
+				{ type: 'alienInline' },
+				{ type: '/alienInline' },
+				'"',
+				{ type: '/paragraph' }
+			],
+			expectedActions: 0
 		},
 		{
 			msg: 'Multiple rules, one invalid',
