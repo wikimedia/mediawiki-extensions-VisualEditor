@@ -31,6 +31,7 @@
 	"editcheck-dialog-addref-reject-other": "سایر",
 	"editcheck-dialog-addref-success-notify": "بابت افزودن یادکرد از شما ممنونیم!",
 	"editcheck-dialog-addref-title": "افزودن یک یادکرد",
+	"editcheck-citationneeded-footer": "گزارش‌شده توسط یک ویرایشگر",
 	"editcheck-dialog-title": "پیش از انتشار",
 	"editcheck-copyvio-title": "متن چسبانده‌شده",
 	"editcheck-copyvio-description": "لطفاً از کپی کردن متن از منابع دیگر بپرهیزید، حتی اگر تغییراتی در آن ایجاد کرده‌اید یا آن را ارجاع داده‌اید. این کار می‌تواند به‌عنوان [{{int:editcheck-copyvio-descriptionlink}} نقض حق تکثیر یا سرقت ادبی] در نظر گرفته شود و ممکن است به حذف محتوای افزوده‌شده توسط شما یا قطع دسترسی ویرایشی حساب کاربری شما منجر شود.",
