@@ -165,6 +165,38 @@ mw.libs.ve.reduplicateStyles = function ( element ) {
 };
 
 /**
+ * Disable redundant copies of TemplateStyles in a rendered surface.
+ *
+ * #reduplicateStyles expands Parsoid's deduplicated TemplateStyles into one copy per occurrence,
+ * and ve.ce.MWTransclusionNode#filterRenderedDomElements keeps them in rendered content, so a
+ * template-heavy article has hundreds of copies of a handful of stylesheets all taking part in
+ * style resolution. They are identical, so only the first for each key has any effect.
+ *
+ * Disabling rather than removing keeps the cascade unchanged and leaves the rendered DOM intact.
+ * Safe to re-run: the first surviving copy of each key is enabled and the rest disabled, so a
+ * survivor is promoted if the enabled copy is deleted mid-edit.
+ *
+ * @param {HTMLElement} element Parent element, e.g. the surface's DOM node
+ * @return {number} Number of stylesheets whose state was changed
+ */
+mw.libs.ve.disableDuplicateStyles = function ( element ) {
+	const seen = new Set();
+	let changed = 0;
+	Array.prototype.forEach.call( element.querySelectorAll( 'style[data-mw-deduplicate]' ), ( style ) => {
+		const key = style.getAttribute( 'data-mw-deduplicate' );
+		const shouldDisable = seen.has( key );
+		seen.add( key );
+		// Only write when the state would change: toggling `disabled` invalidates style for the
+		// whole document, so unconditional writes would force a full recalc on every re-run.
+		if ( style.disabled !== shouldDisable ) {
+			style.disabled = shouldDisable;
+			changed++;
+		}
+	} );
+	return changed;
+};
+
+/**
  * De-duplicate TemplateStyles, like Parsoid does.
  *
  * @param {HTMLElement} element Parent element, e.g. document body

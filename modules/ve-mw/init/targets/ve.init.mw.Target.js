@@ -275,6 +275,16 @@ ve.init.mw.Target.prototype.documentReady = function ( doc ) {
  * @fires ve.init.Target#surfaceReady
  */
 ve.init.mw.Target.prototype.surfaceReady = function () {
+	// Transclusions can appear, render again, or be removed during an edit. Sweep again to
+	// promote a survivor if the enabled copy is removed. #setSurface does the first sweep,
+	// before the first geometry read. The sweep is cheap to repeat: if the copies did not
+	// change, it writes nothing and thus invalidates nothing.
+	this.getSurface().getModel().connect( this, {
+		documentUpdate: ve.debounceWithTest( () => !!this.getSurface(), () => {
+			mw.libs.ve.disableDuplicateStyles( this.getSurface().getView().$element[ 0 ] );
+		}, 250 )
+	} );
+
 	this.emit( 'surfaceReady' );
 };
 
@@ -422,6 +432,13 @@ ve.init.mw.Target.prototype.setSurface = function ( surface ) {
 	if ( !surface.$element.parent().length ) {
 		this.$element.append( surface.$element );
 	}
+
+	// The parent method sets up the toolbar, which reads the geometry of the attached surface.
+	// That first read causes a style recalculation of the whole document, so disable the
+	// redundant copies before it. A later call makes only the subsequent recalculations faster.
+	// The append above must come first, because the browser ignores the disabled property while
+	// the <style> element is not in the document.
+	mw.libs.ve.disableDuplicateStyles( surface.getView().$element[ 0 ] );
 
 	// Parent method
 	ve.init.mw.Target.super.prototype.setSurface.apply( this, arguments );
