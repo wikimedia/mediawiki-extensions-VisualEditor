@@ -33,6 +33,7 @@
 	"editcheck-dialog-addref-reject-other": "Inny powód",
 	"editcheck-dialog-addref-success-notify": "Dziękujemy za dodanie przypisu!",
 	"editcheck-dialog-addref-title": "Dodaj przypis",
+	"editcheck-citationneeded-footer": "Zgłoszony przez redaktora",
 	"editcheck-dialog-title": "Przed publikacją",
 	"editcheck-copyvio-title": "Wklejona zawartość",
 	"editcheck-copyvio-description": "Prosimy unikać kopiowania tekstu z innych źródeł, nawet jeśli jest przeformułowany lub cytowany. Może to zostać uznane za [{{int:editcheck-copyvio-descriptionlink}} naruszenie praw autorskich lub plagiat] i może skutkować usunięciem treści lub zablokowaniem konta.",
