@@ -22,7 +22,7 @@ ve.ui.MWTitleCompletionAction = function VeUiMWTitleCompletionAction() {
 
 	// Create a dummy input widget
 	// TODO: Abstract methods in TitleInputWidget enough that this isn't necessary.
-	this.titleWidget = new mw.widgets.TitleInputWidget( {
+	this.titleWidget = this.createTitleWidget( {
 		showDisambigsLast: true,
 		showInterwikis: true,
 		searchFragments: true,
@@ -65,6 +65,17 @@ ve.ui.MWTitleCompletionAction.static.headerMessage = null;
 /* Methods */
 
 /**
+ * Create the widget whose search logic this action reuses
+ *
+ * @protected
+ * @param {Object} config Configuration options for the widget
+ * @return {mw.widgets.TitleInputWidget}
+ */
+ve.ui.MWTitleCompletionAction.prototype.createTitleWidget = function ( config ) {
+	return new mw.widgets.TitleInputWidget( config );
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
@@ -75,7 +86,9 @@ ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
 	this.titleWidget.setValue( input );
 	const hasColonPrefix = input.startsWith( ':' );
 
-	this.suggestionsPromise = this.titleWidget.getSuggestionsPromise();
+	// getLookupRequest, not getSuggestionsPromise: subclasses of the widget adjust the
+	// results there, and the menu must show the same results as the widget would.
+	this.suggestionsPromise = this.titleWidget.getLookupRequest();
 	return this.suggestionsPromise.then( ( response ) => {
 		if ( !response || !response.query ) {
 			return [];

@@ -5,7 +5,13 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.ui.MWTitleCompletionAction', ve.test.utils.newMwEnvironment() );
+QUnit.module( 've.ui.MWTitleCompletionAction', ve.test.utils.newMwEnvironment( {
+	messages: {
+		// Force the template action's documentation-subpage filters on
+		'templatedata-doc-subpage': '(templatedata-doc-subpage)',
+		'visualeditor-template-sandbox-subpage': '(template-sandbox-subpage)'
+	}
+} ) );
 
 /* Tests */
 
@@ -58,10 +64,98 @@ QUnit.test( 'getSuggestions caps the list at defaultLimit', ( assert ) => {
 		redirects.push( { from: 'Hamr ' + i, to: 'Ham ' + i, index: i + 1 } );
 	}
 	linkAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred()
-		.resolve( { query: { pages, redirects } } ).promise();
+		.resolve( { query: { pages, redirects } } ).promise( { abort: () => {} } );
 
 	return linkAction.getSuggestions( 'ham' ).then( ( suggestions ) => {
 		assert.strictEqual( suggestions.length, limit, 'suggestion count capped at defaultLimit' );
+	} ).always( () => {
+		surface.destroy();
+	} );
+} );
+
+QUnit.test( 'getSuggestions drops template documentation subpages', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
+	assert.true(
+		templateAction.titleWidget instanceof ve.ui.MWTemplateTitleInputWidget,
+		'template action searches with the transclusion dialog\'s widget'
+	);
+	templateAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred().resolve( {
+		query: { pages: [
+			{ title: 'Template:Cite', ns: 10, index: 1 },
+			{ title: 'Template:Cite/(templatedata-doc-subpage)', ns: 10, index: 2 },
+			{ title: 'Template:Cite/(template-sandbox-subpage)', ns: 10, index: 3 }
+		] }
+	} ).promise( { abort: () => {} } );
+
+	return templateAction.getSuggestions( 'cite' ).then( ( suggestions ) => {
+		assert.deepEqual(
+			suggestions,
+			[ 'Cite' ],
+			'documentation and sandbox subpages dropped, and the namespace prefix stripped'
+		);
+	} ).always( () => {
+		surface.destroy();
+	} );
+} );
+
+QUnit.test( 'getSuggestions promotes exact matches when CirrusSearch is installed', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	// Config is reset by newMwEnvironment's teardown
+	mw.config.set( 'wgVisualEditorConfig', ve.extendObject(
+		{}, mw.config.get( 'wgVisualEditorConfig' ), { cirrusSearchLookup: true }
+	) );
+
+	const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
+	// CirrusSearch searches by relevance, so the widget has to put the exact match
+	// back at the top. The action must not skip that step.
+	const addExactMatch = sinon.stub().returnsArg( 0 );
+	templateAction.titleWidget.addExactMatch = addExactMatch;
+	templateAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred().resolve( {
+		query: { pages: [ { title: 'Template:Cite', ns: 10, index: 1 } ] }
+	} ).promise( { abort: () => {} } );
+
+	return templateAction.getSuggestions( 'cite' ).then( ( suggestions ) => {
+		assert.true( addExactMatch.calledOnce, 'search results are passed to addExactMatch' );
+		assert.deepEqual( suggestions, [ 'Cite' ], 'suggestion still offered' );
+	} ).always( () => {
+		surface.destroy();
+	} );
+} );
+
+QUnit.test( 'getSuggestions abort rejects instead of resolving stale results', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	mw.config.set( 'wgVisualEditorConfig', ve.extendObject(
+		{}, mw.config.get( 'wgVisualEditorConfig' ), { cirrusSearchLookup: true }
+	) );
+
+	const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
+	// A search that has already resolved, with addExactMatch still outstanding: this is
+	// the window in which an abort used to be a no-op and a stale menu update followed.
+	const exactMatchDeferred = ve.createDeferred();
+	templateAction.titleWidget.addExactMatch = () => exactMatchDeferred.promise();
+	templateAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred().resolve( {
+		query: { pages: [ { title: 'Template:Stale', ns: 10, index: 1 } ] }
+	} ).promise( { abort: () => {} } );
+
+	let outcome = null;
+	const promise = templateAction.getSuggestions( 'stale' ).then(
+		() => {
+			outcome = 'resolved';
+		},
+		() => {
+			outcome = 'rejected';
+		}
+	);
+
+	templateAction.suggestionsPromise.abort();
+	exactMatchDeferred.resolve( { query: { pages: [ { title: 'Template:Stale', ns: 10, index: 1 } ] } } );
+
+	return promise.then( () => {
+		assert.strictEqual( outcome, 'rejected', 'aborted request rejects, so no stale menu update' );
 	} ).always( () => {
 		surface.destroy();
 	} );

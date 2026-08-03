@@ -86,98 +86,126 @@ ve.ui.MWTemplateTitleInputWidget.prototype.getApiParams = function ( query ) {
 
 // @inheritdoc mw.widgets.TitleInputWidget
 ve.ui.MWTemplateTitleInputWidget.prototype.getLookupRequest = function () {
-	let promise = ve.ui.MWTemplateTitleInputWidget.super.prototype.getLookupRequest.call( this );
+	const searchRequest = ve.ui.MWTemplateTitleInputWidget.super.prototype.getLookupRequest.call( this );
+
+	// jQuery.then doesn't pass through `abort`, and the requests below accept
+	// no abort signal. Track if an abort happens, so that a caller which
+	// aborts gets a rejection instead of the result of an ongoing request.
+	let aborted = false;
+	const rejectIfAborted = ( response ) => aborted ?
+		ve.createDeferred().reject().promise() :
+		response;
+
+	let promise = searchRequest.then( rejectIfAborted );
+
 	if ( mw.config.get( 'wgVisualEditorConfig' ).cirrusSearchLookup ) {
 		promise = promise
 			.then( this.addExactMatch.bind( this ) )
-			.promise( { abort: () => {} } );
+			.then( rejectIfAborted );
 	}
 
-	if ( !this.showTemplateDescriptions ) {
-		return promise;
+	// Filter *after* addExactMatch, since it might have added something
+	promise = promise.then( this.filterPages.bind( this ) );
+
+	if ( this.showTemplateDescriptions ) {
+		let originalResponse;
+		promise = promise
+			.then( ( response ) => {
+				originalResponse = response; // lie!
+				const titles = response.query.pages.map( ( page ) => page.title );
+
+				// Also get descriptions
+				// FIXME: This should go through MWTransclusionModel rather than duplicate.
+				if ( titles.length > 0 ) {
+					return this.getApi().get( {
+						action: 'templatedata',
+						titles,
+						redirects: !!this.showRedirects,
+						includeMissingTitles: '1',
+						lang: mw.config.get( 'wgUserLanguage' )
+					} );
+				}
+			} )
+			.then( ( templateDataResponse ) => {
+				const pages = ( templateDataResponse && templateDataResponse.pages ) || {};
+				// Look for descriptions and cache them
+				for ( const i in pages ) {
+					const page = pages[ i ];
+
+					if ( page.missing ) {
+						// Remember templates that don't exist in the link cache
+						// { title: { missing: true|false }
+						const missingTitle = {};
+						missingTitle[ page.title ] = { missing: true };
+						ve.init.platform.linkCache.setMissing( missingTitle );
+					} else if ( !page.notemplatedata ) {
+						// Cache descriptions
+						this.descriptions[ page.title ] = page.description;
+					}
+				}
+				// Return the original response
+				return originalResponse;
+			// API request failed; most likely, we're on a wiki which doesn't have TemplateData.
+			}, () => originalResponse || ve.createDeferred().reject() )
+			.then( rejectIfAborted );
 	}
 
+	return promise.promise( {
+		abort: () => {
+			aborted = true;
+			searchRequest.abort();
+		}
+	} );
+};
+
+/**
+ * Drop the subpages that are documentation rather than templates, and give every page
+ * the index the results are sorted by.
+ *
+ * @param {Object} response Action API response from server
+ * @return {Object} Modified response
+ */
+ve.ui.MWTemplateTitleInputWidget.prototype.filterPages = function ( response ) {
 	const templateDataMessage = mw.message( 'templatedata-doc-subpage' ),
 		templateDataInstalled = templateDataMessage.exists(),
 		templateDocPageFragment = '/' + templateDataMessage.text();
 
-	let originalResponse;
-	return promise
-		.then( ( response ) => {
-			const redirects = ( response.query && response.query.redirects ) || [];
-			let newPages = ( response.query && response.query.pages ) || [];
+	const redirects = ( response.query && response.query.redirects ) || [];
+	let newPages = ( response.query && response.query.pages ) || [];
 
-			newPages.forEach( ( page ) => {
-				if ( !( 'index' in page ) ) {
-					// Watch out for cases where the index is specified on the redirect object
-					// rather than the page object.
-					for ( const j in redirects ) {
-						if ( redirects[ j ].to === page.title ) {
-							page.index = redirects[ j ].index;
-							break;
-						}
-					}
-				}
-			} );
-
-			// T54448: Filter out matches which end in /doc or as configured on-wiki
-			if ( templateDataInstalled ) {
-				newPages = newPages.filter( ( page ) => !page.title.endsWith( templateDocPageFragment ) );
-			}
-
-			// T390005: Filter out matches which end in /sandbox or as configured on-wiki
-			const sandboxPageFragment = '/' + mw.message( 'visualeditor-template-sandbox-subpage' ).text();
-			newPages = newPages.filter( ( page ) => !page.title.endsWith( sandboxPageFragment ) );
-
-			// Ensure everything goes into the order defined by the page's index key
-			newPages.sort( ( a, b ) => {
-				// T366299: Avoid unstable sort.
-				if ( a.index === undefined || b.index === undefined ) {
-					return 0;
-				}
-				return a.index - b.index;
-			} );
-
-			const titles = newPages.map( ( page ) => page.title );
-
-			ve.setProp( response, 'query', 'pages', newPages );
-			originalResponse = response; // lie!
-
-			// Also get descriptions
-			// FIXME: This should go through MWTransclusionModel rather than duplicate.
-			if ( titles.length > 0 ) {
-				const xhr = this.getApi().get( {
-					action: 'templatedata',
-					titles,
-					redirects: !!this.showRedirects,
-					includeMissingTitles: '1',
-					lang: mw.config.get( 'wgUserLanguage' )
-				} );
-				return xhr.promise( { abort: xhr.abort } );
-			}
-		} )
-		.then( ( templateDataResponse ) => {
-			const pages = ( templateDataResponse && templateDataResponse.pages ) || {};
-			// Look for descriptions and cache them
-			for ( const i in pages ) {
-				const page = pages[ i ];
-
-				if ( page.missing ) {
-					// Remember templates that don't exist in the link cache
-					// { title: { missing: true|false }
-					const missingTitle = {};
-					missingTitle[ page.title ] = { missing: true };
-					ve.init.platform.linkCache.setMissing( missingTitle );
-				} else if ( !page.notemplatedata ) {
-					// Cache descriptions
-					this.descriptions[ page.title ] = page.description;
+	newPages.forEach( ( page ) => {
+		if ( !( 'index' in page ) ) {
+			// Watch out for cases where the index is specified on the redirect object
+			// rather than the page object.
+			for ( const j in redirects ) {
+				if ( redirects[ j ].to === page.title ) {
+					page.index = redirects[ j ].index;
+					break;
 				}
 			}
-			// Return the original response
-			return originalResponse;
-		// API request failed; most likely, we're on a wiki which doesn't have TemplateData.
-		}, () => originalResponse || ve.createDeferred().reject() )
-		.promise( { abort: () => {} } );
+		}
+	} );
+
+	// T54448: Filter out matches which end in /doc or as configured on-wiki
+	if ( templateDataInstalled ) {
+		newPages = newPages.filter( ( page ) => !page.title.endsWith( templateDocPageFragment ) );
+	}
+
+	// T390005: Filter out matches which end in /sandbox or as configured on-wiki
+	const sandboxPageFragment = '/' + mw.message( 'visualeditor-template-sandbox-subpage' ).text();
+	newPages = newPages.filter( ( page ) => !page.title.endsWith( sandboxPageFragment ) );
+
+	// Ensure everything goes into the order defined by the page's index key
+	newPages.sort( ( a, b ) => {
+		// T366299: Avoid unstable sort.
+		if ( a.index === undefined || b.index === undefined ) {
+			return 0;
+		}
+		return a.index - b.index;
+	} );
+
+	ve.setProp( response, 'query', 'pages', newPages );
+	return response;
 };
 
 /**

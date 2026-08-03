@@ -36,6 +36,19 @@ ve.ui.MWTemplateCompletionAction.static.headerMessage = 'visualeditor-templateco
 /**
  * @inheritdoc
  */
+ve.ui.MWTemplateCompletionAction.prototype.createTitleWidget = function ( config ) {
+	// MWTemplateTitleInputWidget knows about template-specific behavior
+	return new ve.ui.MWTemplateTitleInputWidget( ve.extendObject( {}, config, {
+		// A transclusion has no section to link to
+		searchFragments: false,
+		// Transclusion from another wiki does not work
+		showInterwikis: false
+	} ) );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTemplateCompletionAction.prototype.getInsertionText = function ( suggestion ) {
 	return '{{' + suggestion + '}}';
 };
