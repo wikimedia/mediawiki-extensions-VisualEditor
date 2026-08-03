@@ -22,20 +22,32 @@ OO.inheritClass( mw.editcheck.LLMSuggestionEditCheck, mw.editcheck.BaseEditCheck
 
 mw.editcheck.LLMSuggestionEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, {
 	showAsCheck: false, // This would never make sense to enable
-	showAsSuggestion: false,
-	dynamicPrompt: false
+	showAsSuggestion: false
 } );
+
+// TODO: remove this if translations happen:
+const msg = ( key, wikitext ) => {
+	const msgkey = `editcheck-llmsuggestion-${ key }`;
+	ve.init.platform.addMessages( { [ msgkey ]: wikitext } );
+	return ve.deferJQueryMsg( msgkey );
+};
 
 mw.editcheck.LLMSuggestionEditCheck.static.name = 'llmSuggestion';
 mw.editcheck.LLMSuggestionEditCheck.static.title = 'Model sourced suggestion';
 mw.editcheck.LLMSuggestionEditCheck.static.description = 'This suggestion comes from a model and should be verified before being followed';
-mw.editcheck.LLMSuggestionEditCheck.static.footer = 'These suggestions are machine-generated';
+mw.editcheck.LLMSuggestionEditCheck.static.prompt = 'Do you think this suggestion is valid?';
+mw.editcheck.LLMSuggestionEditCheck.static.footer = msg( 'footer', 'Identified using an [https://www.mediawiki.org/wiki/VisualEditor/Suggestion_Mode/Model-generated_editing_suggestions#Research_findings open-weight language model]' );
 mw.editcheck.LLMSuggestionEditCheck.static.footerIcon = 'robot';
+mw.editcheck.LLMSuggestionEditCheck.static.success = 'Thank you for helping to ensure edit suggestions are reliable and useful';
 
 mw.editcheck.LLMSuggestionEditCheck.static.choices = [
 	{
-		action: 'dismiss',
-		label: OO.ui.deferMsg( 'editcheck-action-dismiss' )
+		action: 'valid',
+		label: 'Yes, it\'s valid'
+	},
+	{
+		action: 'invalid',
+		label: 'No, it\'s not valid'
 	}
 ];
 
@@ -110,17 +122,11 @@ mw.editcheck.LLMSuggestionEditCheck.prototype.onBranchNodeChange = function ( su
 			modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) )
 		) {
 			suggestion.previouslyApplied = true;
-			const msg = ( key, wikitext ) => {
-				const msgkey = `editcheck-llmsuggestion-${ key }`;
-				ve.init.platform.addMessages( { [ msgkey ]: wikitext } );
-				return ve.deferJQueryMsg( msgkey );
-			};
 			return new mw.editcheck.LLMSuggestionEditCheckAction( {
 				suggestionData: suggestion,
 				fragments: [ fragment ],
 				title: suggestion.title,
-				message: msg( suggestion.suggestion_id + '-description', suggestion.static_description ),
-				prompt: ( this.config.dynamicPrompt && suggestion.description ) ? msg( suggestion.suggestion_id + '-prompt', suggestion.description ) : undefined,
+				message: msg( 'description', suggestion.static_description ),
 				check: this
 			} );
 		}
@@ -137,6 +143,39 @@ mw.editcheck.LLMSuggestionEditCheck.prototype.onBranchNodeChange = function ( su
 mw.editcheck.LLMSuggestionEditCheck.prototype.act = function ( choice, action ) {
 	// parent will do the dismissal, but we need to log this for feedback
 	ve.track( `activity.editCheck-${ action.getName() }`, { action: `${ choice }-id-${ action.id }` } );
+	switch ( choice ) {
+		case 'valid': {
+			this.dismiss( action );
+			this.showSuccess();
+			break;
+		}
+		case 'invalid': {
+			return action.widget.showFeedback( {
+				allowInSuggestions: true,
+				suppressFeedback: true,
+				description: 'Please help developers understand why you think this suggestion is invalid',
+				choices: [
+					{
+						data: 'mislabeled',
+						label: 'There is an issue in the text, but the type of issue is mislabeled'
+					},
+					{
+						data: 'unhelpful',
+						label: 'There is an issue in the text, but the suggestion is not helpful'
+					},
+					{
+						data: 'other',
+						label: 'None of the above applies'
+					}
+				]
+			} ).then( ( reason ) => {
+				this.dismiss( action );
+				this.showSuccess();
+				ve.track( `activity.editCheck-${ action.getName() }`, { action: `${ choice }-id-${ action.id }-reason-${ reason }` } );
+				return ve.createDeferred().resolve( { action: choice, reason } ).promise();
+			} );
+		}
+	}
 	// Parent method
 	return mw.editcheck.LLMSuggestionEditCheck.super.prototype.act.apply( this, arguments );
 };

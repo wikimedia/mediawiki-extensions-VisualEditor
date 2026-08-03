@@ -322,14 +322,15 @@ mw.editcheck.EditCheckActionWidget.prototype.toggleCollapse = function ( collaps
  * Show a feedback panel
  *
  * @param {Object} data
- * @param {string} data.title
  * @param {string} [data.description]
  * @param {Object[]} data.choices
+ * @param {boolean} [data.allowInSuggestions=false]
+ * @param {boolean} [data.suppressFeedback=false]
  * @return {jQuery.Promise} Promise which resolves when feedback is submitted or is rejected when back is chosen
  */
 mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 	const deferred = this.feedbackDeferred = ve.createDeferred();
-	if ( this.suggestion ) {
+	if ( this.suggestion && !data.allowInSuggestions ) {
 		// Suggestions bypass feedback surveys
 		return deferred.resolve().promise();
 	}
@@ -370,7 +371,9 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 		const reason = selectedItem && selectedItem.getData();
 		if ( reason ) {
 			deferred.resolve( reason );
-			ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-reason-' + reason } );
+			if ( !data.suppressFeedback ) {
+				ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-reason-' + reason } );
+			}
 		}
 	} );
 	back.on( 'click', () => {
@@ -379,7 +382,9 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 
 	this.$body.prepend( form.$element );
 
-	ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-shown' } );
+	if ( !data.suppressFeedback ) {
+		ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-shown' } );
+	}
 	return deferred.promise().always( () => {
 		// HACK: This causes the answerRadioSelect.onDocumentKeyDownHandler to be unbound
 		// otherwise, it'll swallow certain key events (arrow keys, enter, pagedown/up) forever.
