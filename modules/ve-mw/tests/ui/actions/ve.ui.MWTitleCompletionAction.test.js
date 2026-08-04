@@ -100,6 +100,60 @@ QUnit.test( 'getSuggestions drops template documentation subpages', ( assert ) =
 	} );
 } );
 
+QUnit.test( 'getSuggestions searches past a subst: magic word', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
+	let searched = null;
+	templateAction.titleWidget.getSuggestionsPromise = function () {
+		searched = this.getQueryValue();
+		return ve.createDeferred().resolve( {
+			query: { pages: [ { title: 'Template:Cite web', ns: 10, index: 1 } ] }
+		} ).promise( { abort: () => {} } );
+	};
+
+	const cases = [
+		{
+			input: 'cite we',
+			searched: 'cite we',
+			expected: [ 'Cite web' ],
+			msg: 'a plain name is searched as-is'
+		},
+		{
+			input: 'subst:cite we',
+			searched: 'cite we',
+			expected: [ 'subst:Cite web' ],
+			msg: 'subst: is not searched for, but kept in the suggestion'
+		},
+		{
+			input: 'SAFESUBST: cite we',
+			searched: 'cite we',
+			expected: [ 'SAFESUBST: Cite web' ],
+			// The insertion must reproduce the user's own spelling, not a normalized one
+			msg: 'capitalization and whitespace are preserved as typed'
+		},
+		{
+			input: 'subst :cite we',
+			searched: 'subst :cite we',
+			expected: [ 'Cite web' ],
+			msg: 'a name that only looks like the magic word is searched as-is'
+		}
+	];
+
+	// Sequentially, because each call aborts the previous one
+	return cases.reduce(
+		( promise, caseItem ) => promise.then( () => templateAction.getSuggestions( caseItem.input )
+			.then( ( suggestions ) => {
+				assert.strictEqual( searched, caseItem.searched, caseItem.msg + ' (query)' );
+				assert.deepEqual( suggestions, caseItem.expected, caseItem.msg + ' (suggestions)' );
+			} )
+		),
+		ve.createDeferred().resolve().promise()
+	).always( () => {
+		surface.destroy();
+	} );
+} );
+
 QUnit.test( 'getSuggestions promotes exact matches when CirrusSearch is installed', ( assert ) => {
 	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
 

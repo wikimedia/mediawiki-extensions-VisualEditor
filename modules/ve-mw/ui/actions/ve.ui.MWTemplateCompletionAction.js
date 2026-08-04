@@ -49,6 +49,21 @@ ve.ui.MWTemplateCompletionAction.prototype.createTitleWidget = function ( config
 /**
  * @inheritdoc
  */
+ve.ui.MWTemplateCompletionAction.prototype.getSuggestions = function ( input ) {
+	// The search does not know the {{subst:...}} magic word. A query that starts with it
+	// gets no results, or the wrong ones.
+	const magicWord = input.match( ve.dm.MWTemplateModel.static.substMagicWordPattern );
+	if ( !magicWord ) {
+		return ve.ui.MWTemplateCompletionAction.super.prototype.getSuggestions.call( this, input );
+	}
+	return ve.ui.MWTemplateCompletionAction.super.prototype.getSuggestions
+		.call( this, input.slice( magicWord[ 0 ].length ) )
+		.then( ( suggestions ) => suggestions.map( ( suggestion ) => magicWord[ 0 ] + suggestion ) );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.MWTemplateCompletionAction.prototype.getInsertionText = function ( suggestion ) {
 	return '{{' + suggestion + '}}';
 };

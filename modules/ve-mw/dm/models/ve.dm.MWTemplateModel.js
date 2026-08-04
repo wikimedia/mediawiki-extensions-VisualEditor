@@ -66,6 +66,20 @@ OO.inheritClass( ve.dm.MWTemplateModel, ve.dm.MWTransclusionPartModel );
  * @event ve.dm.MWTemplateModel#change
  */
 
+/* Static Properties */
+
+/**
+ * The magic words {{subst:...}} and {{safesubst:...}} in front of a template name, with the
+ * whitespace the parser allows around them.
+ *
+ * FIXME: This currently doesn't match localized versions of these magic words.
+ *
+ * @property {RegExp}
+ * @static
+ * @inheritable
+ */
+ve.dm.MWTemplateModel.static.substMagicWordPattern = /^\s*(?:safe)?subst:\s*/i;
+
 /* Static Methods */
 
 /**
@@ -138,9 +152,8 @@ ve.dm.MWTemplateModel.prototype.getTitle = function () {
  *  elements like `subst:` stripped.
  */
 ve.dm.MWTemplateModel.prototype.getTemplateDataQueryTitle = function () {
-	// FIXME: This currently doesn't strip localized versions of these magic words.
-	// Strip magic words {{subst:…}} and {{safesubst:…}}
-	const name = this.target.wt.trim().replace( /^(?:safe)?subst:/i, '' ),
+	const pattern = this.constructor.static.substMagicWordPattern,
+		name = this.target.wt.trim().replace( pattern, '' ),
 		templateNs = mw.config.get( 'wgNamespaceIds' ).template,
 		title = mw.Title.newFromText( name, templateNs );
 	return title ? title.getPrefixedText() : this.getTitle();
