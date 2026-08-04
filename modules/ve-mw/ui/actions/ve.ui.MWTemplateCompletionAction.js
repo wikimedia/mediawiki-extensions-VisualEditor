@@ -53,12 +53,40 @@ ve.ui.MWTemplateCompletionAction.prototype.getSuggestions = function ( input ) {
 	// The search does not know the {{subst:...}} magic word. A query that starts with it
 	// gets no results, or the wrong ones.
 	const magicWord = input.match( ve.dm.MWTemplateModel.static.substMagicWordPattern );
+	const query = magicWord ? input.slice( magicWord[ 0 ].length ) : input;
+
+	this.setSearchNamespace( query );
+
+	const promise = ve.ui.MWTemplateCompletionAction.super.prototype.getSuggestions
+		.call( this, query );
 	if ( !magicWord ) {
-		return ve.ui.MWTemplateCompletionAction.super.prototype.getSuggestions.call( this, input );
+		return promise;
 	}
-	return ve.ui.MWTemplateCompletionAction.super.prototype.getSuggestions
-		.call( this, input.slice( magicWord[ 0 ].length ) )
-		.then( ( suggestions ) => suggestions.map( ( suggestion ) => magicWord[ 0 ] + suggestion ) );
+	return promise.then(
+		( suggestions ) => suggestions.map( ( suggestion ) => magicWord[ 0 ] + suggestion )
+	);
+};
+
+/**
+ * Point the search at the namespace the query names
+ *
+ * A transclusion is from the template namespace unless the wikitext names another one, as in
+ * "{{Help:Foo}}" or "{{:Article}}". A search of the template namespace finds nothing for
+ * those.
+ *
+ * @private
+ * @param {string} query Query, without a {{subst:...}} magic word
+ */
+ve.ui.MWTemplateCompletionAction.prototype.setSearchNamespace = function ( query ) {
+	const defaultNamespace = this.constructor.static.namespace,
+		title = mw.Title.newFromText( query, defaultNamespace ),
+		namespace = title ? title.getNamespaceId() : defaultNamespace;
+
+	if ( namespace !== this.titleWidget.getNamespace() ) {
+		this.titleWidget.setNamespace( namespace );
+		// Only the default namespace is left out of the inserted wikitext
+		this.titleWidget.relative = namespace === defaultNamespace;
+	}
 };
 
 /**

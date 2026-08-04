@@ -73,6 +73,79 @@ QUnit.test( 'getSuggestions caps the list at defaultLimit', ( assert ) => {
 	} );
 } );
 
+QUnit.test( 'getSuggestions searches the namespace the query names', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
+	const templateNs = ve.ui.MWTemplateCompletionAction.static.namespace;
+	// Answer with a page from whichever namespace was searched, as the API would
+	const pages = {};
+	pages[ templateNs ] = { title: 'Template:Ham', ns: templateNs, index: 1 };
+	pages[ 12 ] = { title: 'Help:Ham', ns: 12, index: 1 };
+	pages[ 6 ] = { title: 'File:Ham', ns: 6, index: 1 };
+	pages[ 0 ] = { title: 'Ham', ns: 0, index: 1 };
+	let searched = null;
+	templateAction.titleWidget.getSuggestionsPromise = function () {
+		searched = this.getNamespace();
+		return ve.createDeferred().resolve( {
+			query: { pages: [ pages[ searched ] ] }
+		} ).promise( { abort: () => {} } );
+	};
+
+	const cases = [
+		{
+			input: 'Ham',
+			namespace: templateNs,
+			expected: [ 'Ham' ],
+			msg: 'the template namespace is the default, and stays out of the wikitext'
+		},
+		{
+			input: 'Template:Ham',
+			namespace: templateNs,
+			expected: [ 'Ham' ],
+			msg: 'naming the default namespace changes nothing'
+		},
+		{
+			input: 'Help:Ham',
+			namespace: 12,
+			expected: [ 'Help:Ham' ],
+			msg: 'another namespace is searched, and kept in the wikitext'
+		},
+		{
+			// "Image" is the alias for the file namespace that core defines everywhere
+			input: 'Image:Ham',
+			namespace: 6,
+			expected: [ 'File:Ham' ],
+			msg: 'a namespace alias is searched as the namespace it means'
+		},
+		{
+			input: ':Ham',
+			namespace: 0,
+			expected: [ ':Ham' ],
+			msg: 'a leading colon searches the main namespace'
+		},
+		{
+			input: 'subst:Help:Ham',
+			namespace: 12,
+			expected: [ 'subst:Help:Ham' ],
+			msg: 'a magic word and a namespace together'
+		}
+	];
+
+	// Sequentially, because each call aborts the previous one
+	return cases.reduce(
+		( promise, caseItem ) => promise.then( () => templateAction.getSuggestions( caseItem.input )
+			.then( ( suggestions ) => {
+				assert.strictEqual( searched, caseItem.namespace, caseItem.msg + ' (namespace)' );
+				assert.deepEqual( suggestions, caseItem.expected, caseItem.msg + ' (suggestions)' );
+			} )
+		),
+		ve.createDeferred().resolve().promise()
+	).always( () => {
+		surface.destroy();
+	} );
+} );
+
 QUnit.test( 'getSuggestions drops template documentation subpages', ( assert ) => {
 	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
 
