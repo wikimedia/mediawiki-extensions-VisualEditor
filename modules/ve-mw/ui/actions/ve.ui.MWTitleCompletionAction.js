@@ -98,8 +98,9 @@ ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
 		this.suggestionsPromise.abort();
 	}
 
-	const prefix = this.prepareSearch( input );
-	this.titleWidget.setValue( input.slice( prefix.length ) );
+	const prefix = this.prepareSearch( input ),
+		query = input.slice( prefix.length );
+	this.titleWidget.setValue( query );
 
 	// getLookupRequest, not getSuggestionsPromise: subclasses of the widget adjust the
 	// results there, and the menu must show the same results as the widget would.
@@ -108,7 +109,7 @@ ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
 		if ( !response || !response.query ) {
 			return [];
 		}
-		return this.titleWidget.getOptionsFromData( response.query )
+		const suggestions = this.titleWidget.getOptionsFromData( response.query )
 			// The API limit only limits the prefix search. TitleWidget adds the sources
 			// of resolved redirects and the missing-page result on top of that, so cap
 			// the list here as filterSuggestionsForInput used to.
@@ -116,9 +117,41 @@ ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
 			.map(
 				// Put back what the search did not get
 				// TODO: Find a way to extract the "isInterwiki" flag from the response.
-				( option ) => prefix + option.data
+				( option ) => prefix + this.restoreTypedNamespace( option.data, query )
 			);
+		// The input as typed and the normalized title become the same wikitext here
+		return OO.unique( suggestions );
 	} );
+};
+
+/**
+ * Put a namespace prefix back the way it was typed
+ *
+ * The search answers with canonical titles, so a query for "Image:Foo" comes back as
+ * "File:Foo". Keep the prefix the user chose. This also keeps the correct name for a
+ * namespace that has a gendered form.
+ *
+ * @protected
+ * @param {string} suggestion Suggestion from the title widget
+ * @param {string} query Query the suggestion was found for, without a leading colon
+ * @return {string}
+ */
+ve.ui.MWTitleCompletionAction.prototype.restoreTypedNamespace = function ( suggestion, query ) {
+	const colon = query.indexOf( ':' ),
+		title = colon > 0 ? mw.Title.newFromText( query ) : null,
+		// The main namespace has no prefix. An interwiki prefix also resolves to it, and
+		// must stay part of the title
+		namespace = title ? title.getNamespaceId() : 0;
+	if ( !namespace ) {
+		return suggestion;
+	}
+
+	const typedPrefix = query.slice( 0, colon ),
+		canonicalPrefix = mw.config.get( 'wgFormattedNamespaces' )[ namespace ];
+	// Replace the prefix only, so that a section or a subpage of the title survives
+	return canonicalPrefix !== typedPrefix && suggestion.startsWith( canonicalPrefix + ':' ) ?
+		typedPrefix + suggestion.slice( canonicalPrefix.length ) :
+		suggestion;
 };
 
 /**

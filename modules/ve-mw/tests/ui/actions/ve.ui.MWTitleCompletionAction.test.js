@@ -115,7 +115,7 @@ QUnit.test( 'getSuggestions searches the namespace the query names', ( assert ) 
 			// "Image" is the alias for the file namespace that core defines everywhere
 			input: 'Image:Ham',
 			namespace: 6,
-			expected: [ 'File:Ham' ],
+			expected: [ 'Image:Ham' ],
 			msg: 'a namespace alias is searched as the namespace it means'
 		},
 		{
@@ -192,9 +192,8 @@ QUnit.test( 'getSuggestions adds the colon to the input as typed only once', ( a
 	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
 
 	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
-	// The widget offers the input as typed next to the normalized title, which is how a
-	// namespace alias survives to the insertion (T433767). Searching with the colon still
-	// attached made that a duplicate suggestion with a doubled colon.
+	// The widget offers the input as typed next to the normalized title. Searching with the
+	// colon still attached made that a duplicate suggestion with a doubled colon.
 	linkAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred().resolve( {
 		query: { pages: [ { title: 'File:Ham', pageid: 2, ns: 6, index: 1 } ] }
 	} ).promise( { abort: () => {} } );
@@ -205,10 +204,67 @@ QUnit.test( 'getSuggestions adds the colon to the input as typed only once', ( a
 	} ).then( ( suggestions ) => {
 		assert.deepEqual(
 			suggestions,
-			[ ':Image:Ham', ':File:Ham' ],
-			'an alias is kept as typed, with one colon, next to the canonical title'
+			[ ':Image:Ham' ],
+			'both forms of an aliased title become the one the user typed'
 		);
 	} ).always( () => {
+		surface.destroy();
+	} );
+} );
+
+QUnit.test( 'getSuggestions keeps a namespace prefix as it was typed', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
+	// The search answers with canonical titles, whatever prefix the query used (T433767)
+	let response = null;
+	linkAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred()
+		.resolve( response ).promise( { abort: () => {} } );
+
+	const cases = [
+		{
+			input: 'Image:Ha',
+			pages: [ { title: 'File:Ham', ns: 6, index: 1 } ],
+			expected: [ 'Image:Ham' ],
+			msg: 'an alias replaces the canonical prefix, before the title is complete'
+		},
+		{
+			input: 'image:Ha',
+			pages: [ { title: 'File:Ham', ns: 6, index: 1 } ],
+			expected: [ 'image:Ham' ],
+			msg: 'the capitalization of the prefix is kept as typed'
+		},
+		{
+			input: 'Image:Ham#Ba',
+			pages: [ { title: 'File:Ham#Bar', ns: 6, index: 1 } ],
+			expected: [ 'Image:Ham#Bar' ],
+			msg: 'only the prefix is replaced, so a section survives'
+		},
+		{
+			input: 'File:Ha',
+			pages: [ { title: 'File:Ham', ns: 6, index: 1 } ],
+			expected: [ 'File:Ham' ],
+			msg: 'the canonical prefix is left alone'
+		},
+		{
+			// An interwiki prefix is part of the title, not a namespace
+			input: 'mw:Sandbo',
+			pages: [ { title: 'Mw:Sandbox', ns: 0, index: 1 } ],
+			expected: [ 'Mw:Sandbox' ],
+			msg: 'a prefix that is not a namespace is left alone'
+		}
+	];
+
+	// Sequentially, because each call aborts the previous one
+	return cases.reduce(
+		( promise, caseItem ) => promise.then( () => {
+			response = { query: { pages: caseItem.pages } };
+			return linkAction.getSuggestions( caseItem.input ).then( ( suggestions ) => {
+				assert.deepEqual( suggestions, caseItem.expected, caseItem.msg );
+			} );
+		} ),
+		ve.createDeferred().resolve().promise()
+	).always( () => {
 		surface.destroy();
 	} );
 } );
