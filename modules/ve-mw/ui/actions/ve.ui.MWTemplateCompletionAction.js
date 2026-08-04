@@ -75,13 +75,17 @@ ve.ui.MWTemplateCompletionAction.prototype.prepareSearch = function ( input ) {
 ve.ui.MWTemplateCompletionAction.prototype.setSearchNamespace = function ( query ) {
 	const defaultNamespace = this.constructor.static.namespace,
 		title = mw.Title.newFromText( query, defaultNamespace ),
-		namespace = title ? title.getNamespaceId() : defaultNamespace;
+		namespace = title ? title.getNamespaceId() : defaultNamespace,
+		// Without a default, the parse only finds a namespace the query names itself. A
+		// colon does not always name one: "{{Foo:Bar}}" is a template of that name.
+		named = mw.Title.newFromText( query );
 
 	if ( namespace !== this.titleWidget.getNamespace() ) {
+		// This also drops the widget's lookup cache, so do it only on a change
 		this.titleWidget.setNamespace( namespace );
-		// Only the default namespace is left out of the inserted wikitext
-		this.titleWidget.relative = namespace === defaultNamespace;
 	}
+	// Leave the namespace out of the inserted wikitext, unless the query names it
+	this.titleWidget.relative = !named || named.getNamespaceId() !== namespace;
 };
 
 /**

@@ -13,6 +13,36 @@ QUnit.module( 've.ui.MWTitleCompletionAction', ve.test.utils.newMwEnvironment( {
 	}
 } ) );
 
+/**
+ * Answer the action's search with a fixed response, and run each case through it in turn
+ *
+ * Sequentially, because each call aborts the one before it.
+ *
+ * @param {QUnit.Assert} assert
+ * @param {ve.ui.MWTitleCompletionAction} action Action to drive
+ * @param {Object[]} cases Objects with input, pages, expected and msg, plus namespace where
+ *  the namespace that was searched is part of the point
+ * @return {jQuery.Promise}
+ */
+function runSuggestionCases( assert, action, cases ) {
+	let pages = [],
+		searched = null;
+	action.titleWidget.getSuggestionsPromise = function () {
+		searched = this.getNamespace();
+		return ve.createDeferred().resolve( { query: { pages } } ).promise( { abort: () => {} } );
+	};
+
+	return cases.reduce( ( promise, caseItem ) => promise.then( () => {
+		pages = caseItem.pages;
+		return action.getSuggestions( caseItem.input ).then( ( suggestions ) => {
+			if ( caseItem.namespace !== undefined ) {
+				assert.strictEqual( searched, caseItem.namespace, caseItem.msg + ' (namespace)' );
+			}
+			assert.deepEqual( suggestions, caseItem.expected, caseItem.msg );
+		} );
+	} ), ve.createDeferred().resolve().promise() );
+}
+
 /* Tests */
 
 QUnit.test( 'getInsertionText wraps the suggestion in the right markup', ( assert ) => {
@@ -78,36 +108,36 @@ QUnit.test( 'getSuggestions searches the namespace the query names', ( assert ) 
 
 	const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
 	const templateNs = ve.ui.MWTemplateCompletionAction.static.namespace;
-	// Answer with a page from whichever namespace was searched, as the API would
-	const pages = {};
-	pages[ templateNs ] = { title: 'Template:Ham', ns: templateNs, index: 1 };
-	pages[ 12 ] = { title: 'Help:Ham', ns: 12, index: 1 };
-	pages[ 6 ] = { title: 'File:Ham', ns: 6, index: 1 };
-	pages[ 0 ] = { title: 'Ham', ns: 0, index: 1 };
-	let searched = null;
-	templateAction.titleWidget.getSuggestionsPromise = function () {
-		searched = this.getNamespace();
-		return ve.createDeferred().resolve( {
-			query: { pages: [ pages[ searched ] ] }
-		} ).promise( { abort: () => {} } );
-	};
+	const templatePage = { title: 'Template:Ham', ns: templateNs, index: 1 };
+	const filePage = { title: 'File:Ham', ns: 6, index: 1 };
+	const helpPage = { title: 'Help:Ham', ns: 12, index: 1 };
 
-	const cases = [
+	return runSuggestionCases( assert, templateAction, [
 		{
 			input: 'Ham',
 			namespace: templateNs,
+			pages: [ templatePage ],
 			expected: [ 'Ham' ],
 			msg: 'the template namespace is the default, and stays out of the wikitext'
 		},
 		{
 			input: 'Template:Ham',
 			namespace: templateNs,
-			expected: [ 'Ham' ],
-			msg: 'naming the default namespace changes nothing'
+			pages: [ templatePage ],
+			expected: [ 'Template:Ham' ],
+			msg: 'naming the default namespace keeps it in the wikitext'
+		},
+		{
+			input: 'Foo:Ham',
+			namespace: templateNs,
+			pages: [ { title: 'Template:Foo:Ham', ns: templateNs, index: 1 } ],
+			expected: [ 'Foo:Ham' ],
+			msg: 'a colon that names no namespace is part of the template name'
 		},
 		{
 			input: 'Help:Ham',
 			namespace: 12,
+			pages: [ helpPage ],
 			expected: [ 'Help:Ham' ],
 			msg: 'another namespace is searched, and kept in the wikitext'
 		},
@@ -115,33 +145,25 @@ QUnit.test( 'getSuggestions searches the namespace the query names', ( assert ) 
 			// "Image" is the alias for the file namespace that core defines everywhere
 			input: 'Image:Ham',
 			namespace: 6,
+			pages: [ filePage ],
 			expected: [ 'Image:Ham' ],
-			msg: 'a namespace alias is searched as the namespace it means'
+			msg: 'a namespace alias is searched as the namespace it means, and kept as typed'
 		},
 		{
 			input: ':Ham',
 			namespace: 0,
+			pages: [ { title: 'Ham', ns: 0, index: 1 } ],
 			expected: [ ':Ham' ],
 			msg: 'a leading colon searches the main namespace'
 		},
 		{
 			input: 'subst:Help:Ham',
 			namespace: 12,
+			pages: [ helpPage ],
 			expected: [ 'subst:Help:Ham' ],
 			msg: 'a magic word and a namespace together'
 		}
-	];
-
-	// Sequentially, because each call aborts the previous one
-	return cases.reduce(
-		( promise, caseItem ) => promise.then( () => templateAction.getSuggestions( caseItem.input )
-			.then( ( suggestions ) => {
-				assert.strictEqual( searched, caseItem.namespace, caseItem.msg + ' (namespace)' );
-				assert.deepEqual( suggestions, caseItem.expected, caseItem.msg + ' (suggestions)' );
-			} )
-		),
-		ve.createDeferred().resolve().promise()
-	).always( () => {
+	] ).always( () => {
 		surface.destroy();
 	} );
 } );
@@ -217,10 +239,6 @@ QUnit.test( 'getSuggestions keeps a namespace prefix as it was typed', ( assert 
 
 	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
 	// The search answers with canonical titles, whatever prefix the query used (T433767)
-	let response = null;
-	linkAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred()
-		.resolve( response ).promise( { abort: () => {} } );
-
 	const cases = [
 		{
 			input: 'Image:Ha',
@@ -255,16 +273,7 @@ QUnit.test( 'getSuggestions keeps a namespace prefix as it was typed', ( assert 
 		}
 	];
 
-	// Sequentially, because each call aborts the previous one
-	return cases.reduce(
-		( promise, caseItem ) => promise.then( () => {
-			response = { query: { pages: caseItem.pages } };
-			return linkAction.getSuggestions( caseItem.input ).then( ( suggestions ) => {
-				assert.deepEqual( suggestions, caseItem.expected, caseItem.msg );
-			} );
-		} ),
-		ve.createDeferred().resolve().promise()
-	).always( () => {
+	return runSuggestionCases( assert, linkAction, cases ).always( () => {
 		surface.destroy();
 	} );
 } );
