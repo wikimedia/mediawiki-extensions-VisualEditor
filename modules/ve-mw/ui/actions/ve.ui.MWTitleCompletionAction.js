@@ -76,6 +76,21 @@ ve.ui.MWTitleCompletionAction.prototype.createTitleWidget = function ( config ) 
 };
 
 /**
+ * Prepare the search for an input, and get the leading syntax the search leaves out
+ *
+ * A leading colon says "not the default namespace". It is not part of the title, and the
+ * search finds nothing for a query that starts with one, e.g. ":Category:Foo". A subclass
+ * adds the syntax it knows in front of this, in the order the wikitext uses.
+ *
+ * @protected
+ * @param {string} input
+ * @return {string} Start of the input to put back in front of each suggestion
+ */
+ve.ui.MWTitleCompletionAction.prototype.prepareSearch = function ( input ) {
+	return input.startsWith( ':' ) ? ':' : '';
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
@@ -83,8 +98,8 @@ ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
 		this.suggestionsPromise.abort();
 	}
 
-	this.titleWidget.setValue( input );
-	const hasColonPrefix = input.startsWith( ':' );
+	const prefix = this.prepareSearch( input );
+	this.titleWidget.setValue( input.slice( prefix.length ) );
 
 	// getLookupRequest, not getSuggestionsPromise: subclasses of the widget adjust the
 	// results there, and the menu must show the same results as the widget would.
@@ -99,9 +114,9 @@ ve.ui.MWTitleCompletionAction.prototype.getSuggestions = function ( input ) {
 			// the list here as filterSuggestionsForInput used to.
 			.slice( 0, this.constructor.static.defaultLimit )
 			.map(
-				// Hack: Colon prefix gets normalised away.
+				// Put back what the search did not get
 				// TODO: Find a way to extract the "isInterwiki" flag from the response.
-				( option ) => ( hasColonPrefix ? ':' : '' ) + option.data
+				( option ) => prefix + option.data
 			);
 	} );
 };

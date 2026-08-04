@@ -49,22 +49,17 @@ ve.ui.MWTemplateCompletionAction.prototype.createTitleWidget = function ( config
 /**
  * @inheritdoc
  */
-ve.ui.MWTemplateCompletionAction.prototype.getSuggestions = function ( input ) {
+ve.ui.MWTemplateCompletionAction.prototype.prepareSearch = function ( input ) {
 	// The search does not know the {{subst:...}} magic word. A query that starts with it
-	// gets no results, or the wrong ones.
-	const magicWord = input.match( ve.dm.MWTemplateModel.static.substMagicWordPattern );
-	const query = magicWord ? input.slice( magicWord[ 0 ].length ) : input;
+	// gets no results, or the wrong ones. The magic word comes before a colon for the main
+	// namespace, as in "{{subst::Article}}".
+	const magicWord = input.match( ve.dm.MWTemplateModel.static.substMagicWordPattern ),
+		query = magicWord ? input.slice( magicWord[ 0 ].length ) : input;
 
 	this.setSearchNamespace( query );
 
-	const promise = ve.ui.MWTemplateCompletionAction.super.prototype.getSuggestions
-		.call( this, query );
-	if ( !magicWord ) {
-		return promise;
-	}
-	return promise.then(
-		( suggestions ) => suggestions.map( ( suggestion ) => magicWord[ 0 ] + suggestion )
-	);
+	return ( magicWord ? magicWord[ 0 ] : '' ) +
+		ve.ui.MWTemplateCompletionAction.super.prototype.prepareSearch.call( this, query );
 };
 
 /**

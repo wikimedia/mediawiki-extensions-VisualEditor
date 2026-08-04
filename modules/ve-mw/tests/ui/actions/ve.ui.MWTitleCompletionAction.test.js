@@ -146,6 +146,73 @@ QUnit.test( 'getSuggestions searches the namespace the query names', ( assert ) 
 	} );
 } );
 
+QUnit.test( 'getSuggestions searches past a leading colon', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
+	let searched = null;
+	linkAction.titleWidget.getSuggestionsPromise = function () {
+		searched = this.getQueryValue();
+		return ve.createDeferred().resolve( {
+			query: { pages: [ { title: 'Category:Ham', ns: 14, index: 1 } ] }
+		} ).promise( { abort: () => {} } );
+	};
+
+	return linkAction.getSuggestions( ':Category:Ham' ).then( ( suggestions ) => {
+		assert.strictEqual( searched, 'Category:Ham', 'the colon is left out of the search' );
+		assert.deepEqual( suggestions, [ ':Category:Ham' ], 'the colon is put back on the suggestion' );
+		return linkAction.getSuggestions( 'Category:Ham' );
+	} ).then( ( suggestions ) => {
+		assert.strictEqual( searched, 'Category:Ham', 'a query without a colon is unchanged' );
+		assert.deepEqual( suggestions, [ 'Category:Ham' ], 'no colon is added to the suggestion' );
+
+		// A transclusion of a main-namespace page is written the same way
+		const templateAction = new ve.ui.MWTemplateCompletionAction( surface );
+		templateAction.titleWidget.getSuggestionsPromise = function () {
+			searched = this.getQueryValue();
+			return ve.createDeferred().resolve( {
+				query: { pages: [ { title: 'Ham', ns: 0, index: 1 } ] }
+			} ).promise( { abort: () => {} } );
+		};
+		return templateAction.getSuggestions( ':Ham' ).then( ( transclusions ) => {
+			assert.strictEqual( searched, 'Ham', 'the colon is left out of a transclusion search' );
+			assert.deepEqual( transclusions, [ ':Ham' ], 'the colon is put back for a transclusion' );
+			// The wikitext puts the magic word first, so the two prefixes must nest
+			return templateAction.getSuggestions( 'subst::Ham' );
+		} );
+	} ).then( ( suggestions ) => {
+		assert.strictEqual( searched, 'Ham', 'a magic word and a colon both come off' );
+		assert.deepEqual( suggestions, [ 'subst::Ham' ], 'and both go back, in the typed order' );
+	} ).always( () => {
+		surface.destroy();
+	} );
+} );
+
+QUnit.test( 'getSuggestions adds the colon to the input as typed only once', ( assert ) => {
+	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
+
+	const linkAction = new ve.ui.MWLinkCompletionAction( surface );
+	// The widget offers the input as typed next to the normalized title, which is how a
+	// namespace alias survives to the insertion (T433767). Searching with the colon still
+	// attached made that a duplicate suggestion with a doubled colon.
+	linkAction.titleWidget.getSuggestionsPromise = () => ve.createDeferred().resolve( {
+		query: { pages: [ { title: 'File:Ham', pageid: 2, ns: 6, index: 1 } ] }
+	} ).promise( { abort: () => {} } );
+
+	return linkAction.getSuggestions( ':File:Ham' ).then( ( suggestions ) => {
+		assert.deepEqual( suggestions, [ ':File:Ham' ], 'the canonical title is offered once' );
+		return linkAction.getSuggestions( ':Image:Ham' );
+	} ).then( ( suggestions ) => {
+		assert.deepEqual(
+			suggestions,
+			[ ':Image:Ham', ':File:Ham' ],
+			'an alias is kept as typed, with one colon, next to the canonical title'
+		);
+	} ).always( () => {
+		surface.destroy();
+	} );
+} );
+
 QUnit.test( 'getSuggestions drops template documentation subpages', ( assert ) => {
 	const surface = ve.test.utils.createSurfaceFromHtml( '<p></p>' );
 
