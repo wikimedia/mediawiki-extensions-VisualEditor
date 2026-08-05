@@ -18,6 +18,32 @@ ve.ce.MWWikitextClipboardHandler = function VeCeMwWikitextClipboardHandler() {
 
 OO.inheritClass( ve.ce.MWWikitextClipboardHandler, ve.ce.ClipboardHandler );
 
+/* Static methods */
+
+/**
+ * Check if a range contains a node which keeps its content outside the linear data,
+ * e.g. an extension node such as <syntaxhighlight>, which keeps its source in an
+ * attribute. Plain text can only summarise such a node, never reproduce it.
+ *
+ * @param {ve.dm.LinearData} data Linear data
+ * @param {ve.Range} range Range to check
+ * @return {boolean} The range contains such a node
+ */
+ve.ce.MWWikitextClipboardHandler.static.hasNodesWithHiddenContent = function ( data, range ) {
+	for ( let i = range.start; i < range.end; i++ ) {
+		if ( data.isOpenElementData( i ) ) {
+			const type = data.getType( i );
+			if (
+				!ve.dm.nodeFactory.canNodeHaveChildren( type ) &&
+				!ve.dm.nodeFactory.isNodeContent( type )
+			) {
+				return true;
+			}
+		}
+	}
+	return false;
+};
+
 /* Methods */
 
 /**
@@ -86,8 +112,13 @@ ve.ce.MWWikitextClipboardHandler.prototype.onCopy = function ( e ) {
 ve.ce.MWWikitextClipboardHandler.prototype.afterPasteInsertExternalData = function ( targetFragment, pastedDocumentModel, contextRange, clipboardPlaintext ) {
 	const wasSpecial = this.isPasteSpecial(),
 		// TODO: This check returns true if the paste contains meaningful structure (tables, lists etc.)
-		// or block content nodes (mwBlockExtension) but no annotations (bold, links etc.).
-		wasPlain = wasSpecial || pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true );
+		// but no annotations (bold, links etc.).
+		wasPlain = wasSpecial || (
+			pastedDocumentModel.data.isPlainText( contextRange, true, undefined, true ) &&
+			// Plain text can only summarise these nodes, e.g. it gives the source of a
+			// <syntaxhighlight> without its tag, so still offer to convert the wikitext
+			!this.constructor.static.hasNodesWithHiddenContent( pastedDocumentModel.data, contextRange )
+		);
 
 	let promise;
 	if ( clipboardPlaintext ) {

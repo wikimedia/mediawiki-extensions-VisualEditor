@@ -31,6 +31,8 @@ ve.dm.MWPreNode.static.extensionName = 'pre';
 
 ve.dm.MWPreNode.static.tagName = 'pre';
 
+ve.dm.MWPreNode.static.usesSourceAsPlainText = true;
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.MWPreNode );

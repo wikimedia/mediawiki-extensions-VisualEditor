@@ -57,6 +57,29 @@ ve.dm.MWExtensionNode.static.tagName = null;
  */
 ve.dm.MWExtensionNode.static.extensionName = null;
 
+/**
+ * Whether the extension renders its own source, as <pre> and <syntaxhighlight> do.
+ *
+ * Only such nodes can give a plain text value, because the source is then what the
+ * user sees. Leave this false where the two differ, e.g. a reference or a graph:
+ * the source is not a substitute for the rendering, so the node has no plain text.
+ *
+ * @static
+ * @property {boolean}
+ * @inheritable
+ */
+ve.dm.MWExtensionNode.static.usesSourceAsPlainText = false;
+
+/**
+ * @inheritdoc
+ */
+ve.dm.MWExtensionNode.static.getText = function ( element ) {
+	if ( !this.usesSourceAsPlainText ) {
+		return '';
+	}
+	return ve.getProp( element, 'attributes', 'mw', 'body', 'extsrc' ) || '';
+};
+
 ve.dm.MWExtensionNode.static.getMatchRdfaTypes = function () {
 	return [ 'mw:Extension/' + this.extensionName ];
 };

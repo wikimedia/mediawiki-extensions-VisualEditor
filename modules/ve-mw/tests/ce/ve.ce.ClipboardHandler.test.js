@@ -181,3 +181,43 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 		done();
 	}() );
 } );
+
+QUnit.test.each( 'hasNodesWithHiddenContent', {
+	'plain text': {
+		data: [ { type: 'paragraph' }, ...'Foo', { type: '/paragraph' } ],
+		expected: false
+	},
+	'content node, which plain text can reproduce': {
+		data: [
+			{ type: 'paragraph' },
+			{ type: 'mwEntity', attributes: { character: '{' } }, { type: '/mwEntity' },
+			{ type: '/paragraph' }
+		],
+		expected: false
+	},
+	'extension node, which keeps its source in an attribute': {
+		data: [
+			{ type: 'mwPre', attributes: { mw: { name: 'pre', body: { extsrc: 'Foo' } } } },
+			{ type: '/mwPre' }
+		],
+		expected: true
+	},
+	'structure, which plain text can reproduce': {
+		data: [
+			{ type: 'list', attributes: { style: 'bullet' } },
+			{ type: 'listItem' },
+			{ type: 'paragraph' }, ...'Foo', { type: '/paragraph' },
+			{ type: '/listItem' },
+			{ type: '/list' }
+		],
+		expected: false
+	}
+}, ( assert, caseItem ) => {
+	const data = new ve.dm.LinearData( new ve.dm.HashValueStore(), caseItem.data );
+	assert.strictEqual(
+		ve.ce.MWWikitextClipboardHandler.static.hasNodesWithHiddenContent(
+			data, new ve.Range( 0, caseItem.data.length )
+		),
+		caseItem.expected
+	);
+} );
