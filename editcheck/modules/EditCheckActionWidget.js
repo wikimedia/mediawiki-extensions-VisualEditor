@@ -183,6 +183,20 @@ mw.editcheck.EditCheckActionWidget.prototype.setMode = function ( mode ) {
 };
 
 /**
+ * Set the message body of the widget and add click tracking + link modifiers
+ *
+ * Created solely for use by SourceVerificationEditCheck to update the message body when
+ * citation numbers change. This may be unnecessary if we can just rerender the action instead.
+ *
+ * @param {string|jQuery|Function|OO.ui.HtmlSnippet} message Body message
+ */
+mw.editcheck.EditCheckActionWidget.prototype.setMessage = function ( message ) {
+	this.message.setLabel( message );
+	mw.editcheck.trackActionLinks( this.message.$element, this.name, 'click-learn-more' );
+	ve.targetLinksToNewWindow( this.message.$element[ 0 ] );
+};
+
+/**
  * Open suggestion mode feedback dialog
  */
 mw.editcheck.EditCheckActionWidget.prototype.onFeedbackSelect = function () {

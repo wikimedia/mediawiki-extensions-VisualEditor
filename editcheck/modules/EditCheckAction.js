@@ -21,6 +21,7 @@
  * @param {string} [config.type='warning'] Type of message (e.g., 'warning', 'error')
  * @param {boolean} [config.suggestion] Whether this is a suggestion
  * @param {Object[]} [config.choices] User choices
+ * @param {boolean} [config.trackId] Whether to include the action's ID in instrumentation
  */
 mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	// Mixin constructor
@@ -43,6 +44,7 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.type = config.type || 'warning';
 	this.choices = config.choices || config.check.constructor.static.choices;
 	this.suggestion = config.suggestion;
+	this.trackId = !!config.trackId;
 	this.widget = null;
 	this.stale = false;
 };
@@ -214,6 +216,30 @@ mw.editcheck.EditCheckAction.prototype.isSuggestion = function () {
 mw.editcheck.EditCheckAction.prototype.isExperimental = function () {
 	return ( !this.suggestion && !this.check.config.showAsCheck ) ||
 		( this.suggestion && !this.check.config.showAsSuggestion );
+};
+
+/**
+ * Whether widget needs to be redrawn using fresh data, without a full rerender
+ *
+ * Called from Controller#updateForListener when a new action #equals the old one,
+ * but there is an update to some data that is displayed in the widget
+ *
+ * @param {mw.editcheck.EditCheckAction} action the new, equivalent action
+ * @return {boolean} Whether widget needs to be redrawn
+ */
+mw.editcheck.EditCheckAction.prototype.updateFrom = function () {
+	return false;
+};
+
+/**
+ * Refresh the rendered widget to reflect any changes since it was last built
+ *
+ * Currently only updates the card description but this could be extended if other getters become stale(-able) too
+ */
+mw.editcheck.EditCheckAction.prototype.refreshWidget = function () {
+	if ( this.widget ) {
+		this.widget.setMessage( this.getDescription() );
+	}
 };
 
 /**
@@ -481,4 +507,13 @@ mw.editcheck.EditCheckAction.prototype.overlapsRanges = function ( ranges ) {
  */
 mw.editcheck.EditCheckAction.prototype.isDismissed = function () {
 	return this.isTagged( 'dismissed' );
+};
+
+/**
+ * Get action's id if it's configured to include it in its instrumentation
+ *
+ * @return {string} suffix with ID, or an empty string
+ */
+mw.editcheck.EditCheckAction.prototype.getTrackingIdSuffix = function () {
+	return this.trackId ? `-id-${ this.id }` : '';
 };

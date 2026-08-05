@@ -1,0 +1,38 @@
+@import 'mediawiki.skin.variables.less';
+
+.ve-ui-editCheckActionWidget-sourceVerification {
+	&-message {
+		display: flex;
+		flex-direction: column;
+		gap: @spacing-50;
+	}
+
+	&-quoteLabel {
+		font-size: @font-size-small;
+	}
+
+	&-quote {
+		margin: 0;
+		padding: @spacing-65;
+		border-left: @border-width-thick solid @border-color-muted;
+		font-style: italic;
+	}
+
+	&-link {
+		font-size: @font-size-small;
+	}
+
+	&-comments {
+		background-color: @background-color-neutral-subtle;
+		border: @border-width-base solid @border-color-muted;
+		padding: @spacing-75;
+	}
+
+	&-comments-label {
+		font-weight: @font-weight-bold;
+	}
+
+	&-comments-text {
+		color: @color-subtle;
+	}
+}

@@ -451,6 +451,9 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 		const oldAction = existing.find( ( existingAction ) => action.equals( existingAction ) );
 		if ( oldAction && !( oldAction.isSuggestion() && !action.isSuggestion() ) ) {
 			// Let a new non-suggestion take over from an old suggestion
+			if ( oldAction.updateFrom( action ) ) {
+				oldAction.refreshWidget();
+			}
 			action = oldAction;
 		}
 		this.emit( 'actionsUpdatedProgress', listener, action, oldAction );
@@ -1307,10 +1310,10 @@ Controller.prototype.onActionSeenOrShown = function ( action, seenOrShown ) {
 	const data = {};
 	if ( action.isSuggestion() ) {
 		mw.editcheck.state.suggestions[ seenOrShown ][ name ] = true;
-		data.action = `suggestion-${ seenOrShown }-${ moment }`;
+		data.action = `suggestion-${ seenOrShown }-${ moment }${ action.getTrackingIdSuffix() }`;
 	} else {
 		mw.editcheck.state.checks[ seenOrShown ][ name ] = true;
-		data.action = `check-${ seenOrShown }-${ moment }`;
+		data.action = `check-${ seenOrShown }-${ moment }${ action.getTrackingIdSuffix() }`;
 	}
 	ve.track( `activity.editCheck-${ name }`, data );
 };
@@ -1325,7 +1328,7 @@ Controller.prototype.onActionSeenOrShown = function ( action, seenOrShown ) {
 Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
 	const name = action.getName();
 	const data = {
-		action: ( action.isSuggestion() ? 'suggestion-' : '' ) + 'action-' + ( actionTaken || 'unknown' )
+		action: ( action.isSuggestion() ? 'suggestion-' : '' ) + 'action-' + ( actionTaken || 'unknown' ) + action.getTrackingIdSuffix()
 	};
 	ve.track( `activity.editCheck-${ name }`, data );
 	const dismissalActions = [ 'dismiss', 'reject', 'keep' ];
