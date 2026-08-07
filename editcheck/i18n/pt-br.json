@@ -10,6 +10,7 @@
 	},
 	"editchecks": "Editar verificações",
 	"editcheck-toolbar-suggestions-title": "Sugestões (mostrar ou ocultar)",
+	"editcheck-toolbar-suggestions-count": "{{PLURAL:$1|$1|100={{formatnum:99}}+}}",
 	"editcheck-suggestions-turned-on": "Sugestões ativadas",
 	"editcheck-suggestions-turned-off": "Sugestões desativadas",
 	"editcheck-dialog-action-no": "Não",
