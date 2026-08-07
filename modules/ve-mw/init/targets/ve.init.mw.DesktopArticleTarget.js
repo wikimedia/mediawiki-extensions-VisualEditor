@@ -444,9 +444,9 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 		.removeClass( 've-activating ve-active-visual ve-active-source' )
 		.addClass( 've-active ve-active-' + this.getSurface().getMode() );
 
-	// Disable TemplateStyles in the original content
-	// (We do this here because toggling 've-active' class above hides it)
-	this.$editableContent.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', true );
+	// Repeat the call in #setSurface for paths that do not set a new surface.
+	// A repeat call writes nothing.
+	this.disableOriginalContentStyles();
 
 	this.afterSurfaceReady();
 
@@ -470,6 +470,20 @@ ve.init.mw.DesktopArticleTarget.prototype.afterActivate = function () {
 };
 
 /**
+ * Disable the TemplateStyles of the original read view content
+ *
+ * Call this before the first geometry read. The change makes the style of the whole
+ * document invalid. After layout, the browser must then do a second full style
+ * recalculation.
+ *
+ * The read view keeps its styles. The surface holds copies, and TemplateStyles rules
+ * apply to the whole document.
+ */
+ve.init.mw.DesktopArticleTarget.prototype.disableOriginalContentStyles = function () {
+	this.$editableContent.find( 'style[data-mw-deduplicate^="TemplateStyles:"]' ).prop( 'disabled', true );
+};
+
+/**
  * @inheritdoc
  */
 ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
@@ -477,6 +491,8 @@ ve.init.mw.DesktopArticleTarget.prototype.setSurface = function ( surface ) {
 
 	if ( resetSurface ) {
 		this.$editableContent.after( surface.$element );
+		// Before the parent method, which sets up the toolbar and reads geometry
+		this.disableOriginalContentStyles();
 	}
 
 	// Parent method
