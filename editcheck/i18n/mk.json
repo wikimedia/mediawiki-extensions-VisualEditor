@@ -28,6 +28,7 @@
 	"editcheck-dialog-addref-reject-other": "Друго",
 	"editcheck-dialog-addref-success-notify": "Ви благодариме што ставивте навод!",
 	"editcheck-dialog-addref-title": "Додај навод",
+	"editcheck-citationneeded-footer": "Пријавено од уредник",
 	"editcheck-dialog-title": "Пред да објавите",
 	"editcheck-copyvio-title": "Налепена содржина",
 	"editcheck-copyvio-description": "Избегнувајте да копирате текстови од други извори, дури и ако се пресрочени или цитирани. Ова може да се смета за [{{int:editcheck-copyvio-descriptionlink}} авторскоправен прекршок или плагијат] и може да доведе до остранување на вашата содржина или блокирање на вашата сметка.",
