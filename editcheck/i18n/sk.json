@@ -1,7 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"KormiSK"
+			"KormiSK",
+			"TomášPolonec"
 		]
-	}
+	},
+	"editcheck-dialog-title": "Pred publikovaním"
 }
