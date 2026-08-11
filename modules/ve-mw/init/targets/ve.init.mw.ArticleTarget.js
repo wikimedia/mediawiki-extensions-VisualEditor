@@ -102,6 +102,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	this.pageDeletedWarning = false;
 	this.events = {
 		track: () => {},
+		trackTiming: () => {},
 		trackActivationStart: () => {},
 		trackActivationComplete: () => {}
 	};
@@ -1366,19 +1367,19 @@ ve.init.mw.ArticleTarget.prototype.prepareCacheKey = function ( doc ) {
 				( response ) => {
 					const trackData = { duration: ve.now() - start };
 					if ( response.visualeditoredit && typeof response.visualeditoredit.cachekey === 'string' ) {
-						this.events.track( 'performance.system.serializeforcache', trackData );
+						this.events.trackTiming( 'performance_system_serializeforcache', { ...trackData, type: 'cachekey' } );
 						return {
 							cacheKey: response.visualeditoredit.cachekey,
 							// Pass the HTML for retries.
 							html: deflatedHtml
 						};
 					} else {
-						this.events.track( 'performance.system.serializeforcache.nocachekey', trackData );
+						this.events.trackTiming( 'performance_system_serializeforcache', { ...trackData, type: 'nocachekey' } );
 						return ve.createDeferred().reject();
 					}
 				},
 				() => {
-					this.events.track( 'performance.system.serializeforcache.fail', { duration: ve.now() - start } );
+					this.events.trackTiming( 'performance_system_serializeforcache', { duration: ve.now() - start, type: 'fail' } );
 					return ve.createDeferred().reject();
 				}
 			);
@@ -1430,7 +1431,7 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  * @param {HTMLDocument|string} doc Document to submit or string in source mode
  * @param {Object} extraData POST parameters to send. Do not include 'html', 'cachekey' or 'format'.
  * @param {string} [eventName] If set, log an event when the request completes successfully. The
- *  full event name used will be 'performance.system.{eventName}.withCacheKey' or .withoutCacheKey
+ *  event name used will be 'performance_system_{eventName}, with a type of `cachekey` or `nocachekey`
  *  depending on whether or not a cache key was used.
  * @return {jQuery.Promise} Promise which resolves/rejects when saving is complete/fails
  */
@@ -1469,7 +1470,7 @@ ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, ext
 		{
 			onCacheKeyFail: this.clearPreparedCacheKey.bind( this ),
 			api: this.getContentApi(),
-			track: this.events.track.bind( this.events ),
+			trackTiming: this.events.trackTiming.bind( this.events ),
 			eventName,
 			now: ve.now
 		}

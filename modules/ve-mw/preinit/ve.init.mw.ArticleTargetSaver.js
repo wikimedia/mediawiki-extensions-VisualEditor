@@ -151,7 +151,7 @@
 		 * @param {Object} [options]
 		 * @param {mw.Api} [options.api] Api to use
 		 * @param {Function} [options.now] Function returning current time in milliseconds for tracking, e.g. ve.now
-		 * @param {Function} [options.track] Tracking function
+		 * @param {Function} [options.trackTiming] Tracking function
 		 * @param {string} [options.eventName] Event name for tracking
 		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
 		 */
@@ -210,7 +210,7 @@
 		 * @param {Object} [options]
 		 * @param {mw.Api} [options.api] Api to use
 		 * @param {Function} [options.now] Function returning current time in milliseconds for tracking, e.g. ve.now
-		 * @param {Function} [options.track] Tracking function
+		 * @param {Function} [options.trackTiming] Tracking function
 		 * @param {string} [options.eventName] Event name for tracking
 		 * @return {jQuery.Promise} Promise which resolves with API save data, or rejects with error details
 		 */
@@ -252,14 +252,13 @@
 					const responseData = response[ action ];
 
 					// Log data about the request if eventName was set
-					if ( options.track && options.eventName ) {
+					if ( options.trackTiming && options.eventName ) {
 						const eventData = {
 							bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
-							duration: options.now() - start
+							duration: options.now() - start,
+							type: responseData.cachekey ? 'cachekey' : 'nocachekey'
 						};
-						const fullEventName = 'performance.system.' + options.eventName +
-							( responseData.cachekey ? '.withCacheKey' : '.withoutCacheKey' );
-						options.track( fullEventName, eventData );
+						options.trackTiming( 'performance_system_' + options.eventName, eventData );
 					}
 
 					let error;
@@ -304,18 +303,13 @@
 				( code, response ) => {
 					const responseText = OO.getProp( response, 'xhr', 'responseText' );
 
-					if ( responseText && options.track && options.eventName ) {
+					if ( responseText && options.trackTiming && options.eventName ) {
 						const eventData = {
 							bytes: require( 'mediawiki.String' ).byteLength( responseText ),
-							duration: options.now() - start
+							duration: options.now() - start,
+							type: code === 'badcachekey' ? 'badcachekey' : 'nocachekey'
 						};
-						let fullEventName;
-						if ( code === 'badcachekey' ) {
-							fullEventName = 'performance.system.' + options.eventName + '.badCacheKey';
-						} else {
-							fullEventName = 'performance.system.' + options.eventName + '.withoutCacheKey';
-						}
-						options.track( fullEventName, eventData );
+						options.trackTiming( 'performance_system_' + options.eventName, eventData );
 					}
 					return $.Deferred().reject( code, response ).promise();
 				}

@@ -48,23 +48,28 @@ ve.init.mw.ArticleTargetEvents.prototype.track = function ( topic, data ) {
 /**
  * Target specific ve.track wrapper, focused on timing
  *
- * @param {string} topic Event name
+ * @param {string} topic Event name, must match [A-Za-z0-9_]+
  * @param {Object} data Additional data describing the event, encoded as an object
+ * @param {number} data.duration Time in milliseconds associated with the event
+ * @param {string} [data.type] Type of event, added to submitted labels
  */
 ve.init.mw.ArticleTargetEvents.prototype.trackTiming = function ( topic, data ) {
-	if ( topic.startsWith( 'performance.system.serializeforcache' ) ) {
+	if ( !Number.isFinite( data.duration ) ) {
+		mw.log.warn( 'Couldn\'t track timing for ' + topic );
+		return;
+	}
+	if ( topic.startsWith( 'performance_system_serializeforcache' ) ) {
 		// HACK: track serializeForCache duration here, because there's no event for that
 		this.timings.serializeForCache = data.duration;
 	}
 
-	// Add type for save errors; not in the topic for stupid historical reasons
-	if ( topic === 'performance.user.saveError' ) {
-		topic = topic + '.' + data.type;
+	const labels = { target: this.target.constructor.static.trackingName };
+
+	if ( data.type ) {
+		labels.type = data.type;
 	}
 
-	topic = 'timing.ve.' + this.target.constructor.static.trackingName + '.' + topic;
-
-	mw.track( topic, data.duration );
+	mw.track( 'stats.mediawiki_ve_' + topic + '_seconds', data.duration, labels );
 };
 
 /**
@@ -73,7 +78,7 @@ ve.init.mw.ArticleTargetEvents.prototype.trackTiming = function ( topic, data ) 
 ve.init.mw.ArticleTargetEvents.prototype.onFirstTransaction = function () {
 	this.track( 'editAttemptStep', { action: 'firstChange' } );
 
-	this.trackTiming( 'behavior.firstTransaction', {
+	this.trackTiming( 'behavior_firstTransaction', {
 		duration: ve.now() - this.timings.surfaceReady
 	} );
 };
@@ -83,7 +88,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onFirstTransaction = function () {
  */
 ve.init.mw.ArticleTargetEvents.prototype.onSaveWorkflowBegin = function () {
 	this.timings.saveWorkflowBegin = ve.now();
-	this.trackTiming( 'behavior.lastTransactionTillSaveDialogOpen', {
+	this.trackTiming( 'behavior_lastTransactionTillSaveDialogOpen', {
 		duration: this.timings.saveWorkflowBegin - this.timings.lastTransaction
 	} );
 	this.track( 'editAttemptStep', { action: 'saveIntent' } );
@@ -93,7 +98,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveWorkflowBegin = function () {
  * Track when user ends the save workflow
  */
 ve.init.mw.ArticleTargetEvents.prototype.onSaveWorkflowEnd = function () {
-	this.trackTiming( 'behavior.saveDialogClose', { duration: ve.now() - this.timings.saveWorkflowBegin } );
+	this.trackTiming( 'behavior_saveDialogClose', { duration: ve.now() - this.timings.saveWorkflowBegin } );
 	this.timings.saveWorkflowBegin = null;
 };
 
@@ -103,7 +108,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveWorkflowEnd = function () {
 ve.init.mw.ArticleTargetEvents.prototype.onSaveInitiated = function () {
 	this.timings.saveInitiated = ve.now();
 	this.timings.saveRetries++;
-	this.trackTiming( 'behavior.saveDialogOpenTillSave', {
+	this.trackTiming( 'behavior_saveDialogOpenTillSave', {
 		duration: this.timings.saveInitiated - this.timings.saveWorkflowBegin
 	} );
 	this.track( 'editAttemptStep', { action: 'saveAttempt' } );
@@ -115,7 +120,7 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveInitiated = function () {
  * @param {Object} data Save data from the API, see ve.init.mw.ArticleTarget#saveComplete
  */
 ve.init.mw.ArticleTargetEvents.prototype.onSaveComplete = function ( data ) {
-	this.trackTiming( 'performance.user.saveComplete', { duration: ve.now() - this.timings.saveInitiated } );
+	this.trackTiming( 'performance_user_saveComplete', { duration: ve.now() - this.timings.saveInitiated } );
 	this.timings.saveRetries = 0;
 	this.track( 'editAttemptStep', {
 		action: 'saveSuccess',
@@ -133,29 +138,22 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveComplete = function ( data ) {
 ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( code ) {
 	// Maps error codes to editAttemptStep types
 	const typeMap = {
-			badtoken: 'userBadToken',
-			assertanonfailed: 'userNewUser',
-			assertuserfailed: 'userNewUser',
-			assertnameduserfailed: 'userNewUser',
-			'abusefilter-disallowed': 'extensionAbuseFilter',
-			'abusefilter-warning': 'extensionAbuseFilter',
-			captcha: 'extensionCaptcha',
-			spamblacklist: 'extensionSpamBlacklist',
-			'titleblacklist-forbidden': 'extensionTitleBlacklist',
-			pagedeleted: 'editPageDeleted',
-			editconflict: 'editConflict'
-		},
-		// Types that are logged as performance.user.saveError.{code}
-		// (for historical reasons; this sucks)
-		specialTypes = [ 'editconflict' ];
+		badtoken: 'userBadToken',
+		assertanonfailed: 'userNewUser',
+		assertuserfailed: 'userNewUser',
+		assertnameduserfailed: 'userNewUser',
+		'abusefilter-disallowed': 'extensionAbuseFilter',
+		'abusefilter-warning': 'extensionAbuseFilter',
+		captcha: 'extensionCaptcha',
+		spamblacklist: 'extensionSpamBlacklist',
+		'titleblacklist-forbidden': 'extensionTitleBlacklist',
+		pagedeleted: 'editPageDeleted',
+		editconflict: 'editConflict'
+	};
 
-	let key = 'performance.user.saveError';
-	if ( specialTypes.includes( code ) ) {
-		key += '.' + code;
-	}
-	this.trackTiming( key, {
+	this.trackTiming( 'performance_user_saveError', {
 		duration: ve.now() - this.timings.saveInitiated,
-		type: code
+		type: typeMap[ code ] || 'responseUnknown'
 	} );
 
 	this.track( 'editAttemptStep', {
@@ -179,7 +177,7 @@ ve.init.mw.ArticleTargetEvents.prototype.trackActivationStart = function ( start
  * Record activation being complete.
  */
 ve.init.mw.ArticleTargetEvents.prototype.trackActivationComplete = function () {
-	this.trackTiming( 'performance.system.activation', { duration: ve.now() - this.timings.activationStart } );
+	this.trackTiming( 'performance_system_activation', { duration: ve.now() - this.timings.activationStart } );
 };
 
 /**
@@ -194,7 +192,7 @@ ve.init.mw.ArticleTargetEvents.prototype.recordLastTransactionTime = function ()
  */
 ve.init.mw.ArticleTargetEvents.prototype.onSaveReview = function () {
 	this.timings.saveReview = ve.now();
-	this.trackTiming( 'behavior.saveDialogOpenTillReview', {
+	this.trackTiming( 'behavior_saveDialogOpenTillReview', {
 		duration: this.timings.saveReview - this.timings.saveWorkflowBegin
 	} );
 };
@@ -210,28 +208,28 @@ ve.init.mw.ArticleTargetEvents.prototype.onSurfaceReady = function () {
  * Track when the user enters the review workflow
  */
 ve.init.mw.ArticleTargetEvents.prototype.onShowChanges = function () {
-	this.trackTiming( 'performance.user.reviewComplete', { duration: ve.now() - this.timings.saveReview } );
+	this.trackTiming( 'performance_user_reviewComplete', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
  * Track when the diff request fails in the review workflow
  */
 ve.init.mw.ArticleTargetEvents.prototype.onShowChangesError = function () {
-	this.trackTiming( 'performance.user.reviewError', { duration: ve.now() - this.timings.saveReview } );
+	this.trackTiming( 'performance_user_reviewError', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
  * Track when the diff request detects no changes
  */
 ve.init.mw.ArticleTargetEvents.prototype.onNoChanges = function () {
-	this.trackTiming( 'performance.user.reviewComplete', { duration: ve.now() - this.timings.saveReview } );
+	this.trackTiming( 'performance_user_reviewComplete', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
  * Track when serialization is complete in review workflow
  */
 ve.init.mw.ArticleTargetEvents.prototype.onSerializeComplete = function () {
-	this.trackTiming( 'performance.user.reviewComplete', { duration: ve.now() - this.timings.saveReview } );
+	this.trackTiming( 'performance_user_reviewComplete', { duration: ve.now() - this.timings.saveReview } );
 };
 
 /**
@@ -241,6 +239,6 @@ ve.init.mw.ArticleTargetEvents.prototype.onSerializeError = function () {
 	if ( this.timings.saveWorkflowBegin ) {
 		// This function can be called by the switch to wikitext button as well, so only log
 		// reviewError if we actually got here from the save workflow
-		this.trackTiming( 'performance.user.reviewError', { duration: ve.now() - this.timings.saveReview } );
+		this.trackTiming( 'performance_user_reviewError', { duration: ve.now() - this.timings.saveReview } );
 	}
 };

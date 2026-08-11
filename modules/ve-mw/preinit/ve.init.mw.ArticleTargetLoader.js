@@ -407,8 +407,8 @@
 			if ( !apiPromise ) {
 				apiPromise = apiXhr.then( ( response ) => {
 					ve.track( 'trace.apiLoad.exit', { mode: 'visual' } );
-					mw.track( 'timing.ve.' + options.targetName + '.performance.system.apiLoad',
-						ve.now() - start );
+					mw.track( 'stats.mediawiki_ve_performance_system_apiLoad_seconds',
+						ve.now() - start, { target: options.targetName } );
 					if ( response.visualeditor ) {
 						response.visualeditor.switched = switched;
 						response.visualeditor.fromEditedState = fromEditedState;
@@ -476,8 +476,8 @@
 				const restbasePromise = restbaseXhr.then(
 					( response, status, jqxhr ) => {
 						ve.track( 'trace.restbaseLoad.exit', { mode: 'visual' } );
-						mw.track( 'timing.ve.' + options.targetName + '.performance.system.restbaseLoad',
-							ve.now() - start );
+						mw.track( 'stats.mediawiki_ve_performance_system_restbaseLoad_seconds',
+							ve.now() - start, { target: options.targetName } );
 						return [ response, jqxhr.getResponseHeader( 'etag' ) ];
 					},
 					( xhr, code, _ ) => {
