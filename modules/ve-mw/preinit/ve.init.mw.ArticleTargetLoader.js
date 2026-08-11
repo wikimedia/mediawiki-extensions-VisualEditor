@@ -80,8 +80,8 @@
 	if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 		ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
 	}
-	const editCheck = ( conf.editCheck || !!ecenable ) && ecenable !== '0';
-	if ( conf.editCheckTagging || editCheck ) {
+	const editCheck = ( conf.editCheck || !!ecenable );
+	if ( ( conf.editCheckTagging || editCheck ) && ecenable !== '0' ) {
 		modules.push(
 			'ext.visualEditor.editCheck',
 			'ext.visualEditor.editCheck.checks'
