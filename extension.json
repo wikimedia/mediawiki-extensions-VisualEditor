@@ -261,7 +261,10 @@
 		"OutputPageBodyAttributes": "VisualEditorHooks",
 		"ParserOptionsDefaults": "VisualEditorHooks",
 		"ParserTestGlobals": "VisualEditorHooks",
-		"PreferencesFormPreSave": "VisualEditorHooks",
+		"PreferencesFormPreSave": [
+			"VisualEditorHooks",
+			"EditCheckHooks"
+		],
 		"RecentChange_save": "VisualEditorHooks",
 		"RedirectSpecialArticleRedirectParams": "VisualEditorHooks",
 		"ResourceLoaderGetConfigVars": "VisualEditorHooks",
@@ -2587,7 +2590,8 @@
 		"visualeditor-hidetabdialog": 0,
 		"visualeditor-newwikitext": 0,
 		"visualeditor-tabs": "remember-last",
-		"visualeditor-editcheck-suggestions-toggle": 1
+		"visualeditor-editcheck-suggestions-toggle": 1,
+		"visualeditor-editcheck-experimental": 0
 	},
 	"SpecialPages": {
 		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad",

@@ -56,6 +56,8 @@
 	"editcheck-preference-suggestions-description": "Used in [[Special:Preferences]].\n\nDescription for the suggestion mode beta preference.\n\nThe label for this checkbox is {{msg-mw|editcheck-preference-suggestions-label}}",
 	"editcheck-preference-suggestions-info-link": "{{optional|Used on [[Special:Preferences]] as a link to more information about suggestion mode.}}",
 	"editcheck-preference-suggestions-discussion-link": "{{optional|Used on [[Special:Preferences]] as a link to discussion page about suggestion mode.}}",
+	"editcheck-preference-experimental-enable": "Used in [[Special:Preferences]].\n\nLabel for experimental edit checks and suggestions.\n\nThe description for this checkbox is {{msg-mw|editcheck-preference-experimental-help}}",
+	"editcheck-preference-experimental-help": "Used in [[Special:Preferences]].\n\nDescription for the experimental edit check preference.\n\nThe label for this checkbox is {{msg-mw|editcheck-preference-experimental-enable}}",
 	"editcheck-textmatch-replace": "Prompt for specific text replacement the user can make.\n\nValues:\n* $1 – Found text.\n* $2 – Replacement text.",
 	"editcheck-tone-title": "Title of tone check",
 	"editcheck-tone-description": "Help text explaining the tone check",

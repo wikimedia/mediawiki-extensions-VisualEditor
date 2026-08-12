@@ -20,12 +20,12 @@ if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 if ( ecenable === '0' ) {
 	return;
 }
-
 // any setting for forceEnable will bypass account-specific configs, though it will still honor the other configs
+const experimentalPref = !!mw.user.options.get( 'visualeditor-editcheck-experimental' ) && !!mw.user.options.get( 'visualeditor-editcheck-suggestions' );
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
-	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || ecenable === '2' ),
+	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || experimentalPref || ecenable === '2' ),
 	suggestionsModeAvailable: !!mw.user.options.get( 'visualeditor-editcheck-suggestions' ),
 	// runtime performance logging config that we can adjust from the console
 	sessionPerfConfig: { checksMax: 5000, typingMaxSamples: 5000 },
