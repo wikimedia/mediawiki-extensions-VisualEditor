@@ -33,8 +33,7 @@ mw.editcheck.HeadingLevelEditCheck.static.description = ve.deferJQueryMsg( 'edit
 mw.editcheck.HeadingLevelEditCheck.static.choices = [
 	{
 		action: 'fix',
-		label: OO.ui.deferMsg( 'editcheck-headinglevel-action-adjust' ),
-		icon: 'edit'
+		label: OO.ui.deferMsg( 'editcheck-headinglevel-action-adjust' )
 	},
 	{
 		action: 'dismiss',
