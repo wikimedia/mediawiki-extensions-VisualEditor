@@ -59,6 +59,35 @@ mw.libs.ve.unwrapParsoidSections = function ( element, keepSection ) {
 };
 
 /**
+ * Remove Parsoid section wrappers from a Parsoid HTML string
+ *
+ * This produces the same document as #unwrapParsoidSections, minus the section IDs that method
+ * copies onto headings, so only use it where those are not needed, e.g. diffing.
+ *
+ * It is much cheaper. #unwrapParsoidSections moves every child out of every section, and the cost
+ * of a DOM move is proportional to the subtree moved, so a long article pays for its whole tree.
+ * Doing it on the string instead costs nothing beyond the parse that follows.
+ *
+ * Wikitext cannot produce a `<section>` element, so every closing tag belongs to one of Parsoid's
+ * wrappers. Should that ever stop holding, this returns null and the caller can unwrap the DOM.
+ *
+ * @param {string} html Parsoid HTML
+ * @return {string|null} HTML without section wrappers, or null if it could not be done safely
+ */
+mw.libs.ve.stripParsoidSections = function ( html ) {
+	const opened = ( html.match( /<section [^>]*data-mw-section-id[^>]*>/g ) || [] ).length,
+		closed = ( html.match( /<\/section>/g ) || [] ).length;
+	if ( opened !== closed ) {
+		return null;
+	}
+	return opened ?
+		html
+			.replace( /<section [^>]*data-mw-section-id[^>]*>/g, '' )
+			.replace( /<\/section>/g, '' ) :
+		html;
+};
+
+/**
  * Strip legacy (non-HTML5) IDs; typically found as section IDs inside
  * headings.
  *

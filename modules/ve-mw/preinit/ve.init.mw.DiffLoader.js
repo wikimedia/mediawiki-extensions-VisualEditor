@@ -33,8 +33,16 @@
 			if ( typeof html !== 'string' ) {
 				return null;
 			}
+			// A diff needs no section IDs on its headings, so for a whole document the wrappers
+			// can come off the string, which is far cheaper than unwrapping them in the DOM.
+			// The stripped string still goes through parseDocument, which then finds no sections
+			// to unwrap but keeps doing the rest: TemplateStyles, fallback IDs, base URL, and
+			// the script deny list.
+			const stripped = section === null ? mw.libs.ve.stripParsoidSections( html ) : null;
 			// The section is selected from the parsed document, so the whole document is fetched.
-			const doc = targetClass.static.parseDocument( html, 'visual', section, section !== null );
+			const doc = targetClass.static.parseDocument(
+				stripped !== null ? stripped : html, 'visual', section, section !== null
+			);
 			mw.libs.ve.stripRestbaseIds( doc );
 			return targetClass.static.createModelFromDom( doc, 'visual' );
 		},
