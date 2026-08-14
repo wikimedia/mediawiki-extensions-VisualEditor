@@ -82,6 +82,53 @@ QUnit.test( 'reduplicateStyles/deduplicateStyles', ( assert ) => {
 	} );
 } );
 
+QUnit.test( 'stripParsoidSections', ( assert ) => {
+	const sectionCases = [
+		{
+			msg: 'HTML with no sections is returned unchanged',
+			html: '<p>Hello</p>',
+			expected: '<p>Hello</p>'
+		},
+		{
+			msg: 'a single section wrapper is removed',
+			html: '<section data-mw-section-id="0"><p>Hello</p></section>',
+			expected: '<p>Hello</p>'
+		},
+		{
+			msg: 'several section wrappers are removed',
+			html: '<section data-mw-section-id="0"><p>One</p></section>' +
+				'<section data-mw-section-id="1"><h2>Two</h2></section>',
+			expected: '<p>One</p><h2>Two</h2>'
+		},
+		{
+			msg: 'nested section wrappers are removed',
+			html: '<section data-mw-section-id="1"><h2>Two</h2>' +
+				'<section data-mw-section-id="2"><h3>Three</h3></section></section>',
+			expected: '<h2>Two</h2><h3>Three</h3>'
+		},
+		{
+			// The open tag is only matched when it carries a section ID, so a section
+			// without one leaves the counts unbalanced. Bail out rather than guess.
+			msg: 'a section without a section ID gives null',
+			html: '<section><p>Hello</p></section>',
+			expected: null
+		},
+		{
+			msg: 'an unbalanced close tag gives null',
+			html: '<section data-mw-section-id="0"><p>Hello</p></section></section>',
+			expected: null
+		}
+	];
+
+	sectionCases.forEach( ( caseItem ) => {
+		assert.strictEqual(
+			mw.libs.ve.stripParsoidSections( caseItem.html ),
+			caseItem.expected,
+			caseItem.msg
+		);
+	} );
+} );
+
 QUnit.test( 'getTargetDataFromHref', ( assert ) => {
 	const doc = ve.createDocumentFromHtml( ve.test.utils.makeBaseTag( ve.dm.mwExample.baseUri ) );
 	mw.config.set( {

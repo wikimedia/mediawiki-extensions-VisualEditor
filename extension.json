@@ -2343,6 +2343,7 @@
 			"modules/ve-mw/tests/ve.test.utils.js",
 			"lib/ve/tests/ve.test.js",
 			"modules/ve-mw/tests/preinit/ve.utils.parsoid.test.js",
+			"modules/ve-mw/tests/preinit/ve.init.mw.DiffLoader.test.js",
 			"lib/ve/tests/ve.DiffMatchPatch.test.js",
 			"lib/ve/tests/ve.EventSequencer.test.js",
 			"lib/ve/tests/ve.Scheduler.test.js",
@@ -2549,7 +2550,8 @@
 			"ext.visualEditor.core.mobile",
 			"ext.visualEditor.editCheck",
 			"ext.visualEditor.editCheck.checks",
-			"ext.visualEditor.rebase"
+			"ext.visualEditor.rebase",
+			"ext.visualEditor.diffLoader"
 		],
 		"factory": "MediaWiki\\Extension\\VisualEditor\\VisualEditorDataModule::addOptional",
 		"optional": {
