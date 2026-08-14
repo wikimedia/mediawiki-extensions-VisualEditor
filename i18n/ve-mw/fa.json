@@ -34,7 +34,8 @@
 			"Taha",
 			"الناز",
 			"درفش کاویانی",
-			"فلورانس"
+			"فلورانس",
+			"LProfo"
 		]
 	},
 	"collabpad-doctitle": "CollabPad: $1",
@@ -112,8 +113,8 @@
 	"visualeditor-dialog-media-type-frameless": "بدون قاب",
 	"visualeditor-dialog-media-type-none": "پایه",
 	"visualeditor-dialog-media-type-section": "نوع تصویر",
-	"visualeditor-dialog-media-type-section-help": "می ةوانید مشخص کنید که آیتم رسانه چگونه در صفحه نمایش داده شود. این مورد برای حالت بندانگشتی است که شامل همه موارد و همه صفحات می‌شود.",
-	"visualeditor-dialog-media-type-thumb": "کوچک",
+	"visualeditor-dialog-media-type-section-help": "می توانید مشخص کنید که آیتم رسانه چگونه در صفحه نمایش داده شود. این مورد برای حالت بندانگشتی است که شامل همه موارد و همه صفحات می‌شود.",
+	"visualeditor-dialog-media-type-thumb": "بندانگشتی",
 	"visualeditor-dialog-media-upload": "بارگذاری",
 	"visualeditor-dialog-meta-advancedsettings-label": "تنظیمات پیشرفته",
 	"visualeditor-dialog-meta-advancedsettings-section": "تنظیمات پیشرفته",
