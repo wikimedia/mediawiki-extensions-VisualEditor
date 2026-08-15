@@ -203,14 +203,10 @@ ve.dm.MWTemplateModel.prototype.getOriginalParameterName = function ( name ) {
 	if ( name in this.params ) {
 		return name;
 	}
-	const aliases = this.spec.getParameterAliases( name );
-	// FIXME: Should use .filter() when we dropped IE11 support
-	for ( let i = 0; i < aliases.length; i++ ) {
-		if ( aliases[ i ] in this.params ) {
-			return aliases[ i ];
-		}
-	}
-	return this.spec.getPrimaryParameterName( name );
+	const matchingAlias = this.spec.getParameterAliases( name )
+		.find( ( alias ) => alias in this.params );
+
+	return matchingAlias || this.spec.getPrimaryParameterName( name );
 };
 
 /**
