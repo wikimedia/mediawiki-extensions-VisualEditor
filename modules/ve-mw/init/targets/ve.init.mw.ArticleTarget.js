@@ -1688,7 +1688,8 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 		// This means that we might need to redirect to an opaque URL,
 		// so we must set up query parameters we want ahead of time.
 		// TODO: `this.isRedirect` is only set in visual mode, not in source mode
-		data.returntoquery = this.isRedirect ? 'redirect=no' : '';
+		data.returntoquery = [ data.returntoquery, this.isRedirect ? 'redirect=no' : '' ]
+			.filter( Boolean ).join( '&' );
 		data.returntoanchor = this.getSectionHashFromPage();
 	}
 
