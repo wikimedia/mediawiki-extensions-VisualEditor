@@ -115,6 +115,10 @@ ve.ui.MWCategoryInputWidget.prototype.getLookupCacheDataFromResponse = function 
 
 	ve.init.platform.linkCache.set( linkCacheUpdate );
 
+	// T435029: The allcategories generator provides no index to convey its ordering,
+	// so results arrive in page ID order. Restore a useful order for the user.
+	result.sort( ( a, b ) => a.localeCompare( b ) );
+
 	return result;
 };
 
