@@ -126,7 +126,7 @@ mw.editcheck.LLMSuggestionEditCheck.prototype.onBranchNodeChange = function ( su
 				suggestionData: suggestion,
 				fragments: [ fragment ],
 				title: suggestion.title,
-				message: msg( 'description', suggestion.static_description ),
+				message: msg( `description-${ suggestion.suggestion_id }`, suggestion.static_description ),
 				check: this
 			} );
 		}
