@@ -82,6 +82,11 @@ mw.editcheck.LLMSuggestionEditCheck.static.fetchSuggestions = function ( surface
 				const documentModel = surfaceModel.getDocument();
 				// This could be optimized by squashing it into a single finder
 				results.suggestions.forEach( ( result ) => {
+					// exclude NPOV suggestions per T435253
+					// TODO remove once/if it's changed from the api instead
+					if ( result.suggestion_type === 'NPOV' ) {
+						return;
+					}
 					// Already present on result:
 					// .wiki_id, .revision_id, .page_id, .page_title, .title, .static_description, .description, .target, .suggestion_type, .suggestion_id
 					const ranges = documentModel.findText( result.target, { caseSensitiveString: true } );
