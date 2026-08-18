@@ -118,7 +118,7 @@ mw.editcheck.LLMSuggestionEditCheck.prototype.onBranchNodeChange = function ( su
 		}
 		if (
 			!range.isCollapsed() && // deleted fragment
-			fragment.getText() === suggestion.target && // modified text might no longer apply
+			fragment.getText( '\uFFFC' ) === suggestion.target && // modified text might no longer apply
 			modified.some( ( modifiedRange ) => modifiedRange.touchesRange( range ) )
 		) {
 			suggestion.previouslyApplied = true;
