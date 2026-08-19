@@ -16,6 +16,8 @@
 	"editcheck-dialog-addref-success-notify": "Hvala za dodani sklic!",
 	"editcheck-dialog-addref-title": "Dodajte sklic",
 	"editcheck-dialog-title": "Pred objavo",
+	"editcheck-preference-suggestions-label": "Način predlaganja",
+	"editcheck-preference-suggestions-description": "Skupnostno konfigurirani predlogi za izboljšanje člankov. Na voljo v [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|vizualnem urejevalniku]].",
 	"tag-editcheck-reference-decline-common-knowledge": "Preverjanje urejanja (sklici) odklonjeno (splošno znanje)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck: Sklic je bil odklonjen kot splošno znanje",
 	"tag-editcheck-reference-decline-irrelevant": "Preverjanje urejanja (sklici) odklonjeno (nepotrebno)",
