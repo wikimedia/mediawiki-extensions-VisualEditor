@@ -113,6 +113,7 @@ Controller.prototype.clearState = function () {
 	this.lastBranchNodeChangeHistoryPointer = null;
 	this.currentListenerPromise = null;
 	this.refreshDeferred = null;
+	this.sidebarShownPromise = null;
 };
 
 /**
@@ -337,6 +338,21 @@ Controller.prototype.whenActionsSettled = function () {
 	}
 	// Nothing is currently being done, so just return the current known actions:
 	return ve.createDeferred().resolve( this.getActions() ).promise();
+};
+
+/**
+ * Wait for the sidebar to be shown, if it is being opened
+ *
+ * @return {jQuery.Promise}
+ */
+Controller.prototype.whenSidebarShown = function () {
+	if ( this.surface.getSidebarDialogs().getCurrentWindow() ) {
+		// Already opening or open, so there is nothing to wait for. Never wait
+		// in this case: the open promise does not resolve if a second
+		// actionsUpdated tried to open the sidebar while it was still opening.
+		return ve.createDeferred().resolve().promise();
+	}
+	return this.sidebarShownPromise || ve.createDeferred().resolve().promise();
 };
 
 /**
@@ -597,12 +613,19 @@ Controller.prototype.ensureActionIsShown = function ( action, scrollConfig ) {
 		scrollConfig = { alignToTop: true };
 	}
 	if ( OO.ui.isMobile() ) {
-		const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
-		if ( !currentWindow || currentWindow.constructor.static.name !== 'gutterSidebarEditCheckDialog' ) {
-			return;
-		}
-		// This will ultimately focus the action and scroll it into view as well:
-		currentWindow.showDialogWithAction( action, ve.extendObject( { alignToTop: true }, scrollConfig ) );
+		// If this is called directly from refresh then the sidebar was opened
+		// by an actionsUpdated that *immediately* precedes this call, so it
+		// can still be opening and not yet be the current window.
+		this.whenSidebarShown().then( () => {
+			const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
+			if ( !currentWindow || currentWindow.constructor.static.name !== 'gutterSidebarEditCheckDialog' ) {
+				return;
+			}
+			currentWindow.whenActionsRendered().then( () => {
+				// This will ultimately focus the action and scroll it into view as well:
+				currentWindow.showDialogWithAction( action, ve.extendObject( { alignToTop: true }, scrollConfig ) );
+			} );
+		} );
 	} else {
 		this.focusAction( action, true, scrollConfig );
 	}
@@ -917,6 +940,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	} else {
 		shownPromise = ve.createDeferred().resolve().promise();
 	}
+	this.sidebarShownPromise = shownPromise;
 	shownPromise.then( () => {
 		if ( visibleNewActions.length ) {
 			// Check if any new actions are relevant to our current selection:

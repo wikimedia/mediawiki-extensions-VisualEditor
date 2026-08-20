@@ -47,6 +47,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	this.sections = [];
 	this.navigableActions = [];
 	this.hasActionInSectionInitially = false;
+	this.renderDeferred = ve.createDeferred();
 
 	this.scrollIntoView = new ve.ui.EditCheckScrollIntoViewWidget();
 	this.scrollIntoView.connect( this, {
@@ -137,6 +138,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
 
 		this.widgets.forEach( ( widget ) => widget.teardown() );
 		this.widgets = [];
+		this.renderDeferred = ve.createDeferred();
 
 		if ( this.scrollIntoView ) {
 			this.scrollIntoView.clear();
@@ -308,6 +310,20 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions,
 	oldWidgets.forEach( ( widget ) => widget.teardown() );
 	// After the loop, so the icons' measurements don't interleave with its writes
 	this.widgets.forEach( ( widget ) => widget.updateSticky() );
+	// An action only gets a widget if it is inside the attached root. When
+	// editing one section the others have no rect, which is correct and not a
+	// sign that the layout is unsettled.
+	const attachedRootRange = this.surface.getModel().getDocument().getAttachedRootRange();
+	const isRenderable = ( action ) => action.getHighlightSelections().some( ( selection ) => {
+		const range = selection.getCoveringRange();
+		return range && attachedRootRange.containsRange( range );
+	} );
+	if ( this.widgets.length || !actions.some( isRenderable ) ) {
+		// Something rendered, or nothing was going to. If the layout has not
+		// settled yet, a later redraw resolves this instead, probably from a
+		// position event.
+		this.renderDeferred.resolve();
+	}
 	this.setOutsideSectionState();
 	this.scrollToNearestActionDebounced();
 };
@@ -332,6 +348,15 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.showDialogWithAction = function ( a
 			}
 		}
 	}
+};
+
+/**
+ * Wait for some actions to have been rendered by this dialog
+ *
+ * @return {jQuery.Promise}
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.whenActionsRendered = function () {
+	return this.renderDeferred.promise();
 };
 
 /**
