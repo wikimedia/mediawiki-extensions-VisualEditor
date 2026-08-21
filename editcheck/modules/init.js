@@ -224,12 +224,14 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 	} );
 }
 
+const Controller = require( './controller.js' ).Controller;
+mw.editcheck.Controller = Controller;
+
 if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnable ) {
 	if ( mw.editcheck.suggestionsModeAvailable ) {
 		require( './EditCheckSuggestionsTool.js' );
 	}
 
-	const Controller = require( './controller.js' ).Controller;
 	mw.hook( 've.newTarget' ).add( ( target ) => {
 		if ( target.constructor.static.name !== 'article' ) {
 			return;
