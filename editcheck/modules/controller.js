@@ -930,7 +930,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 		const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
 		shownPromise = windowAction.open(
 			windowName,
-			{ inBeforeSave: this.inBeforeSave, visibleActions, visibleNewActions, controller: this }
+			{ inBeforeSave: this.inBeforeSave, actions: visibleActions, newActions: visibleNewActions, controller: this }
 		).then( ( instance ) => {
 			ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
 			instance.closed.then( () => {

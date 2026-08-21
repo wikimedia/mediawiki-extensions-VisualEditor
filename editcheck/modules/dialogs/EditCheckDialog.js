@@ -361,7 +361,8 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.controller.on( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, false, this );
 		this.controller.on( 'focusAction', this.onFocusAction, false, this );
 
-		const actions = data.actions || this.controller.getActions();
+		const actions = data.actions ||
+			this.controller.filterActionsForDisplay( this.controller.getActions() );
 
 		if ( !Object.prototype.hasOwnProperty.call( data, 'inBeforeSave' ) ) {
 			throw new Error( 'inBeforeSave argument required' );

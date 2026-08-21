@@ -118,7 +118,10 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		if ( this.fromSection ) {
 			this.scrollIntoView = null;
 		}
-		this.renderActions( data.actions || this.controller.getActions(), data.newActions || [] );
+		this.renderActions(
+			data.actions || this.controller.filterActionsForDisplay( this.controller.getActions() ),
+			data.newActions || []
+		);
 
 		if ( this.scrollIntoView ) {
 			const fullPageButton = this.controller.getTarget().switchToFullPageButtonBottom;
@@ -173,7 +176,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( liste
  * Handle position events from the controller
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
-	this.renderActions( this.controller.getActions(), [] );
+	this.renderActions( this.controller.filterActionsForDisplay( this.controller.getActions() ), [] );
 };
 
 /**
