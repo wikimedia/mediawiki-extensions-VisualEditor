@@ -16,6 +16,7 @@
 	"editcheck-dialog-addref-success-notify": "Hvala za dodani sklic!",
 	"editcheck-dialog-addref-title": "Dodajte sklic",
 	"editcheck-dialog-title": "Pred objavo",
+	"editcheck-preference-suggestions-label": "Način predlaganja",
 	"tag-editcheck-reference-decline-common-knowledge": "Preverjanje urejanja (sklici) odklonjeno (splošno znanje)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck: Sklic je bil odklonjen kot splošno znanje",
 	"tag-editcheck-reference-decline-irrelevant": "Preverjanje urejanja (sklici) odklonjeno (nepotrebno)",
