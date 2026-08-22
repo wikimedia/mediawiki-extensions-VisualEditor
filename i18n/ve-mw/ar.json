@@ -38,7 +38,8 @@
 			"فلورانس",
 			"محمد أحمد عبد الفتاح",
 			"محمد عصام",
-			"مشعل الحربي"
+			"مشعل الحربي",
+			"يزن البلوي"
 		]
 	},
 	"collabpad-disabled": "لم يتم تفعيل CollabPad في هذه الويكي.",
@@ -161,7 +162,7 @@
 	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "نعم",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-help": "يمكن إظهار زر إضافة قسم جديد بجانب زر \"$1\"، أو إخفاؤه.",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-label": "إظهار اشارة تبويب على هذه الصفحة لإضافة قسم جديد",
-	"visualeditor-dialog-meta-settings-nocontentconvert-help": "يمكن منع التحويل التلقائي لمحتويات الصفحة إلى أنظمة الكتابة الأخرى.",
+	"visualeditor-dialog-meta-settings-nocontentconvert-help": "يمكن تعطيل التحويل التلقائي لمحتوى الصفحة إلى أنظمة كتابة أخرى.",
 	"visualeditor-dialog-meta-settings-nocontentconvert-label": "لا تحول المحتوى بين تنويعات اللغات",
 	"visualeditor-dialog-meta-settings-noeditsection-help": "يمكن إخفاء وصلات التعديل الظاهرة بجانب عناوين الأقسام (للحالات النادرة).",
 	"visualeditor-dialog-meta-settings-noeditsection-label": "تعطيل وصلات التعديل الظاهرة بجانب كل عنوان في هذه الصفحة.",
@@ -369,7 +370,7 @@
 	"visualeditor-savedialog-identify-temp": "أنت تستخدم الآن اسم المستخدم المؤقت <strong>$1</strong> . إذا تابعت، فسيتم ربط تعديلك باسم المستخدم هذا.",
 	"visualeditor-savedialog-identify-user": "لقد سجلت الدخول على أنك [[User:$1|$1]]. سيرتبط تعديلك بهذا الحساب إذا حفظت هذا التعديل.",
 	"visualeditor-savedialog-keyboard-shortcut-submit": "يمكنك الضغط على $1 لحفظ تعديلك.",
-	"visualeditor-savedialog-label-publish-short": "انشر",
+	"visualeditor-savedialog-label-publish-short": "أنشر",
 	"visualeditor-savedialog-label-publish-short-start": "نشر...",
 	"visualeditor-savedialog-label-resolve-conflict": "عالج التضارب",
 	"visualeditor-savedialog-label-resume-editing": "تابع التعديل",
