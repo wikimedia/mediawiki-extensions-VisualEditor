@@ -50,6 +50,8 @@
 	"editcheck-double-bold-action-remove": "حذف برجسته",
 	"editcheck-preference-suggestions-label": "حالت پیشنهادی",
 	"editcheck-preference-suggestions-description": "پیشنهادهای ویرایشی پیکربندی‌شده توسط جامعه برای بهبود مقاله‌ها. در [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|ویرایشگر دیداری]] در دسترس است.",
+	"editcheck-preference-experimental-enable": "فعال‌سازی بررسی‌ها و پیشنهادهای ویرایشی آزمایشی",
+	"editcheck-preference-experimental-help": "این، بررسی‌های ویرایشی و پیشنهادهایی را که در حال حاضر در دست تهیه هستند، نشان می‌دهد.",
 	"editcheck-textmatch-replace": "\"$1\" با \"$2\" جایگزین شود؟",
 	"editcheck-tone-title": "اصلاح لحن؟",
 	"editcheck-tone-description": "کاربران دیگر معمولاً چنین جمله‌بندی‌هایی را اصلاح می‌کنند، زیرا معتقدند که لحن آن نامتعادل است. [{{int:editcheck-tone-descriptionlink}} بیشتر بدانید]",

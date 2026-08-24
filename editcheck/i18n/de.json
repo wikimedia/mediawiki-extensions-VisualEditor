@@ -48,6 +48,8 @@
 	"editcheck-double-bold-action-remove": "Fettdruck entfernen",
 	"editcheck-preference-suggestions-label": "Vorschlags-Modus",
 	"editcheck-preference-suggestions-description": "Von der Community konfigurierte Bearbeitungsvorschläge zur Verbesserung von Artikeln. Verfügbar im [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|visuellen Editor]].",
+	"editcheck-preference-experimental-enable": "Experimentelle Bearbeitungsprüfungen und Vorschläge aktivieren",
+	"editcheck-preference-experimental-help": "Hier werden Bearbeitungsprüfungen und Vorschläge angezeigt, die sich derzeit in der Entwicklung befinden.",
 	"editcheck-textmatch-replace": "Ersetzen von „$1“ durch „$2“?",
 	"editcheck-tone-title": "Tonfall überarbeiten?",
 	"editcheck-tone-description": "Andere Benutzer überarbeiteten diese Art der Formulierung häufig, weil sie den Tonfall als unausgewogen ansehen. [{{int:editcheck-tone-descriptionlink}} Mehr erfahren]",

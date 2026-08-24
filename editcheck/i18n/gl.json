@@ -46,6 +46,8 @@
 	"editcheck-double-bold-action-remove": "Eliminar a grosa",
 	"editcheck-preference-suggestions-label": "Modo de suxestión",
 	"editcheck-preference-suggestions-description": "Suxestións de edición configuradas pola comunidade para mellorar os artigos. Dispoñibles no [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|editor visual]].",
+	"editcheck-preference-experimental-enable": "Activar as verificacións de edicións e mais as suxestións experimentais",
+	"editcheck-preference-experimental-help": "Isto mostrará as verificacións de edicións e mais as suxestións que están actualmente en desenvolvemento.",
 	"editcheck-textmatch-replace": "Queres substituír «$1» por «$2»?",
 	"editcheck-tone-title": "Revisar o ton?",
 	"editcheck-tone-description": "Outros usuarios adoitan revisar este tipo de redacción, porque consideran que o ton non é axeitado. [{{int:editcheck-tone-descriptionlink}} Máis información]",

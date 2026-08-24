@@ -46,6 +46,8 @@
 	"editcheck-double-bold-action-remove": "Ka saar qoraalka culus",
 	"editcheck-preference-suggestions-label": "Habka talo bixinta",
 	"editcheck-preference-suggestions-description": "Talooyin wax ka beddel oo ay bulshadu dejisay si loo hagaajiyo maqaalada. Waxa laga heli karaa [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|tafaftiraha muuqaalka]].",
+	"editcheck-preference-experimental-enable": "Daar hubinta iyo soo jeedimaha tifaftirka ee tijaabada ah",
+	"editcheck-preference-experimental-help": "Tani waxay muujin doontaa hubinta iyo soo jeedimaha tifaftirka ee hadda la horumarinayo.",
 	"editcheck-textmatch-replace": "Ma ku beddelaa \"$1\" \"$2\"?",
 	"editcheck-tone-title": "Ma dib u habeynayaa codka?",
 	"editcheck-tone-description": "Isticmaalayaasha kale badanaa way dib u eegaan noocan eray-bixinta, iyagoo sheegaya in codka uusan dheellitirnayn. [{{int:editcheck-tone-descriptionlink}} Wax badan baro]",

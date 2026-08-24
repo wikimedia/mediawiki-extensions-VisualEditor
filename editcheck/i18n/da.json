@@ -46,6 +46,8 @@
 	"editcheck-double-bold-action-remove": "Fjern fed skrift",
 	"editcheck-preference-suggestions-label": "Forslagstilstand",
 	"editcheck-preference-suggestions-description": "Redigeringsforslag konfigureret af fællesskabet til forbedring af artikler. Tilgængelig i [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|visuel editor]].",
+	"editcheck-preference-experimental-enable": "Aktivér eksperimentelle redigeringstjek og forslag",
+	"editcheck-preference-experimental-help": "Dette vil vise redigeringstjek og forslag, der i øjeblikket er under udvikling.",
 	"editcheck-textmatch-replace": "Erstat \"$1\" med \"$2\"?",
 	"editcheck-tone-title": "Revider tone?",
 	"editcheck-tone-description": "Andre brugere reviderer ofte denne form for formulering og siger, at tonen er ubalanceret. [{{int:editcheck-tone-descriptionlink}} Læs mere]",

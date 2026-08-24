@@ -48,6 +48,8 @@
 	"editcheck-double-bold-action-remove": "Nyahtebal",
 	"editcheck-preference-suggestions-label": "Mod cadangan",
 	"editcheck-preference-suggestions-description": "Cadangan suntingan tetapan komuniti untuk menambah baik rencana. Tersedia pada [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|alat sunting visual]].",
+	"editcheck-preference-experimental-enable": "Dayakan semakan dan cadangan suntingan eksperimen",
+	"editcheck-preference-experimental-help": "Pilihan ini akan memaparkan semakan suntingan dan cadangan yang sedang dalam pembangunan.",
 	"editcheck-textmatch-replace": "Gantikan \"$1\" dengan \"$2\"?",
 	"editcheck-tone-title": "Semak Nada?",
 	"editcheck-tone-description": "Pengguna lain sering menyemak semula perkataan seperti ini, dengan mengatakan nadanya tidak seimbang. [{{int:editcheck-tone-descriptionlink}} Ketahui lebih lanjut]",
