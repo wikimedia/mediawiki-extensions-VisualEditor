@@ -65,6 +65,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.getPrimaryAction = function 
  */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.update = function () {
 	const action = this.getPrimaryAction();
+	const allExperimentalSuggestions = this.actions.every( ( a ) => a.isExperimental() && a.isSuggestion() );
 
 	this.$element
 		.removeClass( ( index, classes ) => (
@@ -81,7 +82,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.update = function () {
 		.toggleClass( 've-ui-editCheck-gutter-action-suggestion', action.isSuggestion() )
 		.toggleClass( 've-ui-editCheck-gutter-action-quickaction', !!action.gutterQuickAction );
 
-	this.iconWidget.setAction( action, this.actions.length );
+	this.iconWidget.setAction( action, this.actions.length, allExperimentalSuggestions );
 };
 
 /**

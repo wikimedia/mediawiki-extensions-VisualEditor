@@ -27,12 +27,22 @@
 		}
 	}
 
+	&-experimentalSubheading {
+		margin-top: @spacing-25;
+
+		&-text {
+			color: @color-subtle;
+			font-style: italic;
+			font-size: @font-size-x-small;
+		}
+	}
+
 	> .oo-ui-iconElement-icon {
 		// Fixes icon placement in WMUI theme
 		top: -@spacing-50;
 	}
 
-	> .oo-ui-labelElement-label {
+	> .oo-ui-labelElement-label:not( .ve-ui-editCheckActionWidget-experimentalSubheading ) {
 		font-weight: @font-weight-semi-bold;
 	}
 
@@ -152,6 +162,10 @@
 		}
 
 		> .ve-ui-editCheckActionWidget-body {
+			display: none;
+		}
+
+		> .ve-ui-editCheckActionWidget-experimentalSubheading {
 			display: none;
 		}
 	}

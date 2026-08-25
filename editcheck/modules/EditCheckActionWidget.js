@@ -32,6 +32,21 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	mw.editcheck.EditCheckActionWidget.super.call( this, config );
 
+	if ( config.experimental ) {
+		// only update to experimental lightbulb icon when it's a suggestion; we don't have an experimental check icon atm
+		if ( config.suggestion ) {
+			this.setIcon( 'lightbulbDashed' );
+		}
+		const label = config.suggestion ?
+			ve.msg( 'editcheck-experimental-subheading-suggestion' ) :
+			ve.msg( 'editcheck-experimental-subheading-check' );
+		this.experimentalSubheading = new OO.ui.LabelWidget( {
+			label: $( '<span>' ).addClass( 've-ui-editCheckActionWidget-experimentalSubheading-text' ).text( label ),
+			classes: [ 've-ui-editCheckActionWidget-experimentalSubheading' ]
+		} );
+		this.$element.append( this.experimentalSubheading.$element );
+	}
+
 	this.inactiveSelectionElements = null;
 	this.feedbackDeferred = null;
 
@@ -108,7 +123,11 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 					new OO.ui.MenuOptionWidget( {
 						data: 'feedback',
 						label: ve.msg( 'editcheck-suggestionfeedback-label-report' )
-					} )
+					} ),
+					...( config.experimental ? [ new OO.ui.MenuOptionWidget( {
+						data: 'Special:EditChecks#experimental-checks',
+						label: ve.msg( 'editcheck-suggestionfeedback-label-experimental' )
+					} ) ] : [] )
 				]
 			}
 		} );
@@ -123,18 +142,6 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 			}
 		} );
 		this.$actions.append( suggestionFeedbackMenuSelect.$element );
-	}
-
-	if ( config.experimental ) {
-		const $warning = new OO.ui.MessageWidget( {
-			type: 'error',
-			label: 'Experimental edit check. For testing purposes only.',
-			inline: true
-		} ).$element.css( {
-			'white-space': 'normal',
-			margin: '0.5em 0'
-		} );
-		this.$body.append( $warning );
 	}
 
 	this.$element

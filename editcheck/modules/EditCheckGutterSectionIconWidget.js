@@ -103,11 +103,16 @@ mw.editcheck.EditCheckGutterSectionIconWidget.static.getStickyMetrics = function
  *
  * @param {mw.editcheck.EditCheckAction} action Primary action of the section
  * @param {number} count Number of actions in the section
+ * @param {boolean} allExperimentalSuggestions If each action in the section is an experimental suggestion
  */
-mw.editcheck.EditCheckGutterSectionIconWidget.prototype.setAction = function ( action, count ) {
+mw.editcheck.EditCheckGutterSectionIconWidget.prototype.setAction = function ( action, count, allExperimentalSuggestions ) {
 	const quickAction = !!action.gutterQuickAction;
 	if ( !quickAction ) {
-		this.icon.setIcon( mw.editcheck.EditCheckActionWidget.static.iconMap[ action.getType() ] || 'notice' );
+		if ( allExperimentalSuggestions ) {
+			this.icon.setIcon( 'lightbulbDashed' );
+		} else {
+			this.icon.setIcon( mw.editcheck.EditCheckActionWidget.static.iconMap[ action.getType() ] || 'notice' );
+		}
 		this.icon.clearFlags().setFlags( action.getType() );
 		this.countLabel.setLabel( count.toString() );
 		this.countLabel.setInvisibleLabel( count === 1 );
