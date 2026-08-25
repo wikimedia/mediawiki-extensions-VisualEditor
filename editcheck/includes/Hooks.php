@@ -76,7 +76,7 @@ class Hooks implements
 				'type' => 'toggle',
 				'label-message' => 'editcheck-preference-experimental-enable',
 				'help-message' => 'editcheck-preference-experimental-help',
-				'section' => 'editing/developertools'
+				'section' => 'editing/editor'
 			];
 		}
 	}
