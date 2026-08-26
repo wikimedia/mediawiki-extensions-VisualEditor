@@ -190,7 +190,7 @@
 	"visualeditor-dialog-transclusion-add-param-error-exists-selected": "Nie można dodać parametru „$2” dwukrotnie.",
 	"visualeditor-dialog-transclusion-add-param-error-exists-unselected": "Parametr „$2” jest już dostępny do dodania. Sprawdź opcje w pasku bocznym.",
 	"visualeditor-dialog-transclusion-add-param-error-forbidden-char": "„$1” jest niedozwolonym znakiem. Usuń go, aby dodać parametr.",
-	"visualeditor-dialog-transclusion-add-param-help": "Podaj [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters nieudokumentowane nazwy parametrów], jeśli są ci znane. Zwróć uwagę, że tylko parametry używane przez szablon zadziałają. Możesz znaleźć informacje na temat istniejących parametrów na [[$1|stronie szablonu]].",
+	"visualeditor-dialog-transclusion-add-param-help": "Podaj [//www.mediawiki.org/wiki/Special:MyLanguage/Help:VisualEditor/User_guide#Adding_undocumented_parameters nieudokumentowane nazwy parametrów], jeśli są Ci znane. Zwróć uwagę, że tylko parametry używane przez szablon zadziałają. Możesz znaleźć informacje na temat istniejących parametrów na [[$1|stronie szablonu]].",
 	"visualeditor-dialog-transclusion-add-param-placeholder": "Nazwa parametru",
 	"visualeditor-dialog-transclusion-add-param-save": "Dodaj",
 	"visualeditor-dialog-transclusion-add-template": "Dodaj szablon",
