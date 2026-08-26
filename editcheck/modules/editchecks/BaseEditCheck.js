@@ -480,7 +480,7 @@ mw.editcheck.BaseEditCheck.prototype.getAddedNodes = function ( documentModel, t
 			} );
 		} );
 		return matchedNodes;
-	}, `editcheck-addednodes-${ JSON.stringify( [ this.includeSuggestions, type ] ) }` );
+	}, 'editcheck-addednodes', this.includeSuggestions, type );
 };
 
 /**
@@ -510,6 +510,7 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentMode
 	if ( !this.includeSuggestions && !documentModel.completeHistory.getLength() ) {
 		return [];
 	}
+	const flagKeys = [ this.includeSuggestions, coveredNodesOnly, onlyContentRanges, onlyPureInsertions ];
 	return documentModel.getOrInsertCachedData( () => {
 		let candidates = [];
 		if ( this.includeSuggestions ) {
@@ -574,9 +575,8 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedRanges = function ( documentMode
 			}
 		} );
 		return ranges;
-	}, `editcheck-modifiedranges-${
-		JSON.stringify( [ this.includeSuggestions, coveredNodesOnly, onlyContentRanges, onlyPureInsertions ] )
-	}` ).filter( ( range ) => this.isRangeValid( range, documentModel ) );
+	}, 'editcheck-modifiedranges', ...flagKeys )
+		.filter( ( range ) => this.isRangeValid( range, documentModel ) );
 };
 
 /**
