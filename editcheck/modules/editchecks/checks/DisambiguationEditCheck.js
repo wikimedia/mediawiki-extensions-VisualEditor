@@ -47,12 +47,12 @@ mw.editcheck.DisambiguationEditCheck.static.linkClasses = [ ve.dm.MWInternalLink
 
 /* Methods */
 
-mw.editcheck.DisambiguationEditCheck.prototype.checkNode = function ( node, surfaceModel ) {
+mw.editcheck.DisambiguationEditCheck.prototype.checkNode = function ( node, surfaceModel, modifiedContentRanges ) {
 	const checkDisambig = ( annotation ) => ve.init.platform.linkCache.get(
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.disambiguation ) );
 
-	return this.getModifiedLinkRanges( surfaceModel, node )
+	return this.getModifiedLinkRanges( surfaceModel, modifiedContentRanges, node )
 		// Links to sections of disambiguation pages are deliberately specific, so ignore them
 		.filter( ( annRange ) => !annRange.annotation.getFragment() )
 		.map( ( annRange ) => checkDisambig( annRange.annotation ).then( ( isDisambig ) => isDisambig ?

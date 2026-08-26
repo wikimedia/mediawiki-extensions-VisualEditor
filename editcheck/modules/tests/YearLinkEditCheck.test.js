@@ -110,7 +110,8 @@ QUnit.test( 'checkNode', ( assert ) => {
 		const surfaceModel = createSurfaceWithInternalLink( caseItem.targetTitle, caseItem.labelText );
 		const node = surfaceModel.getDocument().getDocumentNode().children[ 0 ];
 		const check = new mw.editcheck.YearLinkEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
-		const actions = check.checkNode( node, surfaceModel ).filter( Boolean );
+		const modified = check.getModifiedContentRanges( surfaceModel.getDocument() );
+		const actions = check.checkNode( node, surfaceModel, modified ).filter( Boolean );
 
         const wikilink = '[[' + caseItem.targetTitle + ( caseItem.labelText !== caseItem.targetTitle ? '|' + caseItem.labelText : '' ) + ']]';
         const msg = caseItem.name + ' (' + wikilink + ')';

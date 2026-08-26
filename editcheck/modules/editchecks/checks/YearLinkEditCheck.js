@@ -71,8 +71,8 @@ mw.editcheck.YearLinkEditCheck.prototype.matchSingleYear = function ( text, disa
 	return matches && matches.length === 1 ? matches[ 0 ] : null;
 };
 
-mw.editcheck.YearLinkEditCheck.prototype.checkNode = function ( node, surfaceModel ) {
-	return this.getModifiedLinkRanges( surfaceModel, node ).map( ( annRange ) => {
+mw.editcheck.YearLinkEditCheck.prototype.checkNode = function ( node, surfaceModel, modifiedContentRanges ) {
+	return this.getModifiedLinkRanges( surfaceModel, modifiedContentRanges, node ).map( ( annRange ) => {
 		const title = mw.Title.newFromText( annRange.annotation.getDisplayTitle() );
 		if ( !title ) {
 			return null;

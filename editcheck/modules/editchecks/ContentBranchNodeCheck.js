@@ -23,6 +23,9 @@ mw.editcheck.ContentBranchNodeCheck = function MWContentBranchNodeCheck() {
  * Find any ranges in the node that contain content that should trigger this edit check
  *
  * @abstract
+ * @param {ve.dm.ContentBranchNode} node Node to check
+ * @param {ve.dm.Surface} surfaceModel
+ * @param {ve.Range[]} modifiedContentRanges Modified content ranges for the whole document
  * @return {mw.editcheck.EditCheckAction[]|Promise[]|mw.editcheck.EditCheckAction|Promise} Action, or Promise which resolves with an Action or null
  */
 mw.editcheck.ContentBranchNodeCheck.prototype.checkNode = null;
@@ -39,6 +42,9 @@ mw.editcheck.ContentBranchNodeCheck.prototype.onDocumentChange = function ( surf
 	const doc = surfaceModel.getDocument();
 
 	const modified = this.getModifiedRanges( doc, false, false, false );
+	// These are the same for every node, so get them one time and give them to
+	// each checkNode call
+	const modifiedContentRanges = this.getModifiedContentRanges( doc );
 
 	doc.getNodesByType( ve.dm.ContentBranchNode ).forEach( ( node ) => {
 		const nodeRange = node.getRange();
@@ -50,7 +56,7 @@ mw.editcheck.ContentBranchNodeCheck.prototype.onDocumentChange = function ( surf
 		// The purpose of this approach is for checkNode to be simple to write and simple to cache
 		let nodeActions = doc.getOrInsertCachedData(
 			node,
-			( () => this.checkNode( node, surfaceModel ) ),
+			( () => this.checkNode( node, surfaceModel, modifiedContentRanges ) ),
 			'editcheck-ContentBranchNodeCheck-checkNode', this.constructor.static.name
 		);
 		if ( !Array.isArray( nodeActions ) ) {

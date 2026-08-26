@@ -407,16 +407,15 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( docum
  * Get annotation ranges where at least some content has been modified
  *
  * @param {ve.dm.Document} documentModel
+ * @param {ve.Range[]} modifiedContentRanges Modified content ranges for the whole document
  * @param {string[]} [names] Names of annotations to filter for
  * @param {ve.dm.ContentBranchNode} [scopeNode] Node to check within
  * @return {ve.dm.LinearData.AnnotationRange[]} Annotation ranges, containing an annotation and its range
  */
-mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( documentModel, names, scopeNode ) {
-	const modified = this.getModifiedContentRanges( documentModel );
-
+mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( documentModel, modifiedContentRanges, names, scopeNode ) {
 	return ( scopeNode || documentModel.getDocumentNode() ).getAnnotationRanges().filter(
 		// Try to apply fastest filters first
-		( annRange ) => modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
+		( annRange ) => modifiedContentRanges.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
 			( !names || names.includes( annRange.annotation.name ) ) &&
 			!this.isDismissedRange( annRange.range ) &&
 			// isRangeInValidSection is relatively expensive, so check last

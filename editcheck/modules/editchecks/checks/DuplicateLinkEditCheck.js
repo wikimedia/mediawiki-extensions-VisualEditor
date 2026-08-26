@@ -116,7 +116,9 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surf
 	// Traverse again for links we want to show a Check on. This could be a small set, or all links.
 	// Filter out any links that appear only once in the document.
 	// getModifiedLinkRanges handles filtering sections and dismissed actions.
-	const candidateModifiedLinks = this.getModifiedLinkRanges( surfaceModel ).filter(
+	const candidateModifiedLinks = this.getModifiedLinkRanges(
+		surfaceModel, this.getModifiedContentRanges( documentModel )
+	).filter(
 		( annRange ) => ( allLinksByTitle.get( annRange.annotation.getAttribute( normalizedTitleKey ) ) || [] ).length > 1
 	);
 

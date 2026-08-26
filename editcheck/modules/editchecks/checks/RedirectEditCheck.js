@@ -52,12 +52,12 @@ mw.editcheck.RedirectEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnota
 
 /* Methods */
 
-mw.editcheck.RedirectEditCheck.prototype.checkNode = function ( node, surfaceModel ) {
+mw.editcheck.RedirectEditCheck.prototype.checkNode = function ( node, surfaceModel, modifiedContentRanges ) {
 	const checkRedirect = ( annotation ) => ve.init.platform.linkCache.get(
 		annotation.getAttribute( 'lookupTitle' )
 	).then( ( linkData ) => !!( linkData && linkData.redirect ) );
 
-	return this.getModifiedLinkRanges( surfaceModel, node )
+	return this.getModifiedLinkRanges( surfaceModel, modifiedContentRanges, node )
 		// exclude links where the link target matches the link text
 		.filter( ( annRange ) => {
 			const labelTitle = mw.Title.newFromText( surfaceModel.getLinearFragment( annRange.range ).getText() );
