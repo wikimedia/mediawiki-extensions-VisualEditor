@@ -685,12 +685,14 @@ mw.editcheck.BaseEditCheck.prototype.getHeadingsFromDocument = function ( docume
  */
 mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, documentModel, config ) {
 	config = config || this.config;
-	const ignoreSections = config.ignoreSections || [];
+	let ignoreSections = config.ignoreSections || [];
 	const includeSections = config.includeSections;
 	const shouldIncludeSections = Array.isArray( includeSections );
-	if ( config.ignoreLeadSection ) {
-		// backwards compatibility
-		ignoreSections.push( '' );
+	if ( config.ignoreLeadSection && !ignoreSections.includes( '' ) ) {
+		// backwards compatibility.
+		// Copy the array, because config.ignoreSections is shared between check
+		// instances. (T435714)
+		ignoreSections = ignoreSections.concat( [ '' ] );
 	}
 	if ( ignoreSections.length === 0 && !shouldIncludeSections ) {
 		// No restrictions, so skip the rest
@@ -717,7 +719,7 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 		return !shouldIncludeSections;
 	}
 
-	const compare = new Intl.Collator( documentModel.getLang(), { sensitivity: 'accent' } ).compare;
+	const compare = this.constructor.static.getSectionCollator( documentModel.getLang() ).compare;
 
 	// Climb the heirarchy bottom-up and return the first time we find an
 	// ignored or excluded section
@@ -733,6 +735,24 @@ mw.editcheck.BaseEditCheck.prototype.isRangeInValidSection = function ( range, d
 
 	// Nothing matched, so return true only if we weren't restricting to specific sections
 	return !shouldIncludeSections;
+};
+
+// Construction of an Intl.Collator is expensive, so keep one for each language.
+mw.editcheck.BaseEditCheck.static.sectionCollators = new Map();
+
+/**
+ * Get a collator to compare section names
+ *
+ * @static
+ * @param {string} lang Language code
+ * @return {Intl.Collator}
+ */
+mw.editcheck.BaseEditCheck.static.getSectionCollator = function ( lang ) {
+	const collators = mw.editcheck.BaseEditCheck.static.sectionCollators;
+	if ( !collators.has( lang ) ) {
+		collators.set( lang, new Intl.Collator( lang, { sensitivity: 'accent' } ) );
+	}
+	return collators.get( lang );
 };
 
 mw.editcheck.BaseEditCheck.static.quoteGroupings = new Map( [
