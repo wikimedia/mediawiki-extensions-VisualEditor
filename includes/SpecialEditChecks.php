@@ -123,7 +123,8 @@ class SpecialEditChecks extends SpecialPage {
 
 		if ( $this->coreConfig->get( 'VisualEditorEnableEditCheckSuggestionsBeta' ) ) {
 			// Split beta and experimental checks based on if they are enabled by default
-			$out->addHTML( Html::rawElement( 'h2', [],
+			$this->addTocSection( 'betafeatures', 'editcheck-specialeditchecks-header-betafeatures' );
+			$out->addHTML( Html::rawElement( 'h2', [ 'id' => Sanitizer::escapeIdForLink( 'betafeatures' ) ],
 				Html::element( 'a', [
 					'href' => $this->getTitleFor( 'Preferences' )->getLocalURL() . '#mw-prefsection-betafeatures',
 				],
