@@ -94,6 +94,13 @@ OO.mixinClass( Controller, OO.EventEmitter );
  * @event EditCheckController#position
  */
 
+/**
+ * The selected branch node has changed
+ *
+ * @event EditCheckController#branchNodeChange
+ * @param {ve.dm.BranchNode} branchNode
+ */
+
 /* Methods */
 
 /**
@@ -679,6 +686,7 @@ Controller.prototype.onSelect = function () {
 		return;
 	}
 	this.clearEphemeralTagsForSelection();
+	this.emitBranchNodeChangeIfNeeded();
 	if ( !OO.ui.isMobile() ) {
 		this.focusActionForSelection();
 	}
@@ -740,11 +748,6 @@ Controller.prototype.focusActionForSelection = function () {
 	}
 
 	const selection = this.surface.getModel().getSelection();
-
-	if ( !this.inBeforeSave && this.updateCurrentBranchNodeFromSelection( selection ) ) {
-		this.emit( 'branchNodeChange', this.branchNode );
-	}
-
 	const actions = this.getActions();
 
 	if ( actions.length === 0 || selection.isNull() ) {
@@ -944,6 +947,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	shownPromise.then( () => {
 		if ( visibleNewActions.length ) {
 			// Check if any new actions are relevant to our current selection:
+			this.emitBranchNodeChangeIfNeeded();
 			this.focusActionForSelection();
 		}
 	} );
@@ -1268,6 +1272,22 @@ Controller.prototype.updateCurrentBranchNodeFromSelection = function ( selection
 		return true;
 	}
 	return false;
+};
+
+/*
+ * Emit the branchNodeChange event if it's appropriate to do so
+ *
+ * That means: we're not in beforeSave and the selection has moved since
+ * this was last checked.
+ *
+ * @fires EditCheckController#branchNodeChange
+ */
+Controller.prototype.emitBranchNodeChangeIfNeeded = function () {
+	const selection = this.surface.getModel().getSelection();
+
+	if ( !this.inBeforeSave && this.updateCurrentBranchNodeFromSelection( selection ) ) {
+		this.emit( 'branchNodeChange', this.branchNode );
+	}
 };
 
 /**
