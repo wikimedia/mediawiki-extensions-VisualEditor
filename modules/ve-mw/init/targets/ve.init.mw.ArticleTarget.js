@@ -641,7 +641,7 @@ ve.init.mw.ArticleTarget.prototype.storeDocState = function ( html ) {
  * @param {string} key Access key
  */
 ve.init.mw.ArticleTarget.prototype.disableAccessKey = function ( key ) {
-	$( '[accesskey=' + key + ']' ).each( ( i, el ) => {
+	$( '[accesskey="' + key + '"]' ).each( ( i, el ) => {
 		const $el = $( el );
 
 		$el
