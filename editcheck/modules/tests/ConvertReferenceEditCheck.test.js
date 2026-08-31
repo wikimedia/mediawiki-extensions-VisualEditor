@@ -38,7 +38,6 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 			body: [
 				...ve.dm.example.annotateText( 'https://google.com', link( 'https://google.com' ) )
 			],
-			convertible: true,
 			expected: { 'url-only': 1, covered: 1, any: 1 }
 		},
 		{
@@ -49,7 +48,6 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 				{ type: 'link/mwNumberedExternal', attributes: { href: 'https://google.com' } },
 				{ type: '/link/mwNumberedExternal' }
 			],
-			convertible: true,
 			expected: { 'url-only': 1, covered: 1, any: 1 }
 		},
 		{
@@ -57,7 +55,6 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 			body: [
 				...ve.dm.example.annotateText( 'Book Name', link( 'http://google.com/' ) )
 			],
-			convertible: true,
 			expected: { 'url-only': 0, covered: 1, any: 1 }
 		},
 		{
@@ -67,7 +64,6 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 				...ve.dm.example.annotateText( 'Book Name', link( 'http://google.com/' ) ),
 				...'. p.58.'
 			],
-			convertible: true,
 			expected: { 'url-only': 0, covered: 0, any: 1 }
 		},
 		{
@@ -75,7 +71,6 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 			// must not trigger. The old unanchored regex wrongly matched here.
 			name: 'URL text not covering whole reference',
 			body: [ ...'https://google.com plus trailing words' ],
-			convertible: true,
 			expected: { 'url-only': 0, covered: 0, any: 1 }
 		},
 		{
@@ -83,6 +78,23 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 			body: [ ...'https://google.com' ],
 			convertible: false,
 			expected: { 'url-only': 0, covered: 0, any: 0 }
+		},
+		{
+			name: 'No PDFs',
+			body: [
+				...ve.dm.example.annotateText( 'https://google.com/foo.pdf', link( 'https://google.com/foo.pdf' ) )
+			],
+			convertible: 'https://google.com/foo.pdf',
+			expected: { 'url-only': 0, covered: 0, any: 0 }
+		},
+		{
+			// Doesn't forbid something just containing the string pdf
+			name: 'PDF in a URL is fine',
+			body: [
+				...ve.dm.example.annotateText( 'https://google.com/pdf/foo', link( 'https://google.com/pdf/foo' ) )
+			],
+			convertible: 'https://google.com/pdf/foo',
+			expected: { 'url-only': 1, covered: 1, any: 1 }
 		}
 	];
 
@@ -119,8 +131,9 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 		strictModes.forEach( ( strict ) => {
 			const surfaceModel = buildSurface( caseItem.body );
 
-			ve.ui.CitoidReferenceContextItem.static.getConvertibleHref =
-				() => ( caseItem.convertible ? 'https://google.com' : null );
+			if ( caseItem.convertible !== undefined ) {
+				ve.ui.CitoidReferenceContextItem.static.getConvertibleHref = () => caseItem.convertible;
+			}
 
 			const check = new mw.editcheck.ConvertReferenceEditCheck(
 				ve.test.utils.EditCheck.dummyController,

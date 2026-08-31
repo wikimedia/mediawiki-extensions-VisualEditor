@@ -26,7 +26,8 @@ OO.inheritClass( mw.editcheck.ConvertReferenceEditCheck, mw.editcheck.BaseEditCh
 
 mw.editcheck.ConvertReferenceEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.ConvertReferenceEditCheck.super.static.defaultConfig, {
 	showAsCheck: false,
-	strict: 'url-only'
+	strict: 'url-only',
+	forbiddenExtensions: [ 'pdf' ]
 } );
 
 mw.editcheck.ConvertReferenceEditCheck.static.title = OO.ui.deferMsg( 'editcheck-convertreference-title' );
@@ -59,7 +60,7 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 		seenIndexes[ index ] = true;
 		const referenceNode = node.getInternalItem();
 		const href = ve.ui.CitoidReferenceContextItem.static.getConvertibleHref( referenceNode );
-		if ( href ) {
+		if ( href && this.isUrlAllowed( href ) ) {
 			// A bare numbered external link (<ref>[https://example.com]</ref>) is just a
 			// single link with no other content to lose, so it's safe to convert under
 			// any strictness level. It turns into
@@ -106,6 +107,22 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.onDocumentChange = function ( s
 			check: this
 		} )
 	) );
+};
+
+mw.editcheck.ConvertReferenceEditCheck.prototype.isUrlAllowed = function ( href ) {
+	if ( !this.config.forbiddenExtensions || this.config.forbiddenExtensions.length === 0 ) {
+		return true;
+	}
+	try {
+		const url = new URL( href );
+		const pathsegments = url.pathname.split( '.' );
+		return !this.config.forbiddenExtensions.includes(
+			pathsegments[ pathsegments.length - 1 ].toLowerCase()
+		);
+	} catch ( e ) {
+		// This is essentially passing it on to Citoid to give a real fetch a try
+		return true;
+	}
 };
 
 mw.editcheck.ConvertReferenceEditCheck.prototype.act = function ( choice, action, surface ) {
