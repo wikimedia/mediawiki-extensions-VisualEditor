@@ -2388,6 +2388,7 @@
 			"lib/ve/tests/dm/ve.dm.ModelRegistry.test.js",
 			"lib/ve/tests/dm/ve.dm.MetaList.test.js",
 			"lib/ve/tests/dm/ve.dm.Scalable.test.js",
+			"lib/ve/tests/dm/ve.dm.TableMatrix.test.js",
 			"lib/ve/tests/dm/selections/ve.dm.LinearSelection.test.js",
 			"lib/ve/tests/dm/selections/ve.dm.NullSelection.test.js",
 			"lib/ve/tests/dm/selections/ve.dm.TableSelection.test.js",
