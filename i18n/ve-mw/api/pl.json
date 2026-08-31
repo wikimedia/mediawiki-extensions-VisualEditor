@@ -15,7 +15,7 @@
 	},
 	"apierror-visualeditor-badcachekey": "Nie znaleziono seryjnej pamięci podręcznej dla tego klucza",
 	"apierror-visualeditor-difffailed": "Porównywanie nie powiodło się",
-	"apihelp-visualeditor-param-basetimestamp": "Podczas zapisywania, ustaw na znacznik czasu edytowanej wersji. Służy to do wykrywania konfliktów edycji.",
+	"apihelp-visualeditor-param-basetimestamp": "Podczas zapisywania ustaw na znacznik czasu edytowanej wersji. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditor-param-badetag": "Jeśli zapytanie do RESTBase zwróciło ETag wyglądający na nieprawidłowy, podaj go tutaj w celu logowania problemu.",
 	"apihelp-visualeditor-param-cachekey": "Dla serializacji lub porównywania użyj wyniku poprzedniego żądania serializeforcache z tym kluczem. Zastępuje $1html.",
 	"apihelp-visualeditor-param-editintro": "Edytuj intro, aby dodać do powiadomień.",
@@ -51,6 +51,6 @@
 	"apihelp-visualeditoredit-param-starttimestamp": "Podczas zapisywania, ustaw znacznik czasu, kiedy strona została załadowana. Służy to do wykrywania konfliktów edycji.",
 	"apihelp-visualeditoredit-param-summary": "Opis zmian.",
 	"apihelp-visualeditoredit-param-tags": "Znaczniki zmian do zastosowania w tej edycji.",
-	"apihelp-visualeditoredit-param-wikitext": "The wikitext do działania.",
+	"apihelp-visualeditoredit-param-wikitext": "Wikikod do działania.",
 	"apihelp-visualeditoredit-summary": "Zapisz stronę HTML5 w MediaWiki (konwertowana na wikikod przez usługę Parsoid)."
 }
