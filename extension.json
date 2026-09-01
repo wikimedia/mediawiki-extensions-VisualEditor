@@ -2187,6 +2187,7 @@
 					"name": "modules/ve-mw/ui/actions/ve.ui.MWMagicWordCompletionAction.data.js",
 					"callback": "MediaWiki\\Extension\\VisualEditor\\ResourceLoaderData::makeMagicWordData"
 				},
+				"modules/ve-mw/ui/tools/ve.ui.MWNoWikiTool.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWWikitextPasteContextItem.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWWikitextLinkAnnotationInspector.js",
 				"modules/ve-mw/ui/datatransferhandlers/ve.ui.MWWikitextPlainTextStringTransferHandler.js"
@@ -2208,6 +2209,7 @@
 				"visualeditor-dialog-table-caption",
 				"visualeditor-generating-wikitext-progress",
 				"visualeditor-linkcompletion-header",
+				"visualeditor-nowiki-tooltip",
 				"visualeditor-table-format-data",
 				"visualeditor-table-format-header",
 				"visualeditor-templatecompletion-header",

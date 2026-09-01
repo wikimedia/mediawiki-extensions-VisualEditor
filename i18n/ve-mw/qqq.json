@@ -356,6 +356,7 @@
 	"visualeditor-mwpredialog-convert": "Label for a button which will convert the preformatted text block into a form which can have text styles applied (e.g. bold, italic, links).",
 	"visualeditor-mwpredialog-title": "Title for the preformatted text dialog. It appears when clicking on a <nowiki><pre></nowiki> element.",
 	"visualeditor-mwsignature-tool": "Used as name of the tool for inserting signatures.",
+	"visualeditor-nowiki-tooltip": "Used as name of the tool for inserting nowiki tags in source editing mode.",
 	"visualeditor-preference-visualeditor": "Label for the user preference to enable VisualEditor.",
 	"visualeditor-preference-newwikitexteditor-enable": "Label for the user preference to use the wikitext mode inside the visual editor. It replaces the wikitext editor software.",
 	"visualeditor-preference-newwikitexteditor-help": "Explanation underneath the preference to enable the editor, giving its secondary name.\n\nThe sentence follows {{msg-mw|visualeditor-preference-newwikitexteditor-enable}}.\n\nSee also {{msg-mw|wikieditor-toolbar-preference-help}}.",
