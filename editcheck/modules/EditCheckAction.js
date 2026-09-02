@@ -208,6 +208,11 @@ mw.editcheck.EditCheckAction.prototype.isSuggestion = function () {
 	return this.suggestion;
 };
 
+mw.editcheck.EditCheckAction.prototype.isExperimental = function () {
+	return ( !this.suggestion && !this.check.config.showAsCheck ) ||
+		( this.suggestion && !this.check.config.showAsSuggestion );
+};
+
 /**
  * Render as an EditCheckActionWidget
  *
@@ -217,8 +222,6 @@ mw.editcheck.EditCheckAction.prototype.isSuggestion = function () {
  * @return {mw.editcheck.EditCheckActionWidget}
  */
 mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleAction, surface ) {
-	const enabledByDefault = ( !this.suggestion && this.check.config.showAsCheck ) ||
-		( this.suggestion && this.check.config.showAsSuggestion );
 	this.widget = new mw.editcheck.EditCheckActionWidget( {
 		type: this.getType(),
 		icon: this.icon,
@@ -232,7 +235,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		mode: this.mode,
 		singleAction,
 		suggestion: this.suggestion,
-		experimental: !enabledByDefault
+		experimental: this.isExperimental()
 	} );
 	this.widget.connect( this, {
 		actionClick: [ 'onActionClick', surface ]

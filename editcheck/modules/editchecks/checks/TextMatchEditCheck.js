@@ -50,7 +50,8 @@ const replaceTextLengthLimit = 100;
  * and let the finer limitations be handled by individual matchRules.
  */
 mw.editcheck.TextMatchEditCheck.static.defaultConfig = ve.extendObject( {}, mw.editcheck.TextMatchEditCheck.super.static.defaultConfig, {
-	showAsCheck: false,
+	showAsCheck: true,
+	showAsSuggestion: true,
 	maximumEditCount: false,
 	minimumEditCount: false
 } );
@@ -414,6 +415,7 @@ mw.editcheck.TextMatchEditCheck.prototype.buildAction = function ( matchRule, fr
 		title: matchRule.title,
 		message: matchRule.message,
 		check: this,
+		ruleConfig: matchRule.config,
 		mode: matchRule.mode,
 		matchRuleId: matchRule.id,
 		tagName,
@@ -574,6 +576,7 @@ mw.editcheck.TextMatchEditCheckAction = function MWTextMatchEditCheckAction( con
 	this.replacement = config.replacement;
 	this.tagName = config.tagName;
 	this.replacementFragment = config.replacementFragment;
+	this.ruleConfig = config.ruleConfig;
 };
 
 /* Inheritance */
@@ -621,6 +624,12 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getTagName = function () {
  */
 mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
 	return this.check.getName() + '-' + this.matchRuleId;
+};
+
+mw.editcheck.TextMatchEditCheckAction.prototype.isExperimental = function () {
+	return this.constructor.super.prototype.isExperimental.apply( this, arguments ) ||
+		( !this.suggestion && !this.ruleConfig.showAsCheck ) ||
+		( this.suggestion && !this.ruleConfig.showAsSuggestion );
 };
 
 /**
@@ -690,7 +699,7 @@ OO.initClass( mw.editcheck.TextMatchRule );
 /* Static properties */
 
 mw.editcheck.TextMatchRule.static.defaultConfig = {
-	showAsCheck: true,
+	showAsCheck: false,
 	showAsSuggestion: true
 };
 
