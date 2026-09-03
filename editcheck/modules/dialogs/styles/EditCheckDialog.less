@@ -24,12 +24,23 @@
 		/* Match toolbar border & shadow */
 		border-top: @border-subtle;
 		box-shadow: 0 -1px 1px 0 rgba( 0, 0, 0, 0.1 );
-		/* Transition out faster, as keyboard may be coming up */
-		transition: transform 100ms;
-		transform: translateY( 0% );
 		// See: .ve-init-mw-target-surface in ve.init.mw.MobileArticleTarget.less
 		max-width: calc( 993.3px + (2 * 1em) );
 		margin: 0 auto;
+
+		// This in particular is differently implemented from MobileContext
+		// because of differences in how the dialogs are triggered. This is
+		// setting a quicker initial show and then a slower hide animation.
+		// (See: ToolbarDialogWindowManager, which MobileContext uses while
+		// this goes through SidebarDialogWindowManager.)
+		transform: translateY( 100% );
+		transition: transform 250ms;
+
+		&.oo-ui-window-ready {
+			// Added when the dialog is shown, we're speeding up the initial display.
+			transform: translateY( 0% );
+			transition: transform 100ms;
+		}
 
 		&-close,
 		&-collapseExpand {
@@ -44,8 +55,7 @@
 			padding: @spacing-12 @spacing-100;
 		}
 
-		&.ve-ui-editCheckDialog-collapsed {
-			display: block;
+		&.oo-ui-window-ready.ve-ui-editCheckDialog-collapsed {
 			transition: transform 250ms;
 			transform: translateY( calc( 100% - 2.5em ) );
 		}
