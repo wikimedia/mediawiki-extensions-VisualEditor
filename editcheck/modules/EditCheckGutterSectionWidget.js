@@ -174,12 +174,15 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 	action.select( surface, false, false );
 	const currentWindow = surface.getToolbarDialogs( ve.ui.MobileEditCheckDialog.static.position ).getCurrentWindow();
 	if ( !currentWindow || currentWindow.constructor.static.name !== 'mobileEditCheckDialog' ) {
+		let scrollPromise;
 		if ( scrollConfig && scrollConfig.alignToTop ) {
 			// Scroll immediately, because we don't need to wait for the padding to settle
-			controller.focusAction( action, true, scrollConfig );
+			scrollPromise = controller.focusAction( action, true, scrollConfig );
+		} else {
+			scrollPromise = ve.createDeferred().resolve().promise();
 		}
 		const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
-		windowAction.open(
+		scrollPromise.then( () => windowAction.open(
 			'mobileEditCheckDialog',
 			{
 				controller,
@@ -191,13 +194,15 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 				// Just filter out any discarded actions from the allowed set
 				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( a ) => !discardedActions.includes( a ) )
 			}
-		).then( () => {
+		) ).then( () => {
 			if ( scrollConfig && scrollConfig.alignToTop ) {
 				// We already focused and scrolled because it was safe to do so
 				return;
 			}
 			// Wait for window to open and new surface padding to be applied
-			// before trying to focus and scroll.
+			// before trying to focus and scroll. We can't just use one of
+			// the `instance` promises because those don't account for the
+			// surrounding animation.
 			setTimeout( () => {
 				controller.focusAction( action, true, scrollConfig );
 			}, OO.ui.theme.getDialogTransitionDuration() );

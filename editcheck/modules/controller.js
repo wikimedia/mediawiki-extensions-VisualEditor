@@ -586,24 +586,28 @@ Controller.prototype.removeAction = function ( listener, action, rejected ) {
  * @param {mw.editcheck.EditCheckAction} action Action to focus
  * @param {boolean} [scrollTo] Scroll action's selection into view
  * @param {Object} [scrollConfig] Configuration for scrolling
+ * @return {jQuery.Promise} Promise resolved when scrolling is complete
  * @fires EditCheckController#focusAction
  * @fires EditCheckController#position
  */
 Controller.prototype.focusAction = function ( action, scrollTo, scrollConfig ) {
 	if ( !scrollTo && action === this.focusedAction ) {
 		// Don't emit unnecessary events if there is no change or scroll
-		return;
+		return ve.createDeferred().resolve().promise();
 	}
 
 	this.focusedAction = action;
 
+	let scrollPromise;
 	if ( scrollTo ) {
-		this.scrollActionIntoViewDebounced( action, scrollConfig );
+		scrollPromise = this.scrollActionIntoView( action, scrollConfig );
 	}
 
 	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
 
 	this.updatePositionsDebounced();
+
+	return scrollPromise || ve.createDeferred().resolve().promise();
 };
 
 /**
@@ -1214,13 +1218,14 @@ Controller.prototype.drawSelections = function () {
  *
  * @param {mw.editcheck.EditCheckAction} action
  * @param {Object} [scrollConfig] Configuration for scrolling
+ * @return {jQuery.Promise} Promise resolved when scrolling is complete
  */
 Controller.prototype.scrollActionIntoView = function ( action, scrollConfig ) {
 	// scrollSelectionIntoView scrolls to the focus of a selection, but we
 	// want the very beginning to be in view, so collapse it:
 	const selection = action.getHighlightSelections()[ 0 ].collapseToStart();
 
-	this.surface.scrollSelectionIntoView( selection, ve.extendObject( {
+	return this.surface.scrollSelectionIntoView( selection, ve.extendObject( {
 		animate: true,
 		extraPadding: { top: 10, bottom: OO.ui.isMobile() ? 200 : 10 }
 	}, scrollConfig ) );
