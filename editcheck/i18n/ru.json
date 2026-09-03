@@ -52,6 +52,8 @@
 	"editcheck-double-bold-action-remove": "Удалить жирный шрифт",
 	"editcheck-preference-suggestions-label": "Режим предложений",
 	"editcheck-preference-suggestions-description": "Гаджет советов по улучшению статей. Доступен в [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|визуальном редакторе]].",
+	"editcheck-preference-experimental-enable": "Включить экспериментальные проверки Режима предложений",
+	"editcheck-preference-experimental-help": "Это покажет проверки и предложения, которые сейчас находятся в разработке.",
 	"editcheck-textmatch-replace": "Заменить «$1» на «$2»?",
 	"editcheck-tone-title": "Изменить тон?",
 	"editcheck-tone-description": "Другие пользователи часто корректируют подобные формулировки, отмечая несбалансированный тон. [{{int:editcheck-tone-descriptionlink}} Узнать больше]",

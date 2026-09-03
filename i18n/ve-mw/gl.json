@@ -322,6 +322,7 @@
 	"visualeditor-mwpredialog-convert": "Permite a aplicación de estilos ó texto",
 	"visualeditor-mwpredialog-title": "Texto simple preformatado",
 	"visualeditor-mwsignature-tool": "A túa sinatura",
+	"visualeditor-nowiki-tooltip": "Desactivar o formato de marcas",
 	"visualeditor-preference-visualeditor": "Activar o editor visual",
 	"visualeditor-preference-newwikitexteditor-enable": "Usar o modo de texto wiki dentro do editor visual, no lugar de nun editor de texto wiki diferente",
 	"visualeditor-preference-newwikitexteditor-help": "Isto ás veces chámase \"editor de texto wiki de 2017\".",
