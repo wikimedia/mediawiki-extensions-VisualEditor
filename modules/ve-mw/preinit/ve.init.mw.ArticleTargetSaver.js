@@ -17,6 +17,23 @@
 ( function () {
 	mw.libs.ve = mw.libs.ve || {};
 
+	/**
+	 * Get the cache key type for tracking.
+	 *
+	 * A paction=save, diff or serialize response does not repeat the cache key.
+	 * Thus the request, not the response, shows if a cache key was used.
+	 *
+	 * @param {Object} data Request data sent to the API
+	 * @param {string} [code] API error code, if the request failed
+	 * @return {string} 'badcachekey', 'cachekey' or 'nocachekey'
+	 */
+	function getCacheKeyType( data, code ) {
+		if ( code === 'badcachekey' ) {
+			return 'badcachekey';
+		}
+		return data.cachekey ? 'cachekey' : 'nocachekey';
+	}
+
 	mw.libs.ve.targetSaver = {
 		/**
 		 * Preload the library required for deflating so the user doesn't
@@ -248,15 +265,14 @@
 			} );
 
 			return request.then(
-				( response, jqxhr ) => {
+				( response ) => {
 					const responseData = response[ action ];
 
 					// Log data about the request if eventName was set
 					if ( options.trackTiming && options.eventName ) {
 						const eventData = {
-							bytes: require( 'mediawiki.String' ).byteLength( jqxhr.responseText ),
 							duration: options.now() - start,
-							type: responseData.cachekey ? 'cachekey' : 'nocachekey'
+							type: getCacheKeyType( data )
 						};
 						options.trackTiming( 'performance_system_' + options.eventName, eventData );
 					}
@@ -305,9 +321,8 @@
 
 					if ( responseText && options.trackTiming && options.eventName ) {
 						const eventData = {
-							bytes: require( 'mediawiki.String' ).byteLength( responseText ),
 							duration: options.now() - start,
-							type: code === 'badcachekey' ? 'badcachekey' : 'nocachekey'
+							type: getCacheKeyType( data, code )
 						};
 						options.trackTiming( 'performance_system_' + options.eventName, eventData );
 					}

@@ -1431,9 +1431,9 @@ ve.init.mw.ArticleTarget.prototype.clearPreparedCacheKey = function () {
  *
  * @param {HTMLDocument|string} doc Document to submit or string in source mode
  * @param {Object} extraData POST parameters to send. Do not include 'html', 'cachekey' or 'format'.
- * @param {string} [eventName] If set, log an event when the request completes successfully. The
- *  event name used will be 'performance_system_{eventName}, with a type of `cachekey` or `nocachekey`
- *  depending on whether or not a cache key was used.
+ * @param {string} [eventName] If set, log an event when the request completes. The event name
+ *  used will be 'performance_system_{eventName}', with a type of `cachekey`, `nocachekey` or
+ *  `badcachekey` to show how the request used the prepared cache key.
  * @return {jQuery.Promise} Promise which resolves/rejects when saving is complete/fails
  */
 ve.init.mw.ArticleTarget.prototype.tryWithPreparedCacheKey = function ( doc, extraData, eventName ) {
