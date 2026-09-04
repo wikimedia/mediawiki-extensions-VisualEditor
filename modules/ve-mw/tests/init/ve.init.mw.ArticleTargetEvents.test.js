@@ -87,4 +87,43 @@ QUnit.module( 've.init.mw.ArticleTargetEvents', ve.test.utils.newMwEnvironment()
 			);
 		} );
 	} );
+
+	/**
+	 * Collect what each channel receives while the target reports a first change.
+	 *
+	 * @param {Object} [config] Config for ve.init.mw.ArticleTargetEvents
+	 * @return {Object} Topics sent to ve.track, and count of timings sent
+	 */
+	function trackFirstTransaction( config ) {
+		const topics = [];
+		let timings = 0;
+		const target = { connect: () => {}, surface: null, getDefaultMode: () => 'visual' };
+		const events = new ve.init.mw.ArticleTargetEvents( target, config );
+		events.timings = { surfaceReady: ve.now() };
+		events.trackTiming = () => {
+			timings++;
+		};
+		const veTrack = ve.track;
+		ve.track = ( topic ) => {
+			topics.push( topic );
+		};
+		try {
+			events.onFirstTransaction();
+		} finally {
+			ve.track = veTrack;
+		}
+		return { topics, timings };
+	}
+
+	QUnit.test( 'editAttemptStep is sent by default', ( assert ) => {
+		const result = trackFirstTransaction();
+		assert.deepEqual( result.topics, [ 'editAttemptStep' ], 'the event is sent' );
+		assert.strictEqual( result.timings, 1, 'the timing is sent' );
+	} );
+
+	QUnit.test( 'trackEditAttemptStep false keeps the timings', ( assert ) => {
+		const result = trackFirstTransaction( { trackEditAttemptStep: false } );
+		assert.deepEqual( result.topics, [], 'no editAttemptStep, so mobile cannot double-log it' );
+		assert.strictEqual( result.timings, 1, 'the timing is still sent' );
+	} );
 }() );

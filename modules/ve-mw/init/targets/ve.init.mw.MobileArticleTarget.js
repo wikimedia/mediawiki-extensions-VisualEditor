@@ -33,6 +33,10 @@ ve.init.mw.MobileArticleTarget = function VeInitMwMobileArticleTarget( overlay, 
 	// Parent constructor
 	ve.init.mw.MobileArticleTarget.super.call( this, config );
 
+	// MobileFrontend logs editAttemptStep for both of its editors, so take only
+	// the timing metrics here. See T110272.
+	this.events = new ve.init.mw.ArticleTargetEvents( this, { trackEditAttemptStep: false } );
+
 	// eslint-disable-next-line no-jquery/no-global-selector
 	this.$editableContent = $( '#mw-content-text' );
 

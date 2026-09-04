@@ -12,9 +12,13 @@
  *
  * @constructor
  * @param {ve.init.mw.ArticleTarget} target Target class to log events for
+ * @param {Object} [config]
+ * @param {boolean} [config.trackEditAttemptStep=true] Send editAttemptStep events.
+ *  Set this to false when another extension logs them for the same edit.
  */
-ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) {
+ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target, config = {} ) {
 	this.target = target;
+	this.trackEditAttemptStep = config.trackEditAttemptStep !== false;
 	this.timings = { saveRetries: 0 };
 	// Events
 	this.target.connect( this, {
@@ -40,6 +44,9 @@ ve.init.mw.ArticleTargetEvents = function VeInitMwArticleTargetEvents( target ) 
  * @param {Object} data Additional data describing the event, encoded as an object
  */
 ve.init.mw.ArticleTargetEvents.prototype.track = function ( topic, data ) {
+	if ( topic === 'editAttemptStep' && !this.trackEditAttemptStep ) {
+		return;
+	}
 	ve.track( topic, ve.extendObject( {
 		mode: this.target.surface ? this.target.surface.getMode() : this.target.getDefaultMode()
 	}, data ) );
