@@ -136,7 +136,9 @@ ve.init.mw.ArticleTargetEvents.prototype.onSaveComplete = function ( data ) {
  * @param {string} code Error code
  */
 ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( code ) {
-	// Maps error codes to editAttemptStep types
+	// Maps error codes to editAttemptStep types. Each value must be in the
+	// save_failure_type enum of the EditAttemptStep schema, or EventGate drops
+	// the event.
 	const typeMap = {
 		badtoken: 'userBadToken',
 		assertanonfailed: 'userNewUser',
@@ -151,9 +153,41 @@ ve.init.mw.ArticleTargetEvents.prototype.trackSaveError = function ( code ) {
 		editconflict: 'editConflict'
 	};
 
+	// The metric has no schema, so it can name the causes that editAttemptStep
+	// must report as responseUnknown.
+	const metricTypeMap = ve.extendObject( {}, typeMap, {
+		// The user cannot save, but the page is unchanged.
+		blocked: 'userBlocked',
+		autoblocked: 'userBlocked',
+		ratelimited: 'userRateLimited',
+		'acct_creation_throttle_hit-temp': 'userAccountCreationThrottle',
+		permissiondenied: 'userPermissionDenied',
+		cantcreate: 'userPermissionDenied',
+		'cantcreate-anon': 'userPermissionDenied',
+		// The page or the edit session changed under the user.
+		protectedpage: 'editPageProtected',
+		'rest-specified-revision-unavailable': 'editRevisionMissing',
+		'rest-no-stashed-content': 'editStashMissing',
+		// Blocked domains have their own code, but the cause is AbuseFilter.
+		'abusefilter-blocked-domains-attempted': 'extensionAbuseFilter',
+		// The server or the client failed. The user did nothing wrong.
+		readonly: 'responseReadOnly',
+		'rest-parsoid-error': 'responseParsoidError',
+		invaliddeflate: 'clientInvalidDeflate'
+	} );
+
+	let metricType = metricTypeMap[ code ];
+	if ( !metricType ) {
+		// The API makes one code for each exception class. Match the prefix to
+		// keep the number of labels bounded.
+		metricType = code && code.startsWith( 'internal_api_error_' ) ?
+			'responseServerError' :
+			'responseUnknown';
+	}
+
 	this.trackTiming( 'performance_user_saveError', {
 		duration: ve.now() - this.timings.saveInitiated,
-		type: typeMap[ code ] || 'responseUnknown'
+		type: metricType
 	} );
 
 	this.track( 'editAttemptStep', {
