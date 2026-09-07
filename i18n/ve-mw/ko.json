@@ -343,6 +343,7 @@
 	"visualeditor-mwpredialog-convert": "텍스트 서식 허용",
 	"visualeditor-mwpredialog-title": "서식이 미리 지정된 평문",
 	"visualeditor-mwsignature-tool": "당신의 서명",
+	"visualeditor-nowiki-tooltip": "마크업 비활성화",
 	"visualeditor-preference-visualeditor": "시각편집기 활성화",
 	"visualeditor-preference-newwikitexteditor-enable": "다른 위키텍스트 편집기 대신 시각편집기 내의 위키텍스트 모드를 사용하기",
 	"visualeditor-preference-newwikitexteditor-help": "'2017년 위키텍스트 편집기'라고도 합니다.",

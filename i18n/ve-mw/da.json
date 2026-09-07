@@ -331,6 +331,7 @@
 	"visualeditor-mwpredialog-convert": "Tillad tekstformatering",
 	"visualeditor-mwpredialog-title": "Forhåndsformateret ren tekst",
 	"visualeditor-mwsignature-tool": "Din signatur",
+	"visualeditor-nowiki-tooltip": "Deaktiver markering",
 	"visualeditor-preference-visualeditor": "Aktiver visuel redigering",
 	"visualeditor-preference-newwikitexteditor-enable": "Brug wikitekst-tilstanden i visuel redigering fremfor en egen wikitekstredigering",
 	"visualeditor-preference-newwikitexteditor-help": "Dette kaldes undertiden '2017 wikitekstredigering'.",

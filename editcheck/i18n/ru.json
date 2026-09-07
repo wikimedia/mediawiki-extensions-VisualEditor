@@ -48,7 +48,7 @@
 	"editcheck-copyvio-keep-notify": "Спасибо, что поделились причиной, по которой решили сохранить скопированный текст!",
 	"editcheck-copyvio-remove-notify": "Спасибо за помощь в сохранении свободного доступа к знаниям!",
 	"editcheck-double-bold-title": "Избыточное выделение жирным шрифтом",
-	"editcheck-double-bold-description": "Жирный шрифт уже автоматически применяется к подзаголовкам, терминам в списках определений и заголовкам таблиц. Помогите читателям — удалите [{{int:editcheck-double-bold-descriptionlink}} лишнее выделение жирным] из этих элементов.",
+	"editcheck-double-bold-description": "Жирный шрифт уже автоматически применяется к заголовкам таблиц. Удалите [{{int:editcheck-double-bold-descriptionlink}} лишнее выделение жирным] здесь.",
 	"editcheck-double-bold-action-remove": "Удалить жирный шрифт",
 	"editcheck-preference-suggestions-label": "Режим предложений",
 	"editcheck-preference-suggestions-description": "Гаджет советов по улучшению статей. Доступен в [[:mw:Special:MyLanguage/Help:VisualEditor/User_guide|визуальном редакторе]].",
