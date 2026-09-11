@@ -20,7 +20,8 @@ use MediaWiki\User\UserIdentity;
 class VisualEditorHookRunner implements
 	VisualEditorApiVisualEditorEditPreSaveHook,
 	VisualEditorApiVisualEditorEditPostSaveHook,
-	VisualEditorBeforeEditorHook
+	VisualEditorBeforeEditorHook,
+	VisualEditorRegisterChangeTagsHook
 {
 
 	public function __construct( private readonly HookContainer $hookContainer ) {
@@ -63,6 +64,13 @@ class VisualEditorHookRunner implements
 			$pluginData,
 			$saveResult,
 			&$apiResponse
+		], [ 'abortable' => false ] );
+	}
+
+	/** @inheritDoc */
+	public function onVisualEditorRegisterChangeTags( array &$tags ): void {
+		$this->hookContainer->run( 'VisualEditorRegisterChangeTags', [
+			&$tags
 		], [ 'abortable' => false ] );
 	}
 

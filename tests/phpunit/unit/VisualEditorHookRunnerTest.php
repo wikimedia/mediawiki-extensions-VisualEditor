@@ -61,4 +61,24 @@ class VisualEditorHookRunnerTest extends MediaWikiUnitTestCase {
 		);
 	}
 
+	public function testRegisterChangeTagsHook() {
+		$container = $this->createNoOpMock( HookContainer::class, [ 'run' ] );
+		$container->expects( $this->once() )
+			->method( 'run' )
+			->with(
+				'VisualEditorRegisterChangeTags',
+				$this->isType( 'array' ),
+				[ 'abortable' => false ]
+			)
+			->willReturnCallback( static function ( $name, $args ) {
+				$args[0][] = 'some-tag';
+				return true;
+			} );
+		$runner = new VisualEditorHookRunner( $container );
+
+		$tags = [];
+		$runner->onVisualEditorRegisterChangeTags( $tags );
+		$this->assertSame( [ 'some-tag' ], $tags );
+	}
+
 }

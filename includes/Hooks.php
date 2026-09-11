@@ -736,9 +736,21 @@ class Hooks implements
 	}
 
 	/**
+	 * Get the change tags that VisualEditor knows, with the tags that other
+	 * extensions add through the VisualEditorRegisterChangeTags hook.
+	 *
+	 * @return string[]
+	 */
+	private function getTags(): array {
+		$extraTags = [];
+		$this->hookRunner->onVisualEditorRegisterChangeTags( $extraTags );
+		return array_values( array_unique( array_merge( static::TAGS, $extraTags ) ) );
+	}
+
+	/**
 	 * Called when an edit is saved
 	 * Adds 'visualeditor-switched' tag to the edit if requested
-	 * Adds whatever tags from static::TAGS are present in the vetags parameter
+	 * Adds whatever known tags are present in the vetags parameter
 	 *
 	 * @param RecentChange $rc The new RC entry.
 	 */
@@ -749,7 +761,7 @@ class Hooks implements
 		}
 
 		$tags = explode( ',', $request->getVal( 'vetags' ) ?? '' );
-		$tags = array_values( array_intersect( $tags, static::TAGS ) );
+		$tags = array_values( array_intersect( $tags, $this->getTags() ) );
 		if ( $tags ) {
 			$rc->addTags( $tags );
 		}
@@ -1043,7 +1055,7 @@ class Hooks implements
 	 * @param array &$tags Available change tags.
 	 */
 	public function onListDefinedTags( &$tags ) {
-		$tags = array_merge( $tags, static::TAGS );
+		$tags = array_merge( $tags, $this->getTags() );
 	}
 
 	/**
