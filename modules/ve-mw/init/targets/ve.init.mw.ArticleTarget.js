@@ -39,6 +39,7 @@ ve.init.mw.ArticleTarget = function VeInitMwArticleTarget( config = {} ) {
 	this.saveDialog = null;
 	this.saveDeferred = null;
 	this.saveFields = {};
+	this.saveTags = new Set();
 	this.wasSaveable = null;
 	this.docToSave = null;
 	this.originalDmDocPromise = null;
@@ -1647,6 +1648,18 @@ ve.init.mw.ArticleTarget.prototype.getSaveOptionsProcess = function () {
 	return this.saveOptionsProcess;
 };
 
+ve.init.mw.ArticleTarget.prototype.addSaveTag = function ( tagName ) {
+	this.saveTags.add( tagName );
+};
+
+ve.init.mw.ArticleTarget.prototype.deleteSaveTag = function ( tagName ) {
+	this.saveTags.delete( tagName );
+};
+
+ve.init.mw.ArticleTarget.prototype.getSaveTags = function () {
+	return [ ...this.saveTags ];
+};
+
 /**
  * Post DOM data to the Parsoid API.
  *
@@ -1695,7 +1708,12 @@ ve.init.mw.ArticleTarget.prototype.save = function ( doc, options ) {
 
 	const config = mw.config.get( 'wgVisualEditorConfig' );
 
-	const taglist = data.vetags ? data.vetags.split( ',' ) : [];
+	const taglist = this.getSaveTags();
+
+	if ( data.vetags ) {
+		// deprecated in favor of `addSaveTag`
+		taglist.push( ...data.vetags.split( ',' ) );
+	}
 
 	if ( config.useChangeTagging ) {
 		taglist.push(
@@ -1975,6 +1993,8 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
 			// Release the reference
 			this.saveDialog = null;
 		}
+
+		this.saveTags.clear();
 
 		// Parent method
 		this.teardownPromise = ve.init.mw.ArticleTarget.super.prototype.teardown.call( this ).then( () => saveDialogPromise.then( () => {

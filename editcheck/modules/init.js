@@ -157,69 +157,73 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			return;
 		}
 
+		let initLength;
+		function getRefNodes() {
+			// The firstNodes list is a numerically indexed array of reference nodes in the document.
+			// The list is append only, and removed references are set to undefined in place.
+			// To check if a new reference is being published, we just need to know if a reference
+			// with an index beyond the initial list (initLength) is still set.
+			const internalList = target.getSurface().getModel().getDocument().getInternalList();
+			const group = internalList.getNodeGroup( 'mwReference/' );
+			return group ? group.firstNodes || [] : [];
+		}
 		target.on( 'surfaceReady', () => {
-			function getRefNodes() {
-				// The firstNodes list is a numerically indexed array of reference nodes in the document.
-				// The list is append only, and removed references are set to undefined in place.
-				// To check if a new reference is being published, we just need to know if a reference
-				// with an index beyond the initial list (initLength) is still set.
-				const internalList = target.getSurface().getModel().getDocument().getInternalList();
-				const group = internalList.getNodeGroup( 'mwReference/' );
-				return group ? group.firstNodes || [] : [];
-			}
-
-			let hasFailingToneCheck = null;
-			target.getPreSaveProcess().first( () => {
-				// Start checking for tone in the pre-save process, but don't block the save dialog
-				// from appearing. If the tone check isn't finished by save time we will just log
-				// an error.
-				hasFailingToneCheck = null;
-				mw.editcheck.hasFailingToneCheck( target.getSurface().getModel() ).then( ( result ) => {
-					hasFailingToneCheck = result;
-				} );
-			} );
-
-			const initLength = getRefNodes().length;
-			target.saveFields.vetags = function () {
-				const refNodes = getRefNodes();
-				const newLength = refNodes.length;
-				let newNodesInDoc = false;
-				for ( let i = initLength; i < newLength; i++ ) {
-					if ( refNodes[ i ] ) {
-						newNodesInDoc = true;
-						break;
-					}
-				}
-				const tags = [];
-				if ( newNodesInDoc ) {
-					tags.push( 'editcheck-newreference' );
-				}
-				if ( mw.editcheck.state.checks.shown.addReference ) {
-					tags.push( 'editcheck-references-shown' );
-				}
-				if ( mw.editcheck.state.checks.shown.tone ) {
-					tags.push( 'editcheck-tone-shown' );
-				}
-				if ( mw.editcheck.state.checks.shown.paste ) {
-					tags.push( 'editcheck-paste-shown' );
-				}
-				if ( Object.keys( mw.editcheck.state.suggestions.seen ).length > 0 ) {
-					tags.push( 'editsuggestion-seen' );
-				}
-				if ( Object.keys( mw.editcheck.state.suggestions.used ).length > 0 ) {
-					tags.push( 'editsuggestion-used' );
-				}
-				if ( hasFailingToneCheck ) {
-					tags.push( 'editcheck-tone' );
-				} else if ( hasFailingToneCheck === null ) {
-					ve.track( 'activity.editCheck-tone', { action: 'save-before-check-finalized' } );
-				}
-				return tags.join( ',' );
-			};
+			initLength = getRefNodes().length;
 		} );
 
-		target.on( 'teardown', () => {
-			delete target.saveFields.vetags;
+		let hasFailingToneCheck = null;
+		target.getPreSaveProcess().first( () => {
+			// Start checking for tone in the pre-save process, but don't block the save dialog
+			// from appearing. If the tone check isn't finished by save time we will just log
+			// an error.
+			hasFailingToneCheck = null;
+			mw.editcheck.hasFailingToneCheck( target.getSurface().getModel() ).then( ( result ) => {
+				hasFailingToneCheck = result;
+			} );
+		} );
+
+		// saveOptionsProcess is executed every time a save is attempted
+		target.getSaveOptionsProcess().next( () => {
+			if ( target.getSurface().getMode() !== 'visual' ) {
+				return;
+			}
+			// In case someone is retrying a save, clear state for the
+			// tags that could possibly change between saves:
+			target.deleteSaveTag( 'editcheck-tone' );
+			target.deleteSaveTag( 'editcheck-newreference' );
+			// Now build tags:
+			const refNodes = getRefNodes();
+			const newLength = refNodes.length;
+			let newNodesInDoc = false;
+			for ( let i = initLength; i < newLength; i++ ) {
+				if ( refNodes[ i ] ) {
+					newNodesInDoc = true;
+					break;
+				}
+			}
+			if ( newNodesInDoc ) {
+				target.addSaveTag( 'editcheck-newreference' );
+			}
+			if ( mw.editcheck.state.checks.shown.addReference ) {
+				target.addSaveTag( 'editcheck-references-shown' );
+			}
+			if ( mw.editcheck.state.checks.shown.tone ) {
+				target.addSaveTag( 'editcheck-tone-shown' );
+			}
+			if ( mw.editcheck.state.checks.shown.paste ) {
+				target.addSaveTag( 'editcheck-paste-shown' );
+			}
+			if ( Object.keys( mw.editcheck.state.suggestions.seen ).length > 0 ) {
+				target.addSaveTag( 'editsuggestion-seen' );
+			}
+			if ( Object.keys( mw.editcheck.state.suggestions.used ).length > 0 ) {
+				target.addSaveTag( 'editsuggestion-used' );
+			}
+			if ( hasFailingToneCheck ) {
+				target.addSaveTag( 'editcheck-tone' );
+			} else if ( hasFailingToneCheck === null ) {
+				ve.track( 'activity.editCheck-tone', { action: 'save-before-check-finalized' } );
+			}
 		} );
 	} );
 }
