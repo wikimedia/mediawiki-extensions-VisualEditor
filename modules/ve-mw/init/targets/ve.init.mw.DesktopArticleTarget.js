@@ -249,6 +249,20 @@ ve.init.mw.DesktopArticleTarget.prototype.setupToolbar = function ( surface ) {
 
 	ve.track( 'trace.setupToolbar.exit', { mode } );
 	if ( !wasSetup ) {
+		// Need to check not only that toolbar exists, but that we're in visual editing mode, because 2017 wt editor uses the toolbar too
+		if ( mode === 'visual' && toolbar.tools.editModeVisual && toolbar.tools.editModeSource ) {
+			const toolGroup = toolbar.tools.editModeVisual.toolGroup;
+			const popup = new ve.ui.MWSourceEducationPopupWidget(
+				toolGroup.$handle,
+				{
+					onTrySource: () => {
+						toolbar.tools.editModeSource.onSelect();
+					}
+				}
+			);
+			toolGroup.$element.append( popup.$element );
+		}
+
 		toolbar.$element
 			.addClass( 've-init-mw-desktopArticleTarget-toolbar-open' )
 			.css( 'height', '' );

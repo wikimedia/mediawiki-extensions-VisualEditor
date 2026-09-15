@@ -21,30 +21,39 @@
  * @param {string|jQuery} config.popupText
  * @param {string} [config.popupImage] Popup image class
  * @param {string} [config.trackingName]
+ * @param {string} [config.closeButtonLabel]
+ * @param {string[]} [config.closeButtonFlags]
  */
 ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) {
-	// HACK: Do not display on platforms other than desktop
-	if ( !( ve.init.mw.DesktopArticleTarget && ve.init.target instanceof ve.init.mw.DesktopArticleTarget ) ) {
-		return;
-	}
 
-	// Do not display if the user already acknowledged the popups
-	if ( !mw.libs.ve.shouldShowEducationPopups() ) {
+	if ( !this.isEligible() ) {
 		return;
 	}
 
 	// Parent method
 	ve.ui.MWEducationPopupWidget.super.call( this, config );
 
+	this.initialize( $target, config );
+
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ui.MWEducationPopupWidget, OO.ui.Widget );
+
+/* Methods */
+
+ve.ui.MWEducationPopupWidget.prototype.initialize = function ( $target, config ) {
 	// Properties
 	this.$target = $target;
 	this.popupCloseButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( 'visualeditor-educationpopup-dismiss' ),
-		flags: [ 'progressive', 'primary' ],
-		classes: [ 've-ui-educationPopup-dismiss' ]
+		label: config.closeButtonLabel || ve.msg( 'visualeditor-educationpopup-dismiss' ),
+		flags: config.closeButtonFlags || [ 'progressive', 'primary' ]
 	} );
 	this.trackingName = config.trackingName;
 	this.$pulsatingDot = $( '<div>' ).addClass( 'mw-pulsating-dot' );
+	this.$buttons = $( '<div>' ).addClass( 've-ui-educationPopup-buttons' )
+		.append( this.popupCloseButton.$element );
 
 	const $popupContent = $( '<div>' ).append(
 		$( '<h3>' ).text( config.popupTitle ),
@@ -54,7 +63,7 @@ ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) 
 				config.popupText :
 				document.createTextNode( config.popupText )
 		),
-		this.popupCloseButton.$element
+		this.$buttons
 	);
 	ve.targetLinksToNewWindow( $popupContent[ 0 ] );
 	if ( config.popupImage ) {
@@ -76,18 +85,40 @@ ve.ui.MWEducationPopupWidget = function VeUiMwEducationPopup( $target, config ) 
 	this.onTargetMouseDownHandler = this.onTargetMouseDown.bind( this );
 
 	// Events
-	this.$target.on( 'mousedown', this.onTargetMouseDownHandler );
+	this.addHandler();
 	this.popupCloseButton.connect( this, { click: 'onPopupCloseButtonClick' } );
 
 	// DOME
 	this.$element.addClass( 've-ui-educationPopup' ).append( this.$pulsatingDot, this.popup.$element );
 };
 
-/* Inheritance */
+ve.ui.MWEducationPopupWidget.prototype.isEligible = function () {
+	// HACK: Do not display on platforms other than desktop
+	// and do not display if the user already acknowledged the popups
+	return ve.init.mw.DesktopArticleTarget &&
+		ve.init.target instanceof ve.init.mw.DesktopArticleTarget &&
+		this.shouldShow();
+};
 
-OO.inheritClass( ve.ui.MWEducationPopupWidget, OO.ui.Widget );
+ve.ui.MWEducationPopupWidget.prototype.shouldShow = function () {
+	return mw.libs.ve.shouldShowEducationPopups();
+};
 
-/* Methods */
+ve.ui.MWEducationPopupWidget.prototype.stopShowing = function () {
+	return mw.libs.ve.stopShowingEducationPopups();
+};
+
+ve.ui.MWEducationPopupWidget.prototype.getButtonToFocus = function () {
+	return this.popupCloseButton;
+};
+
+ve.ui.MWEducationPopupWidget.prototype.addHandler = function () {
+	this.$target.on( 'mousedown', this.onTargetMouseDownHandler );
+};
+
+ve.ui.MWEducationPopupWidget.prototype.removeHandler = function () {
+	this.$target.off( 'mousedown', this.onTargetMouseDownHandler );
+};
 
 /**
  * Handle mouse down events on the handle
@@ -96,15 +127,16 @@ OO.inheritClass( ve.ui.MWEducationPopupWidget, OO.ui.Widget );
  * @return {boolean|undefined}
  */
 ve.ui.MWEducationPopupWidget.prototype.onTargetMouseDown = function () {
-	if ( ve.init.target.openEducationPopup ) {
-		ve.init.target.openEducationPopup.popup.toggle( false );
-		ve.init.target.openEducationPopup.$pulsatingDot.removeClass( 'oo-ui-element-hidden' );
+	const educationPopup = ve.init.target.educationPopup;
+	if ( educationPopup ) {
+		educationPopup.popup.toggle( false );
+		educationPopup.$pulsatingDot.removeClass( 'oo-ui-element-hidden' );
 	}
-	ve.init.target.openEducationPopup = this;
+	ve.init.target.educationPopup = this;
 
 	this.$pulsatingDot.addClass( 'oo-ui-element-hidden' );
 	this.popup.toggle( true );
-	this.popupCloseButton.focus();
+	this.getButtonToFocus().focus();
 
 	if ( this.trackingName ) {
 		ve.track( 'activity.' + this.trackingName + 'EducationPopup', { action: 'show' } );
@@ -116,16 +148,20 @@ ve.ui.MWEducationPopupWidget.prototype.onTargetMouseDown = function () {
  * Click handler for the popup close button
  */
 ve.ui.MWEducationPopupWidget.prototype.onPopupCloseButtonClick = function () {
-	this.$target.off( 'mousedown', this.onTargetMouseDownHandler );
-	this.popup.toggle( false );
-
-	ve.init.target.openEducationPopup = null;
-	mw.libs.ve.stopShowingEducationPopups();
-
+	if ( this.trackingName ) {
+		ve.track( 'activity.' + this.trackingName + 'EducationPopup', { action: 'dismiss' } );
+	}
+	this.closePopup();
 	const mouseLeft = { which: OO.ui.MouseButtons.LEFT };
 	this.$target
 		.trigger( $.Event( 'mousedown', mouseLeft ) )
 		.trigger( $.Event( 'mouseup', mouseLeft ) )
 		.trigger( $.Event( 'click', mouseLeft ) );
+};
 
+ve.ui.MWEducationPopupWidget.prototype.closePopup = function () {
+	this.removeHandler();
+	this.popup.toggle( false );
+	ve.init.target.educationPopup = null;
+	this.stopShowing();
 };

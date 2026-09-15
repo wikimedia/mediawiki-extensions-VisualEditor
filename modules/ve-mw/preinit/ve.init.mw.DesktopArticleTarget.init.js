@@ -1289,6 +1289,33 @@
 		 */
 		disableEducationPopups: function () {
 			educationPopupsDisabled = true;
+		},
+
+		/**
+		 * Check whether the source education popup (ve.ui.MWSourceEducationPopupWidget) should be shown.
+		 *
+		 * It's disabled if we've already shown it before, i.e., when it has a value stored in a user preference, local storage or a cookie.
+		 *
+		 * @return {boolean}
+		 */
+		shouldShowSourceEducationPopup: function () {
+			const groups = mw.config.get( 'wgUserGroups' ) || [];
+			return (
+				conf.enableSourceEducationPopup &&
+				groups.includes( 'autoconfirmed' ) &&
+				!educationPopupsDisabled &&
+				!checkPreferenceOrStorage( 'visualeditor-hidesourceswitcheducation', 've-hidesourceswitch-education' )
+			);
+		},
+
+		/**
+		 * Record that we've already shown the source education popup to this user, so that it won't be
+		 * shown to them again.
+		 *
+		 * Uses a preference for logged-in users; uses local storage or a cookie for anonymous users.
+		 */
+		stopShowingSourceEducationPopup: function () {
+			setPreferenceOrStorage( 'visualeditor-hidesourceswitcheducation', 've-hidesourceswitch-education' );
 		}
 	};
 
