@@ -1003,6 +1003,7 @@ class Hooks implements
 		$preferences['visualeditor-hidesourceswitchpopup'] = $api;
 		$preferences['visualeditor-hidevisualswitchpopup'] = $api;
 		$preferences['visualeditor-hideusered'] = $api;
+		$preferences['visualeditor-hidesourceswitcheducation'] = $api;
 		$preferences['visualeditor-findAndReplace-diacritic'] = $api;
 		$preferences['visualeditor-findAndReplace-findText'] = $api;
 		$preferences['visualeditor-findAndReplace-replaceText'] = $api;
@@ -1167,6 +1168,7 @@ class Hooks implements
 			'VisualEditorEditCheckABTest',
 			'VisualEditorEnableEditCheckExperimental',
 			'VisualEditorEnableEditCheckSuggestionsBeta',
+			'VisualEditorEnableSourceEducationPopup',
 			'VisualEditorFeedbackTitle',
 			'VisualEditorSourceFeedbackTitle',
 			'VisualEditorSuggestionFeedbackTitle',

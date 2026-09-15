@@ -58,6 +58,10 @@
 		"VisualEditorEnableHelpCompletion": {
 			"value": true
 		},
+		"VisualEditorEnableSourceEducationPopup": {
+			"description": "Show education popup for switching to source editor when user enters Visual Editor. The corresponding per-user option is visualeditor-hidesourceswitcheducation.",
+			"value": false
+		},
 		"VisualEditorEnableVisualSectionEditing": {
 			"description": "When opened from a section edit link, only show that section in the editor (like in the wikitext editor). Can be boolean true for desktop and mobile, or 'mobile' for just mobile.",
 			"value": "mobile"
@@ -1403,6 +1407,7 @@
 				"modules/ve-mw/ui/contextitems/ve.ui.MWAlienAnnotationContextItem.js",
 				"modules/ve-mw/ui/contextitems/ve.ui.MWIncludesContextItem.js",
 				"modules/ve-mw/ui/widgets/ve.ui.MWEducationPopupWidget.js",
+				"modules/ve-mw/ui/widgets/ve.ui.MWSourceEducationPopupWidget.js",
 				"modules/ve-mw/ui/inspectors/ve.ui.MWCommentInspector.js"
 			],
 			"styles": [
@@ -1419,7 +1424,8 @@
 				"modules/ve-mw/ui/styles/tools/ve.ui.MWPopupTool.less",
 				"modules/ve-mw/ui/styles/toolgroups/ve.ui.MWHelpListToolGroup.less",
 				"modules/ve-mw/ui/styles/widgets/ve.ui.MWAceEditorWidget.less",
-				"modules/ve-mw/ui/styles/widgets/ve.ui.MWEducationPopupWidget.less"
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWEducationPopupWidget.less",
+				"modules/ve-mw/ui/styles/widgets/ve.ui.MWSourceEducationPopupWidget.less"
 			],
 			"skinStyles": {
 				"default": [
@@ -1486,6 +1492,11 @@
 				"visualeditor-annotations-extended-documentation",
 				"visualeditor-mwpredialog-convert",
 				"visualeditor-mwpredialog-title",
+				"visualeditor-sourceswitch-popup-title",
+				"visualeditor-sourceswitch-popup-text",
+				"visualeditor-sourceswitch-popup-wtlink",
+				"visualeditor-sourceswitch-popup-dismiss",
+				"visualeditor-sourceswitch-popup-trysource",
 				"visualeditor-tooltip-non-breaking-space",
 				"visualeditor-version-label",
 				"visualeditor-wikitext-progress",
@@ -2598,7 +2609,19 @@
 		"visualeditor-newwikitext": 0,
 		"visualeditor-tabs": "remember-last",
 		"visualeditor-editcheck-suggestions-toggle": 1,
-		"visualeditor-editcheck-experimental": 0
+		"visualeditor-editcheck-experimental": 0,
+		"visualeditor-hidesourceswitcheducation": 1
+	},
+	"ConditionalUserOptions": {
+		"visualeditor-hidesourceswitcheducation": [
+			[
+				false,
+				[
+					"registered-after",
+					"20260101000000"
+				]
+			]
+		]
 	},
 	"SpecialPages": {
 		"CollabPad": "MediaWiki\\Extension\\VisualEditor\\SpecialCollabPad",
