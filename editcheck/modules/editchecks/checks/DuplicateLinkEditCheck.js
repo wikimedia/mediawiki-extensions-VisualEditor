@@ -173,6 +173,13 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surf
 			} );
 
 			if ( adjacent ) {
+				// Show nothing if the merge cannot work (T437749)
+				const mergeRange = ve.Range.static.newCoveringRange(
+					duplicateLinks.map( ( ar ) => ar.range )
+				);
+				if ( !this.getMergeOuterAnnotations( documentModel, mergeRange ) ) {
+					continue;
+				}
 				actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
 					fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) ),
 					mode: 'adjacent',
@@ -190,6 +197,48 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surf
 	return actions;
 };
 
+/**
+ * Get the annotations which nest outside a merged link
+ *
+ * The converter puts the link inside each annotation which is already open where
+ * the link starts. If such an annotation stops inside the link, the link must
+ * close and open again. An equal annotation with other HTML attributes gives the
+ * same result. Parsoid puts a different id on each element, so two italic runs
+ * always differ in this way. The link then becomes more than one element, and the
+ * merge makes no change to the page. (T437749)
+ *
+ * The caller must give the whole link one instance of each of these annotations.
+ * That instance covers whitespace only, or replaces an equal annotation, so the
+ * page looks the same.
+ *
+ * @param {ve.dm.Document} documentModel
+ * @param {ve.Range} range Range which the merged link covers
+ * @return {ve.dm.Annotation[]|null} Annotations to set over the whole range, or null
+ *  if the merge needs a change which the reader can see
+ */
+mw.editcheck.DuplicateLinkEditCheck.prototype.getMergeOuterAnnotations = function ( documentModel, range ) {
+	const data = documentModel.data;
+	const linkNames = this.constructor.static.linkClasses.map( ( linkClass ) => linkClass.static.name );
+	// An annotation is open where the link starts only if it also covers the offset
+	// before it. Compare it the way the converter does, to get the same nesting.
+	const previousAnnotations = data.getAnnotationsFromOffset( range.start - 1 );
+	const outerAnnotations = data.getAnnotationsFromOffset( range.start ).filter(
+		( annotation ) => !linkNames.includes( annotation.name ) &&
+			previousAnnotations.containsComparableForSerialization( annotation )
+	).get();
+
+	for ( const annotation of outerAnnotations ) {
+		for ( let offset = range.start; offset < range.end; offset++ ) {
+			const hasEqual = data.getAnnotationsFromOffset( offset ).containsComparable( annotation );
+			// Whitespace looks the same with the annotation, other content does not
+			if ( !hasEqual && !/^\s$/.test( data.getCharacterData( offset ) ) ) {
+				return null;
+			}
+		}
+	}
+	return outerAnnotations;
+};
+
 mw.editcheck.DuplicateLinkEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'remove' ) {
 		action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name );
@@ -201,11 +250,22 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.act = function ( choice, action, s
 			const r = fragment.getSelection().getCoveringRange();
 			coveringRange = coveringRange ? coveringRange.expand( r ) : r;
 		} );
-		const coveringFragment = surface.getModel().getLinearFragment( coveringRange );
+		const surfaceModel = surface.getModel();
+		const coveringFragment = surfaceModel.getLinearFragment( coveringRange );
 		const linkAnnotation = this.getLinkFromFragment( action.fragments[ 0 ] );
+		const documentModel = surfaceModel.getDocument();
+		const outerAnnotations = this.getMergeOuterAnnotations( documentModel, coveringRange ) || [];
 		coveringFragment
 			.annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name )
 			.annotateContent( 'set', linkAnnotation );
+		outerAnnotations.forEach( ( annotation ) => {
+			// Clear the equal annotations first: 'set' does nothing at an offset
+			// which one of them already covers
+			documentModel.data.getAnnotationsFromRange( coveringRange, true )
+				.getComparableAnnotations( annotation ).get()
+				.forEach( ( equalAnnotation ) => coveringFragment.annotateContent( 'clear', equalAnnotation ) );
+			coveringFragment.annotateContent( 'set', annotation );
+		} );
 		this.selectAnnotation( coveringFragment, surface );
 		return;
 	}
