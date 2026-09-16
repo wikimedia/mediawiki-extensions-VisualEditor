@@ -15,7 +15,6 @@ use MediaWiki\Content\TextContent;
 use MediaWiki\Extension\VisualEditor\MediaWikiJsonSchemaValidator;
 use MediaWiki\Hook\UnitTestsListHook;
 use MediaWiki\HTMLForm\HTMLForm;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Preferences\Hook\PreferencesFormPreSaveHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
@@ -23,6 +22,8 @@ use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWiki\Revision\RenderedRevision;
 use MediaWiki\Status\Status;
 use MediaWiki\Storage\Hook\MultiContentSaveHook;
+use MediaWiki\User\Options\UserOptionsLookup;
+use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
 
@@ -34,6 +35,12 @@ class Hooks implements
 	UnitTestsListHook
 {
 
+	public function __construct(
+		private readonly UserOptionsLookup $userOptionsLookup,
+		private readonly UserOptionsManager $userOptionsManager,
+	) {
+	}
+
 	/**
 	 * @param string[] &$paths
 	 */
@@ -42,9 +49,6 @@ class Hooks implements
 	}
 
 	public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
-		$services = MediaWikiServices::getInstance();
-		$veConfig = $services->getConfigFactory()->makeConfig( 'visualeditor' );
-
 		$checksDir = dirname( __DIR__ ) . '/modules/editchecks/checks';
 		$files = array_diff( scandir( $checksDir ), [ '..', '.' ] );
 
@@ -79,9 +83,7 @@ class Hooks implements
 		$preferences['visualeditor-editcheck-suggestions-toggle'] = $api;
 		$preferences['visualeditor-editcheck-showpublishpath'] = $api;
 
-		$services = MediaWikiServices::getInstance();
-		$userOptionsLookup = $services->getUserOptionsLookup();
-		if ( $userOptionsLookup->getOption( $user, 'visualeditor-editcheck-suggestions' ) ) {
+		if ( $this->userOptionsLookup->getOption( $user, 'visualeditor-editcheck-suggestions' ) ) {
 			$preferences['visualeditor-editcheck-experimental'] = [
 				'type' => 'toggle',
 				'label-message' => 'editcheck-preference-experimental-enable',
@@ -102,12 +104,9 @@ class Hooks implements
 	 * @param array $oldUserOptions Array with user's old options (before save)
 	 */
 	public function onPreferencesFormPreSave( $formData, $form, $user, &$result, $oldUserOptions ) {
-		$services = MediaWikiServices::getInstance();
-		$userOptionsManager = $services->getUserOptionsManager();
-
 		// When the user disables suggestion mode, clear the experimental preference before the changes are saved.
-		if ( !$userOptionsManager->getOption( $user, 'visualeditor-editcheck-suggestions' ) ) {
-			$userOptionsManager->setOption( $user, 'visualeditor-editcheck-experimental', false );
+		if ( !$this->userOptionsManager->getOption( $user, 'visualeditor-editcheck-suggestions' ) ) {
+			$this->userOptionsManager->setOption( $user, 'visualeditor-editcheck-experimental', false );
 		}
 	}
 

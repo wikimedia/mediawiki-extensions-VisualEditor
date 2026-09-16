@@ -296,7 +296,11 @@
 			]
 		},
 		"EditCheckHooks": {
-			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\Hooks"
+			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\Hooks",
+			"services": [
+				"UserOptionsLookup",
+				"UserOptionsManager"
+			]
 		},
 		"betapreferences": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\BetaPreferenceHooks",

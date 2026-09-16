@@ -10,15 +10,23 @@ use MediaWiki\Revision\RenderedRevision;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\TitleValue;
 use MediaWiki\User\UserIdentity;
-use MediaWikiUnitTestCase;
+use MediaWikiIntegrationTestCase;
 
 /**
  * @covers \MediaWiki\Extension\VisualEditor\EditCheck\Hooks
  */
-class EditCheckHooksTest extends MediaWikiUnitTestCase {
+class EditCheckHooksTest extends MediaWikiIntegrationTestCase {
+
+	private function newHooks(): Hooks {
+		$services = $this->getServiceContainer();
+		return new Hooks(
+			$services->getUserOptionsLookup(),
+			$services->getUserOptionsManager()
+		);
+	}
 
 	private static function loadFixtureData( string $filename ): array {
-		$fixturePath = __DIR__ . '/configs/' . $filename;
+		$fixturePath = __DIR__ . '/../unit/configs/' . $filename;
 		$data = json_decode( file_get_contents( $fixturePath ), true );
 
 		if ( $data === null && json_last_error() !== JSON_ERROR_NONE ) {
@@ -50,7 +58,7 @@ class EditCheckHooksTest extends MediaWikiUnitTestCase {
 
 	public function testOnMultiContentSaveAllowsValidEditCheckConfig(): void {
 		$config = self::loadFixtureData( 'enwiki.json' );
-		$hooks = new Hooks();
+		$hooks = $this->newHooks();
 		$status = Status::newGood();
 
 		$result = $hooks->onMultiContentSave(
@@ -79,7 +87,7 @@ class EditCheckHooksTest extends MediaWikiUnitTestCase {
 			]
 		];
 
-		$hooks = new Hooks();
+		$hooks = $this->newHooks();
 		$status = Status::newGood();
 
 		$result = $hooks->onMultiContentSave(
@@ -98,7 +106,7 @@ class EditCheckHooksTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testOnMultiContentSaveIgnoresOtherPages(): void {
-		$hooks = new Hooks();
+		$hooks = $this->newHooks();
 		$status = Status::newGood();
 
 		$result = $hooks->onMultiContentSave(
