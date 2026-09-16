@@ -12,7 +12,6 @@ use MediaWiki\Extension\VisualEditor\EditCheck\ResourceLoaderData;
 use MediaWiki\Html\Html;
 use MediaWiki\Html\TocGeneratorTrait;
 use MediaWiki\Language\RawMessage;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Sanitizer;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
@@ -93,7 +92,7 @@ class SpecialEditChecks extends SpecialPage {
 		$experimentalEnabledChecks = $this->collectChecks(
 			$checksDir . '/*.js', [], false, false, true, $onWikiConfig
 		);
-		$abTest = MediaWikiServices::getInstance()->getMainConfig()->get( 'VisualEditorEditCheckABTest' );
+		$abTest = $this->coreConfig->get( 'VisualEditorEditCheckABTest' );
 		if ( $abTest !== null ) {
 			foreach ( [ &$defaultChecks, &$disabledChecks, &$experimentalEnabledChecks ] as &$checks ) {
 				foreach ( $checks as $i => $check ) {
