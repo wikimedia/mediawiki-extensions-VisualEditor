@@ -286,9 +286,20 @@
 		"VisualEditorHooks": {
 			"class": "MediaWiki\\Extension\\VisualEditor\\Hooks",
 			"services": [
+				"ConnectionProvider",
 				"ExtensionRegistry",
 				"VisualEditor.VisualEditorAvailabilityLookup",
+				"LanguageConverterFactory",
+				"MagicWordFactory",
+				"NamespaceInfo",
+				"PageProps",
+				"PermissionManager",
+				"ReadOnlyMode",
+				"ShadowPageLoader",
+				"UrlUtils",
 				"UserOptionsLookup",
+				"UserOptionsManager",
+				"WikiPageFactory",
 				"HookContainer",
 				"ConfigFactory"
 			],

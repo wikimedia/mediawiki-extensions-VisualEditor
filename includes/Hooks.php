@@ -33,15 +33,19 @@ use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Language\Language;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Language\LanguageConverterFactory;
 use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Output\Hook\MakeGlobalVariablesScriptHook;
 use MediaWiki\Output\Hook\OutputPageBodyAttributesHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\Hook\ArticleParserOptionsHook;
+use MediaWiki\Page\PageProps;
+use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Parser\Hook\ParserOptionsDefaultsHook;
+use MediaWiki\Parser\MagicWordFactory;
 use MediaWiki\Parser\ParserOptions;
+use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Preferences\Hook\PreferencesFormPreSaveHook;
 use MediaWiki\RecentChanges\Hook\RecentChange_saveHook;
@@ -51,19 +55,25 @@ use MediaWiki\Request\WebRequest;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderGetConfigVarsHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
+use MediaWiki\ShadowPage\ShadowPageLoader;
 use MediaWiki\Skin\Hook\SkinEditSectionLinksHook;
 use MediaWiki\Skin\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Skin\SkinTemplate;
 use MediaWiki\SpecialPage\Hook\RedirectSpecialArticleRedirectParamsHook;
 use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsLookup;
+use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
+use MediaWiki\Utils\UrlUtils;
 use MobileContext;
 use OOUI\ButtonGroupWidget;
 use OOUI\ButtonWidget;
+use Wikimedia\Rdbms\IConnectionProvider;
+use Wikimedia\Rdbms\ReadOnlyMode;
 
 class Hooks implements
 	TextSlotDiffRendererTablePrefixHook,
@@ -131,9 +141,20 @@ class Hooks implements
 	private readonly VisualEditorHookRunner $hookRunner;
 
 	public function __construct(
+		private readonly IConnectionProvider $dbProvider,
 		private readonly ExtensionRegistry $extensionRegistry,
 		private readonly VisualEditorAvailabilityLookup $visualEditorAvailabilityLookup,
+		private readonly LanguageConverterFactory $languageConverterFactory,
+		private readonly MagicWordFactory $magicWordFactory,
+		private readonly NamespaceInfo $namespaceInfo,
+		private readonly PageProps $pageProps,
+		private readonly PermissionManager $permissionManager,
+		private readonly ReadOnlyMode $readOnlyMode,
+		private readonly ShadowPageLoader $shadowPageLoader,
+		private readonly UrlUtils $urlUtils,
 		private readonly UserOptionsLookup $userOptionsLookup,
+		private readonly UserOptionsManager $userOptionsManager,
+		private readonly WikiPageFactory $wikiPageFactory,
 		HookContainer $hookContainer,
 		ConfigFactory $configFactory,
 		private readonly ?MobileContext $mobileFrontendContext,
@@ -166,7 +187,6 @@ class Hooks implements
 	 * @param Skin $skin The skin that's going to build the UI.
 	 */
 	public function onBeforePageDisplay( $output, $skin ): void {
-		$services = MediaWikiServices::getInstance();
 		if ( !$this->hookRunner->onVisualEditorBeforeEditor( $output, $skin ) ) {
 			$output->addJsConfigVars( 'wgVisualEditorDisabledByHook', true );
 			return;
@@ -178,11 +198,7 @@ class Hooks implements
 			return;
 		}
 
-		if ( !(
-			$this->extensionRegistry->isLoaded( 'MobileFrontend' ) &&
-			$services->getService( 'MobileFrontend.Context' )
-				->shouldDisplayMobileView()
-		) ) {
+		if ( !$this->mobileFrontendContext?->shouldDisplayMobileView() ) {
 			$output->addModules( 'ext.visualEditor.desktopArticleTarget.init' );
 			$output->addModuleStyles( [ 'ext.visualEditor.desktopArticleTarget.noscript' ] );
 		} else {
@@ -209,7 +225,7 @@ class Hooks implements
 
 		// TODO: Move to EditCheck
 		$isDisambiguation = $output->getTitle()->exists() &&
-			$services->getPageProps()->getProperties( $output->getTitle(), 'disambiguation' ) !== [];
+			$this->pageProps->getProperties( $output->getTitle(), 'disambiguation' ) !== [];
 		$output->addJsConfigVars( 'wgVisualEditorPageIsDisambiguation', $isDisambiguation );
 
 		// Don't index VE edit pages (T319124)
@@ -304,7 +320,7 @@ class Hooks implements
 	private function isSupportedEditPage( Title $title, User $user, WebRequest $req ): bool {
 		if (
 			$req->getVal( 'action' ) !== 'edit' ||
-			!MediaWikiServices::getInstance()->getPermissionManager()->quickUserCan( 'edit', $user, $title )
+			!$this->permissionManager->quickUserCan( 'edit', $user, $title )
 		) {
 			return false;
 		}
@@ -346,15 +362,13 @@ class Hooks implements
 	 * @param string $key
 	 * @param string $value
 	 */
-	private static function deferredSetUserOption( UserIdentity $user, string $key, string $value ): void {
-		DeferredUpdates::addCallableUpdate( static function () use ( $user, $key, $value ) {
-			$services = MediaWikiServices::getInstance();
-			if ( $services->getReadOnlyMode()->isReadOnly() ) {
+	private function deferredSetUserOption( UserIdentity $user, string $key, string $value ): void {
+		DeferredUpdates::addCallableUpdate( function () use ( $user, $key, $value ) {
+			if ( $this->readOnlyMode->isReadOnly() ) {
 				return;
 			}
-			$userOptionsManager = $services->getUserOptionsManager();
-			$userOptionsManager->setOption( $user, $key, $value );
-			$userOptionsManager->saveOptions( $user );
+			$this->userOptionsManager->setOption( $user, $key, $value );
+			$this->userOptionsManager->saveOptions( $user );
 		} );
 	}
 
@@ -368,15 +382,10 @@ class Hooks implements
 	 */
 	public function onCustomEditor( $article, $user ) {
 		$req = $article->getContext()->getRequest();
-		$services = MediaWikiServices::getInstance();
-		$urlUtils = $services->getUrlUtils();
 
-		if ( $this->extensionRegistry->isLoaded( 'MobileFrontend' ) ) {
-			// If mobilefrontend is involved it can make its own decisions about this
-			$mobFrontContext = MediaWikiServices::getInstance()->getService( 'MobileFrontend.Context' );
-			if ( $mobFrontContext->shouldDisplayMobileView() ) {
-				return true;
-			}
+		// If mobilefrontend is involved it can make its own decisions about this
+		if ( $this->mobileFrontendContext?->shouldDisplayMobileView() ) {
+			return true;
 		}
 
 		if ( !$this->visualEditorAvailabilityLookup->isEnabledForUser( $user ) ) {
@@ -388,7 +397,7 @@ class Hooks implements
 		if ( $req->getVal( 'venoscript' ) ) {
 			$req->response()->setCookie( 'VEE', 'wikitext', 0, [ 'prefix' => '' ] );
 			if ( $user->isNamed() ) {
-				self::deferredSetUserOption( $user, 'visualeditor-editor', 'wikitext' );
+				$this->deferredSetUserOption( $user, 'visualeditor-editor', 'wikitext' );
 			}
 			return true;
 		}
@@ -402,7 +411,7 @@ class Hooks implements
 			$titleMsg = $title->exists() ? 'editing' : 'creating';
 			$out->setPageTitleMsg( wfMessage( $titleMsg, $title->getPrefixedText() ) );
 			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable Only null for invalid URL, shouldn't happen
-			$out->showPendingTakeover( $url, 'visualeditor-toload', $urlUtils->expand( $url ) );
+			$out->showPendingTakeover( $url, 'visualeditor-toload', $this->urlUtils->expand( $url ) );
 
 			$out->setRevisionId( $req->getInt( 'oldid', $article->getRevIdFetched() ) );
 			return false;
@@ -433,7 +442,7 @@ class Hooks implements
 		if ( $req->getVal( 'veswitched' ) !== null ) {
 			return 'wikitext';
 		}
-		return self::getPreferredEditor( $user, $req, !$isRedLink );
+		return $this->getPreferredEditor( $user, $req, !$isRedLink );
 	}
 
 	/**
@@ -442,22 +451,17 @@ class Hooks implements
 	 * @param bool $useWikitextInMultiTab
 	 * @return string 'wikitext' or 'visual'
 	 */
-	public static function getPreferredEditor(
+	private function getPreferredEditor(
 		User $user, WebRequest $req, bool $useWikitextInMultiTab = false
 	): string {
 		// VisualEditor shouldn't even call this method when it's disabled, but it is a public API for
 		// other extensions (e.g. DiscussionTools), and the editor preferences might have surprising
 		// values if the user has tried VisualEditor in the past and then disabled it. (T257234)
-		$services = MediaWikiServices::getInstance();
-		/** @var VisualEditorAvailabilityLookup $visualEditorAvailabilityLookup */
-		$visualEditorAvailabilityLookup = $services->get( VisualEditorAvailabilityLookup::SERVICE_NAME );
-		if ( !$visualEditorAvailabilityLookup->isEnabledForUser( $user ) ) {
+		if ( !$this->visualEditorAvailabilityLookup->isEnabledForUser( $user ) ) {
 			return 'wikitext';
 		}
 
-		$userOptionsLookup = $services->getUserOptionsLookup();
-
-		switch ( $userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) ) {
+		switch ( $this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) ) {
 			case 'prefer-ve':
 				return 'visualeditor';
 			case 'prefer-wt':
@@ -468,10 +472,10 @@ class Hooks implements
 				// so we can use getLastEditor here instead.
 				return $useWikitextInMultiTab ?
 					'wikitext' :
-					self::getLastEditor( $user, $req );
+					$this->getLastEditor( $user, $req );
 			case 'remember-last':
 			default:
-				return self::getLastEditor( $user, $req );
+				return $this->getLastEditor( $user, $req );
 		}
 	}
 
@@ -480,7 +484,7 @@ class Hooks implements
 	 * @param WebRequest $req
 	 * @return string
 	 */
-	private static function getLastEditor( User $user, WebRequest $req ): string {
+	private function getLastEditor( User $user, WebRequest $req ): string {
 		// This logic matches getLastEditor in:
 		// modules/ve-mw/init/targets/ve.init.mw.DesktopArticleTarget.init.js
 		$editor = $req->getCookie( 'VEE', '' );
@@ -493,9 +497,7 @@ class Hooks implements
 			// value is invalid.
 			!( $editor === 'visualeditor' || $editor === 'wikitext' )
 		) {
-			$services = MediaWikiServices::getInstance();
-			$userOptionsLookup = $services->getUserOptionsLookup();
-			$editor = $userOptionsLookup->getOption( $user, 'visualeditor-editor' );
+			$editor = $this->userOptionsLookup->getOption( $user, 'visualeditor-editor' );
 		}
 		return $editor;
 	}
@@ -509,11 +511,7 @@ class Hooks implements
 	 * @param array &$links Navigation links.
 	 */
 	public function onSkinTemplateNavigation__Universal( $skin, &$links ): void {
-		$services = MediaWikiServices::getInstance();
-		if (
-			$this->extensionRegistry->isLoaded( 'MobileFrontend' ) &&
-			$services->getService( 'MobileFrontend.Context' )->shouldDisplayMobileView()
-		) {
+		if ( $this->mobileFrontendContext?->shouldDisplayMobileView() ) {
 			return;
 		}
 
@@ -543,7 +541,7 @@ class Hooks implements
 			$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last'
 		) {
 			// Check if the user has made any edits before the SET switch time
-			$dbr = $services->getConnectionProvider()->getReplicaDatabase();
+			$dbr = $this->dbProvider->getReplicaDatabase();
 			$revExists = $dbr->newSelectQueryBuilder()
 				->from( 'revision' )
 				->field( '1' )
@@ -579,7 +577,6 @@ class Hooks implements
 		// the edit tab as appropriate. We have to rebuild the array because PHP doesn't allow
 		// us to splice into the middle of an associative array.
 		$newViews = [];
-		$wikiPageFactory = $services->getWikiPageFactory();
 		if ( $title->inNamespace( NS_SPECIAL ) ) {
 			// @see https://phabricator.wikimedia.org/T376487
 			// The WikiPageFactory call would fatal if $title points to a special page, but sometimes,
@@ -587,7 +584,7 @@ class Hooks implements
 			// tab to itself. Luckily most special pages are smarter than that.
 			$isRemote = false;
 		} else {
-			$isRemote = !$wikiPageFactory->newFromTitle( $title )->isLocal();
+			$isRemote = !$this->wikiPageFactory->newFromTitle( $title )->isLocal();
 		}
 
 		$skinHasEditIcons = in_array(
@@ -597,7 +594,7 @@ class Hooks implements
 
 		foreach ( $links['views'] as $action => $data ) {
 			if ( $action === 'edit' ) {
-				$shadowPage = $services->getShadowPageLoader()->get( $title );
+				$shadowPage = $this->shadowPageLoader->get( $title );
 				// Build the VisualEditor tab
 				$existing = $title->exists() || $shadowPage?->existsForEdit();
 				$action = $existing ? 'edit' : 'create';
@@ -668,7 +665,7 @@ class Hooks implements
 					$editTab['single-id'] = $editTabTooltip;
 				}
 
-				$editor = self::getLastEditor( $user, $skin->getRequest() );
+				$editor = $this->getLastEditor( $user, $skin->getRequest() );
 				if (
 					$isAvailable &&
 					$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) &&
@@ -805,10 +802,9 @@ class Hooks implements
 		}
 
 		// Exit if we're on a foreign file description page
-		$services = MediaWikiServices::getInstance();
 		if (
 			$title->inNamespace( NS_FILE ) &&
-			!$services->getWikiPageFactory()->newFromTitle( $title )->isLocal()
+			!$this->wikiPageFactory->newFromTitle( $title )->isLocal()
 		) {
 			return;
 		}
@@ -890,7 +886,7 @@ class Hooks implements
 		$user = $article->getContext()->getUser();
 		$request = $article->getContext()->getRequest();
 
-		$editor = self::getLastEditor( $user, $request );
+		$editor = $this->getLastEditor( $user, $request );
 		if (
 				$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
 				$editor === 'wikitext'
@@ -1026,8 +1022,6 @@ class Hooks implements
 	 * @param array $oldUserOptions
 	 */
 	public function onPreferencesFormPreSave( $data, $form, $user, &$result, $oldUserOptions ) {
-		$services = MediaWikiServices::getInstance();
-		$userOptionsManager = $services->getUserOptionsManager();
 		$isBeta = $this->veConfig->get( 'VisualEditorEnableBetaFeature' );
 
 		// The "autodisable" preference records whether the user has explicitly opted out of VE
@@ -1035,12 +1029,12 @@ class Hooks implements
 
 		if (
 			// When the user enables VE, clear the preference.
-			$userOptionsManager->getOption( $user, 'visualeditor-autodisable' ) &&
+			$this->userOptionsManager->getOption( $user, 'visualeditor-autodisable' ) &&
 			( $isBeta ?
-				$userOptionsManager->getOption( $user, 'visualeditor-enable' ) :
-				!$userOptionsManager->getOption( $user, 'visualeditor-betatempdisable' ) )
+				$this->userOptionsManager->getOption( $user, 'visualeditor-enable' ) :
+				!$this->userOptionsManager->getOption( $user, 'visualeditor-betatempdisable' ) )
 		) {
-			$userOptionsManager->setOption( $user, 'visualeditor-autodisable', false );
+			$this->userOptionsManager->setOption( $user, 'visualeditor-autodisable', false );
 		}
 	}
 
@@ -1069,8 +1063,7 @@ class Hooks implements
 	 */
 	public function onMakeGlobalVariablesScript( &$vars, $out ): void {
 		$pageLanguage = ApiVisualEditor::getPageLanguage( $out->getTitle() );
-		$converter = MediaWikiServices::getInstance()->getLanguageConverterFactory()
-			->getLanguageConverter( $pageLanguage );
+		$converter = $this->languageConverterFactory->getLanguageConverter( $pageLanguage );
 
 		$fallbacks = $converter->getVariantFallbacks( $converter->getPreferredVariant() );
 
@@ -1090,7 +1083,6 @@ class Hooks implements
 	 */
 	public function onResourceLoaderGetConfigVars( array &$vars, $skin, Config $config ): void {
 		$coreConfig = RequestContext::getMain()->getConfig();
-		$services = MediaWikiServices::getInstance();
 
 		$availableNamespaces = $this->visualEditorAvailabilityLookup->getAvailableNamespaceIds();
 		sort( $availableNamespaces );
@@ -1112,18 +1104,17 @@ class Hooks implements
 		// to include those in the JavaScript data. See T291727.
 		// Run this filtering after the filter for subpages being enabled, to reduce
 		// the number of calls needed to namespace info.
-		$nsInfo = $services->getNamespaceInfo();
 		$namespacesWithSubpagesEnabled = array_values( array_filter(
 			$namespacesWithSubpagesEnabled,
-			$nsInfo->exists( ... )
+			$this->namespaceInfo->exists( ... )
 		) );
 
-		$defaultSortPrefix = $services->getMagicWordFactory()->get( 'defaultsort' )->getSynonym( 0 );
+		$defaultSortPrefix = $this->magicWordFactory->get( 'defaultsort' )->getSynonym( 0 );
 		// Sanitize trailing colon. /languages/messages/*.php are not consistent but the
 		// presence or absence of a trailing colon in the message makes no difference.
 		$defaultSortPrefix = preg_replace( '/:$/', '', $defaultSortPrefix );
 
-		$displayTitlePrefix = $services->getMagicWordFactory()->get( 'displaytitle' )->getSynonym( 0 );
+		$displayTitlePrefix = $this->magicWordFactory->get( 'displaytitle' )->getSynonym( 0 );
 		$displayTitlePrefix = preg_replace( '/:$/', '', $displayTitlePrefix );
 
 		$vars['wgVisualEditorConfig'] = [
@@ -1264,7 +1255,7 @@ class Hooks implements
 	public function onUserLoggedIn( $user ) {
 		$cookie = RequestContext::getMain()->getRequest()->getCookie( 'VEE', '' );
 		if ( $user->isNamed() && ( $cookie === 'visualeditor' || $cookie === 'wikitext' ) ) {
-			self::deferredSetUserOption( $user, 'visualeditor-editor', $cookie );
+			$this->deferredSetUserOption( $user, 'visualeditor-editor', $cookie );
 		}
 	}
 
