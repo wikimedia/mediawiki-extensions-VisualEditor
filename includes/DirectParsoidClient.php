@@ -11,8 +11,8 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use MediaWiki\Content\WikitextContent;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageIdentity;
+use MediaWiki\Parser\Parsoid\Config\SiteConfig;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\Helper\HtmlInputTransformHelper;
 use MediaWiki\Rest\Handler\Helper\HtmlOutputRendererHelper;
@@ -33,15 +33,11 @@ class DirectParsoidClient implements ParsoidClient {
 
 	private const FLAVOR_DEFAULT = 'view';
 
-	private PageRestHelperFactory $helperFactory;
-	private Authority $performer;
-
 	public function __construct(
-		PageRestHelperFactory $helperFactory,
-		Authority $performer
+		private readonly PageRestHelperFactory $helperFactory,
+		private readonly SiteConfig $siteConfig,
+		private readonly Authority $performer,
 	) {
-		$this->performer = $performer;
-		$this->helperFactory = $helperFactory;
 	}
 
 	private function getHtmlOutputRendererHelper(
@@ -105,7 +101,7 @@ class DirectParsoidClient implements ParsoidClient {
 			pageLanguage: $pageLanguage
 		);
 
-		$statsFactory = MediaWikiServices::getInstance()->getParsoidSiteConfig()->prefixedStatsFactory();
+		$statsFactory = $this->siteConfig->prefixedStatsFactory();
 		$helper->setMetrics( $statsFactory );
 
 		return $helper;

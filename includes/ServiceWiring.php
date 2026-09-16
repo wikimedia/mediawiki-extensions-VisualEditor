@@ -25,7 +25,10 @@ return [
 	VisualEditorParsoidClientFactory::SERVICE_NAME => static function (
 		MediaWikiServices $services
 	): VisualEditorParsoidClientFactory {
-		return new VisualEditorParsoidClientFactory( $services->getPageRestHelperFactory() );
+		return new VisualEditorParsoidClientFactory(
+			$services->getPageRestHelperFactory(),
+			$services->getParsoidSiteConfig()
+		);
 	},
 	VisualEditorAvailabilityLookup::SERVICE_NAME => static function (
 		MediaWikiServices $services

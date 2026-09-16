@@ -32,7 +32,8 @@ class VisualEditorParsoidClientFactoryTest extends MediaWikiIntegrationTestCase 
 		);
 
 		return new VisualEditorParsoidClientFactory(
-			$this->createNoOpMock( PageRestHelperFactory::class )
+			$this->createNoOpMock( PageRestHelperFactory::class ),
+			$this->getServiceContainer()->getParsoidSiteConfig()
 		);
 	}
 

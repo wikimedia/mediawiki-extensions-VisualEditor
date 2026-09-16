@@ -17,6 +17,7 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$services = $this->getServiceContainer();
 		$directClient = new DirectParsoidClient(
 			$services->getPageRestHelperFactory(),
+			$services->getParsoidSiteConfig(),
 			$services->getUserFactory()->newAnonymous()
 		);
 
@@ -147,6 +148,7 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$services = $this->getServiceContainer();
 		$directClient = new DirectParsoidClient(
 			$services->getPageRestHelperFactory(),
+			$services->getParsoidSiteConfig(),
 			$services->getUserFactory()->newAnonymous()
 		);
 

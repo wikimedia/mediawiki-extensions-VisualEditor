@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Parser\Parsoid\Config\SiteConfig;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
 
@@ -18,6 +19,7 @@ class VisualEditorParsoidClientFactory {
 
 	public function __construct(
 		private readonly PageRestHelperFactory $pageRestHelperFactory,
+		private readonly SiteConfig $siteConfig,
 	) {
 	}
 
@@ -46,6 +48,7 @@ class VisualEditorParsoidClientFactory {
 	private function createDirectClient( Authority $performer ): ParsoidClient {
 		return new DirectParsoidClient(
 			$this->pageRestHelperFactory,
+			$this->siteConfig,
 			$performer
 		);
 	}
