@@ -99,6 +99,7 @@ class DirectParsoidClient implements ParsoidClient {
 		}
 
 		$helper = $this->helperFactory->newHtmlInputTransformHelper(
+			envOptions: [],
 			page: $page,
 			body: $body,
 			pageLanguage: $pageLanguage
