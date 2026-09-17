@@ -57,8 +57,7 @@ mw.editcheck.LLMSuggestionEditCheck.static.cachedPromises = new Map();
 
 mw.editcheck.LLMSuggestionEditCheck.static.fetchSuggestions = function ( surfaceModel ) {
 	if ( !this.cachedPromises.has( surfaceModel ) ) {
-		const deferred = ve.createDeferred();
-		mw.editcheck.fetchTimeout( 'https://api.wikimedia.org/service/lw/inference/v1/models/editing-suggestions:predict', {
+		const promise = mw.editcheck.fetchTimeout( 'https://api.wikimedia.org/service/lw/inference/v1/models/editing-suggestions:predict', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -75,8 +74,7 @@ mw.editcheck.LLMSuggestionEditCheck.static.fetchSuggestions = function ( surface
 			.then( ( response ) => response.json() )
 			.then( ( results ) => {
 				if ( !ve.getProp( results, 'suggestions' ) ) {
-					deferred.reject( results );
-					return;
+					throw new Error( 'Results did not contain suggestions' );
 				}
 				const suggestions = [];
 				const documentModel = surfaceModel.getDocument();
@@ -97,12 +95,9 @@ mw.editcheck.LLMSuggestionEditCheck.static.fetchSuggestions = function ( surface
 					result.fragment = surfaceModel.getLinearFragment( range );
 					suggestions.push( result );
 				} );
-				deferred.resolve( suggestions );
 				return suggestions;
-			}, ( reason ) => {
-				deferred.reject( reason );
 			} );
-		this.cachedPromises.set( surfaceModel, deferred.promise() );
+		this.cachedPromises.set( surfaceModel, promise );
 	}
 	return this.cachedPromises.get( surfaceModel );
 };
