@@ -543,7 +543,6 @@ ve.ui.MWTemplateDialog.prototype.getTeardownProcess = function ( data ) {
 			// Cleanup
 			this.$element.removeClass( 've-ui-mwTemplateDialog-ready' );
 			this.transclusionModel.disconnect( this );
-			this.transclusionModel.abortAllApiRequests();
 			this.transclusionModel = null;
 			this.bookletLayout.clearPages();
 			this.content = null;
