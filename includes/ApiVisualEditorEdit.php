@@ -19,7 +19,7 @@ use MediaWiki\Context\RequestContext;
 use MediaWiki\Diff\DifferenceEngine;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Logger\LoggerFactory;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\ObjectCache\ObjectCacheFactory;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Parser\Sanitizer;
 use MediaWiki\Registration\ExtensionRegistry;
@@ -49,6 +49,7 @@ class ApiVisualEditorEdit extends ApiBase {
 		string $name,
 		HookContainer $hookContainer,
 		StatsFactory $statsFactory,
+		private readonly ObjectCacheFactory $objectCacheFactory,
 		private readonly PageEditStash $pageEditStash,
 		private readonly SkinFactory $skinFactory,
 		private readonly WikiPageFactory $wikiPageFactory,
@@ -267,7 +268,7 @@ class ApiVisualEditorEdit extends ApiBase {
 			return false;
 		}
 
-		$cache = MediaWikiServices::getInstance()->getObjectCacheFactory()->getLocalClusterInstance();
+		$cache = $this->objectCacheFactory->getLocalClusterInstance();
 
 		// Store the corresponding wikitext, referenceable by a new key
 		$hash = md5( $wikitext );
@@ -318,7 +319,7 @@ class ApiVisualEditorEdit extends ApiBase {
 	 * @return string|false The wikitext
 	 */
 	protected function trySerializationCache( $hash ) {
-		$cache = MediaWikiServices::getInstance()->getObjectCacheFactory()->getLocalClusterInstance();
+		$cache = $this->objectCacheFactory->getLocalClusterInstance();
 		$key = $cache->makeKey( 'visualeditor', 'serialization', $hash );
 		$value = $cache->get( $key );
 

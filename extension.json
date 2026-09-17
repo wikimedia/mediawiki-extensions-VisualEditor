@@ -213,6 +213,7 @@
 			"services": [
 				"HookContainer",
 				"StatsFactory",
+				"ObjectCacheFactory",
 				"PageEditStash",
 				"SkinFactory",
 				"WikiPageFactory",
