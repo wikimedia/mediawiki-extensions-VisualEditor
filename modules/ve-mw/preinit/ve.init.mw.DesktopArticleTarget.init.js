@@ -1203,12 +1203,19 @@
 		 * or using a query string parameter; or if we've recorded that we've already shown it before
 		 * in a user preference, local storage or a cookie.
 		 *
+		 * The source education popup makes the same offer to switch editor, so the two must not both
+		 * be enabled.
+		 *
 		 * @return {boolean}
 		 */
 		shouldShowWelcomeDialog: function () {
+			// Separate fetch to `conf` for test suppression reasons
+			const veConfig = mw.config.get( 'wgVisualEditorConfig' );
 			return !(
 				// Disabled in config?
-				!mw.config.get( 'wgVisualEditorConfig' ).showBetaWelcome ||
+				!veConfig.showBetaWelcome ||
+				// Superseded by the source education popup?
+				veConfig.enableSourceEducationPopup ||
 				// Disabled for the current request?
 				this.isWelcomeDialogSuppressed() ||
 				// Joining a collab session
