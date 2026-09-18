@@ -2519,6 +2519,7 @@
 			"modules/ve-mw/tests/ui/layouts/ve.ui.MWTwoPaneTransclusionDialogLayout.test.js",
 			"modules/ve-mw/tests/ui/pages/ve.ui.MWAddParameterPage.test.js",
 			"modules/ve-mw/tests/ui/pages/ve.ui.MWParameterPage.test.js",
+			"modules/ve-mw/tests/ui/pages/ve.ui.MWTemplatePlaceholderPage.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWParameterCheckboxInputWidget.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTemplateTitleInputWidget.test.js",
 			"modules/ve-mw/tests/ui/widgets/ve.ui.MWTransclusionOutlineButtonWidget.test.js",

@@ -114,12 +114,14 @@ ve.ui.MWTemplatePlaceholderPage.prototype.focus = function () {
 
 /**
  * @private
- * @param {Object|undefined} templateData The chosen template's data (if TemplateDiscovery is enabled).
+ * @param {Object|undefined} templateData The chosen template's data (if TemplateDiscovery is
+ *  enabled). The optional substPrefix property holds a {{subst:...}} magic word the user typed.
  */
 ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function ( templateData ) {
 	const transclusion = this.placeholder.getTransclusion();
 
 	let name = null;
+	let substPrefix = '';
 	if ( !this.usingTemplateDiscovery ) {
 		const menu = this.addTemplateInput.getLookupMenu();
 		if ( menu.isVisible() ) {
@@ -132,6 +134,10 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function ( templateDat
 		}
 	} else {
 		name = mw.Title.newFromText( templateData.title );
+		if ( !name ) {
+			return;
+		}
+		substPrefix = templateData.substPrefix || '';
 	}
 
 	// TODO tracking will only be implemented temporarily to answer questions on
@@ -148,7 +154,17 @@ ve.ui.MWTemplatePlaceholderPage.prototype.onAddTemplate = function ( templateDat
 	}
 	mw.track( 'event.VisualEditorTemplateDialogUse', event );
 
-	const part = ve.dm.MWTemplateModel.newFromName( transclusion, name );
+	// Search results have no {{subst:...}} magic word. The wikitext needs it, so put it
+	// back in front of the name.
+	const target = substPrefix ?
+		substPrefix + name.getRelativeText( mw.config.get( 'wgNamespaceIds' ).template ) :
+		name;
+
+	const part = ve.dm.MWTemplateModel.newFromName( transclusion, target );
+	if ( !part ) {
+		// The magic word makes the name longer, so the title can get too long.
+		return;
+	}
 	transclusion.replacePart( this.placeholder, part ).then(
 		transclusion.addPromptedParameters.bind( transclusion )
 	);
