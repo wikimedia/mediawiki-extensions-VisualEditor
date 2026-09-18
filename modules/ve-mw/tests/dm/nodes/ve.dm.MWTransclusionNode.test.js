@@ -97,3 +97,45 @@ QUnit.test.each( 'getWikitext', {
 		assert.strictEqual( node.getWikitext(), caseItem.wikitext );
 	}
 );
+
+QUnit.test.each( 'getSingleTemplatePart and getSingleTemplateName', {
+		'not a template transclusion': {
+			parts: [ '/n' ],
+			expectedPart: undefined
+		},
+		'not a single part': {
+			parts: [ {
+				template: {
+					target: {
+						wt: 'Infobox',
+						href: './Template:Infobox'
+					},
+					params: {}
+				}
+			}, '/n' ],
+			expectedPart: undefined
+		},
+		'valid single template': {
+			parts: [ {
+				template: {
+					target: {
+						wt: 'Infobox',
+						href: './Template:Infobox'
+					},
+					params: {}
+				}
+			} ],
+			expectedPart: {
+				template: 'Infobox',
+				templatePage: 'Template:Infobox',
+				params: {}
+			}
+		}
+	}, ( assert, caseItem ) => {
+		const node = new ve.dm.MWTransclusionNode(
+			{ type: 'mwTransclusion', attributes: { mw: { parts: caseItem.parts } } }
+		);
+		assert.deepEqual( node.getSingleTemplatePart(), caseItem.expectedPart );
+		assert.deepEqual( node.getSingleTemplateName(), caseItem.expectedPart && caseItem.expectedPart.template );
+	}
+);

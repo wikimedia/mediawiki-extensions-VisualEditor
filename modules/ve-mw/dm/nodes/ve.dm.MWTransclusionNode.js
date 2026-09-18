@@ -432,30 +432,54 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
  * @return {boolean} Transclusion only contains a single template, which is one of the ones in templates
  */
 ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( allowedTemplates ) {
-	const templateNS = mw.config.get( 'wgNamespaceIds' ).template,
-		parts = this.getPartsList();
-
+	const templateNS = mw.config.get( 'wgNamespaceIds' ).template;
 	function normalizeTemplateTitle( name ) {
 		const title = mw.Title.newFromText( name, templateNS );
 		return title ? title.getPrefixedText() : name;
 	}
 
-	// Bail out as early as possible when no filter is given, or it's not a single part anyway
-	const isSingle = parts.length === 1;
-	if ( !isSingle || !allowedTemplates ) {
-		return isSingle;
-	}
-
-	const singlePart = parts[ 0 ];
-	// It's not a template but e.g. a parser function or raw wikitext content
-	if ( !singlePart.templatePage ) {
+	const templatePart = this.getSingleTemplatePart();
+	if ( !templatePart || !allowedTemplates ) {
 		return false;
 	}
 
 	if ( typeof allowedTemplates === 'string' ) {
 		allowedTemplates = [ allowedTemplates ];
 	}
-	return allowedTemplates.some( ( template ) => singlePart.templatePage === normalizeTemplateTitle( template ) );
+
+	return allowedTemplates.some(
+		( template ) => templatePart.templatePage === normalizeTemplateTitle( template )
+	);
+};
+
+/**
+ * Get the name of the template if it's a single template transclusion
+ *
+ * @return {string|undefined} Name of the template, undefined if not a single template transclusion
+ */
+ve.dm.MWTransclusionNode.prototype.getSingleTemplateName = function () {
+	const part = this.getSingleTemplatePart();
+	return part && part.template;
+};
+
+/**
+ * Get the transclusion's template part if it's a single template transclusion
+ *
+ * @return {Object|undefined} Object with template properties, undefined if not a single template transclusion
+ */
+ve.dm.MWTransclusionNode.prototype.getSingleTemplatePart = function () {
+	const parts = this.getPartsList();
+	if ( parts.length !== 1 ) {
+		return;
+	}
+
+	const singlePart = parts[ 0 ];
+	// It's not a template but e.g. a parser function or raw wikitext content
+	if ( !singlePart.templatePage ) {
+		return;
+	}
+
+	return singlePart;
 };
 
 /**
