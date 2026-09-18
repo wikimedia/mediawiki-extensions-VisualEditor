@@ -166,6 +166,18 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			const group = internalList.getNodeGroup( 'mwReference/' );
 			return group ? group.firstNodes || [] : [];
 		}
+		function hasLLMPaste() {
+			// Look for content pasted from an LLM anywhere in the document
+			const documentModel = target.getSurface().getModel().getDocument();
+			return documentModel.getDocumentNode().getAnnotationRanges().some( ( annRange ) => {
+				const annotation = annRange.annotation;
+				if ( !( annotation instanceof ve.dm.ImportedDataAnnotation ) ) {
+					return false;
+				}
+				const source = annotation.getAttribute( 'source' );
+				return !!source && source.categories.includes( 'ai' );
+			} );
+		}
 		target.on( 'surfaceReady', () => {
 			initLength = getRefNodes().length;
 		} );
@@ -190,6 +202,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			// tags that could possibly change between saves:
 			target.deleteSaveTag( 'editcheck-tone' );
 			target.deleteSaveTag( 'editcheck-newreference' );
+			target.deleteSaveTag( 'editcheck-llm-paste' );
 			// Now build tags:
 			const refNodes = getRefNodes();
 			const newLength = refNodes.length;
@@ -211,6 +224,9 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			}
 			if ( mw.editcheck.state.checks.shown.paste ) {
 				target.addSaveTag( 'editcheck-paste-shown' );
+			}
+			if ( hasLLMPaste() ) {
+				target.addSaveTag( 'editcheck-llm-paste' );
 			}
 			if ( mw.editcheck.state.checks.shown[ 'llm-paste' ] ) {
 				target.addSaveTag( 'editcheck-llm-paste-shown' );

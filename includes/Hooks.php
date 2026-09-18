@@ -113,6 +113,7 @@ class Hooks implements
 		'editcheck-tone',
 		'editcheck-tone-shown',
 		'editcheck-paste-shown',
+		'editcheck-llm-paste',
 		'editcheck-llm-paste-shown',
 		'editsuggestion-seen',
 		'editsuggestion-used',

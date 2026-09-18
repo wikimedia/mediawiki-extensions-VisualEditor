@@ -36,6 +36,8 @@
 	"tag-editcheck-paste-shown": "Edit Check (paste) shown",
 	"tag-editcheck-paste-shown-description": "EditCheck asked for clarification about content the editor pasted, which was then either removed or affirmed to be permissible",
 	"tag-editcheck-paste-shown-helppage": "mediawikiwiki:Special:MyLanguage/Help:Edit_check#Paste_check",
+	"tag-editcheck-llm-paste": "-",
+	"tag-editcheck-llm-paste-description": "EditCheck detected content pasted from a source that looked AI-generated",
 	"tag-editcheck-llm-paste-shown": "Edit Check (LLM paste) shown",
 	"tag-editcheck-llm-paste-shown-description": "EditCheck asked for clarification about content the editor pasted from a source that looked AI-generated, which was then either removed or affirmed to be permissible",
 	"tag-editcheck-llm-paste-shown-helppage": "mediawikiwiki:Special:MyLanguage/Help:Edit_check#LLM_Paste_check",
