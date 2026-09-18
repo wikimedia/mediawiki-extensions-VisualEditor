@@ -31,6 +31,33 @@
 			} );
 	};
 
+	QUnit.test( 'isSubstitution', ( assert ) => {
+		const doc = ve.dm.Document.static.newBlankDocument();
+
+		[
+			[ [ 'Foo' ], false ],
+			[ [ 'Substitution' ], false ],
+			[ [ 'subst:Foo' ], true ],
+			[ [ 'SUBST:Foo' ], true ],
+			[ [ 'safesubst:Foo' ], true ],
+			[ [ 'Foo', 'subst:Bar' ], true ]
+		].forEach( ( [ names, expected ] ) => {
+			const transclusion = new ve.dm.MWTransclusionModel( doc );
+			names.forEach( ( name ) => {
+				transclusion.parts.push(
+					ve.dm.MWTemplateModel.newFromName( transclusion, name )
+				);
+			} );
+			assert.strictEqual( transclusion.isSubstitution(), expected, names.join( ' + ' ) );
+		} );
+
+		const rawWikitext = new ve.dm.MWTransclusionModel( doc );
+		rawWikitext.parts.push(
+			new ve.dm.MWTransclusionContentModel( rawWikitext, 'subst:Foo' )
+		);
+		assert.false( rawWikitext.isSubstitution(), 'raw wikitext part' );
+	} );
+
 	QUnit.test( 'nextUniquePartId', ( assert ) => {
 		const transclusion = new ve.dm.MWTransclusionModel();
 		assert.strictEqual( transclusion.nextUniquePartId(), 'part_0' );

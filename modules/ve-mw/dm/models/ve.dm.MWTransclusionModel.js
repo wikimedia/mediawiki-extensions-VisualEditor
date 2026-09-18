@@ -67,6 +67,15 @@
 	/* Methods */
 
 	/**
+	 * @return {boolean} True if a part uses a {{subst:...}} magic word
+	 */
+	ve.dm.MWTransclusionModel.prototype.isSubstitution = function () {
+		const pattern = ve.dm.MWTemplateModel.static.substMagicWordPattern;
+		return this.parts.some( ( part ) => part instanceof ve.dm.MWTemplateModel &&
+			pattern.test( part.getTarget().wt ) );
+	};
+
+	/**
 	 * Insert transclusion at the end of a surface fragment.
 	 *
 	 * If forceType is not specified and this is used in async mode, users of this method
@@ -98,21 +107,25 @@
 			// so we don't do a duplicate API call later.
 			if ( generatedContents ) {
 				let generatedData = false;
-				try {
-					// First, try to do a full import of the generated HTML.
-					const generatedDocumentModel = ve.dm.converter.modelFromDomConverter.getModelFromDom(
-						ve.createDocumentFromHtml( generatedContents.map( ( node ) => node.outerHTML ).join( '' ) ),
-						{ targetDoc: this.doc }
-					);
-					const generatedNodes = generatedDocumentModel.selectNodes( generatedDocumentModel.getDocumentRange(), 'siblings' );
-					if ( generatedNodes.length === 1 && generatedNodes[ 0 ].node.canContainContent() ) {
-						generatedData = generatedDocumentModel.getDataFromNode( generatedNodes[ 0 ].node );
-						if ( generatedData.length > 0 ) {
-							data = generatedData;
+				// The parser expands a {{subst:...}} transclusion. Its rendering is the
+				// expanded template, so an import of the rendering drops the magic word.
+				if ( !this.isSubstitution() ) {
+					try {
+						// First, try to do a full import of the generated HTML.
+						const generatedDocumentModel = ve.dm.converter.modelFromDomConverter.getModelFromDom(
+							ve.createDocumentFromHtml( generatedContents.map( ( node ) => node.outerHTML ).join( '' ) ),
+							{ targetDoc: this.doc }
+						);
+						const generatedNodes = generatedDocumentModel.selectNodes( generatedDocumentModel.getDocumentRange(), 'siblings' );
+						if ( generatedNodes.length === 1 && generatedNodes[ 0 ].node.canContainContent() ) {
+							generatedData = generatedDocumentModel.getDataFromNode( generatedNodes[ 0 ].node );
+							if ( generatedData.length > 0 ) {
+								data = generatedData;
+							}
 						}
+					} catch ( e ) {
+						mw.log.warn( 'Error parsing template generated contents', e );
 					}
-				} catch ( e ) {
-					mw.log.warn( 'Error parsing template generated contents', e );
 				}
 				if ( !generatedData || generatedData.length === 0 ) {
 					// Fall back on just storing the sparse template data
