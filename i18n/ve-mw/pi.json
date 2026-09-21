@@ -7,5 +7,9 @@
 	"visualeditor-ca-createlocaldescriptionsource": "ठानीयविवरणमूलं योजेतु",
 	"visualeditor-ca-createsource": "मूलजातं सम्पादेतु",
 	"visualeditor-ca-editsource": "मूलपाठं परिवत्तेतु",
-	"visualeditor-ca-editsource-section": "मूलं सोधेतु"
+	"visualeditor-ca-editsource-section": "मूलं सोधेतु",
+	"visualeditor-sourceswitch-popup-title": "अञ्ञो संसोधन नयो अत्थि ति त्वं जानासि किं?",
+	"visualeditor-sourceswitch-popup-text": "मूल संसोधनं [{{int:visualeditor-sourceswitch-popup-wtlink}} वीकीपाठेन] सद्धिं साधु सम्पादेतुं अनुजानाति। तेन तव रूपक वेसान्तर यन्त विकप्पानि अञ्ञे च उत्तम संसोधन किच्चानि निग्गहितुं बहुतरं वसवत्तितं लब्भति॥",
+	"visualeditor-sourceswitch-popup-dismiss": "इदानि न होति",
+	"visualeditor-sourceswitch-popup-trysource": "मूल संसोधनं उपक्कमेहि"
 }
