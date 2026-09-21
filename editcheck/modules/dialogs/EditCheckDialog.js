@@ -126,9 +126,18 @@ ve.ui.EditCheckDialog.prototype.onScrollIntoViewShowClick = function () {
 ve.ui.EditCheckDialog.prototype.onScrollIntoViewCloseClick = function () {
 	if ( this.scrollIntoView ) {
 		this.scrollIntoView.$element.remove();
-		this.scrollIntoView.clear();
+		this.scrollIntoView.destroy();
 		this.scrollIntoView = null;
 	}
+};
+
+/**
+ * Handle virtualKeyboardChange events from the target
+ *
+ * @param {boolean} isOpen The virtual keyboard is open
+ */
+ve.ui.EditCheckDialog.prototype.onVirtualKeyboardChange = function ( isOpen ) {
+	this.toggle( !isOpen );
 };
 
 /**
@@ -378,9 +387,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.currentAction = null;
 
 		this.toggle( !this.surface.getTarget().isVirtualKeyboardOpen() );
-		this.surface.getTarget().on( 'virtualKeyboardChange', ( isOpen ) => {
-			this.toggle( !isOpen );
-		} );
+		this.surface.getTarget().on( 'virtualKeyboardChange', this.onVirtualKeyboardChange, false, this );
 
 		this.closeButton.toggle( OO.ui.isMobile() && !this.inBeforeSave );
 		this.collapseExpandButton.toggle( OO.ui.isMobile() && this.inBeforeSave );
@@ -417,7 +424,7 @@ ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) 
 		this.controller.off( 'actionsUpdated', this.onActionsUpdated, this );
 		this.controller.off( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, this );
 		this.controller.off( 'focusAction', this.onFocusAction, this );
-		this.surface.getTarget().off( 'virtualKeyboardChange' );
+		this.surface.getTarget().off( 'virtualKeyboardChange', this.onVirtualKeyboardChange, this );
 		this.$actions.empty();
 		if ( this.scrollIntoView ) {
 			this.scrollIntoView.clear();

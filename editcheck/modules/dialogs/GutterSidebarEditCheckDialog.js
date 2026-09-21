@@ -80,7 +80,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewShowClick = functio
 ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewCloseClick = function () {
 	if ( this.scrollIntoView ) {
 		this.scrollIntoView.$element.remove();
-		this.scrollIntoView.clear();
+		this.scrollIntoView.destroy();
 		this.scrollIntoView = null;
 	}
 };

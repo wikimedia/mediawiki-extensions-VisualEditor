@@ -31,6 +31,8 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 	// Parent constructor
 	ve.ui.EditCheckScrollIntoViewWidget.super.call( this, config );
 
+	this.target = ve.init.target;
+
 	this.trackedElements = new Map();
 	this.fullPageIntersecting = false;
 
@@ -43,7 +45,7 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 		closeClick: () => ve.track( 'activity.editCheckScrollIntoView', 'click-close' )
 	} );
 
-	ve.init.target.on( 'virtualKeyboardChange', this.update.bind( this ) );
+	this.target.connect( this, { virtualKeyboardChange: 'update' } );
 
 	this.observer = window.IntersectionObserver ? new IntersectionObserver(
 		( entries ) => {
@@ -82,6 +84,23 @@ OO.inheritClass( ve.ui.EditCheckScrollIntoViewWidget, OO.ui.ButtonGroupWidget );
 ve.ui.EditCheckScrollIntoViewWidget.prototype.clear = function () {
 	if ( this.observer ) {
 		this.observer.disconnect();
+	}
+	this.trackedElements.clear();
+};
+
+/**
+ * Release the widget
+ *
+ * Use this when you discard the widget. To only stop the current
+ * observations, use #clear.
+ */
+ve.ui.EditCheckScrollIntoViewWidget.prototype.destroy = function () {
+	this.target.disconnect( this );
+	if ( this.observer ) {
+		this.observer.disconnect();
+	}
+	if ( this.fullPageButtonObserver ) {
+		this.fullPageButtonObserver.disconnect();
 	}
 	this.trackedElements.clear();
 };
@@ -135,7 +154,7 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
 			this.outsideSectionState.enabled &&
 			( this.outsideSectionState.hasAbove || this.outsideSectionState.hasBelow );
 
-		if ( forced && !ve.init.target.isVirtualKeyboardOpen() ) {
+		if ( forced && !this.target.isVirtualKeyboardOpen() ) {
 			this.showButton.setIcon( this.outsideSectionState.hasAbove ? 'arrowUp' : 'arrowDown' );
 			this.$element.addClass( 've-ui-editCheck-scrollIntoView-bottom' );
 			this.$element.addClass( 've-ui-editCheck-scrollIntoView-visible' );
@@ -143,7 +162,7 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
 		}
 	}
 
-	if ( !this.observer || !this.trackedElements.size || ve.init.target.isVirtualKeyboardOpen() ) {
+	if ( !this.observer || !this.trackedElements.size || this.target.isVirtualKeyboardOpen() ) {
 		this.$element.removeClass( 've-ui-editCheck-scrollIntoView-visible' );
 		return;
 	}
