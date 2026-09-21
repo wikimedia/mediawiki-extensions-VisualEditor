@@ -431,7 +431,9 @@ mw.editcheck.EditCheckAction.prototype.select = function ( surface, selectFocusR
 		}
 	} else {
 		const checkRange = this.getFocusSelection().getCoveringRange();
-		if ( selectFocusRange || surfaceView.findFocusedNode( checkRange ) ) {
+		// On mobile a node-covering selection opens the context, and the context
+		// closes the edit check drawer. Make this selection only on request.
+		if ( selectFocusRange || ( !OO.ui.isMobile() && surfaceView.findFocusedNode( checkRange ) ) ) {
 			surfaceModel.setLinearSelection( checkRange );
 		} else {
 			const surfaceRange = surfaceModel.getSelection().getCoveringRange();

@@ -203,3 +203,59 @@ QUnit.test( 'overlapsRanges', ( assert ) => {
 		'Nonoverlapping ranges'
 	);
 } );
+
+QUnit.test( 'select', ( assert ) => {
+	const isMobileOrig = OO.ui.isMobile;
+
+	const cases = [
+		{
+			name: 'Desktop selects a focusable node',
+			isMobile: false,
+			selectFocusRange: false,
+			expected: new ve.Range( 1, 4 )
+		},
+		{
+			name: 'Mobile moves the cursor instead of selecting a focusable node',
+			isMobile: true,
+			selectFocusRange: false,
+			expected: new ve.Range( 4 )
+		},
+		{
+			name: 'Mobile selects the focus range on request',
+			isMobile: true,
+			selectFocusRange: true,
+			expected: new ve.Range( 1, 4 )
+		}
+	];
+
+	try {
+		cases.forEach( ( caseItem ) => {
+			// setSelection reads the document range, which needs the internal list
+			const doc = new ve.dm.Document( [
+				{ type: 'paragraph' }, ...'abcdefghij', { type: '/paragraph' },
+				{ type: 'internalList' }, { type: '/internalList' }
+			] );
+			const surfaceModel = new ve.dm.Surface( doc );
+			const fragments = [ surfaceModel.getFragment( new ve.dm.LinearSelection( new ve.Range( 1, 4 ) ) ) ];
+			const action = new mw.editcheck.EditCheckAction( { fragments, choices: [] } );
+
+			// Start outside the check range, so the cursor has somewhere to move to
+			surfaceModel.setLinearSelection( new ve.Range( 8 ) );
+
+			OO.ui.isMobile = () => caseItem.isMobile;
+			// Pretend the check range holds a focusable node
+			action.select( {
+				getModel: () => surfaceModel,
+				getView: () => ( { findFocusedNode: () => ( {} ) } )
+			}, caseItem.selectFocusRange, false );
+
+			assert.equalRange(
+				surfaceModel.getSelection().getRange(),
+				caseItem.expected,
+				caseItem.name
+			);
+		} );
+	} finally {
+		OO.ui.isMobile = isMobileOrig;
+	}
+} );
