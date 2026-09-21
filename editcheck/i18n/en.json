@@ -46,7 +46,7 @@
 	"editcheck-copyvio-keep-notify": "Thank you for sharing your reason to keep the pasted text!",
 	"editcheck-copyvio-remove-notify": "Thank you for helping to keep knowledge freely available!",
 	"editcheck-copyvio-llm-title": "Potential AI-generated content",
-	"editcheck-copyvio-llm-description": "The text you pasted appears to be AI-generated. Help keep articles trustworthy by making sure it follows [{{int:editcheck-copyvio-llm-policylink}} this wiki's policy on AI use].",
+	"editcheck-copyvio-llm-description": "The text you pasted appears to be AI-generated, which is usually ''not'' allowed. Help keep articles trustworthy by making sure it follows [{{int:editcheck-copyvio-llm-policylink}} this wiki's policy on AI use].",
 	"editcheck-copyvio-llm-policylink": "//www.mediawiki.org/wiki/Special:MyLanguage/Help:Edit_check#LLM_Paste_check",
 	"editcheck-copyvio-llm-action-keep": "Keep it",
 	"editcheck-copyvio-llm-action-remove": "Remove it",
