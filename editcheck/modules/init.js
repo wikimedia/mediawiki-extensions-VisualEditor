@@ -292,6 +292,14 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		if ( mw.editcheck.suggestionsModeAvailable ) {
 			ve.track( 'activity.editCheck', { action: 'session-initialized-with-suggestions' } );
 		}
+		// Denominator for every other editcheck counter: one per article editing
+		// session, even when no check runs.
+		ve.track( 'stats.mediawiki_editcheck_sessions_total', 1, {
+			wiki: mw.config.get( 'wgDBname' ),
+			platform: mw.editcheck.getPlatform(),
+			experimental: mw.editcheck.experimental ? '1' : '0',
+			suggestions: mw.editcheck.suggestionsModeAvailable ? '1' : '0'
+		} );
 		target.on( 'surfaceReady', () => {
 			target.getSurface().on( 'destroy', () => {
 				mw.editcheck.resetSessionState();

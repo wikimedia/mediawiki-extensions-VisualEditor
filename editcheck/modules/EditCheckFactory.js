@@ -165,7 +165,10 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 					mw.log.warn( `Failed to check ${ checkName }`, reason );
 					if ( !mw.editcheck.state.errored[ checkName ] ) {
 						// Log this once per-session
-						ve.track( 'stats.mediawiki_editcheck_errors_total', 1, { kind: checkName } );
+						ve.track( 'stats.mediawiki_editcheck_errors_total', 1, {
+							wiki: mw.config.get( 'wgDBname' ),
+							kind: checkName
+						} );
 						mw.editcheck.state.errored[ checkName ] = true;
 					}
 					throw reason;

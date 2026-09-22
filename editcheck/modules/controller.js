@@ -1299,6 +1299,28 @@ Controller.prototype.emitBranchNodeChangeIfNeeded = function () {
 };
 
 /**
+ * Count one lifecycle event against the community-defined rule that caused it
+ *
+ * The rule ID has no fixed set of values, so a cross with the check labels
+ * makes too many series.
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @param {string} event Lifecycle event: 'shown', 'seen', or the choice taken
+ */
+Controller.prototype.trackRule = function ( action, event ) {
+	const ruleId = action.getRuleId();
+	if ( ruleId === null ) {
+		return;
+	}
+	ve.track( 'stats.mediawiki_editcheck_rules_total', 1, {
+		wiki: mw.config.get( 'wgDBname' ),
+		kind: action.check.getName(),
+		rule: mw.editcheck.sanitizeStatsvLabel( ruleId ),
+		event
+	} );
+};
+
+/**
  * Handle instrumentation and tracking when an action is shown or marked as seen
  *
  * @param {mw.editcheck.EditCheckAction} action Action that was seen or shown
@@ -1307,15 +1329,24 @@ Controller.prototype.emitBranchNodeChangeIfNeeded = function () {
 Controller.prototype.onActionSeenOrShown = function ( action, seenOrShown ) {
 	const moment = this.inBeforeSave ? 'presave' : 'midedit';
 	const name = action.getName();
-	const data = {};
+	const type = action.isSuggestion() ? 'suggestion' : 'check';
+	const data = { action: `${ type }-${ seenOrShown }-${ moment }${ action.getTrackingIdSuffix() }` };
 	if ( action.isSuggestion() ) {
 		mw.editcheck.state.suggestions[ seenOrShown ][ name ] = true;
-		data.action = `suggestion-${ seenOrShown }-${ moment }${ action.getTrackingIdSuffix() }`;
 	} else {
 		mw.editcheck.state.checks[ seenOrShown ][ name ] = true;
-		data.action = `check-${ seenOrShown }-${ moment }${ action.getTrackingIdSuffix() }`;
 	}
 	ve.track( `activity.editCheck-${ name }`, data );
+	// The EventLogging event above is sampled and only readable in Superset,
+	// so keep an unsampled counter for Grafana.
+	ve.track( 'stats.mediawiki_editcheck_actions_total', 1, {
+		wiki: mw.config.get( 'wgDBname' ),
+		kind: action.check.getName(),
+		type,
+		event: seenOrShown,
+		moment
+	} );
+	this.trackRule( action, seenOrShown );
 };
 
 /**
@@ -1327,10 +1358,20 @@ Controller.prototype.onActionSeenOrShown = function ( action, seenOrShown ) {
  */
 Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
 	const name = action.getName();
+	const type = action.isSuggestion() ? 'suggestion' : 'check';
 	const data = {
 		action: ( action.isSuggestion() ? 'suggestion-' : '' ) + 'action-' + ( actionTaken || 'unknown' ) + action.getTrackingIdSuffix()
 	};
 	ve.track( `activity.editCheck-${ name }`, data );
+	// Each check declares its choices in static.choices, so `act` stays bounded.
+	ve.track( 'stats.mediawiki_editcheck_actionsTaken_total', 1, {
+		wiki: mw.config.get( 'wgDBname' ),
+		kind: action.check.getName(),
+		type,
+		act: actionTaken || 'unknown',
+		moment: this.inBeforeSave ? 'presave' : 'midedit'
+	} );
+	this.trackRule( action, actionTaken || 'unknown' );
 	const dismissalActions = [ 'dismiss', 'reject', 'keep' ];
 	if ( dismissalActions.includes( actionTaken ) ) {
 		// These are actions that represent "don't change anything", and so

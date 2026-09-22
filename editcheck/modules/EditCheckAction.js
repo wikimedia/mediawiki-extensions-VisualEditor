@@ -205,6 +205,18 @@ mw.editcheck.EditCheckAction.prototype.getName = function () {
 };
 
 /**
+ * Get the ID of the community-defined rule that produced this action
+ *
+ * The ID has no fixed set of values, so metrics must not use it as the check
+ * name.
+ *
+ * @return {string|null} Rule ID, or null if the check has no sub-rules
+ */
+mw.editcheck.EditCheckAction.prototype.getRuleId = function () {
+	return null;
+};
+
+/**
  * Whether this is a suggestion
  *
  * @return {boolean}
@@ -255,6 +267,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		type: this.getType(),
 		icon: this.icon,
 		name: this.getName(),
+		checkName: this.check.getName(),
 		label: this.getTitle(),
 		message: this.getDescription(),
 		footer: this.getFooter(),

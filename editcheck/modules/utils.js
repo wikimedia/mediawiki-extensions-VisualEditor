@@ -68,6 +68,39 @@ mw.editcheck.getMediaWikiJSON = function ( pagenames ) {
 };
 
 /**
+ * Get the platform label used by the editcheck statsv metrics
+ *
+ * @return {string} 'mobile' or 'desktop'
+ */
+mw.editcheck.getPlatform = function () {
+	return OO.ui.isMobile() ? 'mobile' : 'desktop';
+};
+
+/**
+ * Make a string safe to send as a statsv label value
+ *
+ * statsv accepts only [A-Za-z0-9_.+-] and replaces any other value with the
+ * placeholder `_invalid_value`.
+ *
+ * @param {string} value
+ * @return {string} Unique value of 1 to 48 characters from [A-Za-z0-9_.+-]
+ */
+mw.editcheck.sanitizeStatsvLabel = function ( value ) {
+	const raw = String( value );
+	const safe = raw.replace( /[^A-Za-z0-9_.+-]/g, '-' );
+	if ( safe === raw && safe.length && safe.length <= 48 ) {
+		return safe;
+	}
+	// Mapping and truncation can give two different IDs the same text, which
+	// reports them as one series.
+	let hash = 0;
+	for ( let i = 0; i < raw.length; i++ ) {
+		hash = ( hash * 31 + raw.charCodeAt( i ) ) % 2147483647;
+	}
+	return safe.slice( 0, 41 ) + '.' + hash.toString( 36 );
+};
+
+/**
  * Add click tracking to all links in an element
  *
  * @param {jQuery} $element Element containing links
