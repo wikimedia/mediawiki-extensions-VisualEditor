@@ -140,7 +140,7 @@ mw.editcheck.EditCheckPerformance.prototype.recordActionStats = function ( async
 		if ( this.trackChecks && this.checkMetricsCount < maxCheckMetrics ) {
 			const labels = {
 				kind: checkName,
-				platform: ( OO.ui.isMobile() ? 'mobile' : 'desktop' ),
+				platform: mw.editcheck.getPlatform(),
 				firstRun: firstRun ? '1' : '0',
 				listener
 			};
@@ -192,7 +192,7 @@ mw.editcheck.EditCheckPerformance.prototype.recordTypingLagSummary = function ()
 	}
 	const sorted = store.rawLags.slice().sort( ( a, b ) => a - b );
 
-	const label = { platform: ( OO.ui.isMobile() ? 'mobile' : 'desktop' ) };
+	const label = { platform: mw.editcheck.getPlatform() };
 	const count = store.rawLags.length;
 	const avg = count ? store.rawLags.reduce( ( sum, x ) => sum + x, 0 ) / count : null;
 

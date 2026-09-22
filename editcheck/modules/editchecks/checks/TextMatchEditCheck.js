@@ -626,6 +626,13 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getName = function () {
 	return this.check.getName() + '-' + this.matchRuleId;
 };
 
+/**
+ * @inheritdoc
+ */
+mw.editcheck.TextMatchEditCheckAction.prototype.getRuleId = function () {
+	return this.matchRuleId;
+};
+
 mw.editcheck.TextMatchEditCheckAction.prototype.isExperimental = function () {
 	return this.constructor.super.prototype.isExperimental.apply( this, arguments ) ||
 		( !this.suggestion && !this.ruleConfig.showAsCheck ) ||

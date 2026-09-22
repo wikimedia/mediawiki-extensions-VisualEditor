@@ -7,6 +7,7 @@
  * @param {Object} config Configuration options
  * @param {string} config.type Type of message (e.g., 'warning', 'error')
  * @param {string} config.name Unique name of the action
+ * @param {string} [config.checkName] Registered name of the check that made the action
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.label Title
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.message Body message
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} [config.footer] Footer message
@@ -23,6 +24,8 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	this.suggestion = config.suggestion;
 
 	this.name = config.name;
+	// this.name can hold a community rule ID. Metrics need the bounded name.
+	this.checkName = config.checkName || config.name;
 
 	this.actions = new OO.ui.ActionSet();
 	this.actions.connect( this, {
@@ -381,6 +384,13 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 			if ( !data.suppressFeedback ) {
 				ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-reason-' + reason } );
 			}
+			// Not gated on suppressFeedback: that hides the per-suggestion event,
+			// and this counter holds no suggestion ID.
+			ve.track( 'stats.mediawiki_editcheck_feedbackReasons_total', 1, {
+				wiki: mw.config.get( 'wgDBname' ),
+				kind: this.checkName,
+				reason
+			} );
 		}
 	} );
 	back.on( 'click', () => {
@@ -392,6 +402,12 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 	if ( !data.suppressFeedback ) {
 		ve.track( 'activity.editCheck-' + this.name, { action: 'edit-check-feedback-shown' } );
 	}
+	// Denominator for feedbackReasons.
+	ve.track( 'stats.mediawiki_editcheck_feedbackPrompts_total', 1, {
+		wiki: mw.config.get( 'wgDBname' ),
+		kind: this.checkName,
+		platform: mw.editcheck.getPlatform()
+	} );
 	return deferred.promise().always( () => {
 		// HACK: This causes the answerRadioSelect.onDocumentKeyDownHandler to be unbound
 		// otherwise, it'll swallow certain key events (arrow keys, enter, pagedown/up) forever.
