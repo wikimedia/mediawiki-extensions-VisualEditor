@@ -40,6 +40,14 @@ module.exports = function ( grunt ) {
 	grunt.loadTasks( 'lib/ve/build/tasks' );
 	grunt.loadTasks( 'build/tasks' );
 
+	const ignores = [
+		'.git/**',
+		'coverage/**',
+		'dist/**',
+		'docs/**',
+		'node_modules/**',
+		'vendor/**'
+	];
 	grunt.initConfig( {
 		mochaTest: {
 			'screenshots-en': {
@@ -63,39 +71,44 @@ module.exports = function ( grunt ) {
 			options: {
 				typos: 'build/typos.json'
 			},
-			src: [
-				'**/*.{js,json,less,css,txt,php,md,sh}',
-				'!**/package-lock.json',
-				'!build/typos.json',
-				'!**/i18n/**/*.json',
-				'**/i18n/**/en.json',
-				'**/i18n/**/qqq.json',
-				'!lib/**',
-				'!**/{docs,node_modules,vendor}/**',
-				'!.git/**'
-			]
+			all: {
+				ignore: ignores.concat( [
+					'build/typos.json',
+					'**/package-lock.json',
+					'lib/**'
+				] ),
+				src: [
+					'**/*.{js,json,less,css,txt,php,md,sh}',
+					// Filter out most i18n files, keep en and qqq
+					'!**/i18n/**/*.json',
+					'**/i18n/**/en.json',
+					'**/i18n/**/qqq.json'
+				]
+			}
 		},
 		eslint: {
 			options: {
 				cache: true,
 				fix: grunt.option( 'fix' )
 			},
-			all: [ '.' ]
+			all: {
+				ignore: ignores,
+				src: '.'
+			}
 		},
 		stylelint: {
 			options: {
 				reportNeedlessDisables: true,
 				cache: true
 			},
-			all: [
-				'**/*.{css,less}',
-				'!coverage/**',
-				'!dist/**',
-				'!docs/**',
-				'!lib/**',
-				'!node_modules/**',
-				'!vendor/**'
-			]
+			all: {
+				ignore: ignores.concat( [
+					'lib/**'
+				] ),
+				src: [
+					'**/*.{css,less}'
+				]
+			}
 		},
 		banana: conf.MessagesDirs,
 		watch: {
