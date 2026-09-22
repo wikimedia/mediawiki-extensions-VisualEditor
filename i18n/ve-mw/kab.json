@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Belkacem77",
+			"ButterflyOfFire",
 			"YouvaDjouadi"
 		]
 	},
@@ -48,5 +49,6 @@
 	"visualeditor-dialog-meta-settings-label": "Iɣewwaṛen n usebter",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-default": "Amezwer",
 	"visualeditor-dialog-meta-settings-newsectioneditlink-disable": "Uhu",
-	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ih"
+	"visualeditor-dialog-meta-settings-newsectioneditlink-force": "Ih",
+	"visualeditor-sourceswitch-popup-dismiss": "Mačči tura"
 }

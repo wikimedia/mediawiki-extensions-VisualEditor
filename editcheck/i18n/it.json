@@ -4,6 +4,7 @@
 			"Beta16",
 			"Daimona Eaytoy",
 			"FL2226",
+			"Matroz",
 			"McDutchie",
 			"Pierpao",
 			"Valepert"
@@ -96,5 +97,6 @@
 	"editcheck-specialeditchecks-config-default": "Configurazione predefinita",
 	"editcheck-suggestionfeedback-label-about": "Informazioni sui suggerimenti",
 	"editcheck-suggestionfeedback-label-report": "Segnala un problema",
+	"editcheck-experimental-subheading-check": "Verifica di modifica sperimentale per il test",
 	"tag-editcheck-reference-decline-other": "Edit Check (citazioni) rifiutato (altro)"
 }

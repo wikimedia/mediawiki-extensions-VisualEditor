@@ -35,6 +35,7 @@
 	"tag-editcheck-tone-shown-description": "Automatyczny pomocnik uważa, że konieczna może być zmiana brzmienia niektórych treści i odpowiedni komunikat został wyświetlony",
 	"tag-editcheck-paste-shown": "Wyświetlono automatycznego pomocnika (wklejanie)",
 	"tag-editcheck-paste-shown-description": "Automatyczny pomocnik zapytał o określenie się co do wklejonej przez edytującego treści, po czym treść ta została przez niego usunięta lub potwierdzona jako dozwolona",
+	"tag-editcheck-llm-paste-description": "Automatyczny pomocnik wykrył wklejony tekst pochodzący ze źródła, które wyglądało na wygenerowane przez sztuczną inteligencję",
 	"tag-editsuggestion-seen": "Widziano sugestię edycji",
 	"tag-editsuggestion-seen-description": "Użytkownik prawdopodobnie zobaczył co najmniej jedną sugestię edycji",
 	"tag-editsuggestion-used": "Użyto sugestii edycji",
