@@ -43,6 +43,7 @@
 	"editcheck-copyvio-keep-other": "Non si applica nessuna delle precedenti",
 	"editcheck-copyvio-keep-notify": "Grazie per aver condiviso il motivo per cui hai deciso di mantenere il testo incollato!",
 	"editcheck-copyvio-remove-notify": "Grazie per aver contribuito a rendere la conoscenza liberamente accessibile!",
+	"editcheck-copyvio-llm-keep-not-ai": "Ho scritto io stesso questo testo. Non è generato dall'intelligenza artificiale.",
 	"editcheck-double-bold-title": "Rimuovi la formattazione in grassetto non necessaria",
 	"editcheck-double-bold-description": "Il grassetto viene applicato automaticamente ai sottotitoli, ai termini degli elenchi di definizioni e alle intestazioni di tabella. Aiuta i lettori rimuovendo la [{{int:editcheck-double-bold-descriptionlink}} formattazione in grassetto non necessaria] da questi elementi.",
 	"editcheck-double-bold-action-remove": "Rimuovi il grassetto",
