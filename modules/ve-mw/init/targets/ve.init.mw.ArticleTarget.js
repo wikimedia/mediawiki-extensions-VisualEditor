@@ -879,6 +879,26 @@ ve.init.mw.ArticleTarget.prototype.saveFail = function ( doc, saveData, code, da
 					this.showSaveError( this.extractErrorMessages( data ) );
 				} );
 				handled = true;
+			} else if ( error.code === 'reauthenticate' ) {
+				// The user needs to reauthenticate to make this edit. This should be quite rare,
+				// so we'll load mediawiki.authenticationPopup on-demand
+				const authPopup = mw.loader.using( 'mediawiki.authenticationPopup' );
+				authPopup.then( ( require ) => require( 'mediawiki.authenticationPopup' )
+					.forReauthentication( error.data.operation )
+					.startPopupWindow()
+				).then( ( ok ) => {
+					if ( ok ) {
+						// The reauthentication will have invalidated the CSRF token, so clear it
+						new mw.Api().badToken( 'csrf' );
+						// Retry the save; this will fetch a new token first
+						this.startSave( this.getSaveOptions() );
+					} else {
+						this.showSaveError( this.extractErrorMessages( data ) );
+					}
+				}, () => {
+					this.showSaveError( this.extractErrorMessages( data ) );
+				} );
+				handled = true;
 			} else if ( error.code === 'editconflict' ) {
 				this.editConflict();
 				handled = true;
