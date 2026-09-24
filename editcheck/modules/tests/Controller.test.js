@@ -228,10 +228,17 @@ QUnit.test( 'updateForListener keeps equal actions and reports changes', async (
 		assert.strictEqual( controller.getActions()[ 0 ], warning, 'An equal action keeps its object' );
 		assert.strictEqual( controller.getActions()[ 1 ], suggestion, 'An equal suggestion keeps its object' );
 
-		await run( { checks: [ [ 'warning', 1 ], [ 'suggestion', 3 ] ], suggestions: [] } );
+		controller.focusedAction = suggestion;
+		assert.deepEqual(
+			await run( { checks: [ [ 'warning', 1 ], [ 'suggestion', 3 ] ], suggestions: [] } ),
+			[ { actions: [ 'warning', 'suggestion' ], newActions: [], discardedActions: [] } ],
+			'A check that replaces an equal suggestion causes an update, but is not new'
+		);
 		const takeover = controller.getActions()[ 1 ];
 		assert.notStrictEqual( takeover, suggestion, 'A check replaces an equal suggestion' );
 		assert.strictEqual( takeover.isSuggestion(), false, 'The replacement is a check' );
+		assert.strictEqual( controller.focusedAction, takeover, 'The focus moves to the replacement' );
+		controller.focusedAction = null;
 
 		assert.deepEqual(
 			await run( { checks: [ [ 'suggestion', 3 ] ], suggestions: [] } ),

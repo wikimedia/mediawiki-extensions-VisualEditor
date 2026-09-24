@@ -479,11 +479,19 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			const existing = this.getActions( listener );
 
 			// Try to match each new action to an existing one (to preserve state)
+			const replacements = [];
 			const actions = actionsFromListener.map( ( action ) => {
 				const oldAction = existing.find( ( existingAction ) => action.equals( existingAction ) );
 				if ( oldAction && !( oldAction.isSuggestion() && !action.isSuggestion() ) ) {
-					// Let a new non-suggestion take over from an old suggestion
 					return oldAction;
+				}
+				if ( oldAction ) {
+					// Let a new non-suggestion take over from an old suggestion.
+					// It is not new to the user, but the dialogs must draw it again.
+					replacements.push( action );
+					if ( this.focusedAction === oldAction ) {
+						this.focusedAction = action;
+					}
 				}
 				return action;
 			} );
@@ -504,14 +512,17 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			let newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
 			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
 
-			newActions.forEach( ( action ) => {
+			[ ...newActions, ...replacements ].forEach( ( action ) => {
 				action.once( 'shown', this.onActionSeenOrShown.bind( this, action, 'shown' ) );
 				action.once( 'seen', this.onActionSeenOrShown.bind( this, action, 'seen' ) );
 				action.on( 'act', this.onActionAct, [ action ], this );
 			} );
 
 			// If the actions list changed, update
-			if ( fromRefresh || staleUpdated || actions.length !== existing.length || newActions.length || discardedActions.length ) {
+			if (
+				fromRefresh || staleUpdated || actions.length !== existing.length ||
+				newActions.length || discardedActions.length || replacements.length
+			) {
 				if ( this.inSetup ) {
 					// Any actions that are present during initial setup
 					// shouldn't be treated as being "new". They're either
