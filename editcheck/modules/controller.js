@@ -7,6 +7,44 @@ const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
  *
  * Manages triggering and updating edit checks.
  *
+ * Lifecycle:
+ *
+ * - init.js makes one controller for each article target. The controller
+ *   connects to each new surface on surfaceReady, which includes a section
+ *   switch. When the surface is destroyed, it closes its sidebar and clears
+ *   its state.
+ * - A first refresh runs soon after the controller connects to a surface.
+ *   Actions found in this refresh are not "new", because they are restored
+ *   or are suggestions that the user did not cause.
+ * - Mid-edit, an undo stack change runs the onDocumentChange checks. A
+ *   selection in a different branch node runs the onBranchNodeChange checks,
+ *   if the document changed after their last run. updateForListener keeps an
+ *   existing action when it finds an equal one, so that the action keeps its
+ *   state. The exception is a check that is equal to a suggestion: the check
+ *   replaces the suggestion. updateForListener emits actionsUpdatedProgress
+ *   for each action when it arrives. When all checks for the listener are
+ *   finished, it emits actionsUpdated if the list of actions changed, or if
+ *   an action was replaced.
+ * - Before save, the onBeforeSave checks run and inBeforeSave is true.
+ *   getActions then gives only the pre-save actions.
+ *
+ * Dialogs:
+ *
+ * - Mid-edit, onActionsUpdated opens one sidebar: sidebarEditCheckDialog on
+ *   desktop, or gutterSidebarEditCheckDialog on mobile. On mobile, a gutter
+ *   icon opens mobileEditCheckDialog with the actions of that part of the
+ *   page. Its updateFilter keeps it limited to these actions. A click on a
+ *   different icon while it is open replaces its actions.
+ * - Before save, the controller opens fixedEditCheckDialog if there are
+ *   pre-save actions.
+ * - The open request sends the current actions to the dialog. After its
+ *   setup, the dialog keeps its own list from the actionsUpdated and
+ *   actionsUpdatedProgress events. The window manager runs the setup some
+ *   time after the open request, and a dialog gets no events before its
+ *   setup. Thus a dialog does not see the updates that occur while it opens.
+ * - Each dialog ignores action updates from the mode that it is not in:
+ *   pre-save or mid-edit.
+ *
  * @class EditCheckController
  * @constructor
  * @mixes OO.EventEmitter
