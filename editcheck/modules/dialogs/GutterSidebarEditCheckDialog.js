@@ -210,22 +210,16 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.scrollToNearestAction = function ()
  * Notify the scroll-into-view widget of the state of suggestions around this section
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.setOutsideSectionState = function () {
-	const target = this.controller.getTarget();
-	const scrollIntoView = this.scrollIntoView;
-	if ( !scrollIntoView || target.section === null ) {
+	if ( !this.scrollIntoView || this.controller.getTarget().section === null ) {
 		return;
 	}
-	this.controller.whenActionsSettled().then( () => {
-		const outsideSectionState = {
-			enabled: !this.hasActionInSectionInitially,
-			hasAbove: !!this.controller.editFullPageIndicatorTop.isVisible(),
-			hasBelow: !!this.controller.editFullPageIndicatorBottom.isVisible()
-		};
-		// do nothing if button has been nulled out or replaced
-		if ( !this.scrollIntoView || this.scrollIntoView !== scrollIntoView ) {
-			return;
-		}
-		this.scrollIntoView.setOutsideSectionState( outsideSectionState );
+	// Use the actions that the gutter shows now, so that the button can show
+	// before all checks finish. A later action in the section can hide it again.
+	const placement = this.controller.getSuggestionPlacement( this.controller.getDisplayActions() );
+	this.scrollIntoView.setOutsideSectionState( {
+		enabled: !this.hasActionInSectionInitially,
+		hasAbove: placement.hasAbove,
+		hasBelow: placement.hasBelow
 	} );
 };
 

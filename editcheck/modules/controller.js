@@ -1070,8 +1070,7 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
  * @param {mw.editcheck.EditCheckAction[]} actions All current mid-edit actions
  */
 Controller.prototype.updateSuggestionIndicators = function ( actions ) {
-	const suggestionRanges = actions.filter( ( action ) => action.isSuggestion() ).map( ( action ) => action.getFocusSelection().getCoveringRange() );
-	const suggestionCount = suggestionRanges.length;
+	const suggestionCount = actions.filter( ( action ) => action.isSuggestion() ).length;
 	let availableSuggestionCount = suggestionCount;
 	const target = this.target;
 	if ( target.enableVisualSectionEditing && target.section !== null ) {
@@ -1087,12 +1086,10 @@ Controller.prototype.updateSuggestionIndicators = function ( actions ) {
 			target.switchToFullPageButtonTop.$label.append( this.editFullPageIndicatorTop.$element );
 			target.switchToFullPageButtonBottom.$label.append( this.editFullPageIndicatorBottom.$element );
 		}
-		const attachedRootRange = this.surface.getModel().getDocument().getAttachedRoot().getOuterRange();
-		availableSuggestionCount = suggestionRanges.filter( ( range ) => attachedRootRange.containsRange( range ) ).length;
-		const hasActionsAbove = suggestionRanges.some( ( range ) => range.end < attachedRootRange.start );
-		const hasActionsBelow = suggestionRanges.some( ( range ) => range.start > attachedRootRange.end );
-		this.editFullPageIndicatorTop.toggle( hasActionsAbove );
-		this.editFullPageIndicatorBottom.toggle( hasActionsBelow );
+		const placement = this.getSuggestionPlacement( actions );
+		availableSuggestionCount = placement.inSection;
+		this.editFullPageIndicatorTop.toggle( placement.hasAbove );
+		this.editFullPageIndicatorBottom.toggle( placement.hasBelow );
 	}
 
 	// Ignore a count of 0 during initial setup
@@ -1101,6 +1098,24 @@ Controller.prototype.updateSuggestionIndicators = function ( actions ) {
 	}
 
 	this.lastAvailableSuggestionCount = availableSuggestionCount;
+};
+
+/**
+ * Find where suggestions are, compared to the section that is being edited
+ *
+ * @param {mw.editcheck.EditCheckAction[]} actions
+ * @return {{inSection: number, hasAbove: boolean, hasBelow: boolean}} Number of
+ *  suggestions in the section, and if there are suggestions above or below it
+ */
+Controller.prototype.getSuggestionPlacement = function ( actions ) {
+	const attachedRootRange = this.surface.getModel().getDocument().getAttachedRoot().getOuterRange();
+	const ranges = actions.filter( ( action ) => action.isSuggestion() )
+		.map( ( action ) => action.getFocusSelection().getCoveringRange() );
+	return {
+		inSection: ranges.filter( ( range ) => attachedRootRange.containsRange( range ) ).length,
+		hasAbove: ranges.some( ( range ) => range.end < attachedRootRange.start ),
+		hasBelow: ranges.some( ( range ) => range.start > attachedRootRange.end )
+	};
 };
 
 /**

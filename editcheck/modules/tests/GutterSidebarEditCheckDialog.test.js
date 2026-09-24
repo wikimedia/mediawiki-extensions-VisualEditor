@@ -90,3 +90,60 @@ QUnit.test( 'findReusableWidget', ( assert ) => {
 	assert.strictEqual( findReusableWidget( [ small, large ], [ first, second, third ] ), large, 'The widget with the most actions is preferred' );
 	assert.strictEqual( findReusableWidget( [ large, acting ], [ first, second, third ] ), acting, 'An acting widget is preferred' );
 } );
+
+QUnit.test( 'setOutsideSectionState uses the actions that the gutter shows now', ( assert ) => {
+	// Leave gaps, so that the actions do not touch the section
+	const [ above, , inside, , below ] = ve.test.utils.EditCheck.makeComparableActions(
+		[ 'above', 'gap1', 'inside', 'gap2', 'below' ]
+	);
+	const actions = [ above, inside, below ];
+	actions.forEach( ( action ) => {
+		action.suggestion = true;
+	} );
+	const cases = [
+		{
+			msg: 'Suggestions above and below the section are found',
+			shown: actions,
+			hasActionInSectionInitially: false,
+			expected: { enabled: true, hasAbove: true, hasBelow: true }
+		},
+		{
+			msg: 'A suggestion that is not shown yet is not found',
+			shown: [ above ],
+			hasActionInSectionInitially: false,
+			expected: { enabled: true, hasAbove: true, hasBelow: false }
+		},
+		{
+			msg: 'The button is not forced when the section had an action',
+			shown: actions,
+			hasActionInSectionInitially: true,
+			expected: { enabled: false, hasAbove: true, hasBelow: true }
+		}
+	];
+
+	cases.forEach( ( caseItem ) => {
+		const states = [];
+		const controller = {
+			surface: {
+				getModel: () => ( {
+					getDocument: () => ( {
+						// The section is the range of the inside action
+						getAttachedRoot: () => ( { getOuterRange: () => new ve.Range( 3, 4 ) } )
+					} )
+				} )
+			},
+			getTarget: () => ( { section: 1 } ),
+			getDisplayActions: () => caseItem.shown,
+			getSuggestionPlacement: mw.editcheck.Controller.prototype.getSuggestionPlacement
+		};
+		const dialog = {
+			controller,
+			hasActionInSectionInitially: caseItem.hasActionInSectionInitially,
+			scrollIntoView: { setOutsideSectionState: ( state ) => states.push( state ) }
+		};
+
+		ve.ui.GutterSidebarEditCheckDialog.prototype.setOutsideSectionState.call( dialog );
+
+		assert.deepEqual( states, [ caseItem.expected ], caseItem.msg );
+	} );
+} );
