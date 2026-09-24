@@ -187,8 +187,12 @@ const makeStubCheckController = function ( spec, checkStatic = {} ) {
 	OO.EventEmitter.call( controller );
 	controller.clearState();
 	controller.suggestionsModeAvailable = true;
+	controller.suggestionsVisible = true;
 	controller.suppressSuggestions = false;
 	controller.surface = { getModel: () => surfaceModel };
+	controller.target = { active: true, deactivating: false, enableVisualSectionEditing: false };
+	controller.updateSuggestionCountDebounced = () => {};
+	controller.showSidebar = () => ve.createDeferred().resolve().promise();
 	return { controller, factory };
 };
 
@@ -274,8 +278,6 @@ QUnit.test( 'A tool can suppress suggestions and still show its own check', asyn
 		suggestions: [ [ 'forced', 1 ], [ 'other', 3 ] ]
 	};
 	const { controller, factory } = makeStubCheckController( spec, { takesFocus: true } );
-	controller.target = { active: true, deactivating: false };
-	controller.suggestionsVisible = true;
 	controller.suppressSuggestions = true;
 	const newActions = [];
 	controller.on( 'actionsUpdated', ( listener, actions, listenerNewActions ) => {
@@ -430,6 +432,72 @@ QUnit.test( 'updateForListener ignores the results of a run that a newer run rep
 			[ 'kept' ],
 			'The results of the newer run are kept when the older run finishes last'
 		);
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+	}
+} );
+
+QUnit.test( 'A streamed action opens the sidebar before all checks finish', async ( assert ) => {
+	let releaseSlow;
+	const slow = new Promise( ( resolve ) => {
+		releaseSlow = resolve;
+	} );
+	const spec = {
+		checks: [ [ 'fast', 1 ], [ 'slow', 3, slow ] ],
+		suggestions: [ [ 'suggestion', 5 ], [ 'fast', 1 ] ]
+	};
+	const { controller, factory } = makeStubCheckController( spec );
+	const tracked = [];
+	controller.trackAction = ( action ) => tracked.push( action.id );
+	const counts = [];
+	controller.updateSuggestionCountDebounced = ( count ) => counts.push( count );
+	const opens = [];
+	controller.showSidebar = ( newActions ) => {
+		opens.push( newActions );
+		return ve.createDeferred().resolve().promise();
+	};
+	const nextTask = () => new Promise( ( resolve ) => {
+		setTimeout( resolve );
+	} );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const updating = controller.updateForListener( 'onDocumentChange' );
+		await nextTask();
+		assert.notStrictEqual( opens.length, 0, 'The sidebar opens before the slow check finishes' );
+		assert.deepEqual( opens[ 0 ], [], 'A streamed action is not focused' );
+		assert.deepEqual( counts, [], 'The suggestion count waits for all checks to finish' );
+		assert.deepEqual( controller.getActions(), [], 'The streamed actions are not settled' );
+		assert.deepEqual(
+			ve.test.utils.EditCheck.actionIds( controller.getDisplayActions() ),
+			[ 'fast', 'suggestion' ],
+			'The dialogs can show the streamed actions, with one copy of an action that is both a check and a suggestion'
+		);
+		assert.strictEqual( controller.getDisplayActions()[ 0 ].isSuggestion(), false, 'The check is shown instead of the equal suggestion' );
+		assert.deepEqual( tracked.slice().sort(), [ 'fast', 'fast', 'suggestion' ], 'Each pending action is tracked when it arrives' );
+
+		controller.suppressSuggestions = true;
+		assert.deepEqual(
+			ve.test.utils.EditCheck.actionIds( controller.getDisplayActions() ),
+			[ 'fast' ],
+			'Suppressed suggestions are not shown while they are pending'
+		);
+		controller.suppressSuggestions = false;
+
+		controller.inBeforeSave = true;
+		assert.deepEqual( controller.getDisplayActions(), [], 'Before save, the mid-edit pending actions are not shown' );
+		controller.inBeforeSave = false;
+
+		releaseSlow();
+		await updating;
+		assert.deepEqual(
+			ve.test.utils.EditCheck.actionIds( controller.getActions() ),
+			[ 'fast', 'slow', 'suggestion' ],
+			'All actions are settled when all checks finish'
+		);
+		assert.deepEqual( controller.pendingActionsByListener, {}, 'No action is pending after all checks finish' );
+		assert.deepEqual( tracked.slice().sort(), [ 'fast', 'fast', 'slow', 'suggestion' ], 'An action is tracked once' );
 	} finally {
 		mw.editcheck.editCheckFactory = originalFactory;
 	}

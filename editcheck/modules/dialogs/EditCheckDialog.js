@@ -164,7 +164,8 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdatedProgress = function ( listener, 
 		// This can settle out in onActionsUpdated
 		return;
 	}
-	if ( this.isInScope( action ) && this.controller.filterActionsForDisplay( [ action ] ).length ) {
+	// This also skips a streamed action that is equal to a shown action
+	if ( this.getScopedActions().includes( action ) ) {
 		this.renderAction( action );
 		this.afterRefreshDebounced();
 	}

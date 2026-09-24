@@ -22,25 +22,28 @@ const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
  *   existing action when it finds an equal one, so that the action keeps its
  *   state. The exception is a check that is equal to a suggestion: the check
  *   replaces the suggestion. updateForListener emits actionsUpdatedProgress
- *   for each action when it arrives. When all checks for the listener are
- *   finished, it emits actionsUpdated if the list of actions changed, or if
- *   an action was replaced. If a newer run for the same listener started
- *   before this, updateForListener ignores the results of the older run and
- *   does not emit actionsUpdated for it.
+ *   for each action when it arrives. Until all checks for the listener are
+ *   finished, a new action is pending. When they are finished,
+ *   updateForListener emits actionsUpdated if the list of actions changed,
+ *   or if an action was replaced. If a newer run for the same listener
+ *   started before this, updateForListener ignores the results of the older
+ *   run and does not emit actionsUpdated for it.
  * - Before save, the onBeforeSave checks run and inBeforeSave is true.
  *   getActions then gives only the pre-save actions.
  *
  * Dialogs:
  *
- * - Mid-edit, the controller opens one sidebar with showSidebar:
- *   sidebarEditCheckDialog on desktop, or gutterSidebarEditCheckDialog on
- *   mobile. On mobile, a gutter icon opens mobileEditCheckDialog, with a
- *   scope that limits it to the actions of that part of the page. A click on
- *   a different icon while it is open replaces its scope.
+ * - Mid-edit, the controller opens one sidebar with showSidebar, when the
+ *   first action that it can show arrives: sidebarEditCheckDialog on
+ *   desktop, or gutterSidebarEditCheckDialog on mobile. On mobile, a gutter
+ *   icon opens mobileEditCheckDialog, with a scope that limits it to the
+ *   actions of that part of the page. A click on a different icon while it
+ *   is open replaces its scope.
  * - Before save, the controller opens fixedEditCheckDialog if there are
  *   pre-save actions.
  * - A dialog reads its actions from getDisplayActions, in its setup and on
- *   each actionsUpdated, and keeps only the actions in its scope. The window
+ *   each actionsUpdated, and keeps only the actions in its scope.
+ *   getDisplayActions includes the pending actions. The window
  *   manager runs the setup some time after the open request, and a dialog
  *   gets no events before its setup. The read in setup includes the updates
  *   that occur while the dialog opens.
@@ -162,6 +165,7 @@ Controller.prototype.clearState = function () {
 	this.refreshDeferred = null;
 	this.sidebarOpeningPromise = null;
 	this.runsByListener = {};
+	this.pendingActionsByListener = {};
 };
 
 /**
@@ -491,6 +495,14 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	}
 	const run = {};
 	this.runsByListener[ listener ] = run;
+	// Actions that arrive before all checks for this listener finish
+	const pending = [];
+	this.pendingActionsByListener[ listener ] = pending;
+	const clearPending = () => {
+		if ( this.pendingActionsByListener[ listener ] === pending ) {
+			delete this.pendingActionsByListener[ listener ];
+		}
+	};
 	const onProgress = ( action ) => {
 		const existing = this.getActions( listener );
 		const oldAction = existing.find( ( existingAction ) => action.equals( existingAction ) );
@@ -501,7 +513,17 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			}
 			action = oldAction;
 		}
+		if ( this.runsByListener[ listener ] !== run ) {
+			// A newer run for this listener replaced this run
+			return;
+		}
+		if ( !existing.includes( action ) ) {
+			pending.push( action );
+			// The user can see and use a pending action before the run finishes
+			this.trackAction( action );
+		}
 		this.emit( 'actionsUpdatedProgress', listener, action, oldAction );
+		this.onActionStreamed( listener );
 	};
 	let actionsPromise;
 	// Create all actions for this listener
@@ -520,6 +542,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	}
 	actionsPromise = actionsPromise
 		.then( ( actionsFromListener ) => {
+			clearPending();
 			if ( this.runsByListener[ listener ] !== run ) {
 				// A newer run for this listener started, or the surface was
 				// destroyed. The results of this run are out of date.
@@ -562,11 +585,10 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			let newActions = actions.filter( ( action ) => existing.every( ( oldAction ) => !action.equals( oldAction ) ) );
 			const discardedActions = existing.filter( ( action ) => actions.every( ( newAction ) => !action.equals( newAction ) ) );
 
-			[ ...newActions, ...replacements ].forEach( ( action ) => {
-				action.once( 'shown', this.onActionSeenOrShown.bind( this, action, 'shown' ) );
-				action.once( 'seen', this.onActionSeenOrShown.bind( this, action, 'seen' ) );
-				action.on( 'act', this.onActionAct, [ action ], this );
-			} );
+			[ ...newActions, ...replacements ]
+				// Pending actions are tracked from when they arrive
+				.filter( ( action ) => !pending.includes( action ) )
+				.forEach( ( action ) => this.trackAction( action ) );
 
 			// If the actions list changed, update
 			if (
@@ -598,6 +620,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 		} );
 	this.currentListenerPromise = actionsPromise;
 	const resetPromise = () => {
+		clearPending();
 		if ( this.currentListenerPromise === actionsPromise ) {
 			this.currentListenerPromise = null;
 		}
@@ -607,12 +630,74 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 };
 
 /**
+ * Record when an action is shown, seen or used
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ */
+Controller.prototype.trackAction = function ( action ) {
+	action.once( 'shown', this.onActionSeenOrShown.bind( this, action, 'shown' ) );
+	action.once( 'seen', this.onActionSeenOrShown.bind( this, action, 'seen' ) );
+	action.on( 'act', this.onActionAct, [ action ], this );
+};
+
+/**
+ * Get the current actions, and the mid-edit actions that are pending
+ *
+ * A pending action arrived before all checks for its listener finished. As
+ * when the checks finish, a check replaces an equal suggestion, and other
+ * equal actions are shown once.
+ *
+ * @return {mw.editcheck.EditCheckAction[]} Actions
+ */
+Controller.prototype.getActionsWithPending = function () {
+	const actions = this.getActions();
+	if ( this.inBeforeSave ) {
+		return actions;
+	}
+	midEditListeners.forEach( ( listener ) => {
+		( this.pendingActionsByListener[ listener ] || [] ).forEach( ( action ) => {
+			if ( this.suppressSuggestions && action.isSuggestion() ) {
+				return;
+			}
+			const index = actions.findIndex( ( listAction ) => listAction.equals( action ) );
+			if ( index === -1 ) {
+				actions.push( action );
+			} else if ( actions[ index ].isSuggestion() && !action.isSuggestion() ) {
+				actions[ index ] = action;
+			}
+		} );
+	} );
+	actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
+	return actions;
+};
+
+/**
  * Get the actions that a dialog can show
  *
  * @return {mw.editcheck.EditCheckAction[]} Actions
  */
 Controller.prototype.getDisplayActions = function () {
-	return this.filterActionsForDisplay( this.getActions() );
+	return this.filterActionsForDisplay( this.getActionsWithPending() );
+};
+
+/**
+ * Handle an action that arrives before all checks for its listener finish
+ *
+ * Show it now, so that the user does not wait for the slowest check.
+ *
+ * @param {string} listener
+ */
+Controller.prototype.onActionStreamed = function ( listener ) {
+	if ( listener === 'onBeforeSave' || this.inBeforeSave || !this.surface ) {
+		return;
+	}
+	// The suggestion count and indicators wait for all checks to finish.
+	// Until then, the list still has the old actions that the run removes.
+	if ( this.getDisplayActions().length ) {
+		// New actions get the focus when all checks finish, after the rules
+		// for setup and suppressed suggestions apply
+		this.showSidebar( [] );
+	}
 };
 
 /**

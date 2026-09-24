@@ -219,3 +219,52 @@ QUnit.test( 'setScope focuses an equal replacement of the action', ( assert ) =>
 	assert.strictEqual( calls[ 0 ][ 0 ].length, 2, 'Both actions in the scope are shown' );
 	assert.deepEqual( calls[ 0 ][ 1 ], [ secondReplacement ], 'The replacement is focused' );
 } );
+
+QUnit.test( 'onActionsUpdatedProgress renders only the actions that the controller gives', ( assert ) => {
+	const [ shown, other ] = ve.test.utils.EditCheck.makeComparableActions( [ 'shown', 'other' ] );
+	let renders = 0;
+	const dialog = Object.assign( Object.create( ve.ui.EditCheckDialog.prototype ), {
+		inBeforeSave: false,
+		scope: null,
+		controller: { getDisplayActions: () => [ shown ] },
+		renderAction: () => renders++,
+		afterRefreshDebounced: () => {}
+	} );
+
+	dialog.onActionsUpdatedProgress( 'onDocumentChange', other, null );
+	assert.strictEqual( renders, 0, 'An action that the controller does not give is not rendered' );
+	dialog.onActionsUpdatedProgress( 'onDocumentChange', shown, null );
+	assert.strictEqual( renders, 1, 'An action that the controller gives is rendered' );
+} );
+
+QUnit.test( 'A gutter quick action finishes after a redraw removed its widget', async ( assert ) => {
+	const [ action ] = ve.test.utils.EditCheck.makeComparableActions( [ 'quick' ] );
+	const acted = ve.createDeferred();
+	action.gutterQuickAction = 'recheck';
+	action.check.act = () => acted.promise();
+	let positionUpdates = 0;
+	const controller = {
+		inBeforeSave: false,
+		focusedAction: null,
+		surface: {},
+		getActions: () => [ action ],
+		updatePositionsDebounced: () => positionUpdates++
+	};
+	const widget = Object.assign( Object.create( mw.editcheck.EditCheckGutterSectionWidget.prototype ), {
+		actions: [ action ],
+		controller,
+		iconWidget: { setActing: () => {} }
+	} );
+
+	widget.onClick();
+	// As teardown does
+	widget.controller = null;
+	acted.resolve();
+	await acted.promise();
+	// jQuery runs promise handlers in a later task
+	await new Promise( ( resolve ) => {
+		setTimeout( resolve );
+	} );
+
+	assert.strictEqual( positionUpdates, 1, 'The positions are updated, and the removed widget does nothing more' );
+} );

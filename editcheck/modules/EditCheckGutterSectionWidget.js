@@ -139,9 +139,13 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 		this.iconWidget.setActing( true );
 		this.acting = true;
 		( promise || ve.createDeferred().resolve().promise() ).always( () => {
+			controller.updatePositionsDebounced();
+			if ( !this.controller ) {
+				// A redraw removed this widget while the action ran
+				return;
+			}
 			this.iconWidget.setActing( false );
 			this.acting = false;
-			controller.updatePositionsDebounced();
 			if ( controller.getActions().includes( action ) ) {
 				// The action wasn't removed, so show its dialog again
 				this.showDialogWithAction( action );

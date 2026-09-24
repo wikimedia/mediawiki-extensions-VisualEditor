@@ -48,6 +48,8 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	this.navigableActions = [];
 	this.hasActionInSectionInitially = false;
 	this.renderDeferred = ve.createDeferred();
+	// Many actions can arrive together, and each render measures all of them
+	this.renderActionsDebounced = ve.debounceWithTest( () => !!this.surface, () => this.renderActions(), 100 );
 
 	this.scrollIntoView = new ve.ui.EditCheckScrollIntoViewWidget();
 	this.scrollIntoView.connect( this, {
@@ -111,6 +113,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		this.fromSection = false;
 		this.scrollToNearestActionDebounced = ve.debounceWithTest( () => this.fromSection, this.scrollToNearestAction.bind( this ), 500 );
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, null, this );
+		this.controller.on( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, null, this );
 		this.controller.on( 'position', this.onPosition, null, this );
 		this.controller.on( 'focusAction', this.onFocusAction, null, this );
 
@@ -164,6 +167,20 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( liste
 		return;
 	}
 	this.renderActions( newActions );
+};
+
+/**
+ * Handle an action that arrives before all checks for its listener finish
+ *
+ * @param {string} listener Check listener
+ * @param {mw.editcheck.EditCheckAction} action
+ * @param {mw.editcheck.EditCheckAction|null} oldAction Previously present equal action
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdatedProgress = function ( listener, action, oldAction ) {
+	if ( this.inBeforeSave !== ( listener === 'onBeforeSave' ) || oldAction ) {
+		return;
+	}
+	this.renderActionsDebounced();
 };
 
 /**
@@ -267,14 +284,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( newActio
 	let shown = newActions.length === 0; // Skip this entirely if there are no new actions
 	this.widgets = [];
 	this.sections.forEach( ( section ) => {
-		let widget;
-		const index = oldWidgets.findIndex(
-			( owidget ) => owidget.actions.length === section.actions.length &&
-				owidget.actions.every( ( oact ) => section.actions.includes( oact ) )
-		);
-		if ( index !== -1 ) {
-			// A widget already exists that contains all of this section's actions
-			widget = oldWidgets.splice( index, 1 )[ 0 ];
+		let widget = this.findReusableWidget( oldWidgets, section.actions );
+		if ( widget ) {
+			oldWidgets.splice( oldWidgets.indexOf( widget ), 1 );
 			widget.navigableActions = this.navigableActions;
 			widget.actions = section.actions;
 		} else {
@@ -325,6 +337,25 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( newActio
 	}
 	this.setOutsideSectionState();
 	this.scrollToNearestActionDebounced();
+};
+
+/**
+ * Find an old widget that can show a section
+ *
+ * A widget can show the section if the section has all of the widget's actions.
+ * Then an icon stays in place when a new action joins its section. An acting
+ * widget is preferred, so that it is not removed while its action runs.
+ *
+ * @param {mw.editcheck.EditCheckGutterSectionWidget[]} oldWidgets
+ * @param {mw.editcheck.EditCheckAction[]} actions Actions of the section
+ * @return {mw.editcheck.EditCheckGutterSectionWidget|null}
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.findReusableWidget = function ( oldWidgets, actions ) {
+	const candidates = oldWidgets.filter(
+		( widget ) => widget.actions.every( ( action ) => actions.includes( action ) )
+	);
+	return candidates.find( ( widget ) => widget.acting ) ||
+		candidates.reduce( ( best, widget ) => ( !best || widget.actions.length > best.actions.length ? widget : best ), null );
 };
 
 /**
