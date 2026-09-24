@@ -259,3 +259,16 @@ QUnit.test( 'select', ( assert ) => {
 		OO.ui.isMobile = isMobileOrig;
 	}
 } );
+
+QUnit.test( 'findEqualActions', ( assert ) => {
+	const [ first, second, third ] = ve.test.utils.EditCheck.makeComparableActions( [ 'first', 'second', 'third' ] );
+	const secondReplacement = new mw.editcheck.EditCheckAction( {
+		fragments: second.fragments, choices: [], check: second.check, id: second.id
+	} );
+
+	assert.deepEqual(
+		mw.editcheck.EditCheckAction.static.findEqualActions( [ first, second, third ], [ first, secondReplacement ] ),
+		[ first, secondReplacement ],
+		'Actions are replaced by their equal actions from the list, and actions not in the list are removed'
+	);
+} );

@@ -67,7 +67,10 @@ QUnit.test( 'onActionsUpdated opens the sidebar with the data the dialogs read',
 		updatePositionsDebounced: () => {},
 		updateSuggestionCountDebounced: () => {},
 		focusActionForSelection: () => {},
-		filterActionsForDisplay: mw.editcheck.Controller.prototype.filterActionsForDisplay
+		emitBranchNodeChangeIfNeeded: () => {},
+		filterActionsForDisplay: mw.editcheck.Controller.prototype.filterActionsForDisplay,
+		updateSuggestionIndicators: mw.editcheck.Controller.prototype.updateSuggestionIndicators,
+		showSidebar: mw.editcheck.Controller.prototype.showSidebar
 	};
 
 	const originalOpen = ve.ui.WindowAction.prototype.open;
@@ -88,13 +91,8 @@ QUnit.test( 'onActionsUpdated opens the sidebar with the data the dialogs read',
 	assert.strictEqual( opened.length, 1, 'The sidebar is opened' );
 	assert.deepEqual(
 		Object.keys( opened[ 0 ].data ).sort(),
-		[ 'actions', 'controller', 'inBeforeSave', 'newActions' ],
-		'The data uses the keys the dialogs read'
-	);
-	assert.deepEqual(
-		ve.test.utils.EditCheck.actionIds( opened[ 0 ].data.actions ),
-		[ 'warning' ],
-		'Suppressed suggestions are not sent as actions'
+		[ 'controller', 'inBeforeSave', 'newActions' ],
+		'The data uses the keys the dialogs read, and no actions, because the dialogs read them from the controller'
 	);
 	assert.deepEqual(
 		ve.test.utils.EditCheck.actionIds( opened[ 0 ].data.newActions ),
@@ -293,7 +291,7 @@ QUnit.test( 'A tool can suppress suggestions and still show its own check', asyn
 	assert.deepEqual( ve.test.utils.EditCheck.actionIds( actions ), [ 'forced' ], 'The refresh gives the check, and not the other suggestion' );
 	assert.strictEqual( actions[ 0 ].isSuggestion(), false, 'The forced action is a check' );
 	assert.deepEqual(
-		ve.test.utils.EditCheck.actionIds( controller.filterActionsForDisplay( controller.getActions() ) ),
+		ve.test.utils.EditCheck.actionIds( controller.getDisplayActions() ),
 		[ 'forced' ],
 		'The dialogs can show the check'
 	);
@@ -306,7 +304,7 @@ QUnit.test( 'whenSidebarShown waits only for a sidebar that is not yet the curre
 		surface: {
 			getSidebarDialogs: () => ( { getCurrentWindow: () => currentWindow } )
 		},
-		sidebarShownPromise: opening.promise()
+		sidebarOpeningPromise: opening.promise()
 	} );
 	const whenSidebarShown = mw.editcheck.Controller.prototype.whenSidebarShown;
 
@@ -369,4 +367,40 @@ QUnit.test( 'ensureActionIsShown', async ( assert ) => {
 	} finally {
 		OO.ui.isMobile = originalIsMobile;
 	}
+} );
+
+QUnit.test( 'showSidebar opens the sidebar only once while it opens', ( assert ) => {
+	const openDeferred = ve.createDeferred();
+	let openCount = 0;
+	const controller = {
+		target: { $element: $( '<div>' ) },
+		surface: {
+			getSidebarDialogs: () => ( { getCurrentWindow: () => null } )
+		},
+		inBeforeSave: false,
+		sidebarOpeningPromise: null
+	};
+
+	const originalOpen = ve.ui.WindowAction.prototype.open;
+	ve.ui.WindowAction.prototype.open = function () {
+		openCount++;
+		return openDeferred.promise();
+	};
+	let firstPromise, secondPromise;
+	try {
+		firstPromise = mw.editcheck.Controller.prototype.showSidebar.call( controller, [] );
+		secondPromise = mw.editcheck.Controller.prototype.showSidebar.call( controller, [] );
+	} finally {
+		ve.ui.WindowAction.prototype.open = originalOpen;
+	}
+
+	assert.strictEqual( openCount, 1, 'A second call does not open the sidebar again' );
+	assert.strictEqual( secondPromise, firstPromise, 'A second call waits for the first open' );
+
+	const done = assert.async();
+	firstPromise.always( () => {
+		assert.strictEqual( controller.sidebarOpeningPromise, null, 'The open is not pending after it resolves' );
+		done();
+	} );
+	openDeferred.resolve( { closed: ve.createDeferred().promise() } );
 } );

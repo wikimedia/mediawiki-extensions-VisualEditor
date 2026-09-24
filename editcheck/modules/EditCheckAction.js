@@ -111,6 +111,21 @@ mw.editcheck.EditCheckAction.static.compareStarts = function ( a, b ) {
 };
 
 /**
+ * Find the actions in a list that are equal to some actions
+ *
+ * Actions with no equal action in the list are removed.
+ *
+ * @param {mw.editcheck.EditCheckAction[]} actions Actions to find
+ * @param {mw.editcheck.EditCheckAction[]} list Actions to search
+ * @return {mw.editcheck.EditCheckAction[]} Actions from the list
+ */
+mw.editcheck.EditCheckAction.static.findEqualActions = function ( actions, list ) {
+	return actions
+		.map( ( action ) => list.find( ( listAction ) => listAction.equals( action ) ) )
+		.filter( ( action ) => action );
+};
+
+/**
  * Get the action's title
  *
  * @return {jQuery|string|Function|OO.ui.HtmlSnippet}

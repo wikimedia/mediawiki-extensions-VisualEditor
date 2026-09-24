@@ -1,13 +1,15 @@
 QUnit.module( 'mw.editcheck.EditCheckDialog', ve.test.utils.newEditCheckEnvironment() );
 
 QUnit.test( 'onActionsUpdated hides suggestions', ( assert ) => {
-	const actions = ve.test.utils.EditCheck.makeDisplayActions();
+	const actions = ve.test.utils.EditCheck.makeComparableActions( [ 'suggestion', 'warning' ] );
+	actions[ 0 ].suggestion = true;
 	const calls = [];
-	const dialog = {
+	const dialog = Object.assign( Object.create( ve.ui.EditCheckDialog.prototype ), {
 		inBeforeSave: false,
+		scope: null,
 		controller: ve.test.utils.EditCheck.makeHidingController( actions ),
 		showActions: ( shown, shownNew, rejected ) => calls.push( [ shown, shownNew, rejected ] )
-	};
+	} );
 
 	ve.ui.EditCheckDialog.prototype.onActionsUpdated.call(
 		dialog, 'onDocumentChange', actions, actions, [], false
@@ -139,29 +141,34 @@ const openDrawerFromGutter = function ( navigableActions, action, currentWindow 
 
 QUnit.test( 'The mobile drawer shows only the actions of its gutter icon', async ( assert ) => {
 	const [ first, second, third ] = ve.test.utils.EditCheck.makeComparableActions( [ 'first', 'second', 'third' ] );
+	// An update can replace an action with an equal one
+	const firstReplacement = new mw.editcheck.EditCheckAction( {
+		fragments: first.fragments, choices: [], check: first.check, id: first.id
+	} );
 	const data = await openDrawerFromGutter( [ first, second ], second, null );
 
+	let controllerActions = [ first, second, third ];
 	const shown = [];
 	let renders = 0;
 	const drawer = Object.assign( Object.create( ve.ui.EditCheckDialog.prototype ), {
 		inBeforeSave: false,
-		updateFilter: data.updateFilter,
-		currentActions: data.actions,
-		controller: { filterActionsForDisplay: ( actions ) => actions },
-		showActions: ( actions ) => {
-			shown.push( ve.test.utils.EditCheck.actionIds( actions ) );
-			drawer.currentActions = actions;
+		scope: data.scope,
+		controller: {
+			getDisplayActions: () => controllerActions,
+			filterActionsForDisplay: ( actions ) => actions
 		},
+		showActions: ( actions, newActions ) => shown.push( [ actions, newActions ] ),
 		renderAction: () => renders++,
 		afterRefreshDebounced: () => {}
 	} );
-	assert.deepEqual( ve.test.utils.EditCheck.actionIds( data.actions ), [ 'first', 'second' ], 'The drawer opens with the actions of the gutter' );
+	assert.deepEqual( ve.test.utils.EditCheck.actionIds( data.scope ), [ 'first', 'second' ], 'The drawer opens with the actions of the gutter as its scope' );
 
-	drawer.onActionsUpdated( 'onDocumentChange', [ first, second, third ], [ third ], [], false );
-	assert.deepEqual( shown.pop(), [ 'first', 'second' ], 'A new action from outside the drawer is not shown' );
+	drawer.onActionsUpdated( 'onDocumentChange', controllerActions, [ third ], [], false );
+	assert.deepEqual( shown.pop(), [ [ first, second ], [] ], 'A new action from outside the drawer is not shown or focused' );
 
-	drawer.onActionsUpdated( 'onDocumentChange', [ first, third ], [], [ second ], false );
-	assert.deepEqual( shown.pop(), [ 'first' ], 'A discarded action is removed from the drawer' );
+	controllerActions = [ firstReplacement, third ];
+	drawer.onActionsUpdated( 'onDocumentChange', controllerActions, [], [ second ], false );
+	assert.deepEqual( shown.pop()[ 0 ], [ firstReplacement ], 'A discarded action is removed, and an equal replacement is shown' );
 
 	drawer.onActionsUpdatedProgress( 'onDocumentChange', third, null );
 	assert.strictEqual( renders, 0, 'A streamed action from outside the drawer is not rendered' );
@@ -172,7 +179,7 @@ QUnit.test( 'A second gutter icon replaces the actions of the open drawer', ( as
 	const calls = [];
 	const drawer = {
 		constructor: { static: { name: 'mobileEditCheckDialog' } },
-		showActions: ( actions, newActions ) => calls.push( [ actions, newActions ] )
+		setScope: ( scope, focusAction ) => calls.push( [ scope, focusAction ] )
 	};
 	const widget = Object.assign( Object.create( mw.editcheck.EditCheckGutterSectionWidget.prototype ), {
 		actions: [ third ],
@@ -188,6 +195,27 @@ QUnit.test( 'A second gutter icon replaces the actions of the open drawer', ( as
 
 	widget.showDialogWithAction( third );
 
-	assert.deepEqual( calls, [ [ [ second, third ], [ third ] ] ], 'The drawer shows the actions of the new icon, and focuses its action' );
+	assert.deepEqual( calls, [ [ [ second, third ], third ] ], 'The drawer gets the actions of the new icon as its scope, and focuses its action' );
 	assert.deepEqual( drawer.sectionActions, [ third ], 'The drawer knows the actions of the new icon' );
+} );
+
+QUnit.test( 'setScope focuses an equal replacement of the action', ( assert ) => {
+	const [ first, second ] = ve.test.utils.EditCheck.makeComparableActions( [ 'first', 'second' ] );
+	// The caller holds the old object, and the controller holds its replacement
+	const secondReplacement = new mw.editcheck.EditCheckAction( {
+		fragments: second.fragments, choices: [], check: second.check, id: second.id
+	} );
+	const calls = [];
+	const dialog = Object.assign( Object.create( ve.ui.EditCheckDialog.prototype ), {
+		scope: null,
+		controller: {
+			getDisplayActions: () => [ first, secondReplacement ]
+		},
+		showActions: ( shown, shownNew ) => calls.push( [ shown, shownNew ] )
+	} );
+
+	dialog.setScope( [ first, second ], second );
+
+	assert.strictEqual( calls[ 0 ][ 0 ].length, 2, 'Both actions in the scope are shown' );
+	assert.deepEqual( calls[ 0 ][ 1 ], [ secondReplacement ], 'The replacement is focused' );
 } );

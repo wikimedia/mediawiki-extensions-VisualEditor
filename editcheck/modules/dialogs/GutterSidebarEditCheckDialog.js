@@ -118,10 +118,7 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		if ( this.fromSection ) {
 			this.scrollIntoView = null;
 		}
-		this.renderActions(
-			data.actions || this.controller.filterActionsForDisplay( this.controller.getActions() ),
-			data.newActions || []
-		);
+		this.renderActions( data.newActions || [] );
 
 		if ( this.scrollIntoView ) {
 			const fullPageButton = this.controller.getTarget().switchToFullPageButtonBottom;
@@ -163,20 +160,17 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getTeardownProcess = function ( dat
  * @param {boolean} rejected The last action was rejected/dismissed
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onActionsUpdated = function ( listener, actions, newActions ) {
-	if ( ( this.inBeforeSave && listener !== 'onBeforeSave' ) || ( !this.inBeforeSave && listener === 'onBeforeSave' ) ) {
+	if ( this.inBeforeSave !== ( listener === 'onBeforeSave' ) ) {
 		return;
 	}
-	this.renderActions(
-		this.controller.filterActionsForDisplay( actions ),
-		this.controller.filterActionsForDisplay( newActions )
-	);
+	this.renderActions( newActions );
 };
 
 /**
  * Handle position events from the controller
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
-	this.renderActions( this.controller.filterActionsForDisplay( this.controller.getActions() ), [] );
+	this.renderActions();
 };
 
 /**
@@ -219,12 +213,14 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.setOutsideSectionState = function (
 };
 
 /**
- * Render the edit check actions as gutter icons, grouping overlapping actions.
+ * Render the current actions as gutter icons, grouping overlapping actions.
  *
- * @param {mw.editcheck.EditCheckAction[]} actions List of actions to render
- * @param {mw.editcheck.EditCheckAction[]} newActions Newly found actions, which could takeFocus
+ * @param {mw.editcheck.EditCheckAction[]} [newActions] Newly found actions, which could takeFocus
  */
-ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( actions, newActions = [] ) {
+ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( newActions = [] ) {
+	const actions = this.controller.getDisplayActions();
+	// A new action can be discarded or replaced after the caller got it
+	newActions = mw.editcheck.EditCheckAction.static.findEqualActions( newActions, actions );
 	this.sections = [];
 	this.navigableActions = [];
 	if ( this.scrollIntoView ) {

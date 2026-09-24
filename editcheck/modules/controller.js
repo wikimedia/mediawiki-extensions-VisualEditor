@@ -30,18 +30,18 @@ const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
  *
  * Dialogs:
  *
- * - Mid-edit, onActionsUpdated opens one sidebar: sidebarEditCheckDialog on
- *   desktop, or gutterSidebarEditCheckDialog on mobile. On mobile, a gutter
- *   icon opens mobileEditCheckDialog with the actions of that part of the
- *   page. Its updateFilter keeps it limited to these actions. A click on a
- *   different icon while it is open replaces its actions.
+ * - Mid-edit, the controller opens one sidebar with showSidebar:
+ *   sidebarEditCheckDialog on desktop, or gutterSidebarEditCheckDialog on
+ *   mobile. On mobile, a gutter icon opens mobileEditCheckDialog, with a
+ *   scope that limits it to the actions of that part of the page. A click on
+ *   a different icon while it is open replaces its scope.
  * - Before save, the controller opens fixedEditCheckDialog if there are
  *   pre-save actions.
- * - The open request sends the current actions to the dialog. After its
- *   setup, the dialog keeps its own list from the actionsUpdated and
- *   actionsUpdatedProgress events. The window manager runs the setup some
- *   time after the open request, and a dialog gets no events before its
- *   setup. Thus a dialog does not see the updates that occur while it opens.
+ * - A dialog reads its actions from getDisplayActions, in its setup and on
+ *   each actionsUpdated, and keeps only the actions in its scope. The window
+ *   manager runs the setup some time after the open request, and a dialog
+ *   gets no events before its setup. The read in setup includes the updates
+ *   that occur while the dialog opens.
  * - Each dialog ignores action updates from the mode that it is not in:
  *   pre-save or mid-edit.
  *
@@ -158,7 +158,7 @@ Controller.prototype.clearState = function () {
 	this.lastBranchNodeChangeHistoryPointer = null;
 	this.currentListenerPromise = null;
 	this.refreshDeferred = null;
-	this.sidebarShownPromise = null;
+	this.sidebarOpeningPromise = null;
 };
 
 /**
@@ -250,6 +250,10 @@ Controller.prototype.getTarget = function () {
  * @param {jQuery.Promise} openingOrClosing Promise that resolves when closing finishes
  */
 Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingOrClosing ) {
+	if ( !win.isOpened() ) {
+		// The opening window is now the current window, which prevents a second open
+		this.sidebarOpeningPromise = null;
+	}
 	if ( win.constructor.static.name !== 'sidebarEditCheckDialog' ) {
 		return;
 	}
@@ -392,12 +396,10 @@ Controller.prototype.whenActionsSettled = function () {
  */
 Controller.prototype.whenSidebarShown = function () {
 	if ( this.surface.getSidebarDialogs().getCurrentWindow() ) {
-		// Already opening or open, so there is nothing to wait for. Never wait
-		// in this case: the open promise does not resolve if a second
-		// actionsUpdated tried to open the sidebar while it was still opening.
+		// Already opening or open, so there is nothing to wait for
 		return ve.createDeferred().resolve().promise();
 	}
-	return this.sidebarShownPromise || ve.createDeferred().resolve().promise();
+	return this.sidebarOpeningPromise || ve.createDeferred().resolve().promise();
 };
 
 /**
@@ -592,6 +594,15 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	};
 	actionsPromise.then( resetPromise, resetPromise );
 	return actionsPromise;
+};
+
+/**
+ * Get the actions that a dialog can show
+ *
+ * @return {mw.editcheck.EditCheckAction[]} Actions
+ */
+Controller.prototype.getDisplayActions = function () {
+	return this.filterActionsForDisplay( this.getActions() );
 };
 
 /**
@@ -943,6 +954,27 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	if ( listener === 'onBeforeSave' ) {
 		return;
 	}
+	this.updateSuggestionIndicators( actions );
+
+	const visibleNewActions = this.filterActionsForDisplay( newActions );
+	if ( !this.filterActionsForDisplay( actions ).length ) {
+		return;
+	}
+	this.showSidebar( visibleNewActions ).then( () => {
+		if ( visibleNewActions.length ) {
+			// Check if any new actions are relevant to our current selection:
+			this.emitBranchNodeChangeIfNeeded();
+			this.focusActionForSelection();
+		}
+	} );
+};
+
+/**
+ * Update the suggestion count and the edit-full-page indicators
+ *
+ * @param {mw.editcheck.EditCheckAction[]} actions All current mid-edit actions
+ */
+Controller.prototype.updateSuggestionIndicators = function ( actions ) {
 	const suggestionRanges = actions.filter( ( action ) => action.isSuggestion() ).map( ( action ) => action.getFocusSelection().getCoveringRange() );
 	const suggestionCount = suggestionRanges.length;
 	let availableSuggestionCount = suggestionCount;
@@ -974,39 +1006,46 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
 	}
 
 	this.lastAvailableSuggestionCount = availableSuggestionCount;
+};
 
-	const visibleActions = this.filterActionsForDisplay( actions );
-	const visibleNewActions = this.filterActionsForDisplay( newActions );
-
-	if ( !visibleActions.length ) {
-		return;
-	}
+/**
+ * Open the mid-edit sidebar, if it is not open
+ *
+ * The sidebar reads the actions from the controller in its setup.
+ *
+ * @param {mw.editcheck.EditCheckAction[]} newActions Newly added actions, which the sidebar can focus
+ * @return {jQuery.Promise} Promise which resolves when the sidebar is open
+ */
+Controller.prototype.showSidebar = function ( newActions ) {
 	const windowName = OO.ui.isMobile() ? 'gutterSidebarEditCheckDialog' : 'sidebarEditCheckDialog';
-	let shownPromise;
 	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
-	if ( !currentWindow || currentWindow.constructor.static.name !== windowName ) {
-		target.$element.addClass( 've-ui-editCheck-sidebar-active' );
-		const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
-		shownPromise = windowAction.open(
-			windowName,
-			{ inBeforeSave: this.inBeforeSave, actions: visibleActions, newActions: visibleNewActions, controller: this }
-		).then( ( instance ) => {
-			ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
-			instance.closed.then( () => {
-				target.$element.removeClass( 've-ui-editCheck-sidebar-active' );
-			} );
-		} );
-	} else {
-		shownPromise = ve.createDeferred().resolve().promise();
+	if ( currentWindow && currentWindow.constructor.static.name === windowName ) {
+		return ve.createDeferred().resolve().promise();
 	}
-	this.sidebarShownPromise = shownPromise;
-	shownPromise.then( () => {
-		if ( visibleNewActions.length ) {
-			// Check if any new actions are relevant to our current selection:
-			this.emitBranchNodeChangeIfNeeded();
-			this.focusActionForSelection();
+	if ( this.sidebarOpeningPromise ) {
+		// The current window is set some time after the open request. A second
+		// open in that time never resolves, so wait for the first one.
+		return this.sidebarOpeningPromise;
+	}
+	const target = this.target;
+	target.$element.addClass( 've-ui-editCheck-sidebar-active' );
+	const windowAction = ve.ui.actionFactory.create( 'window', this.surface, 'check' );
+	const openingPromise = windowAction.open(
+		windowName,
+		{ inBeforeSave: this.inBeforeSave, newActions, controller: this }
+	).then( ( instance ) => {
+		ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-midedit' } );
+		instance.closed.then( () => {
+			target.$element.removeClass( 've-ui-editCheck-sidebar-active' );
+		} );
+	} );
+	this.sidebarOpeningPromise = openingPromise;
+	openingPromise.always( () => {
+		if ( this.sidebarOpeningPromise === openingPromise ) {
+			this.sidebarOpeningPromise = null;
 		}
 	} );
+	return openingPromise;
 };
 
 /**
@@ -1054,7 +1093,7 @@ Controller.prototype.setupPreSaveProcess = function () {
 				return this.closeSidebars( 'preSaveProcess' ).then( () => this.closeDialog( 'preSaveProcess' ).then( () => {
 					target.onContainerScroll();
 					const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
-					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, actions, controller: this } )
+					return windowAction.open( 'fixedEditCheckDialog', { inBeforeSave: true, controller: this } )
 						.then( ( instance ) => {
 							ve.track( 'activity.editCheckDialog', { action: 'window-open-from-check-presave' } );
 							this.scrollActionIntoViewDebounced( this.focusedAction, { alignToTop: true } );

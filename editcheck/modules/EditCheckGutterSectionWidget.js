@@ -188,12 +188,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 			{
 				controller,
 				inBeforeSave: false,
-				actions: this.navigableActions,
+				scope: this.navigableActions,
 				newActions: [ action ],
 				sectionActions: this.actions,
-				footer: true,
-				// Just filter out any discarded actions from the allowed set
-				updateFilter: ( updatedActions, newActions, discardedActions, prevActions ) => prevActions.filter( ( a ) => !discardedActions.includes( a ) )
+				footer: true
 			}
 		) ).then( () => {
 			if ( scrollConfig && scrollConfig.alignToTop ) {
@@ -210,7 +208,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 		} );
 	} else {
 		controller.focusAction( action, true, scrollConfig );
-		currentWindow.showActions( this.navigableActions, [ action ] );
+		currentWindow.setScope( this.navigableActions, action );
 		currentWindow.sectionActions = this.actions;
 	}
 };

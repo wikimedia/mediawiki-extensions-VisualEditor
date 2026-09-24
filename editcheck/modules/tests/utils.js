@@ -70,6 +70,7 @@ ve.test.utils.EditCheck.actionIds = function ( actions ) {
 ve.test.utils.EditCheck.makeHidingController = function ( actions ) {
 	return {
 		getActions: () => actions,
+		getDisplayActions: () => actions.filter( ( action ) => !action.isSuggestion() ),
 		filterActionsForDisplay: ( toFilter ) => toFilter.filter( ( action ) => !action.isSuggestion() )
 	};
 };

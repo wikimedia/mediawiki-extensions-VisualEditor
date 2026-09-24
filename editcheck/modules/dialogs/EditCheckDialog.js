@@ -153,15 +153,7 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdated = function ( listener, actions,
 	if ( this.inBeforeSave !== ( listener === 'onBeforeSave' ) ) {
 		return;
 	}
-	if ( this.updateFilter ) {
-		actions = this.updateFilter( actions, newActions, discardedActions, this.currentActions );
-	}
-
-	this.showActions(
-		this.controller.filterActionsForDisplay( actions ),
-		this.controller.filterActionsForDisplay( newActions ),
-		rejected
-	);
+	this.showScopedActions( newActions, rejected );
 };
 
 ve.ui.EditCheckDialog.prototype.onActionsUpdatedProgress = function ( listener, action, oldAction ) {
@@ -172,16 +164,59 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdatedProgress = function ( listener, 
 		// This can settle out in onActionsUpdated
 		return;
 	}
-	let actions = ve.copy( this.currentActions );
-	actions.push( action );
-	actions.sort( mw.editcheck.EditCheckAction.static.compareStarts );
-	if ( this.updateFilter ) {
-		actions = this.updateFilter( actions, [ action ], [], this.currentActions );
-	}
-	if ( actions.includes( action ) ) {
+	if ( this.isInScope( action ) && this.controller.filterActionsForDisplay( [ action ] ).length ) {
 		this.renderAction( action );
 		this.afterRefreshDebounced();
 	}
+};
+
+/**
+ * Check if an action is in this dialog's scope
+ *
+ * A dialog with no scope can show all actions.
+ *
+ * @param {mw.editcheck.EditCheckAction} action
+ * @return {boolean}
+ */
+ve.ui.EditCheckDialog.prototype.isInScope = function ( action ) {
+	// Match equal actions, because an update can replace an action with an equal one
+	return !this.scope || this.scope.some( ( scopeAction ) => action.equals( scopeAction ) );
+};
+
+/**
+ * Get the actions that this dialog shows
+ *
+ * @return {mw.editcheck.EditCheckAction[]} Actions
+ */
+ve.ui.EditCheckDialog.prototype.getScopedActions = function () {
+	return this.controller.getDisplayActions().filter( ( action ) => this.isInScope( action ) );
+};
+
+/**
+ * Show the current actions in this dialog's scope
+ *
+ * @param {mw.editcheck.EditCheckAction[]} newActions Newly added actions, which the dialog can focus
+ * @param {boolean} [lastActionRejected] Last action was rejected/dismissed
+ */
+ve.ui.EditCheckDialog.prototype.showScopedActions = function ( newActions, lastActionRejected ) {
+	const actions = this.getScopedActions();
+	// A new action can be discarded or replaced after the caller got it
+	this.showActions(
+		actions,
+		mw.editcheck.EditCheckAction.static.findEqualActions( newActions, actions ),
+		lastActionRejected
+	);
+};
+
+/**
+ * Set the scope of this dialog, and focus an action in it
+ *
+ * @param {mw.editcheck.EditCheckAction[]|null} scope Actions this dialog can show, or null for all actions
+ * @param {mw.editcheck.EditCheckAction} focusAction Action to focus
+ */
+ve.ui.EditCheckDialog.prototype.setScope = function ( scope, focusAction ) {
+	this.scope = scope;
+	this.showScopedActions( [ focusAction ] );
 };
 
 /**
@@ -370,15 +405,12 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.controller.on( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, false, this );
 		this.controller.on( 'focusAction', this.onFocusAction, false, this );
 
-		const actions = data.actions ||
-			this.controller.filterActionsForDisplay( this.controller.getActions() );
-
 		if ( !Object.prototype.hasOwnProperty.call( data, 'inBeforeSave' ) ) {
 			throw new Error( 'inBeforeSave argument required' );
 		}
 		this.inBeforeSave = data.inBeforeSave;
 		this.surface = data.surface;
-		this.updateFilter = data.updateFilter;
+		this.scope = data.scope || null;
 
 		// Reset currentOffset so that reusing the dialog multiple times in a
 		// session won't produce unexpected behavior. (T404661)
@@ -407,7 +439,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 			this.surface.context.hide();
 		}
 
-		this.showActions( actions, data.newActions || [] );
+		this.showScopedActions( data.newActions || [] );
 		if ( this.onPosition ) {
 			// This currently only applies to SidebarEditCheckDialog but needs to be
 			// called immediately so margin-top is set before the animation starts.
