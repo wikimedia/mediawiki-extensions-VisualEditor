@@ -15,7 +15,8 @@ const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
  *   its state.
  * - A first refresh runs soon after the controller connects to a surface.
  *   Actions found in this refresh are not "new", because they are restored
- *   or are suggestions that the user did not cause.
+ *   or are suggestions that the user did not cause. A refresh runs the
+ *   checks of the mid-edit listeners at the same time.
  * - Mid-edit, an undo stack change runs the onDocumentChange checks. A
  *   selection in a different branch node runs the onBranchNodeChange checks,
  *   if the document changed after their last run. updateForListener keeps an
@@ -161,7 +162,6 @@ Controller.prototype.clearState = function () {
 	this.taggedIds = {};
 	this.ephemeralTags = [];
 	this.lastBranchNodeChangeHistoryPointer = null;
-	this.currentListenerPromise = null;
 	this.refreshDeferred = null;
 	this.sidebarOpeningPromise = null;
 	this.runsByListener = {};
@@ -359,41 +359,25 @@ Controller.prototype.refresh = function ( useCache ) {
 		this.emit( 'actionsUpdated', 'onBeforeSave', actions, [], [], false );
 		return deferred.resolve( actions ).promise();
 	} else {
-		// Use a process so that updateForListener doesn't run twice in parallel,
-		// which causes problems as the active actions list can change.
-		// TODO: this causes problems if the refresh triggers a sidebar opening
-		// and both listeners have actions, as the second actionsUpdated won't be
-		// caught by the still-opening sidebar.
-		const process = new OO.ui.Process();
-		midEditListeners.forEach(
-			( listener ) => process.next( () => this.updateForListener( listener, true ) )
-		);
-		process.execute().always( () => {
+		// Run the listeners at the same time, so that a slow check for one
+		// listener does not delay the checks for the other. Start each in its
+		// own idle callback, so that their synchronous work is not one long
+		// task. The timeout limits the delay when the page is busy.
+		const runs = midEditListeners.map( ( listener ) => new Promise( ( resolve ) => {
+			mw.requestIdleCallback( () => {
+				try {
+					resolve( this.updateForListener( listener, true ) );
+				} catch ( error ) {
+					mw.log.error( 'Could not update for listener: ' + listener, error );
+					resolve( [] );
+				}
+			}, { timeout: 300 } );
+		} ) );
+		Promise.all( runs ).then( () => {
 			deferred.resolve( this.getActions() );
 		} );
 		return deferred.promise();
 	}
-};
-
-/**
- * Wait for any current action generation to finish
- *
- * @return {Promise<mw.editcheck.EditCheckAction[]>} An updated set of
- *  actions. This promise will resolve *after* any actionsUpdated events are
- *  fired.
- */
-Controller.prototype.whenActionsSettled = function () {
-	if ( this.refreshDeferred ) {
-		// A refresh is happening, which may mean multiple listeners being run
-		// in sequence, so return the promise that will summarize that:
-		return this.refreshDeferred.promise();
-	}
-	if ( this.currentListenerPromise ) {
-		// updateForListener is running, so wait for it to be done:
-		return this.currentListenerPromise;
-	}
-	// Nothing is currently being done, so just return the current known actions:
-	return ve.createDeferred().resolve( this.getActions() ).promise();
 };
 
 /**
@@ -618,14 +602,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			mw.log.error( 'Could not update for listener: ' + listener, error );
 			return [];
 		} );
-	this.currentListenerPromise = actionsPromise;
-	const resetPromise = () => {
-		clearPending();
-		if ( this.currentListenerPromise === actionsPromise ) {
-			this.currentListenerPromise = null;
-		}
-	};
-	actionsPromise.then( resetPromise, resetPromise );
+	actionsPromise.then( clearPending, clearPending );
 	return actionsPromise;
 };
 

@@ -156,7 +156,8 @@ QUnit.test( 'getActions gives the actions for the current mode', ( assert ) => {
  * @ignore
  * @param {Object} spec Actions for the next run. Change its properties between runs.
  * @param {Object} [checkStatic] Static properties of the stub check
- * @return {Object} The controller, and the factory to use as mw.editcheck.editCheckFactory
+ * @return {Object} The controller, the factory to use as mw.editcheck.editCheckFactory,
+ *  and the surface model
  */
 const makeStubCheckController = function ( spec, checkStatic = {} ) {
 	const doc = new ve.dm.Document( [ { type: 'paragraph' }, ...'abcdefgh', { type: '/paragraph' } ] ),
@@ -193,7 +194,7 @@ const makeStubCheckController = function ( spec, checkStatic = {} ) {
 	controller.target = { active: true, deactivating: false, enableVisualSectionEditing: false };
 	controller.updateSuggestionCountDebounced = () => {};
 	controller.showSidebar = () => ve.createDeferred().resolve().promise();
-	return { controller, factory };
+	return { controller, factory, surfaceModel };
 };
 
 QUnit.test( 'updateForListener keeps equal actions and reports changes', async ( assert ) => {
@@ -498,6 +499,61 @@ QUnit.test( 'A streamed action opens the sidebar before all checks finish', asyn
 		);
 		assert.deepEqual( controller.pendingActionsByListener, {}, 'No action is pending after all checks finish' );
 		assert.deepEqual( tracked.slice().sort(), [ 'fast', 'fast', 'slow', 'suggestion' ], 'An action is tracked once' );
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+	}
+} );
+
+QUnit.test( 'refresh runs the mid-edit listeners at the same time', async ( assert ) => {
+	let releaseSlow;
+	const slow = new Promise( ( resolve ) => {
+		releaseSlow = resolve;
+	} );
+	const spec = { checks: [ [ 'document', 1, slow ] ], suggestions: [] };
+	const { controller, factory, surfaceModel } = makeStubCheckController( spec );
+
+	const BranchCheck = function () {};
+	OO.inheritClass( BranchCheck, mw.editcheck.BaseEditCheck );
+	BranchCheck.static.name = 'branch';
+	BranchCheck.prototype.canBeShown = () => true;
+	BranchCheck.prototype.onBranchNodeChange = function () {
+		return new mw.editcheck.EditCheckAction( {
+			check: this,
+			id: 'branch',
+			choices: [],
+			fragments: [ surfaceModel.getLinearFragment( new ve.Range( 3, 4 ) ) ]
+		} );
+	};
+	factory.register( BranchCheck );
+
+	let branchUpdated;
+	const branchUpdate = new Promise( ( resolve ) => {
+		branchUpdated = resolve;
+	} );
+	controller.on( 'actionsUpdated', ( listener ) => {
+		if ( listener === 'onBranchNodeChange' ) {
+			branchUpdated();
+		}
+	} );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const refreshing = controller.refresh();
+		await branchUpdate;
+		assert.strictEqual( refreshing.state(), 'pending', 'The refresh waits for the slow check' );
+		assert.deepEqual(
+			ve.test.utils.EditCheck.actionIds( controller.getActions() ),
+			[ 'branch' ],
+			'The other listener finishes while the slow check runs'
+		);
+
+		releaseSlow();
+		assert.deepEqual(
+			ve.test.utils.EditCheck.actionIds( await refreshing ),
+			[ 'document', 'branch' ],
+			'The refresh gives the actions of both listeners'
+		);
 	} finally {
 		mw.editcheck.editCheckFactory = originalFactory;
 	}
