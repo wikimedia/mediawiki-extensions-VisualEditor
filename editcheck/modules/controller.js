@@ -24,7 +24,9 @@ const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
  *   replaces the suggestion. updateForListener emits actionsUpdatedProgress
  *   for each action when it arrives. When all checks for the listener are
  *   finished, it emits actionsUpdated if the list of actions changed, or if
- *   an action was replaced.
+ *   an action was replaced. If a newer run for the same listener started
+ *   before this, updateForListener ignores the results of the older run and
+ *   does not emit actionsUpdated for it.
  * - Before save, the onBeforeSave checks run and inBeforeSave is true.
  *   getActions then gives only the pre-save actions.
  *
@@ -159,6 +161,7 @@ Controller.prototype.clearState = function () {
 	this.currentListenerPromise = null;
 	this.refreshDeferred = null;
 	this.sidebarOpeningPromise = null;
+	this.runsByListener = {};
 };
 
 /**
@@ -486,6 +489,8 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	if ( this.surface.getModel().isStaging() ) {
 		return Promise.resolve( this.getActions( listener ) );
 	}
+	const run = {};
+	this.runsByListener[ listener ] = run;
 	const onProgress = ( action ) => {
 		const existing = this.getActions( listener );
 		const oldAction = existing.find( ( existingAction ) => action.equals( existingAction ) );
@@ -515,6 +520,11 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	}
 	actionsPromise = actionsPromise
 		.then( ( actionsFromListener ) => {
+			if ( this.runsByListener[ listener ] !== run ) {
+				// A newer run for this listener started, or the surface was
+				// destroyed. The results of this run are out of date.
+				return this.getActions( listener );
+			}
 			// Get the existing actions for this listener
 			const existing = this.getActions( listener );
 

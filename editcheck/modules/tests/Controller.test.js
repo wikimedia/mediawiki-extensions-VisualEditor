@@ -149,7 +149,9 @@ QUnit.test( 'getActions gives the actions for the current mode', ( assert ) => {
  * Make a controller that runs one stub check
  *
  * The stub check makes the actions of spec.checks in the check run, and the
- * actions of spec.suggestions in the suggestion run. Each action is [ id, start ].
+ * actions of spec.suggestions in the suggestion run. Each action is
+ * [ id, start ], or [ id, start, promise ] for an action that arrives when
+ * the promise resolves.
  *
  * @ignore
  * @param {Object} spec Actions for the next run. Change its properties between runs.
@@ -168,14 +170,15 @@ const makeStubCheckController = function ( spec, checkStatic = {} ) {
 	Object.assign( StubCheck.static, checkStatic );
 	StubCheck.prototype.canBeShown = () => true;
 	StubCheck.prototype.onDocumentChange = function () {
-		return ( this.includeSuggestions ? spec.suggestions : spec.checks ).map(
-			( [ id, start ] ) => new mw.editcheck.EditCheckAction( {
+		return ( this.includeSuggestions ? spec.suggestions : spec.checks ).map( ( [ id, start, wait ] ) => {
+			const action = new mw.editcheck.EditCheckAction( {
 				check: this,
 				id,
 				choices: [],
 				fragments: [ surfaceModel.getLinearFragment( new ve.Range( start, start + 1 ) ) ]
-			} )
-		);
+			} );
+			return wait ? wait.then( () => action ) : action;
+		} );
 	};
 	const factory = new mw.editcheck.EditCheckFactory();
 	factory.register( StubCheck );
@@ -403,4 +406,31 @@ QUnit.test( 'showSidebar opens the sidebar only once while it opens', ( assert )
 		done();
 	} );
 	openDeferred.resolve( { closed: ve.createDeferred().promise() } );
+} );
+
+QUnit.test( 'updateForListener ignores the results of a run that a newer run replaced', async ( assert ) => {
+	let releaseOld;
+	const oldGate = new Promise( ( resolve ) => {
+		releaseOld = resolve;
+	} );
+	const spec = { checks: [ [ 'dismissed', 1, oldGate ] ], suggestions: [] };
+	const { controller, factory } = makeStubCheckController( spec );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const oldRun = controller.updateForListener( 'onDocumentChange' );
+		// For example, the user dismissed the action, which starts a new run
+		spec.checks = [ [ 'kept', 3 ] ];
+		await controller.updateForListener( 'onDocumentChange' );
+		releaseOld();
+		await oldRun;
+		assert.deepEqual(
+			ve.test.utils.EditCheck.actionIds( controller.getActions() ),
+			[ 'kept' ],
+			'The results of the newer run are kept when the older run finishes last'
+		);
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+	}
 } );
