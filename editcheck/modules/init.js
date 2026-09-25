@@ -263,7 +263,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		} );
 		controller.setup();
 
-		if ( ve.ui.EditCheckSuggestionsTool && !controller.editChecksArePossible( true ) ) {
+		if ( ve.ui.EditCheckSuggestionsTool && !controller.editChecksArePossible() ) {
 			// This is mostly to stop the suggestion toolbar item from appearing outside enabled namespaces
 			ve.ui.toolFactory.unregister( ve.ui.EditCheckSuggestionsTool );
 		}
@@ -292,18 +292,26 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		if ( mw.editcheck.suggestionsModeAvailable ) {
 			ve.track( 'activity.editCheck', { action: 'session-initialized-with-suggestions' } );
 		}
-		// Denominator for every other editcheck counter: one per article editing
-		// session, even when no check runs.
-		ve.track( 'stats.mediawiki_editcheck_sessions_total', 1, {
-			wiki: mw.config.get( 'wgDBname' ),
-			platform: mw.editcheck.getPlatform(),
-			experimental: mw.editcheck.experimental ? '1' : '0',
-			suggestions: mw.editcheck.suggestionsModeAvailable ? '1' : '0'
-		} );
+		let trackedSession = false;
 		target.on( 'surfaceReady', () => {
 			target.getSurface().on( 'destroy', () => {
 				mw.editcheck.resetSessionState();
 			} );
+			if (
+				!trackedSession &&
+				target.getSurface().getMode() === 'visual' &&
+				controller.editChecksArePossible()
+			) {
+				// Denominator for every other editcheck counter: one per visual article editing
+				// session, if checks or suggestions are available, even when no check runs.
+				ve.track( 'stats.mediawiki_editcheck_sessions_total', 1, {
+					wiki: mw.config.get( 'wgDBname' ),
+					platform: mw.editcheck.getPlatform(),
+					experimental: mw.editcheck.experimental ? '1' : '0',
+					suggestions: mw.editcheck.suggestionsModeAvailable ? '1' : '0'
+				} );
+				trackedSession = true;
+			}
 			// Temporary logging for T402460
 			target.getSurface().getView().on( 'paste', ( data ) => {
 				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
