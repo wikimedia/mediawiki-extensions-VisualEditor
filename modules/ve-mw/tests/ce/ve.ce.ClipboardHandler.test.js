@@ -17,6 +17,12 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 		}
 	};
 
+	const articleDataMw = ve.escapeHtml( JSON.stringify( {
+		name: 'templatestyles',
+		attrs: { src: 'CopyTest/styles.css' },
+		parts: [ { template: { target: { wt: 'CopyTest', href: './Template:CopyTest' }, params: { 1: { wt: '1' } }, i: 0 } } ]
+	} ) );
+
 	const cases = [
 		{
 			documentHtml: '<p></p>',
@@ -74,6 +80,27 @@ QUnit.test( 'beforePaste/afterPaste', ( assert ) => {
 				}
 			},
 			msg: 'External links not stripped, but only some protocols allowed'
+		},
+		{
+			documentHtml: '<p></p>',
+			rangeOrSelection: new ve.Range( 1 ),
+			// As written by ve.init.mw.ArticleCopyHandler for a transclusion that starts with TemplateStyles
+			pasteHtml: '<span typeof="mw:Transclusion" about="#mwt1" data-mw="' + articleDataMw + '" data-ve-no-generated-contents="true"></span>' +
+				'<span class="copytest" about="#mwt1"><a rel="mw:WikiLink" href="https://example.org/wiki/Special:BookSources/1">1</a></span>',
+			expectedRangeOrSelection: new ve.Range( 3 ),
+			expectedHtml: '<p><span typeof="mw:Transclusion" data-mw="' + articleDataMw + '"></span></p>',
+			msg: 'Transclusion copied from an article view'
+		},
+		{
+			documentHtml: '<p></p>',
+			rangeOrSelection: new ve.Range( 1 ),
+			pasteHtml: '<span typeof="mw:Transclusion" about="#mwt1" data-mw="' + articleDataMw + '" data-ve-no-generated-contents="true"></span>' +
+				'<span class="copytest" about="#mwt1"><a rel="mw:WikiLink" href="https://example.org/wiki/Special:BookSources/1">1</a></span>',
+			// The browser can remove an empty span when it pastes into the clipboard handler element
+			clipboardHandlerHtml: '<span class="copytest"><a href="https://example.org/wiki/Special:BookSources/1">1</a></span>',
+			expectedRangeOrSelection: new ve.Range( 3 ),
+			expectedHtml: '<p><span typeof="mw:Transclusion" data-mw="' + articleDataMw + '"></span></p>',
+			msg: 'Transclusion copied from an article view, span removed by paste'
 		},
 		{
 			rangeOrSelection: new ve.Range( 1 ),

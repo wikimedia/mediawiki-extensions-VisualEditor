@@ -438,7 +438,8 @@
 				"modules/ve-mw/preinit/ve.utils.parsoid.js",
 				"modules/ve-mw/preinit/ve.utils.client.js",
 				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetLoader.js",
-				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetSaver.js"
+				"modules/ve-mw/preinit/ve.init.mw.ArticleTargetSaver.js",
+				"modules/ve-mw/preinit/ve.init.mw.ArticleCopyHandler.js"
 			],
 			"dependencies": [
 				"ext.visualEditor.track",
@@ -2417,6 +2418,7 @@
 			"modules/ve-mw/tests/preinit/ve.utils.parsoid.test.js",
 			"modules/ve-mw/tests/preinit/ve.init.mw.ArticleTargetSaver.test.js",
 			"modules/ve-mw/tests/preinit/ve.init.mw.DiffLoader.test.js",
+			"modules/ve-mw/tests/preinit/ve.init.mw.ArticleCopyHandler.test.js",
 			"lib/ve/tests/ve.DiffMatchPatch.test.js",
 			"lib/ve/tests/ve.EventSequencer.test.js",
 			"lib/ve/tests/ve.Scheduler.test.js",
