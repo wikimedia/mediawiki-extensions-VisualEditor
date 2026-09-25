@@ -44,6 +44,11 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.GutterSidebarEditCheckDialog.super.prototype.initialize.call( this );
 
+	// OO.ui.Window#ready focuses the content, and the browser scrolls it into
+	// view. The content is at the top of the surface, above the edited section.
+	// The gutter must not take the focus, so make the content unfocusable.
+	this.$content.removeAttr( 'tabindex' );
+
 	this.sections = [];
 	this.navigableActions = [];
 	this.hasActionInSectionInitially = false;
