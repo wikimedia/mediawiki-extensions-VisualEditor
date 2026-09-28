@@ -402,14 +402,16 @@ mw.editcheck.BaseEditCheck.prototype.canBeShown = function ( documentModel = und
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.inAllowedNamespace = function () {
+	const currentNamespace = mw.config.get( 'wgNamespaceNumber' );
 	const namespaces = mw.config.get( 'wgNamespaceIds' ); // { "name": id }
 	// Checks are always allowed in the main namespace
-	if ( mw.config.get( 'wgNamespaceNumber' ) === namespaces[ '' ] ) {
+	if ( currentNamespace === namespaces[ '' ] ) {
 		return true;
 	}
 	if ( this.config.extraNamespaces ) {
 		for ( const [ namespaceName, enabled ] of Object.entries( this.config.extraNamespaces ) ) {
-			if ( enabled && namespaces[ namespaceName.toLowerCase().replace( / /g, ' ' ) ] ) {
+			const normalizedName = namespaceName.toLowerCase().replace( / /g, '_' );
+			if ( enabled && namespaces[ normalizedName ] === currentNamespace ) {
 				return true;
 			}
 		}

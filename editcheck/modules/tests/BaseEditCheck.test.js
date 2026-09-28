@@ -850,3 +850,101 @@ QUnit.test( 'tag stores under the action tag name', ( assert ) => {
 		'Tag not stored under the check name'
 	);
 } );
+
+QUnit.test( 'inAllowedNamespace', ( assert ) => {
+	// itwiki-like setup, with English aliases for the draft namespaces
+	/* eslint-disable camelcase */
+	const namespaceIds = {
+		'': 0,
+		talk: 1,
+		user: 2,
+		user_talk: 3,
+		bozza: 118,
+		discussioni_bozza: 119,
+		draft: 118,
+		draft_talk: 119
+	};
+	/* eslint-enable camelcase */
+	const cases = [
+		{
+			name: 'Main namespace is always allowed',
+			namespace: 0,
+			extraNamespaces: {},
+			expected: true
+		},
+		{
+			name: 'Main namespace cannot be disabled',
+			namespace: 0,
+			extraNamespaces: { user: false },
+			expected: true
+		},
+		{
+			name: 'Other namespace is not allowed by default',
+			namespace: 2,
+			extraNamespaces: {},
+			expected: false
+		},
+		{
+			name: 'Configured namespace is allowed',
+			namespace: 118,
+			extraNamespaces: { bozza: true },
+			expected: true
+		},
+		{
+			name: 'Configured namespace does not allow a different namespace',
+			namespace: 2,
+			extraNamespaces: { bozza: true },
+			expected: false
+		},
+		{
+			name: 'Namespace name is case-insensitive',
+			namespace: 118,
+			extraNamespaces: { Bozza: true },
+			expected: true
+		},
+		{
+			name: 'Namespace name with spaces',
+			namespace: 119,
+			extraNamespaces: { 'Discussioni bozza': true },
+			expected: true
+		},
+		{
+			name: 'Namespace name with underscores',
+			namespace: 119,
+			// eslint-disable-next-line camelcase
+			extraNamespaces: { discussioni_bozza: true },
+			expected: true
+		},
+		{
+			name: 'Namespace alias is allowed',
+			namespace: 118,
+			extraNamespaces: { Draft: true },
+			expected: true
+		},
+		{
+			name: 'Disabled namespace is not allowed',
+			namespace: 118,
+			extraNamespaces: { bozza: false },
+			expected: false
+		},
+		{
+			name: 'Unknown namespace name is ignored',
+			namespace: 118,
+			extraNamespaces: { nonexistent: true },
+			expected: false
+		},
+		{
+			name: 'Config override object counts as enabled',
+			namespace: 118,
+			extraNamespaces: { bozza: {} },
+			expected: true
+		}
+	];
+
+	mw.config.set( 'wgNamespaceIds', namespaceIds );
+	cases.forEach( ( caseItem ) => {
+		mw.config.set( 'wgNamespaceNumber', caseItem.namespace );
+		const check = new mw.editcheck.BaseEditCheck( {}, { extraNamespaces: caseItem.extraNamespaces }, false );
+		assert.strictEqual( check.inAllowedNamespace(), caseItem.expected, caseItem.name );
+	} );
+} );
