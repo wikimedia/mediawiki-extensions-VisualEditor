@@ -31,6 +31,11 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 	// Parent constructor
 	ve.ui.EditCheckScrollIntoViewWidget.super.call( this, config );
 
+	if ( OO.ui.isMobile() ) {
+		// Set the position before the first show, so the transition has a start state.
+		this.$element.addClass( 've-ui-editCheck-scrollIntoView-bottom' );
+	}
+
 	this.target = ve.init.target;
 
 	this.trackedElements = new Map();
@@ -156,7 +161,6 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
 
 		if ( forced && !this.target.isVirtualKeyboardOpen() ) {
 			this.showButton.setIcon( this.outsideSectionState.hasAbove ? 'arrowUp' : 'arrowDown' );
-			this.$element.addClass( 've-ui-editCheck-scrollIntoView-bottom' );
 			this.$element.addClass( 've-ui-editCheck-scrollIntoView-visible' );
 			return;
 		}
@@ -174,9 +178,7 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
 		const firstEntry = this.trackedElements.values().next().value;
 		const isUp = firstEntry ? firstEntry.boundingClientRect.top < 0 : true;
 		this.showButton.setIcon( isUp ? 'arrowUp' : 'arrowDown' );
-		if ( OO.ui.isMobile() ) {
-			this.$element.addClass( 've-ui-editCheck-scrollIntoView-bottom' );
-		} else {
+		if ( !OO.ui.isMobile() ) {
 			this.$element.toggleClass( 've-ui-editCheck-scrollIntoView-top', isUp );
 			this.$element.toggleClass( 've-ui-editCheck-scrollIntoView-bottom', !isUp );
 		}
