@@ -32,14 +32,20 @@ ve.dm.MWCategoryMetaItem.static.matchTagNames = [ 'link' ];
 
 ve.dm.MWCategoryMetaItem.static.matchRdfaTypes = [ 'mw:PageProp/Category' ];
 
-ve.dm.MWCategoryMetaItem.static.toDataElement = function ( domElements ) {
+ve.dm.MWCategoryMetaItem.static.toDataElement = function ( domElements, converter ) {
 	// Parsoid: LinkHandlerUtils::serializeAsWikiLink
-	const href = domElements[ 0 ].getAttribute( 'href' ),
-		titleAndFragment = href.match( /^(.*?)(?:#(.*))?\s*$/ );
+	// Parses the URL to retrieve the page (category) it points to.
+	// Handles long (query-based) wiki links, similar to how internal links in wiki text are resolved.
+	const targetData = mw.libs.ve.getTargetDataFromHref(
+			domElements[ 0 ].getAttribute( 'href' ),
+			converter.getHtmlDocument()
+		),
+		titleAndFragment = targetData.title.match( /^(.*?)(?:#(.*))?\s*$/ );
+
 	return {
 		type: this.name,
 		attributes: {
-			category: mw.libs.ve.parseParsoidResourceName( titleAndFragment[ 1 ] ).title,
+			category: titleAndFragment[ 1 ],
 			sortkey: titleAndFragment[ 2 ] ? decodeURIComponent( titleAndFragment[ 2 ] ) : ''
 		}
 	};

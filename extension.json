@@ -2443,6 +2443,7 @@
 			"lib/ve/tests/dm/selections/ve.dm.TableSelection.test.js",
 			"modules/ve-mw/tests/dm/ve.dm.mwExample.js",
 			"modules/ve-mw/tests/dm/ve.dm.Converter.test.js",
+			"modules/ve-mw/tests/dm/metaitems/ve.dm.MWCategoryMetaItem.test.js",
 			"modules/ve-mw/tests/dm/annotations/ve.dm.MWInternalLinkAnnotation.test.js",
 			"modules/ve-mw/tests/dm/models/ve.dm.MWImageModel.test.js",
 			"modules/ve-mw/tests/dm/models/ve.dm.MWTemplateModel.test.js",
