@@ -411,6 +411,9 @@ mw.editcheck.EditCheckActionWidget.prototype.showFeedback = function ( data ) {
 		deferred.reject();
 	} );
 
+	// Feedback items might have links in them:
+	ve.targetLinksToNewWindow( form.$element[ 0 ] );
+
 	this.$body.prepend( form.$element );
 
 	if ( !data.suppressFeedback ) {
