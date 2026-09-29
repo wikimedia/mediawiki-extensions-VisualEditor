@@ -6,6 +6,9 @@
 		]
 	},
 	"tag-editcheck-newcontent-description": "Redakto-kontrolo (''EditCheck'') kredas ke nova kontenajo adjuntesis a la pagino",
+	"tag-editcheck-newreference-description": "Refero adjuntesis a la pagino",
+	"tag-editcheck-references-description": "EditCheck 'kredas' ke on bezonas refero",
+	"tag-editcheck-references-activated-description": "EditCheck 'kredas' ke refero bezonesis, e l'UI montresis",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Redakto per VisualEditor]]",
 	"tag-visualeditor-description": "Redaktita per la [[{{MediaWiki:visualeditor-descriptionpagelink}}|VisualEditor]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Redakto per VisualEditor: Kontrolar]]",
