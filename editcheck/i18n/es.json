@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"A.jalate",
 			"CeciMagi",
 			"Dbsnp",
 			"Ed g2s",
@@ -26,6 +27,7 @@
 	"editcheck-dialog-action-replace": "Reemplazar",
 	"editcheck-dialog-action-back": "Atrás",
 	"editcheck-dialog-action-submit": "Enviar",
+	"editcheck-dialog-action-done": "Hecho.",
 	"editcheck-dialog-scroll-into-view": "Ver sugerencias",
 	"editcheck-dialog-toggle": "Alternar visibilidad",
 	"editcheck-dialog-addref-description": "Ayuda a que los lectores entiendan de dónde proviene esta información agregando una cita.",
@@ -64,6 +66,9 @@
 	"editcheck-tone-reject-uncertain": "No sé cómo revisar el tono",
 	"editcheck-tone-reject-other": "Otro",
 	"editcheck-tone-thank": "¡Gracias por revisar el tono!",
+	"editcheck-sourceveri-quote-label": "La fuente dice:",
+	"editcheck-sourceveri-go-to-source": "Ir a la fuente:",
+	"editcheck-sourceveri-reject-other": "Otro",
 	"editcheck-yearlink-title": "Reparar el enlace al año",
 	"editcheck-yearlink-description": "Este enlace apunta a un año diferente al que se muestra en el texto. Ayuda a mejorar la precisión del artículo actualizando el año que se muestra y el año al que apunta el enlace para que coincidan.",
 	"editcheck-yearlink-action-use": "Usa $1",
