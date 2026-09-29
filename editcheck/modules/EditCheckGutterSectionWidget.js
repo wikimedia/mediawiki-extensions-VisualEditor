@@ -187,25 +187,30 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 			scrollPromise = ve.createDeferred().resolve().promise();
 		}
 		const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
-		scrollPromise.then( () => windowAction.open(
-			'mobileEditCheckDialog',
-			{
-				controller,
-				inBeforeSave: false,
-				scope: this.navigableActions,
-				newActions: [ action ],
-				sectionActions: this.actions,
-				footer: true
-			}
+		scrollPromise.then( () => (
+			windowAction.open(
+				'mobileEditCheckDialog',
+				{
+					controller,
+					inBeforeSave: false,
+					scope: this.navigableActions,
+					newActions: [ action ],
+					sectionActions: this.actions,
+					footer: true
+				}
+			).then(
+				// Note: windowAction.open returns a thenable window lifecycle instance... which
+				// resolves when the window closes. Get `opening` from the instance:
+				( instance ) => instance.opened
+			)
 		) ).then( () => {
 			if ( scrollConfig && scrollConfig.alignToTop ) {
 				// We already focused and scrolled because it was safe to do so
 				return;
 			}
-			// Wait for window to open and new surface padding to be applied
-			// before trying to focus and scroll. We can't just use one of
-			// the `instance` promises because those don't account for the
-			// surrounding animation.
+			// Wait for new surface padding to be applied before trying to
+			// focus and scroll. `opened` does not include the surrounding
+			// animation, so wait for it too.
 			setTimeout( () => {
 				controller.focusAction( action, true, scrollConfig );
 			}, OO.ui.theme.getDialogTransitionDuration() );
