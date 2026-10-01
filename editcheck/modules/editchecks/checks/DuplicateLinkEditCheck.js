@@ -33,6 +33,14 @@ mw.editcheck.DuplicateLinkEditCheck.static.title = OO.ui.deferMsg( 'editcheck-du
 
 mw.editcheck.DuplicateLinkEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-duplicate-link-description' );
 
+mw.editcheck.DuplicateLinkEditCheck.static.actionModes = {
+	adjacent: {
+		name: 'duplicateLink-adjacent',
+		title: OO.ui.deferMsg( 'editcheck-adjacent-link-title' ),
+		message: ve.deferJQueryMsg( 'editcheck-adjacent-link-description' )
+	}
+};
+
 mw.editcheck.DuplicateLinkEditCheck.static.choices = [
 	{
 		action: 'remove',
@@ -180,13 +188,10 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.onDocumentChange = function ( surf
 				if ( !this.getMergeOuterAnnotations( documentModel, mergeRange ) ) {
 					continue;
 				}
-				actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
+				actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, ve.extendObject( {
 					fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) ),
-					mode: 'adjacent',
-					name: 'duplicateLink-adjacent',
-					title: OO.ui.deferMsg( 'editcheck-adjacent-link-title' ),
-					message: ve.deferJQueryMsg( 'editcheck-adjacent-link-description' )
-				} ) );
+					mode: 'adjacent'
+				}, this.constructor.static.actionModes.adjacent ) ) );
 			} else {
 				actions.push( this.buildActionFromLinkRange( annRange.range, surfaceModel, {
 					fragments: highlights.map( ( ar ) => surfaceModel.getLinearFragment( ar.range ) )

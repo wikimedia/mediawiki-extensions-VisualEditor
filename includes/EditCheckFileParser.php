@@ -10,10 +10,10 @@ use MediaWiki\Language\MessageLocalizer;
 /**
  * Extracts structured metadata from edit check JavaScript source files.
  *
- * Handles three kinds of value expression that appear in the JS:
+ * Handles these kinds of value expression that appear in the JS:
  *  - string literals ('foo' / "foo")
- *  - message-function calls (ve.msg, mw.msg, OO.ui.deferMsg, …)
  *  - structured arrays / objects (decoded via tryJsonDecodeObjectString)
+ *  - message-function calls (ve.msg, mw.msg, OO.ui.deferMsg, …) inside arrays / objects
  */
 class EditCheckFileParser {
 
@@ -23,11 +23,13 @@ class EditCheckFileParser {
 	}
 
 	/**
-	 * Extract all static property values from a JS source file.
+	 * Extract the value of a static property from a JS source file.
+	 *
+	 * Supports string literals, and arrays or objects which tryJsonDecodeObjectString can decode.
 	 *
 	 * @param string $src Source code
-	 * @param string $prop Property name (e.g. 'name', 'title', 'choices')
-	 * @return string|array|null|\OOUI\HtmlSnippet
+	 * @param string $prop Property name (e.g. 'name', 'allowedContentLanguages')
+	 * @return mixed|null Value, or null if not found or not decodable
 	 */
 	public function extractStaticValue( string $src, string $prop ) {
 		$expr = $this->extractStaticAssignmentExpression( $src, $prop );
@@ -35,27 +37,11 @@ class EditCheckFileParser {
 			return null;
 		}
 
-		// String literal
 		if ( preg_match( '/^([\"\\\'])(.*?)\1$/', $expr, $mm ) ) {
-			if ( $prop === 'name' ) {
-				return $mm[2];
-			} else {
-				return new \OOUI\HtmlSnippet( $mm[2] );
-			}
+			return $mm[2];
 		}
 
-		$message = $this->parseMessage( $expr );
-		if ( $message !== '' ) {
-			return $message;
-		}
-
-		// For non-literal, non-message values, only expose data we explicitly care about.
-		// The common use-case here is extracting multi-line arrays/objects like `static.choices = [ ... ];`.
-		if ( $prop === 'choices' || $prop === 'allowedContentLanguages' ) {
-			return $this->tryJsonDecodeObjectString( $expr );
-		}
-
-		return null;
+		return $this->tryJsonDecodeObjectString( $expr );
 	}
 
 	/**
@@ -78,69 +64,6 @@ class EditCheckFileParser {
 			return $m[ 1 ];
 		}
 		return '';
-	}
-
-	/**
-	 * Find additional action modes by parsing EditCheckAction constructor calls.
-	 *
-	 * @param string $src Source code
-	 * @param array $checkData Base check data
-	 * @return array Derived check entries
-	 */
-	public function findExtraActionModes( string $src, array $checkData ): array {
-		$entries = [];
-		$objectBodies = [];
-		$patterns = [
-			'/new\s+mw\.editcheck\.EditCheckAction\s*\(\s*\{([\s\S]*?)\}\s*\)/',
-			'/buildActionFromLinkRange\s*\([\s\S]*?,\s*\{([\s\S]*?)\}\s*\)/',
-		];
-		foreach ( $patterns as $pattern ) {
-			if ( preg_match_all( $pattern, $src, $matches, PREG_SET_ORDER ) ) {
-				foreach ( $matches as $match ) {
-					$objectBodies[] = $match[1];
-				}
-			}
-		}
-
-		if ( !$objectBodies ) {
-			return $entries;
-		}
-
-		foreach ( $objectBodies as $objectBody ) {
-			$modeExpr = $this->extractObjectPropertyExpression( $objectBody, 'mode' );
-			if ( $modeExpr === null || !preg_match( '/^(["\'])(.*?)\1$/', trim( $modeExpr ), $modeMatch ) ) {
-				continue;
-			}
-			$mode = $modeMatch[2];
-
-			$footerIconExpr = $this->extractObjectPropertyExpression( $objectBody, 'footerIcon' );
-
-			$entryCheckData = $checkData;
-			$entryCheckData['name'] = $checkData['name'] . ' (' . $mode . ')';
-			$entryCheckData['mode'] = $mode;
-			$parsedMessageFields = [
-				'title' => 'title',
-				'message' => 'description',
-				'prompt' => 'prompt',
-				'footer' => 'footer',
-			];
-			foreach ( $parsedMessageFields as $prop => $targetKey ) {
-				$expr = $this->extractObjectPropertyExpression( $objectBody, $prop );
-				if ( !$expr ) {
-					continue;
-				}
-				$parsedValue = $this->parseMessage( $expr );
-				if ( $parsedValue !== '' ) {
-					$entryCheckData[$targetKey] = $parsedValue;
-				}
-			}
-			if ( $footerIconExpr !== null && preg_match( '/^(["\'])(.*?)\1$/', trim( $footerIconExpr ), $iconMatch ) ) {
-				$entryCheckData['footerIcon'] = $iconMatch[2];
-			}
-			$entries[] = $entryCheckData;
-		}
-
-		return $entries;
 	}
 
 	/**
@@ -237,26 +160,6 @@ class EditCheckFileParser {
 		return trim( $end === null ?
 			substr( $src, $start ) :
 			substr( $src, $start, $end - $start )
-		);
-	}
-
-	/**
-	 * Extract a top-level object property expression from a JS object literal body.
-	 *
-	 * @param string $objectBody Object literal content without surrounding braces
-	 * @param string $prop Property name
-	 * @return string|null The value expression, or null if the property is not present
-	 */
-	public function extractObjectPropertyExpression( string $objectBody, string $prop ): ?string {
-		$pattern = '/(^|,)\s*' . preg_quote( $prop, '/' ) . '\s*:\s*/m';
-		if ( !preg_match( $pattern, $objectBody, $m, PREG_OFFSET_CAPTURE ) ) {
-			return null;
-		}
-		$start = $m[0][1] + strlen( $m[0][0] );
-		$end = $this->findTopLevelDelimiter( $objectBody, $start, [ ',' ] );
-		return trim( $end === null ?
-			substr( $objectBody, $start ) :
-			substr( $objectBody, $start, $end - $start )
 		);
 	}
 

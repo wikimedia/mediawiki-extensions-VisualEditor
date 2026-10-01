@@ -50,6 +50,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 		this.$element.append( this.experimentalSubheading.$element );
 	}
 
+	this.suggestionFeedbackMenuSelect = null;
 	this.inactiveSelectionElements = null;
 	this.feedbackDeferred = null;
 
@@ -108,7 +109,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	if ( this.suggestion ) {
 		this.$element.addClass( 've-ui-editCheckActionWidget-suggestion' );
 
-		const suggestionFeedbackMenuSelect = new OO.ui.ButtonMenuSelectWidget( {
+		this.suggestionFeedbackMenuSelect = new OO.ui.ButtonMenuSelectWidget( {
 			label: ve.msg( 'visualeditor-feedback-tool' ),
 			icon: 'ellipsis',
 			framed: false,
@@ -134,7 +135,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 				]
 			}
 		} );
-		suggestionFeedbackMenuSelect.getMenu().on( 'choose', ( menuOption ) => {
+		this.suggestionFeedbackMenuSelect.getMenu().on( 'choose', ( menuOption ) => {
 			const choice = menuOption.getData();
 			if ( choice === 'feedback' ) {
 				this.onFeedbackSelect();
@@ -144,7 +145,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 				window.open( mw.libs.ve.resolveUrlOrTitle( choice ) );
 			}
 		} );
-		this.$actions.append( suggestionFeedbackMenuSelect.$element );
+		this.$actions.append( this.suggestionFeedbackMenuSelect.$element );
 	}
 
 	this.$element

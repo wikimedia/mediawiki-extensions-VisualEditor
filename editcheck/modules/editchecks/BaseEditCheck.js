@@ -84,6 +84,15 @@ mw.editcheck.BaseEditCheck.static.footerIcon = null;
 mw.editcheck.BaseEditCheck.static.prompt = null;
 
 /**
+ * Action config for each action mode other than the default, keyed by mode
+ *
+ * Special:EditChecks uses this to show each mode.
+ *
+ * @type {Object.<string,Object>}
+ */
+mw.editcheck.BaseEditCheck.static.actionModes = {};
+
+/**
  * Success message of the edit check
  *
  * TODO: Add a default success message?

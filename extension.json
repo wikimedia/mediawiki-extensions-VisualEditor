@@ -848,10 +848,16 @@
 		},
 		"ext.visualEditor.editCheck.special": {
 			"styles": [
-				"editcheck/modules/editCheck.special/editchecks.less",
-				"editcheck/modules/styles/EditCheckActionWidget.less",
-				"editcheck/modules/styles/SourceVerificationEditCheck.less",
-				"editcheck/modules/dialogs/styles/EditCheckDialog.less"
+				"editcheck/modules/editCheck.special/editchecks.less"
+			]
+		},
+		"ext.visualEditor.editCheck.special.widgets": {
+			"packageFiles": [
+				"editcheck/modules/editCheck.special/widgets.js"
+			],
+			"dependencies": [
+				"ext.visualEditor.editCheck",
+				"ext.visualEditor.editCheck.checks"
 			]
 		},
 		"ext.visualEditor.editCheck.headless": {

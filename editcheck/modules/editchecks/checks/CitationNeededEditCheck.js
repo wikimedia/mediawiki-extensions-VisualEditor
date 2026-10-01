@@ -83,7 +83,7 @@ mw.editcheck.CitationNeededEditCheck.prototype.onDocumentChange = function ( sur
  * @inheritdoc
  */
 mw.editcheck.CitationNeededEditCheck.prototype.getDescription = function ( action ) {
-	const node = action.fragments[ 0 ].getSelectedNode();
+	const node = action.fragments.length && action.fragments[ 0 ].getSelectedNode();
 
 	if ( !node ) {
 		return this.constructor.static.description;

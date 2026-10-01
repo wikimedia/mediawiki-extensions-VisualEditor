@@ -11,11 +11,9 @@ use MediaWiki\Content\JsonContent;
 use MediaWiki\Extension\VisualEditor\EditCheck\ResourceLoaderData;
 use MediaWiki\Html\Html;
 use MediaWiki\Html\TocGeneratorTrait;
-use MediaWiki\Language\RawMessage;
 use MediaWiki\Parser\Sanitizer;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
-use OOUI\MessageWidget;
 
 class SpecialEditChecks extends SpecialPage {
 	use TocGeneratorTrait;
@@ -60,14 +58,11 @@ class SpecialEditChecks extends SpecialPage {
 			$out->addHTML( Html::element( 'p', [], $this->msg( 'editcheck-specialeditchecks-disabled' )->text() ) );
 			return;
 		}
-		$out->enableOOUI();
 		$out->addModuleStyles( [
-			'oojs-ui.styles.icons-content',
-			'oojs-ui.styles.icons-interactions',
-			'oojs-ui.styles.icons-user',
 			'ext.visualEditor.editCheck.special',
 			'mediawiki.content.json'
 		] );
+		$out->addModules( 'ext.visualEditor.editCheck.special.widgets' );
 
 		$contentLang = $this->getContext()->getLanguage()->getCode();
 		$dir = dirname( __DIR__ );
@@ -216,13 +211,6 @@ class SpecialEditChecks extends SpecialPage {
 			$checkData = [
 				'file' => $file,
 				'name' => $name,
-				'mode' => '',
-				'title' => $this->parser->extractStaticValue( $src, 'title' ),
-				'description' => $this->parser->extractStaticValue( $src, 'description' ),
-				'prompt' => $this->parser->extractStaticValue( $src, 'prompt' ),
-				'footer' => $this->parser->extractStaticValue( $src, 'footer' ),
-				'footerIcon' => $this->parser->extractStaticValue( $src, 'footerIcon' ),
-				'choices' => $this->parser->extractStaticValue( $src, 'choices' ),
 				'allowedContentLanguages' => $this->parser->extractStaticValue( $src, 'allowedContentLanguages' ),
 				'defaultConfig' => $this->parser->extractDefaultConfig( $src ),
 			];
@@ -243,8 +231,6 @@ class SpecialEditChecks extends SpecialPage {
 					continue;
 				}
 			}
-
-			$checkData['extraModes'] = $this->parser->findExtraActionModes( $src, $checkData );
 			$checks[] = $checkData;
 		}
 		usort( $checks, static function ( $a, $b ) {
@@ -293,12 +279,7 @@ class SpecialEditChecks extends SpecialPage {
 					$matchCheckData = [
 						'file' => '',
 						'name' => $checkData['name'] . " ($name)",
-						'mode' => $item['mode'] ?? '',
-						'title' => $item['title'] ?? '',
-						'description' => new \OOUI\HtmlSnippet( ( new RawMessage( $item['message'] ?? '' ) )->parse() ),
-						'prompt' => $item['prompt'] ?? '',
-						'footer' => $item['footer'] ?? '',
-						'choices' => $checkData['choices'] ?? [],
+						'matchRuleId' => (string)$name,
 						'allowedContentLanguages' => '',
 						'defaultConfig' => json_encode( $item['config'] ?? '' ),
 						'matchItem' => $item,
@@ -333,16 +314,8 @@ class SpecialEditChecks extends SpecialPage {
 			$defaultConfig = $this->jsonTableFromObjectString( $checkData['defaultConfig'] );
 		}
 
-		if ( empty( $checkData['title'] ) && empty( $checkData['description'] ) ) {
-			$widget = '';
-		} else {
-			$widget = $this->buildEditCheckActionWidget( $checkData, $suggestions );
-		}
+		$widget = $this->buildWidgetPlaceholder( $checkData, $suggestions );
 		$this->addTocSubSection( $checkData['name'], 'rawmessage', $checkData['name'] );
-
-		foreach ( $checkData['extraModes'] ?? [] as $modeCheckData ) {
-			$widget .= $this->buildEditCheckActionWidget( $modeCheckData, $suggestions );
-		}
 
 		$html .= Html::rawElement( 'tr', [],
 			Html::rawElement( 'td', [],
@@ -377,82 +350,23 @@ class SpecialEditChecks extends SpecialPage {
 		return $html;
 	}
 
-	private function buildEditCheckActionWidget( array $checkData, bool $suggestion ): string {
-		$widget = new MessageWidget(
-			[
-				'type' => $suggestion ? 'progressive' : 'warning',
-				'icon' => $suggestion ? 'lightbulb' : null,
-				'label' => $checkData['title'] ?: "\u{00A0}",
-				'classes' => [ 've-ui-editCheckActionWidget' ]
-			]
-		);
-		if ( $suggestion ) {
-			$widget->clearFlags()->setFlags( [ 'progressive' ] );
-		}
-		if ( $suggestion ) {
-			$widget->addClasses( [ 've-ui-editCheckActionWidget-suggestion' ] );
-		}
-		$actions = new \OOUI\Tag( 'div' );
-		$actions->addClasses( [ 've-ui-editCheckActionWidget-actions' ]	);
-		if ( $checkData['prompt'] ) {
-			$actions
-				->addClasses( [ 've-ui-editCheckActionWidget-actions-prompted' ] )
-				->appendContent(
-					new \OOUI\LabelWidget( [
-						'label' => $checkData['prompt'],
-						'classes' => [ 've-ui-editCheckActionWidget-prompt' ]
-					] ),
-				);
-		}
-		$body = ( new \OOUI\Tag( 'div' ) )->addClasses( [ 've-ui-editCheckActionWidget-body' ] );
-		$widget->appendContent(
-			$body
-				->appendContent( new \OOUI\LabelWidget( [ 'label' => $checkData['description'] ] ) )
-				->appendContent( $actions )
-		);
-		if ( $checkData['footer'] ) {
-			if ( $checkData['footerIcon'] ) {
-				$body->appendContent(
-					new \OOUI\MessageWidget( [
-						'icon' => $checkData['footerIcon'],
-						'label' => $checkData['footer'],
-						'inline' => true,
-						'classes' => [ 've-ui-editCheckActionWidget-footer' ]
-					] )
-				);
-			} else {
-				$body->appendContent(
-					new \OOUI\LabelWidget( [
-						'label' => $checkData['footer'],
-						'classes' => [ 've-ui-editCheckActionWidget-footer' ]
-					] ),
-				);
-			}
-		}
-
-		if ( !empty( $checkData['choices'] ) ) {
-			foreach ( $checkData['choices'] as $choice ) {
-				// Filter by mode
-				if (
-					isset( $choice['modes'] ) && is_array( $choice['modes'] ) &&
-					!in_array( $checkData['mode'], $choice['modes'], true )
-				) {
-					continue;
-				}
-				$actionButton = new \OOUI\ButtonWidget( [
-					'label' => $choice[ 'label' ],
-					'flags' => $choice['flags'] ?? [],
-					'icon' => $choice['icon'] ?? null,
-					'classes' => [ 'oo-ui-actionWidget' ],
-				] );
-				$actions->appendContent( $actionButton );
-			}
-		}
-		return Html::rawElement(
-			'div',
-			[ 'class' => 've-ui-editCheckDialog' ],
-			(string)$widget
-		);
+	/**
+	 * Build the element into which the client shows the check cards.
+	 *
+	 * The client uses the editor code for the cards, so they look the same as in the editor.
+	 *
+	 * @param array $checkData Edit check data
+	 * @param bool $suggestion
+	 * @return string
+	 */
+	private function buildWidgetPlaceholder( array $checkData, bool $suggestion ): string {
+		$matchRuleId = $checkData['matchRuleId'] ?? null;
+		return Html::element( 'div', [
+			'class' => 've-ui-editCheckDialog mw-editchecks-widget',
+			'data-check' => $matchRuleId === null ? $checkData['name'] : 'textMatch',
+			'data-match-rule' => $matchRuleId,
+			'data-suggestion' => $suggestion ? '1' : null,
+		] );
 	}
 
 	/**
