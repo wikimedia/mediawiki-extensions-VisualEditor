@@ -23,12 +23,16 @@
  * @param {Object[]} [config.choices] User choices
  * @param {boolean} [config.trackId] Whether to include the action's ID in instrumentation
  * @param {boolean} [config.collapsible=true] Whether the widget can be expanded and collapsed
+ * @param {string} [config.messageType] Name of the mw.editcheck.SystemMessageEditCheck
+ *  messageType this action was built from. Used only to give the widget a
+ *  `ve-ui-editCheckActionWidget-<messageType>` class as a styling hook.
  */
 mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	// Mixin constructor
 	OO.EventEmitter.call( this );
 
 	this.mode = config.mode || '';
+	this.messageType = config.messageType;
 	this.check = config.check;
 	this.fragments = config.fragments;
 	this.originalText = this.fragments.map( ( fragment ) => fragment.getText() );
@@ -297,6 +301,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		icon: this.icon,
 		name: this.getName(),
 		checkName: this.check.getName(),
+		isSystemCheck: this.check.isSystemCheck(),
 		label: this.getTitle(),
 		message: this.getDescription(),
 		footer: this.getFooter(),
@@ -307,7 +312,8 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		singleAction,
 		suggestion: this.suggestion,
 		experimental: this.isExperimental(),
-		collapsible: this.collapsible
+		collapsible: this.collapsible,
+		classes: this.messageType ? [ 've-ui-editCheckActionWidget-' + this.messageType ] : undefined
 	} );
 	this.widget.connect( this, {
 		actionClick: [ 'onActionClick', surface ]

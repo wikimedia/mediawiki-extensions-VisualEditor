@@ -68,6 +68,7 @@ class Hooks implements
 	public function onGetPreferences( $user, &$preferences ) {
 		$api = [ 'type' => 'api' ];
 		$preferences['visualeditor-editcheck-suggestions-toggle'] = $api;
+		$preferences['visualeditor-editcheck-showpublishpath'] = $api;
 
 		$services = MediaWikiServices::getInstance();
 		$userOptionsLookup = $services->getUserOptionsLookup();

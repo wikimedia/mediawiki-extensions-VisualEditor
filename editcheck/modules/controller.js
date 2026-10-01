@@ -865,6 +865,8 @@ Controller.prototype.registerEphemeralTag = function ( name, tag, fragment ) {
  * @param {ve.dm.SurfaceFragment} fragment Fragment where the resolved action was
  * @param {Object} config EditCheckAction configuration
  * @param {string} [config.messageType='success'] Name of a static.messageTypes entry to use as a base
+ * @param {boolean} [config.dismissOnOtherFocus] If this suggestion card should be dismissed as soon as user moves on
+ *  to a different check or suggestion
  * @return {Promise<mw.editcheck.EditCheckAction[]>} Resolves with the updated onSystemMessage actions
  */
 Controller.prototype.registerSystemMessage = function ( fragment, config ) {
@@ -877,8 +879,23 @@ Controller.prototype.registerSystemMessage = function ( fragment, config ) {
 	record.originalData = record.fragment.getData();
 	this.pendingSystemMessages.push( record );
 
+	if ( config.dismissOnOtherFocus ) {
+		const onOtherFocus = ( focusedAction ) => {
+			if ( !focusedAction || focusedAction.systemMessageRecord === record ) {
+				return;
+			}
+			this.off( 'focusAction', onOtherFocus );
+			mw.editcheck.SystemMessageEditCheck.static.dismissRecord( this, record );
+		};
+		this.on( 'focusAction', onOtherFocus );
+	}
+
 	// Auto-dismiss after the specified time
-	record.autoDismissTimeout = setTimeout( () => mw.editcheck.SystemMessageEditCheck.static.dismissRecord( this, record ), record.config.autoDismiss );
+	// (if not specified, this message type stays until the user acts on it or navigates away)
+	if ( record.config.autoDismiss ) {
+		record.autoDismissTimeout = setTimeout( () => mw.editcheck.SystemMessageEditCheck.static.dismissRecord( this, record ), record.config.autoDismiss );
+	}
+
 	return this.updateForListener( 'onSystemMessage' );
 };
 
@@ -1663,6 +1680,20 @@ Controller.prototype.onActionCompleted = function ( action, message ) {
 	}
 	if ( message ) {
 		title = message;
+	}
+	if ( action.isSuggestion() && mw.editcheck.showPublishPath && !OO.ui.isMobile() ) {
+		mw.editcheck.showPublishPath = false;
+		if ( !mw.user.isAnon() ) {
+			new mw.Api().saveOption( 'visualeditor-editcheck-showpublishpath', '0' );
+			mw.user.options.set( 'visualeditor-editcheck-showpublishpath', '0' );
+		}
+		this.registerSystemMessage( fragment, {
+			title,
+			messageType: 'publishPath',
+			suggestion: action.suggestion,
+			dismissOnOtherFocus: true
+		} );
+		return;
 	}
 	this.registerSystemMessage( fragment, { title, suggestion: action.suggestion } );
 };

@@ -51,7 +51,8 @@ mw.editcheck.SystemMessageEditCheck.prototype.canBeShown = function () {
 };
 
 /**
- * Message types, for now just 'success'
+ * Message types: default 'success' card, and 'publishPath', shown instead
+ * of 'success' on the user's first successfully completed edit
  *
  * @type {Object.<string,Object>}
  */
@@ -61,6 +62,23 @@ mw.editcheck.SystemMessageEditCheck.static.messageTypes = {
 		collapsible: false,
 		choices: [],
 		autoDismiss: 2000
+	},
+	publishPath: {
+		type: 'success',
+		collapsible: true,
+		message: OO.ui.deferMsg( 'editcheck-dialog-publish-path-message' ),
+		choices: [
+			{
+				action: 'viewMoreSuggestions',
+				label: OO.ui.deferMsg( 'editcheck-dialog-action-view-more-suggestions' )
+			},
+			{
+				action: 'publish',
+				label: OO.ui.deferMsg( 'editcheck-dialog-action-publish' ),
+				flags: [ 'progressive' ]
+			}
+		]
+		// No autoDismiss because it should exist until the user acts or moves on to another action
 	}
 };
 
@@ -137,6 +155,31 @@ mw.editcheck.SystemMessageEditCheck.prototype.getActions = function () {
 mw.editcheck.SystemMessageEditCheck.prototype.onSystemMessage = function () {
 	this.controller.dropStaleSystemMessages();
 	return this.getActions();
+};
+
+/**
+ * @inheritdoc
+ */
+mw.editcheck.SystemMessageEditCheck.prototype.act = function ( choice, action ) {
+	const controller = this.controller;
+	if ( choice === 'publish' ) {
+		controller.target.showSaveDialog( null );
+		this.constructor.static.dismissRecord( controller, action.systemMessageRecord );
+		return;
+	}
+	if ( choice === 'viewMoreSuggestions' ) {
+		const position = action.getFocusSelection().getCoveringRange().start;
+		const otherSuggestions = controller.getActions().filter(
+			( candidate ) => candidate !== action && candidate.isSuggestion() && !candidate.check.isSystemCheck()
+		);
+		const nextAction = otherSuggestions.find(
+			( candidate ) => candidate.getFocusSelection().getCoveringRange().start >= position
+		) || otherSuggestions[ otherSuggestions.length - 1 ] || null;
+		this.constructor.static.dismissRecord( controller, action.systemMessageRecord );
+		if ( nextAction ) {
+			controller.ensureActionIsShown( nextAction, { alignToTop: true } );
+		}
+	}
 };
 
 /* Registration */

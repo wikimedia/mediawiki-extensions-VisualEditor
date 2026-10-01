@@ -8,6 +8,7 @@
  * @param {string} config.type Type of message (e.g., 'warning', 'error')
  * @param {string} config.name Unique name of the action
  * @param {string} [config.checkName] Registered name of the check that made the action
+ * @param {boolean} [config.isSystemCheck] The check that made the action is a system check
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.label Title
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.message Body message
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} [config.footer] Footer message
@@ -28,6 +29,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	this.name = config.name;
 	// this.name can hold a community rule ID. Metrics need the bounded name.
 	this.checkName = config.checkName || config.name;
+	this.isSystemCheck = !!config.isSystemCheck;
 
 	this.actions = new OO.ui.ActionSet();
 	this.actions.connect( this, {
@@ -110,7 +112,10 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	if ( this.suggestion ) {
 		this.$element.addClass( 've-ui-editCheckActionWidget-suggestion' );
+	}
 
+	// The feedback/report menu doesn't apply to a system-generated follow-up card
+	if ( this.suggestion && !this.isSystemCheck ) {
 		this.suggestionFeedbackMenuSelect = new OO.ui.ButtonMenuSelectWidget( {
 			label: ve.msg( 'visualeditor-feedback-tool' ),
 			icon: 'ellipsis',

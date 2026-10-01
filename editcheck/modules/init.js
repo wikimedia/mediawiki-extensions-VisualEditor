@@ -22,11 +22,17 @@ if ( ecenable === '0' ) {
 }
 // any setting for forceEnable will bypass account-specific configs, though it will still honor the other configs
 const experimentalPref = !!mw.user.options.get( 'visualeditor-editcheck-experimental' ) && !!mw.user.options.get( 'visualeditor-editcheck-suggestions' );
+// if user should be shown the publish path card after successfully completing a check
+// this will default to true for newer editors
+const storedShowPublishPath = mw.user.options.get( 'visualeditor-editcheck-showpublishpath' );
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || experimentalPref || ecenable === '2' ),
 	suggestionsModeAvailable: !!mw.user.options.get( 'visualeditor-editcheck-suggestions' ),
+	showPublishPath: storedShowPublishPath !== null ?
+		storedShowPublishPath !== '0' :
+		mw.config.get( 'wgUserEditCount', 0 ) <= 10,
 	// runtime performance logging config that we can adjust from the console
 	sessionPerfConfig: { checksMax: 5000, typingMaxSamples: 5000 },
 	resetSessionState: function () {
