@@ -211,20 +211,44 @@ QUnit.test( 'select', ( assert ) => {
 		{
 			name: 'Desktop selects a focusable node',
 			isMobile: false,
-			selectFocusRange: false,
+			forceCollapse: false,
 			expected: new ve.Range( 1, 4 )
 		},
 		{
 			name: 'Mobile moves the cursor instead of selecting a focusable node',
 			isMobile: true,
-			selectFocusRange: false,
+			forceCollapse: false,
 			expected: new ve.Range( 4 )
 		},
 		{
-			name: 'Mobile selects the focus range on request',
+			name: 'forceCollapse always collapses to the nearest edge of the check range',
 			isMobile: true,
-			selectFocusRange: true,
-			expected: new ve.Range( 1, 4 )
+			forceCollapse: true,
+			expected: new ve.Range( 4 )
+		},
+		{
+			name: 'forceCollapse still nudges the cursor when it already overlaps the check range, closer to the end',
+			isMobile: false,
+			forceCollapse: true,
+			// Cursor starts inside the check range (1, 4), closer to its end
+			startRange: new ve.Range( 3 ),
+			expected: new ve.Range( 4 )
+		},
+		{
+			name: 'forceCollapse still nudges the cursor when it already overlaps the check range, closer to the start',
+			isMobile: false,
+			forceCollapse: true,
+			// Cursor starts inside the check range (1, 4), closer to its start
+			startRange: new ve.Range( 2 ),
+			expected: new ve.Range( 1 )
+		},
+		{
+			name: 'forceCollapse collapses to the end when the selection exactly matches the check range',
+			isMobile: false,
+			forceCollapse: true,
+			// Selection exactly covers the check range (1, 4), as for a link check
+			startRange: new ve.Range( 1, 4 ),
+			expected: new ve.Range( 4 )
 		}
 	];
 
@@ -239,15 +263,15 @@ QUnit.test( 'select', ( assert ) => {
 			const fragments = [ surfaceModel.getFragment( new ve.dm.LinearSelection( new ve.Range( 1, 4 ) ) ) ];
 			const action = new mw.editcheck.EditCheckAction( { fragments, choices: [] } );
 
-			// Start outside the check range, so the cursor has somewhere to move to
-			surfaceModel.setLinearSelection( new ve.Range( 8 ) );
+			// Start outside the check range by default, so the cursor has somewhere to move to
+			surfaceModel.setLinearSelection( caseItem.startRange || new ve.Range( 8 ) );
 
 			OO.ui.isMobile = () => caseItem.isMobile;
 			// Pretend the check range holds a focusable node
 			action.select( {
 				getModel: () => surfaceModel,
 				getView: () => ( { findFocusedNode: () => ( {} ) } )
-			}, caseItem.selectFocusRange, false );
+			}, caseItem.forceCollapse, false );
 
 			assert.equalRange(
 				surfaceModel.getSelection().getRange(),
@@ -258,6 +282,43 @@ QUnit.test( 'select', ( assert ) => {
 	} finally {
 		OO.ui.isMobile = isMobileOrig;
 	}
+} );
+
+QUnit.test( 'select: forceCollapse overrides focusAnnotation', ( assert ) => {
+	const doc = new ve.dm.Document( [
+		{ type: 'paragraph' }, ...'abcdefghij', { type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	] );
+	const surfaceModel = new ve.dm.Surface( doc );
+	const fragments = [ surfaceModel.getFragment( new ve.dm.LinearSelection( new ve.Range( 1, 4 ) ) ) ];
+	let selectAnnotationCalled = false;
+	const action = new mw.editcheck.EditCheckAction( {
+		fragments,
+		choices: [],
+		focusAnnotation: () => {
+			selectAnnotationCalled = true;
+		}
+	} );
+
+	// Start outside the check range, so the cursor has somewhere to move to
+	surfaceModel.setLinearSelection( new ve.Range( 8 ) );
+
+	action.select( {
+		getModel: () => surfaceModel,
+		getView: () => ( {
+			findFocusedNode: () => ( {} ),
+			selectAnnotation: () => {
+				selectAnnotationCalled = true;
+			}
+		} )
+	}, true, false );
+
+	assert.strictEqual( selectAnnotationCalled, false, 'focusAnnotation is ignored' );
+	assert.equalRange(
+		surfaceModel.getSelection().getRange(),
+		new ve.Range( 4 ),
+		'The selection still collapses to the nearest edge of the check range'
+	);
 } );
 
 QUnit.test( 'findEqualActions', ( assert ) => {

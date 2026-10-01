@@ -77,7 +77,7 @@ mw.editcheck.DoubleBoldEditCheck.prototype.onDocumentChange = function ( surface
 mw.editcheck.DoubleBoldEditCheck.prototype.act = function ( choice, action, surface ) {
 	if ( choice === 'remove' ) {
 		action.fragments[ 0 ].annotateContent( 'clear', 'textStyle/bold' );
-		action.select( surface, this );
+		action.select( surface, true );
 		action.complete();
 		return;
 	}

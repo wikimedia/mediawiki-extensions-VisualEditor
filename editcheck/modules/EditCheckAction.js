@@ -581,26 +581,36 @@ mw.editcheck.EditCheckAction.prototype.getTagName = function () {
  * Select the action in the surface
  *
  * @param {ve.ui.Surface} surface
- * @param {boolean} selectFocusRange Whether to select the focus range of the check,
- *  or just move the cursor to the nearest point in the selection if outside the check range
+ * @param {boolean} forceCollapse Whether to force the cursor to the edge of the check's range,
+ * or to only do so if outside the check range
  * @param {boolean} [focus=true] Activate and focus the surface
  */
-mw.editcheck.EditCheckAction.prototype.select = function ( surface, selectFocusRange, focus = true ) {
+mw.editcheck.EditCheckAction.prototype.select = function ( surface, forceCollapse, focus = true ) {
 	const surfaceModel = surface.getModel();
 	const surfaceView = surface.getView();
 	if ( focus ) {
 		surfaceView.activate();
 	}
-	if ( this.focusAnnotation ) {
+	const checkRange = this.getFocusSelection().getCoveringRange();
+	if ( forceCollapse ) {
+		const surfaceRange = surfaceModel.getSelection().getCoveringRange();
+		const nearestOffset = surfaceRange === null ?
+			checkRange.start :
+			( Math.abs( surfaceRange.start - checkRange.start ) < Math.abs( surfaceRange.end - checkRange.end ) ?
+				checkRange.start : checkRange.end );
+		surfaceModel.setLinearSelection( new ve.Range( nearestOffset ) );
+		if ( focus ) {
+			surfaceView.focus();
+		}
+	} else if ( this.focusAnnotation ) {
 		surfaceModel.setSelection( this.getFocusSelection() );
 		if ( focus ) {
 			surfaceView.selectAnnotation( this.focusAnnotation );
 		}
 	} else {
-		const checkRange = this.getFocusSelection().getCoveringRange();
 		// On mobile a node-covering selection opens the context, and the context
-		// closes the edit check drawer. Make this selection only on request.
-		if ( selectFocusRange || ( !OO.ui.isMobile() && surfaceView.findFocusedNode( checkRange ) ) ) {
+		// closes the edit check drawer, so only select the focusable node on desktop.
+		if ( !OO.ui.isMobile() && surfaceView.findFocusedNode( checkRange ) ) {
 			surfaceModel.setLinearSelection( checkRange );
 		} else {
 			const surfaceRange = surfaceModel.getSelection().getCoveringRange();
