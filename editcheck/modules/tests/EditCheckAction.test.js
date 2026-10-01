@@ -318,3 +318,99 @@ QUnit.test( 'intendComplete, cancelComplete and discarded', ( assert ) => {
 		'An explicit completion is not duplicated or overridden by a later discard, even if completion was intended'
 	);
 } );
+
+QUnit.test( 'stale and revising', ( assert ) => {
+	const doc = ve.dm.example.createExampleDocumentFromData( [
+		{ type: 'paragraph' }, ...'abcdef', { type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	] );
+	const surface = new ve.dm.Surface( doc );
+	const controller = {
+		taggedFragments: {},
+		taggedIds: {},
+		ephemeralTags: [],
+		registerEphemeralTag: ve.test.utils.EditCheck.dummyController.registerEphemeralTag,
+		unregisterEphemeralTag: ve.test.utils.EditCheck.dummyController.unregisterEphemeralTag
+	};
+	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+	check.canBeStale = () => true;
+	const name = check.getName();
+	const newAction = ( config ) => new mw.editcheck.EditCheckAction( ve.extendObject( {
+		check,
+		choices: [],
+		fragments: [ surface.getLinearFragment( new ve.Range( 1, 4 ) ) ]
+	}, config ) );
+
+	const action = newAction();
+	const events = [];
+	action.on( 'stale', ( stale ) => events.push( stale ) );
+	assert.false( action.isStale(), 'New action is not stale' );
+
+	action.startRevising();
+	assert.true( action.isStale(), 'Revising action is stale' );
+	assert.strictEqual( controller.ephemeralTags.length, 1, 'Revising tag is ephemeral' );
+
+	surface.getLinearFragment( new ve.Range( 4 ) ).insertContent( 'x' );
+	assert.true( action.isRevising(), 'Text typed at the end stays in the revising range' );
+	assert.false( action.updateStale( true ), 'Checking the text again does not stop revising' );
+	assert.false( newAction( { fragments: [ surface.getLinearFragment( new ve.Range( 1, 5 ) ) ] } ).isRevising(), 'Other action in the revising range is not revising' );
+
+	action.stopRevising();
+	assert.false( action.isStale(), 'Action is not stale after stopRevising' );
+	assert.strictEqual( controller.ephemeralTags.length, 0, 'Revising tag is unregistered' );
+	assert.deepEqual( events, [ true, false ], 'Stale events' );
+
+	surface.getLinearFragment( new ve.Range( 2 ) ).insertContent( 'y' );
+	assert.true( action.updateStale(), 'Typing makes the action stale' );
+	assert.true( action.updateStale( true ), 'Checking the text again makes the action fresh' );
+
+	action.startRevising();
+	surface.getLinearFragment( new ve.Range( 2 ) ).insertContent( 'z' );
+	// Same as Controller#clearEphemeralTagsForSelection
+	controller.taggedFragments[ name ].revising = [];
+	assert.true( action.updateStale(), 'Clearing the revising tag changes the stale state' );
+	assert.false( action.isStale(), 'Text typed while revising does not keep the action stale' );
+
+	const actionWithId = newAction( { id: 'example' } );
+	actionWithId.startRevising();
+	assert.true( actionWithId.isRevising(), 'Action with an ID uses its fragments for the revising tag' );
+} );
+
+QUnit.test( 'Revising does not apply to new actions in the tagged range', ( assert ) => {
+	const doc = ve.dm.example.createExampleDocumentFromData( [
+		{ type: 'paragraph' }, ...'abc', { type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	] );
+	const surface = new ve.dm.Surface( doc );
+	const controller = {
+		taggedFragments: {},
+		taggedIds: {},
+		ephemeralTags: [],
+		registerEphemeralTag: ve.test.utils.EditCheck.dummyController.registerEphemeralTag,
+		unregisterEphemeralTag: ve.test.utils.EditCheck.dummyController.unregisterEphemeralTag
+	};
+	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+	check.canBeStale = () => true;
+	const newAction = ( range ) => new mw.editcheck.EditCheckAction( {
+		check,
+		choices: [],
+		fragments: [ surface.getLinearFragment( range ) ]
+	} );
+
+	const action = newAction( new ve.Range( 1, 4 ) );
+	action.startRevising();
+	// Split the paragraph at its end, as the Enter key does. The tag grows
+	// into the new paragraph.
+	surface.getLinearFragment( new ve.Range( 4 ) ).insertContent( [ { type: '/paragraph' }, { type: 'paragraph' } ] );
+	assert.true( action.isRevising(), 'The action that started revising is revising' );
+
+	// A later run makes a new action for the original paragraph
+	const replacement = newAction( new ve.Range( 1, 4 ) );
+	replacement.updateStale();
+	assert.false( replacement.isStale(), 'New action for the split paragraph is not stale' );
+
+	// Pre-save makes a new action for the same range
+	const preSaveAction = newAction( action.fragments[ 0 ].getSelection().getRange() );
+	preSaveAction.updateStale();
+	assert.false( preSaveAction.isStale(), 'New pre-save action for the same range is not stale' );
+} );

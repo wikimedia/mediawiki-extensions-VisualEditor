@@ -558,15 +558,15 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 				return action;
 			} );
 
+			// A real event checks the current text again, so the text is no
+			// longer stale. The 'revising' tag stays until the selection
+			// leaves the action, and any run can find that it was cleared.
 			let staleUpdated = false;
-			if ( !fromRefresh ) {
-				actions.forEach( ( action ) => {
-					if ( action.isStale() ) {
-						action.updateStale( false );
-						staleUpdated = true;
-					}
-				} );
-			}
+			actions.forEach( ( action ) => {
+				if ( action.isStale() && action.updateStale( !fromRefresh ) ) {
+					staleUpdated = true;
+				}
+			} );
 
 			// Update the actions for this listener
 			this.actionsByListener[ listener ] = actions;
@@ -942,6 +942,15 @@ Controller.prototype.dropStaleSystemMessages = function () {
 	[ ...this.systemMessages ]
 		.filter( ( [ action, message ] ) => !ve.compare( action.fragments[ 0 ].getData(), message.originalData ) )
 		.forEach( ( [ action ] ) => this.removeSystemMessage( action ) );
+};
+
+/**
+ * Stop clearing a tag when the selection leaves its range
+ *
+ * @param {ve.dm.SurfaceFragment} fragment The tagged fragment, as given to #registerEphemeralTag
+ */
+Controller.prototype.unregisterEphemeralTag = function ( fragment ) {
+	this.ephemeralTags = this.ephemeralTags.filter( ( entry ) => entry.fragment !== fragment );
 };
 
 /**

@@ -406,12 +406,9 @@ mw.editcheck.SourceVerificationEditCheck.prototype.act = function ( choice, acti
 			return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
-		const fragment = action.fragments[ action.fragments.length - 1 ].collapseToEnd();
-		// prevent triggering branch node change listeners and thus clearing staleness immediately:
-		this.controller.updateCurrentBranchNodeFromSelection( fragment.getSelection() );
-		action.updateStale( true );
+		action.startRevising();
 	} else if ( choice === 'done' ) {
-		action.updateStale( false );
+		action.stopRevising();
 		action.complete();
 		this.dismiss( action );
 		this.controller.removeAction( 'onBranchNodeChange', action, false );

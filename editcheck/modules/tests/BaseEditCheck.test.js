@@ -845,6 +845,33 @@ QUnit.test( 'tagFragments', ( assert ) => {
 	);
 } );
 
+QUnit.test( 'tagFragments includeInsertions and untagFragments', ( assert ) => {
+	const doc = ve.dm.example.createExampleDocumentFromData( [
+		{ type: 'paragraph' }, ...'abcdef', { type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	] );
+	const surface = new ve.dm.Surface( doc );
+	const controller = {
+		taggedFragments: {},
+		ephemeralTags: [],
+		registerEphemeralTag: ve.test.utils.EditCheck.dummyController.registerEphemeralTag,
+		unregisterEphemeralTag: ve.test.utils.EditCheck.dummyController.unregisterEphemeralTag
+	};
+	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+
+	check.tagFragments( 'excluding', [ surface.getLinearFragment( new ve.Range( 1, 3 ) ) ] );
+	check.tagFragments( 'including', [ surface.getLinearFragment( new ve.Range( 1, 3 ) ) ], true, null, true );
+	surface.getLinearFragment( new ve.Range( 3 ) ).insertContent( 'x' );
+
+	assert.strictEqual( check.isTaggedRange( 'excluding', new ve.Range( 1, 4 ) ), false, 'Default tag does not grow at its edge' );
+	assert.strictEqual( check.isTaggedRange( 'including', new ve.Range( 1, 4 ) ), true, 'Tag with includeInsertions grows at its edge' );
+
+	check.untagFragments( 'including', [ surface.getLinearFragment( new ve.Range( 2, 3 ) ) ] );
+	assert.strictEqual( check.isTaggedRange( 'including', new ve.Range( 1, 4 ) ), false, 'Tag covering the fragment is removed' );
+	assert.strictEqual( controller.ephemeralTags.length, 0, 'Ephemeral tag is unregistered' );
+	assert.strictEqual( check.isTaggedRange( 'excluding', new ve.Range( 1, 3 ) ), true, 'Other tags are kept' );
+} );
+
 QUnit.test( 'tag stores under the action tag name', ( assert ) => {
 	const doc = ve.dm.example.createExampleDocumentFromData( [
 		{ type: 'paragraph' }, ...'abc', { type: '/paragraph' },

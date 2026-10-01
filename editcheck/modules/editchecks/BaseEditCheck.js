@@ -955,8 +955,9 @@ mw.editcheck.BaseEditCheck.prototype.tag = function ( tag, action ) {
  * @param {ve.dm.SurfaceFragment[]} fragments
  * @param {boolean} [ephemeral] Clear the tag once the selection leaves the tagged range
  * @param {string} [name] Tag namespace; defaults to this check's name
+ * @param {boolean} [includeInsertions=false] Grow the tagged range when content is inserted at its edges
  */
-mw.editcheck.BaseEditCheck.prototype.tagFragments = function ( tag, fragments, ephemeral, name ) {
+mw.editcheck.BaseEditCheck.prototype.tagFragments = function ( tag, fragments, ephemeral, name, includeInsertions ) {
 	if ( !name ) {
 		name = this.constructor.static.name;
 	}
@@ -964,12 +965,38 @@ mw.editcheck.BaseEditCheck.prototype.tagFragments = function ( tag, fragments, e
 	taggedFragments[ name ] = taggedFragments[ name ] || {};
 	taggedFragments[ name ][ tag ] = taggedFragments[ name ][ tag ] || [];
 	fragments.forEach( ( fragment ) => {
-		// Exclude insertions so we don't accidentally block unrelated changes:
-		const clone = fragment.clone().setExcludeInsertions( true );
+		// By default, exclude insertions so we don't accidentally block unrelated changes:
+		const clone = fragment.clone().setExcludeInsertions( !includeInsertions );
 		taggedFragments[ name ][ tag ].push( clone );
 		if ( ephemeral ) {
 			this.controller.registerEphemeralTag( name, tag, clone );
 		}
+	} );
+};
+
+/**
+ * Remove a tag from the tagged fragments that cover any of a set of fragments
+ *
+ * @param {string} tag
+ * @param {ve.dm.SurfaceFragment[]} fragments
+ * @param {string} [name] Tag namespace; defaults to this check's name
+ */
+mw.editcheck.BaseEditCheck.prototype.untagFragments = function ( tag, fragments, name ) {
+	if ( !name ) {
+		name = this.constructor.static.name;
+	}
+	const tags = this.controller.taggedFragments[ name ];
+	if ( !tags || !tags[ tag ] ) {
+		return;
+	}
+	const ranges = fragments.map( ( fragment ) => fragment.getSelection().getCoveringRange() );
+	tags[ tag ] = tags[ tag ].filter( ( taggedFragment ) => {
+		const taggedRange = taggedFragment.getSelection().getCoveringRange();
+		if ( taggedRange && ranges.some( ( range ) => range && taggedRange.containsRange( range ) ) ) {
+			this.controller.unregisterEphemeralTag( taggedFragment );
+			return false;
+		}
+		return true;
 	} );
 };
 

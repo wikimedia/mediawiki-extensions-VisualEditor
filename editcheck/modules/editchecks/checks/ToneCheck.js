@@ -211,14 +211,12 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
 			const fragment = action.fragments[ action.fragments.length - 1 ].collapseToEnd();
-			// prevent triggering branch node change listeners and thus clearing staleness immediately:
-			this.controller.updateCurrentBranchNodeFromSelection( fragment.getSelection() );
 			// If we transitioned from the pre-save mode to mid-edit we need
 			// to switch to the new action-object. If we didn't, this will just
 			// find `action` again.
 			const newAction = this.controller.getActions().find( ( cAct ) => cAct.equals( action ) );
 			if ( newAction ) {
-				newAction.updateStale( true );
+				newAction.startRevising();
 				// Count revising as complete once this action is discarded,
 				// e.g. because the user's edit resolved the tone issue.
 				newAction.intendComplete();
@@ -266,7 +264,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		// Caller requires a Deferred as it then calls '.always()'
 		// eslint-disable-next-line no-jquery/no-when
 		return $.when( recheckDeferred, minimumTimeDeferred ).then( ( result ) => {
-			action.updateStale( false );
+			action.stopRevising();
 			action.untag( 'pending' );
 			progress.$element.remove();
 			if ( !result ) {

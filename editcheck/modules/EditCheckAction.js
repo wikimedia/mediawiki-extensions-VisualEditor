@@ -405,22 +405,29 @@ mw.editcheck.EditCheckAction.prototype.equals = function ( other, allowOverlaps 
 };
 
 /**
- * Update the stale state of the action based on the text, or force a specific state
+ * Update the stale state of the action
  *
- * @param {boolean} [forceStale] Force the action into a stale or not-stale state
+ * The action is stale while the user revises it (see #startRevising), or
+ * when its text changed since the check last ran.
+ *
+ * @param {boolean} [resetText=false] The check ran again on the current text
+ * @return {boolean} The stale state changed
  */
-mw.editcheck.EditCheckAction.prototype.updateStale = function ( forceStale ) {
+mw.editcheck.EditCheckAction.prototype.updateStale = function ( resetText ) {
 	const wasStale = this.isStale();
-	if ( forceStale !== undefined ) {
-		this.originalText = forceStale ? null : this.fragments.map( ( fragment ) => fragment.getText() );
+	// Revising ends when the selection leaves the action, which clears the 'revising' tag
+	if ( !this.isRevising() && ( resetText || !this.originalText ) ) {
+		this.originalText = this.fragments.map( ( fragment ) => fragment.getText() );
 	}
 	this.stale = !this.originalText || !OO.compare(
 		this.originalText,
 		this.fragments.map( ( fragment ) => fragment.getText() )
 	);
-	if ( wasStale !== this.stale ) {
+	if ( wasStale !== this.isStale() ) {
 		this.emit( 'stale', this.stale );
+		return true;
 	}
+	return false;
 };
 
 /**
@@ -433,6 +440,48 @@ mw.editcheck.EditCheckAction.prototype.updateStale = function ( forceStale ) {
  */
 mw.editcheck.EditCheckAction.prototype.isStale = function () {
 	return this.check.canBeStale() && this.stale;
+};
+
+/**
+ * Start revising the action, which makes it stale
+ *
+ * The 'revising' tag is cleared when the selection leaves the action's
+ * fragments, and this stops the revising.
+ */
+mw.editcheck.EditCheckAction.prototype.startRevising = function () {
+	// Include insertions, so text typed at the edges stays in the tagged range
+	this.check.tagFragments( 'revising', this.fragments, true, this.getTagName(), true );
+	this.originalText = null;
+	this.updateStale();
+};
+
+/**
+ * Stop revising the action, and accept its current text as checked
+ */
+mw.editcheck.EditCheckAction.prototype.stopRevising = function () {
+	// A tag left until the selection leaves would cause a refresh, which
+	// replaces the branch node run that clears staleness from typing.
+	this.check.untagFragments( 'revising', this.fragments, this.getTagName() );
+	this.originalText = this.fragments.map( ( fragment ) => fragment.getText() );
+	this.updateStale();
+};
+
+/**
+ * Check if the user is revising the action
+ *
+ * Only this action object is revising. Other actions in the tagged range are
+ * not, e.g. an action that replaces this one after the paragraph is split.
+ *
+ * This always uses the fragments, also for actions with an ID, because the
+ * tag must be cleared when the selection leaves a range.
+ *
+ * @return {boolean}
+ */
+mw.editcheck.EditCheckAction.prototype.isRevising = function () {
+	return !this.originalText && this.fragments.some( ( fragment ) => {
+		const range = fragment.getSelection().getCoveringRange();
+		return !!range && this.check.isTaggedRange( 'revising', range, this.getTagName() );
+	} );
 };
 
 /**
