@@ -123,6 +123,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 		return;
 	}
 	const action = this.getPrimaryAction();
+	if ( !action.collapsible ) {
+		// e.g. a plain success message
+		return;
+	}
 	// Should we trigger the popup? By default yes, unless
 	// we're in the onBeforeSave mode where we can assume
 	// something else is handling it.
@@ -212,6 +216,10 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 			// focus and scroll. `opened` does not include the surrounding
 			// animation, so wait for it too.
 			setTimeout( () => {
+				if ( action.completed ) {
+					// The action was resolved while waiting
+					return;
+				}
 				controller.focusAction( action, true, scrollConfig );
 			}, OO.ui.theme.getDialogTransitionDuration() );
 		} );

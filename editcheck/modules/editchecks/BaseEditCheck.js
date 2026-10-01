@@ -41,6 +41,9 @@ mw.editcheck.BaseEditCheck.static.choices = [
 	}
 ];
 
+// Choices that represent declining to act rather than making a change
+mw.editcheck.BaseEditCheck.static.dismissalActions = [ 'dismiss', 'reject', 'keep' ];
+
 mw.editcheck.BaseEditCheck.static.defaultConfig = {
 	account: false, // 'loggedin', 'loggedout', false means allow either
 	maximumEditCount: 100,
@@ -103,7 +106,30 @@ mw.editcheck.BaseEditCheck.static.actionModes = {};
  */
 mw.editcheck.BaseEditCheck.static.success = null;
 
+/**
+ * Message that describes the change that will have been made
+ * should this action be considered successfully completed
+ *
+ * @type {jQuery|string|Function|OO.ui.HtmlSnippet}
+ */
+mw.editcheck.BaseEditCheck.static.successResult = null;
+
+/**
+ * Whether this check's actions keep their configured type regardless of
+ * suggestion status, instead of EditCheckAction#getType overriding it to
+ * 'progressive' for suggestions
+ *
+ * Used in the case of the 'success' styling being added to SystemMessage EditChecks
+ *
+ * @type {boolean}
+ */
+mw.editcheck.BaseEditCheck.static.fixedType = false;
+
 mw.editcheck.BaseEditCheck.static.canBeStale = false;
+
+// System checks should be excluded from suggestion counts,
+// editChecksArePossible, and other misc bookkeeping
+mw.editcheck.BaseEditCheck.static.isSystemCheck = false;
 
 /**
  * Takes focus from the surface to show the check as soon as it is detected (on mobile)
@@ -280,6 +306,15 @@ mw.editcheck.BaseEditCheck.prototype.getName = function () {
  */
 mw.editcheck.BaseEditCheck.prototype.canBeStale = function () {
 	return this.constructor.static.canBeStale;
+};
+
+/**
+ * Check whether this check is a system utility check
+ *
+ * @return {boolean}
+ */
+mw.editcheck.BaseEditCheck.prototype.isSystemCheck = function () {
+	return this.constructor.static.isSystemCheck;
 };
 
 /**
@@ -889,6 +924,9 @@ mw.editcheck.BaseEditCheck.prototype.isOffsetQuoted = function ( offset, documen
  * @param {mw.editCheck.EditCheckAction} action
  */
 mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
+	// A dismissal always wins over an earlier #intendComplete, e.g. from a
+	// cancellable workflow that didn't get explicitly cancelled.
+	action.cancelComplete();
 	this.tag( 'dismissed', action );
 };
 

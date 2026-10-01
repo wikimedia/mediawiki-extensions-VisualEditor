@@ -21,11 +21,12 @@ ve.test.utils.EditCheck.dummyController = {
 ve.test.utils.EditCheck.makeDisplayActions = function () {
 	const doc = new ve.dm.Document( [ { type: 'paragraph' }, ...'abcdef', { type: '/paragraph' } ] ),
 		surface = new ve.dm.Surface( doc ),
-		fragments = [ surface.getFragment( new ve.dm.LinearSelection( new ve.Range( 1, 4 ) ) ) ];
+		fragments = [ surface.getFragment( new ve.dm.LinearSelection( new ve.Range( 1, 4 ) ) ) ],
+		check = new mw.editcheck.BaseEditCheck( ve.test.utils.EditCheck.dummyController, {}, false );
 
 	return [
-		new mw.editcheck.EditCheckAction( { fragments, choices: [], suggestion: true, id: 'suggestion' } ),
-		new mw.editcheck.EditCheckAction( { fragments, choices: [], suggestion: false, id: 'warning' } )
+		new mw.editcheck.EditCheckAction( { fragments, choices: [], suggestion: true, id: 'suggestion', check } ),
+		new mw.editcheck.EditCheckAction( { fragments, choices: [], suggestion: false, id: 'warning', check } )
 	];
 };
 

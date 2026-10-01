@@ -22,6 +22,7 @@
  * @param {boolean} [config.suggestion] Whether this is a suggestion
  * @param {Object[]} [config.choices] User choices
  * @param {boolean} [config.trackId] Whether to include the action's ID in instrumentation
+ * @param {boolean} [config.collapsible=true] Whether the widget can be expanded and collapsed
  */
 mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	// Mixin constructor
@@ -45,8 +46,11 @@ mw.editcheck.EditCheckAction = function MWEditCheckAction( config ) {
 	this.choices = config.choices || config.check.constructor.static.choices;
 	this.suggestion = config.suggestion;
 	this.trackId = !!config.trackId;
+	this.collapsible = config.collapsible !== false;
 	this.widget = null;
 	this.stale = false;
+	this.completed = false;
+	this.completionIntended = false;
 };
 
 /* Inheritance */
@@ -81,6 +85,16 @@ OO.mixinClass( mw.editcheck.EditCheckAction, OO.EventEmitter );
  *
  * @event mw.editcheck.EditCheckAction#seen
  * @param {boolean} seen The check is seen
+ */
+
+/**
+ * Fired when the action is completed successfully
+ * Unlike 'discard', this represents an actual outcome of the action,
+ * not just it being removed from the action list
+ *
+ * @event mw.editcheck.EditCheckAction#complete
+ * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [message] Message to show for this
+ *  outcome that overrides the check's successResult message
  */
 
 /* Methods */
@@ -204,7 +218,7 @@ mw.editcheck.EditCheckAction.prototype.getDescription = function () {
  * @return {string}
  */
 mw.editcheck.EditCheckAction.prototype.getType = function () {
-	if ( this.suggestion ) {
+	if ( this.suggestion && !this.check.constructor.static.fixedType ) {
 		return 'progressive';
 	}
 	return this.type;
@@ -292,7 +306,8 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		mode: this.mode,
 		singleAction,
 		suggestion: this.suggestion,
-		experimental: this.isExperimental()
+		experimental: this.isExperimental(),
+		collapsible: this.collapsible
 	} );
 	this.widget.connect( this, {
 		actionClick: [ 'onActionClick', surface ]
@@ -417,9 +432,53 @@ mw.editcheck.EditCheckAction.prototype.isStale = function () {
 
 /**
  * Method called by the controller when the action is removed from the action list
+ *
+ * Also checks if a check previously called #intendComplete on this action,
+ * in which case that completion is finished here.
  */
 mw.editcheck.EditCheckAction.prototype.discarded = function () {
+	if ( this.completionIntended ) {
+		this.complete();
+	}
 	this.emit( 'discard' );
+};
+
+/**
+ * Method called by a check when the action being discarded should indicate it's been completed
+ *
+ * For use by checks whose own workflow can be cancelled without the check knowing.
+ */
+mw.editcheck.EditCheckAction.prototype.intendComplete = function () {
+	this.completionIntended = true;
+};
+
+/**
+ * Cancel a previous call to #intendComplete
+ *
+ * Used when the check was dismissed before the user finished applying the fix.
+ *
+ */
+mw.editcheck.EditCheckAction.prototype.cancelComplete = function () {
+	this.completionIntended = false;
+};
+
+/**
+ * Method called when the action is completed successfully
+ *
+ * Call this before the action is removed from the action list. Then a dialog
+ * that becomes empty can wait for the system message, and does not close.
+ *
+ * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [message] Message to show for this
+ *  outcome that overrides the check's successResult message
+ *
+ * @fires mw.editcheck.EditCheckAction#complete
+ */
+mw.editcheck.EditCheckAction.prototype.complete = function ( message ) {
+	if ( this.completed ) {
+		return;
+	}
+	this.completed = true;
+	this.emit( 'complete', message );
 };
 
 /**

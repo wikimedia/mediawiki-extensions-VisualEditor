@@ -244,6 +244,17 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( newActio
 	}
 
 	if ( actions.length === 0 ) {
+		const update = this.controller.getUnshownSystemMessageUpdate();
+		if ( update && update !== this.awaitedSystemMessageUpdate ) {
+			// The system message for the completed action arrives async. Keep the sidebar open for it.
+			this.awaitedSystemMessageUpdate = update;
+			update.then( () => {
+				if ( this.isOpened() && !this.controller.getDisplayActions().length ) {
+					this.renderActions();
+				}
+			} );
+			return;
+		}
 		this.close( 'complete' );
 		return;
 	}

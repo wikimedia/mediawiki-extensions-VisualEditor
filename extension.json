@@ -729,6 +729,8 @@
 				"editcheck-dialog-action-done",
 				"editcheck-dialog-scroll-into-view",
 				"editcheck-dialog-toggle",
+				"editcheck-dialog-success-suggestion",
+				"editcheck-dialog-success-check",
 				"editcheck-dialog-addref-description",
 				"editcheck-dialog-addref-reject-question",
 				"editcheck-dialog-addref-reject-description",

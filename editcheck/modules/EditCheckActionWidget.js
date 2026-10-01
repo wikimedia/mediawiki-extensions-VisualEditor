@@ -17,9 +17,11 @@
  * @param {string} [config.mode] Mode for the action set widget
  * @param {boolean} [config.suggestion] This is a suggestion
  * @param {boolean} [config.experimental] This is an experimental check (not enabled by default)
+ * @param {boolean} [config.collapsible=true] Whether the widget can be expanded out of its collapsed state
  */
 mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) {
 	this.singleAction = config.singleAction;
+	this.collapsible = config.collapsible !== false;
 	this.mode = config.mode || '';
 	this.suggestion = config.suggestion;
 
@@ -150,7 +152,8 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	this.$element
 		.append( this.$body )
-		.addClass( 've-ui-editCheckActionWidget' );
+		.addClass( 've-ui-editCheckActionWidget' )
+		.toggleClass( 've-ui-editCheckActionWidget-frozen', !this.collapsible );
 };
 
 /* Inheritance */
@@ -275,7 +278,7 @@ mw.editcheck.EditCheckActionWidget.prototype.setDisabled = function ( disabled )
  * @fires mw.editcheck.EditCheckActionWidget#togglecollapse
  */
 mw.editcheck.EditCheckActionWidget.prototype.onClick = function ( e ) {
-	if ( this.singleAction ) {
+	if ( this.singleAction || !this.collapsible ) {
 		return;
 	}
 	if ( this.$body[ 0 ].contains( e.target ) ) {
@@ -329,6 +332,9 @@ mw.editcheck.EditCheckActionWidget.prototype.setFetchSelectionElements = functio
  * @param {boolean} [collapsed] The new collapsed state, toggles if unset
  */
 mw.editcheck.EditCheckActionWidget.prototype.toggleCollapse = function ( collapsed ) {
+	if ( !this.collapsible ) {
+		collapsed = true;
+	}
 	const previousState = this.collapsed;
 	// Assume that the widget being expanded means the suggestion/check is seen.
 	// (For instrumentation and tagging purposes per T412334)

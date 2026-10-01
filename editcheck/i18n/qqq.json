@@ -26,6 +26,8 @@
 	"editcheck-dialog-action-done": "Label for the done option when asking users if they are done acting on a check.\n\n{{Identical|Done}}",
 	"editcheck-dialog-scroll-into-view": "Label for the button that scrolls the first edit check into view.",
 	"editcheck-dialog-toggle": "Hidden accessibility label for the collapse/expand button shown in the edit check dialog's title on mobile during the pre-save process",
+	"editcheck-dialog-success-suggestion": "Default message shown after a user resolves an edit suggestion, for checks that don't define their own success message.",
+	"editcheck-dialog-success-check": "Default message shown after a user resolves an edit check, for checks that don't define their own success message.",
 	"editcheck-dialog-addref-description": "Help text explaining why it is helpful to add a citation.",
 	"editcheck-dialog-addref-reject-question": "Heading for form question asking why the user didn't add a citation.",
 	"editcheck-dialog-addref-reject-description": "Help text for form question asking why the user didn't add a citation.",

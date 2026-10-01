@@ -180,6 +180,9 @@ ve.ui.EditCheckDialog.prototype.onActionsUpdatedProgress = function ( listener, 
  * @return {boolean}
  */
 ve.ui.EditCheckDialog.prototype.isInScope = function ( action ) {
+	if ( action.check.isSystemCheck() ) {
+		return true;
+	}
 	// Match equal actions, because an update can replace an action with an equal one
 	return !this.scope || this.scope.some( ( scopeAction ) => action.equals( scopeAction ) );
 };
@@ -229,6 +232,17 @@ ve.ui.EditCheckDialog.prototype.setScope = function ( scope, focusAction ) {
  */
 ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, lastActionRejected ) {
 	if ( actions.length === 0 ) {
+		const update = this.controller.getUnshownSystemMessageUpdate();
+		if ( update && update !== this.awaitedSystemMessageUpdate ) {
+			// The system message for the completed action arrives async. Keep the dialog open for it.
+			this.awaitedSystemMessageUpdate = update;
+			update.then( () => {
+				if ( this.isOpened() && !this.getScopedActions().length ) {
+					this.showScopedActions( [], lastActionRejected );
+				}
+			} );
+			return;
+		}
 		this.close( { action: lastActionRejected ? 'reject' : 'complete' } );
 		return;
 	}
@@ -331,7 +345,8 @@ ve.ui.EditCheckDialog.prototype.setCurrentAction = function ( action, fromUserAc
 		cAction.widget.toggleCollapse( i !== offset );
 	} );
 
-	if ( offset !== null ) {
+	// Don't show footer for a system check
+	if ( offset !== null && !action.check.isSystemCheck() ) {
 		this.footerLabel.setLabel(
 			ve.msg( 'visualeditor-find-and-replace-results',
 				ve.init.platform.formatNumber( offset + 1 ),
@@ -370,6 +385,9 @@ ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
 		currentAction.widget.setDisabled( this.acting );
 	}
 	this.footerLabel.setDisabled( this.acting );
+	const onSystemMessage = !!( currentAction && currentAction.check.isSystemCheck() );
+	this.footer.toggle( this.footerVisible && !onSystemMessage );
+	this.closeButton.toggle( this.closeButtonVisible && !onSystemMessage );
 	this.nextButton.setDisabled(
 		this.acting ||
 		( this.currentOffset !== null && this.currentOffset >= this.currentActions.length - 1 )
@@ -422,15 +440,13 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.toggle( !this.surface.getTarget().isVirtualKeyboardOpen() );
 		this.surface.getTarget().on( 'virtualKeyboardChange', this.onVirtualKeyboardChange, false, this );
 
-		this.closeButton.toggle( OO.ui.isMobile() && !this.inBeforeSave );
+		this.closeButtonVisible = OO.ui.isMobile() && !this.inBeforeSave;
+		this.closeButton.toggle( this.closeButtonVisible );
 		this.collapseExpandButton.toggle( OO.ui.isMobile() && this.inBeforeSave );
 
 		this.singleAction = this.inBeforeSave || OO.ui.isMobile();
-		if ( data.footer !== undefined ) {
-			this.footer.toggle( data.footer );
-		} else {
-			this.footer.toggle( this.singleAction );
-		}
+		this.footerVisible = data.footer !== undefined ? data.footer : this.singleAction;
+		this.footer.toggle( this.footerVisible );
 		this.$element.toggleClass( 've-ui-editCheckDialog-singleAction', this.singleAction );
 
 		if ( this.surface.context.isVisible() ) {

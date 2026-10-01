@@ -1,6 +1,6 @@
 'use strict';
 
-const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
+const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange', 'onSystemMessage' ];
 
 /**
  * EditCheck controller
@@ -164,6 +164,10 @@ Controller.prototype.clearState = function () {
 	this.taggedFragments = {};
 	this.taggedIds = {};
 	this.ephemeralTags = [];
+	// Registrations made at #registerSystemMessage
+	this.pendingSystemMessages = [];
+	// Latest #updateForListener promise for onSystemMessage
+	this.systemMessageUpdate = null;
 	this.lastBranchNodeChangeHistoryPointer = null;
 	this.refreshDeferred = null;
 	this.sidebarOpeningPromise = null;
@@ -297,7 +301,8 @@ Controller.prototype.editChecksArePossible = function () {
 	}
 	return [ 'onBeforeSave', 'onDocumentChange', 'onBranchNodeChange' ].some(
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
-			( checkName ) => this.canBeShown( checkName )
+			( checkName ) => !mw.editcheck.editCheckFactory.lookup( checkName ).static.isSystemCheck &&
+				this.canBeShown( checkName )
 		)
 	);
 };
@@ -507,7 +512,9 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	};
 	let actionsPromise;
 	// Create all actions for this listener
-	if ( this.suggestionsModeAvailable && !this.inBeforeSave ) {
+	if ( listener !== 'onSystemMessage' && this.suggestionsModeAvailable && !this.inBeforeSave ) {
+		// onSystemMessage's only check doesn't distinguish suggestions from checks,
+		// so there's no need to run twice
 		// eslint-disable-next-line no-jquery/no-when
 		actionsPromise = $.when(
 			mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), true, onProgress ),
@@ -592,6 +599,10 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 				// Notify listeners that actions have been updated
 				this.emit( 'actionsUpdated', listener, this.getActions(), newActions, discardedActions, false );
 			}
+			if ( listener !== 'onSystemMessage' && listener !== 'onBeforeSave' && this.pendingSystemMessages.length ) {
+				// If there are pending messages, see if any of them have been made stale by this document/branch node change
+				this.updateForListener( 'onSystemMessage' );
+			}
 			// Return the updated actions
 			return actions;
 		} ).catch( ( error ) => {
@@ -599,6 +610,9 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			return [];
 		} );
 	actionsPromise.then( clearPending, clearPending );
+	if ( listener === 'onSystemMessage' ) {
+		this.systemMessageUpdate = actionsPromise;
+	}
 	return actionsPromise;
 };
 
@@ -611,6 +625,7 @@ Controller.prototype.trackAction = function ( action ) {
 	action.once( 'shown', this.onActionSeenOrShown.bind( this, action, 'shown' ) );
 	action.once( 'seen', this.onActionSeenOrShown.bind( this, action, 'seen' ) );
 	action.on( 'act', this.onActionAct, [ action ], this );
+	action.on( 'complete', this.onActionCompleted, [ action ], this );
 };
 
 /**
@@ -843,6 +858,61 @@ Controller.prototype.registerEphemeralTag = function ( name, tag, fragment ) {
 };
 
 /**
+ * Register a system message tied to a fragment
+ *
+ * Shown as an EditCheckAction card at a resolved action's location.
+ *
+ * @param {ve.dm.SurfaceFragment} fragment Fragment where the resolved action was
+ * @param {Object} config EditCheckAction configuration
+ * @param {string} [config.messageType='success'] Name of a static.messageTypes entry to use as a base
+ * @return {Promise<mw.editcheck.EditCheckAction[]>} Resolves with the updated onSystemMessage actions
+ */
+Controller.prototype.registerSystemMessage = function ( fragment, config ) {
+	const messageTypes = mw.editcheck.SystemMessageEditCheck.static.messageTypes;
+	const typeConfig = messageTypes[ config.messageType ] || messageTypes.success;
+	const record = {
+		fragment,
+		config: ve.extendObject( {}, typeConfig, config )
+	};
+	record.originalData = record.fragment.getData();
+	this.pendingSystemMessages.push( record );
+
+	// Auto-dismiss after the specified time
+	record.autoDismissTimeout = setTimeout( () => mw.editcheck.SystemMessageEditCheck.static.dismissRecord( this, record ), record.config.autoDismiss );
+	return this.updateForListener( 'onSystemMessage' );
+};
+
+/**
+ * Get the update that will show the registered system messages that have no action yet
+ *
+ * A dialog uses this to stay open when its last action completes, because the
+ * system message for that action arrives async.
+ *
+ * @return {Promise<mw.editcheck.EditCheckAction[]>|null} Null if all system messages have actions
+ */
+Controller.prototype.getUnshownSystemMessageUpdate = function () {
+	const unshown = this.pendingSystemMessages.some(
+		( record ) => !mw.editcheck.SystemMessageEditCheck.static.findCurrentAction( this, record )
+	);
+	return unshown ? this.systemMessageUpdate : null;
+};
+
+/**
+ * Remove any system messages whose fragments no longer exist
+ *
+ */
+Controller.prototype.dropStaleSystemMessages = function () {
+	const pending = this.pendingSystemMessages;
+	for ( let i = pending.length - 1; i >= 0; i-- ) {
+		const record = pending[ i ];
+		if ( !ve.compare( record.fragment.getData(), record.originalData ) ) {
+			pending.splice( i, 1 );
+			clearTimeout( record.autoDismissTimeout );
+		}
+	}
+};
+
+/**
  * Clear any ephemeral tags whose range the selection has left, and refresh if so
  */
 Controller.prototype.clearEphemeralTagsForSelection = function () {
@@ -894,14 +964,18 @@ Controller.prototype.focusActionForSelection = function () {
 		return;
 	}
 
+	// Prefer a system message over whatever it's following up on when both overlap the same selection
+	const preferAction = ( candidates ) => candidates.find( ( action ) => action.check.isSystemCheck() ) ||
+		candidates[ candidates.length - 1 ];
+
 	// First check if the selection matches any action's #getFocusSelection as this
 	// is more specific than highlights.
 	const focusSelectionActions = actions.filter(
 		( action ) => action.getFocusSelection().getCoveringRange().containsRange( selection.getCoveringRange() )
 	);
 	if ( focusSelectionActions.length > 0 ) {
-		// Focus the last action returned, because it should be the most-specific
-		this.focusAction( focusSelectionActions[ focusSelectionActions.length - 1 ], false );
+		// Focus the last action returned (among non-system messages), because it should be the most-specific
+		this.focusAction( preferAction( focusSelectionActions ), false );
 		return;
 	}
 
@@ -910,7 +984,7 @@ Controller.prototype.focusActionForSelection = function () {
 			( highlightSelection ) => highlightSelection.getCoveringRange().containsRange( selection.getCoveringRange() ) ) );
 
 	if ( highlightSelectionsActions.length > 0 ) {
-		this.focusAction( highlightSelectionsActions[ highlightSelectionsActions.length - 1 ], false );
+		this.focusAction( preferAction( highlightSelectionsActions ), false );
 		return;
 	}
 };
@@ -1047,6 +1121,8 @@ Controller.prototype.onActionsUpdated = function ( listener, actions, newActions
  * @param {mw.editcheck.EditCheckAction[]} actions All current mid-edit actions
  */
 Controller.prototype.updateSuggestionIndicators = function ( actions ) {
+	// System messages and any other future system checks shouldn't affect suggestion count
+	actions = actions.filter( ( action ) => !action.check.isSystemCheck() );
 	const suggestionCount = actions.filter( ( action ) => action.isSuggestion() ).length;
 	let availableSuggestionCount = suggestionCount;
 	const target = this.target;
@@ -1347,7 +1423,7 @@ Controller.prototype.drawSelections = function () {
 		}
 		return;
 	}
-	[ 'warning', 'error', 'progressive' ].forEach( ( type ) => {
+	[ 'warning', 'error', 'progressive', 'success' ].forEach( ( type ) => {
 		const actions = allActions.filter( ( action ) => action.getType() === type );
 
 		if ( actions.length === 0 ) {
@@ -1394,9 +1470,11 @@ Controller.prototype.drawSelections = function () {
 		// * ve-ce-surface-selections-editCheck-active-warning
 		// * ve-ce-surface-selections-editCheck-active-error
 		// * ve-ce-surface-selections-editCheck-active-progressive
+		// * ve-ce-surface-selections-editCheck-active-success
 		// * ve-ce-surface-selections-editCheck-inactive-warning
 		// * ve-ce-surface-selections-editCheck-inactive-error
 		// * ve-ce-surface-selections-editCheck-inactive-progressive
+		// * ve-ce-surface-selections-editCheck-inactive-success
 		selectionManager.drawSelections( 'editCheck-inactive-' + type, inactiveSelections, inactiveOptions );
 		const activeSelectionsForType = this.focusedAction && this.focusedAction.getType() === type ? activeSelections : [];
 		selectionManager.drawSelections( 'editCheck-active-' + type, activeSelectionsForType, activeOptions );
@@ -1559,8 +1637,7 @@ Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
 		moment: this.inBeforeSave ? 'presave' : 'midedit'
 	} );
 	this.trackRule( action, actionTaken || 'unknown' );
-	const dismissalActions = [ 'dismiss', 'reject', 'keep' ];
-	if ( dismissalActions.includes( actionTaken ) ) {
+	if ( action.check.constructor.static.dismissalActions.includes( actionTaken ) ) {
 		// These are actions that represent "don't change anything", and so
 		// don't count as the check having been used
 		return;
@@ -1570,6 +1647,24 @@ Controller.prototype.onActionAct = function ( action, promise, actionTaken ) {
 	} else {
 		mw.editcheck.state.checks.used[ name ] = true;
 	}
+};
+
+Controller.prototype.onActionCompleted = function ( action, message ) {
+	if ( this.inBeforeSave ) {
+		// SystemMessageEditCheck has no onBeforeSave listener so a message
+		// registered here wouldn't show until we're back mid-edit, at which point
+		// it could suddenly appear alongside unrelated ones - which we don't want
+		return;
+	}
+	const fragment = action.fragments[ action.fragments.length - 1 ];
+	let title = action.suggestion ? OO.ui.deferMsg( 'editcheck-dialog-success-suggestion' ) : OO.ui.deferMsg( 'editcheck-dialog-success-check' );
+	if ( action.check.constructor.static.successResult ) {
+		title = action.check.constructor.static.successResult;
+	}
+	if ( message ) {
+		title = message;
+	}
+	this.registerSystemMessage( fragment, { title, suggestion: action.suggestion } );
 };
 
 module.exports = {

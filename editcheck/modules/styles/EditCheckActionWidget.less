@@ -111,7 +111,7 @@
 	}
 
 	&:not( .ve-ui-editCheckActionWidget-collapsed ) {
-		box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, 0.2 );
+		box-shadow: @box-shadow-drop-medium;
 	}
 
 	&.oo-ui-flaggedElement-progressive {
@@ -167,6 +167,28 @@
 
 		> .ve-ui-editCheckActionWidget-experimentalSubheading {
 			display: none;
+		}
+	}
+
+	// A message that can never be expanded (e.g., an EditCheckAction
+	// with collapsible: false) shouldn't *look* interactive either.
+	&.ve-ui-editCheckActionWidget-frozen {
+		cursor: default;
+		box-shadow: @box-shadow-drop-medium;
+
+		&.ve-ui-editCheckActionWidget-collapsed {
+			// Do nothing on hover
+			background: @background-color-base;
+			border-color: @border-color-base;
+
+			// System message that followed up on a suggestion rather than a check
+			&.ve-ui-editCheckActionWidget-suggestion {
+				border-color: @border-color-muted;
+			}
+		}
+
+		> .oo-ui-labelElement-label {
+			font-weight: normal;
 		}
 	}
 
