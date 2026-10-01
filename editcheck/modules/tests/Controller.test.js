@@ -579,3 +579,183 @@ QUnit.test( 'refresh runs the mid-edit listeners at the same time', async ( asse
 		mw.editcheck.editCheckFactory = originalFactory;
 	}
 } );
+
+QUnit.test( 'Completing an action registers a system message only once', async ( assert ) => {
+	const clock = sinon.useFakeTimers();
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const check = factory.create( 'stub', controller );
+		const action = new mw.editcheck.EditCheckAction( {
+			check,
+			choices: [],
+			fragments: [ surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) ) ]
+		} );
+		controller.trackAction( action );
+
+		const updates = [];
+		let systemMessageUpdated;
+		const systemMessageUpdate = new Promise( ( resolve ) => {
+			systemMessageUpdated = resolve;
+		} );
+		controller.on( 'actionsUpdated', ( listener ) => {
+			updates.push( listener );
+			if ( listener === 'onSystemMessage' ) {
+				systemMessageUpdated();
+			}
+		} );
+
+		// EditCheckAction#complete guards against firing its event twice
+		action.complete();
+		action.complete();
+		// registerSystemMessage now goes through the normal updateForListener
+		// pipeline, which resolves asynchronously even for a synchronous check
+		await systemMessageUpdate;
+
+		assert.strictEqual( controller.pendingSystemMessages.length, 1, 'Only one system message is registered' );
+		assert.strictEqual( updates.length, 1, 'actionsUpdated is only emitted once for the new system message' );
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+		clock.restore();
+	}
+} );
+
+QUnit.test( 'Completing an action mid-save does not register a system message', ( assert ) => {
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		controller.inBeforeSave = true;
+		const check = factory.create( 'stub', controller );
+		const action = new mw.editcheck.EditCheckAction( {
+			check,
+			choices: [],
+			fragments: [ surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) ) ]
+		} );
+		controller.trackAction( action );
+
+		action.complete();
+
+		assert.strictEqual(
+			controller.pendingSystemMessages.length, 0,
+			'No system message is registered while saving, since there is nowhere to show it yet'
+		);
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+	}
+} );
+
+QUnit.test( 'dropStaleSystemMessages removes messages whose fragment changed, e.g. via undo', async ( assert ) => {
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const fragment = surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) );
+		// registerSystemMessage now goes through the normal updateForListener
+		// pipeline, which resolves asynchronously even for a synchronous check
+		await controller.registerSystemMessage( fragment, { title: 'Done!' } );
+		assert.strictEqual( controller.pendingSystemMessages.length, 1, 'The message is registered' );
+
+		controller.dropStaleSystemMessages();
+		assert.strictEqual( controller.pendingSystemMessages.length, 1, 'An unchanged fragment is kept' );
+
+		// Simulate an undo of the edit that resolved the original check: the
+		// fragment's text no longer matches what was recorded.
+		surfaceModel.change( ve.dm.TransactionBuilder.static.newFromRemoval( surfaceModel.getDocument(), new ve.Range( 1, 2 ) ) );
+
+		controller.dropStaleSystemMessages();
+		assert.strictEqual( controller.pendingSystemMessages.length, 0, 'A message whose fragment changed is dropped' );
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+	}
+} );
+
+QUnit.test( 'getUnshownSystemMessageUpdate', async ( assert ) => {
+	const clock = sinon.useFakeTimers();
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		assert.strictEqual( controller.getUnshownSystemMessageUpdate(), null, 'Null when no message is registered' );
+
+		const fragment = surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) );
+		const update = controller.registerSystemMessage( fragment, { title: 'Done!' } );
+		assert.strictEqual(
+			controller.getUnshownSystemMessageUpdate(), update,
+			'Before the update resolves, the message has no action, so the update is returned'
+		);
+
+		await update;
+		assert.strictEqual(
+			controller.getUnshownSystemMessageUpdate(), null,
+			'Null once the message has an action'
+		);
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+		clock.restore();
+	}
+} );
+
+QUnit.test( 'editChecksArePossible ignores system checks', ( assert ) => {
+	const { controller, factory } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	const originalSuggestionsModeAvailable = mw.editcheck.suggestionsModeAvailable;
+	mw.editcheck.editCheckFactory = factory;
+	mw.editcheck.suggestionsModeAvailable = false;
+	try {
+		const StubCheck = factory.lookup( 'stub' );
+		factory.unregister( 'stub' );
+		assert.strictEqual(
+			controller.editChecksArePossible(), false,
+			'A registry with only a system check reports no checks possible'
+		);
+
+		factory.register( StubCheck );
+		assert.strictEqual(
+			controller.editChecksArePossible(), true,
+			'A normal check alongside it makes checks possible again'
+		);
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+		mw.editcheck.suggestionsModeAvailable = originalSuggestionsModeAvailable;
+	}
+} );
+
+QUnit.test( 'updateSuggestionIndicators excludes system check actions from the suggestion count', ( assert ) => {
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+	controller.updateSuggestionCountDebounced = ( count ) => {
+		controller.lastSuggestionCount = count;
+	};
+
+	const normalCheck = factory.create( 'stub', controller );
+	const systemCheck = factory.create( 'systemMessage', controller );
+
+	const suggestion = new mw.editcheck.EditCheckAction( {
+		check: normalCheck,
+		choices: [],
+		suggestion: true,
+		fragments: [ surfaceModel.getLinearFragment( new ve.Range( 1, 2 ) ) ]
+	} );
+	const systemMessage = new mw.editcheck.EditCheckAction( {
+		check: systemCheck,
+		choices: [],
+		suggestion: true,
+		fragments: [ surfaceModel.getLinearFragment( new ve.Range( 3, 4 ) ) ]
+	} );
+
+	controller.updateSuggestionIndicators( [ suggestion, systemMessage ] );
+
+	assert.strictEqual( controller.lastSuggestionCount, 1, 'The system message does not count as a suggestion' );
+} );

@@ -272,3 +272,49 @@ QUnit.test( 'findEqualActions', ( assert ) => {
 		'Actions are replaced by their equal actions from the list, and actions not in the list are removed'
 	);
 } );
+
+QUnit.test( 'intendComplete, cancelComplete and discarded', ( assert ) => {
+	const doc = new ve.dm.Document( [ { type: 'paragraph' }, ...'abcdef', { type: '/paragraph' } ] ),
+		surface = new ve.dm.Surface( doc ),
+		fragments = [ surface.getFragment( new ve.dm.LinearSelection( new ve.Range( 1, 4 ) ) ) ];
+
+	function makeAction() {
+		const action = new mw.editcheck.EditCheckAction( { fragments, choices: [] } );
+		const events = [];
+		action.on( 'complete', ( message ) => events.push( { type: 'complete', message } ) );
+		action.on( 'discard', () => events.push( { type: 'discard' } ) );
+		return { action, events };
+	}
+
+	let { action, events } = makeAction();
+	action.intendComplete();
+	action.discarded();
+	assert.strictEqual( action.completed, true, 'An intended completion is honoured when the action is discarded' );
+	assert.deepEqual(
+		events,
+		[ { type: 'complete', message: undefined }, { type: 'discard' } ],
+		'complete fires before discard, and both fire exactly once'
+	);
+
+	( { action, events } = makeAction() );
+	action.discarded();
+	assert.strictEqual( action.completed, false, 'A plain discard, with no prior intendComplete, does not complete the action' );
+	assert.deepEqual( events, [ { type: 'discard' } ], 'Only discard fires when completion was never intended' );
+
+	( { action, events } = makeAction() );
+	action.intendComplete();
+	action.cancelComplete();
+	action.discarded();
+	assert.strictEqual( action.completed, false, 'cancelComplete stops a later discard from completing the action' );
+	assert.deepEqual( events, [ { type: 'discard' } ], 'Only discard fires once an intended completion has been cancelled' );
+
+	( { action, events } = makeAction() );
+	action.complete( 'done' );
+	action.intendComplete();
+	action.discarded();
+	assert.deepEqual(
+		events,
+		[ { type: 'complete', message: 'done' }, { type: 'discard' } ],
+		'An explicit completion is not duplicated or overridden by a later discard, even if completion was intended'
+	);
+} );
