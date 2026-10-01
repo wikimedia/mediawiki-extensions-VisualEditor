@@ -102,6 +102,7 @@ mw.editcheck.RedirectEditCheck.prototype.act = function ( choice, action, surfac
 					.annotateContent( 'add', newLinkAnnotation );
 
 				action.select( surface, true );
+				action.complete();
 			}
 		} );
 	}

@@ -90,6 +90,7 @@ mw.editcheck.HeadingLevelEditCheck.prototype.act = function ( choice, action, su
 			}
 		} );
 		action.select( surface, true );
+		action.complete();
 		return;
 	}
 	// Parent method

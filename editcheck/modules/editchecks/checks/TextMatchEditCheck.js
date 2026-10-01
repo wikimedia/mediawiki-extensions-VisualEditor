@@ -437,11 +437,13 @@ mw.editcheck.TextMatchEditCheck.prototype.act = function ( choice, action, surfa
 	switch ( choice ) {
 		case 'delete':
 			action.fragments[ 0 ].removeContent();
+			action.complete();
 			action.select( surface, true );
 			return;
 		case 'accept': {
 			const replacementFragment = action.replacementFragment || action.fragments[ 0 ];
 			replacementFragment.insertContent( action.replacement, true );
+			action.complete();
 			action.select( surface, true );
 			return;
 		}

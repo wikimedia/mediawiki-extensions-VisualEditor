@@ -13,9 +13,6 @@
 mw.editcheck.ToneCheck = function MWToneCheck() {
 	// Parent constructor
 	mw.editcheck.ToneCheck.super.apply( this, arguments );
-
-	// Bind with no arguments so it can be used as an event listener
-	this.showSuccessHandler = this.showSuccess.bind( this );
 };
 
 /* Inheritance */
@@ -42,7 +39,7 @@ mw.editcheck.ToneCheck.static.footer = ve.deferJQueryMsg( 'editcheck-tone-footer
 
 mw.editcheck.ToneCheck.static.footerIcon = 'robot';
 
-mw.editcheck.ToneCheck.static.success = OO.ui.deferMsg( 'editcheck-tone-thank' );
+mw.editcheck.ToneCheck.static.successResult = OO.ui.deferMsg( 'editcheck-tone-thank' );
 
 mw.editcheck.ToneCheck.static.choices = [
 	{
@@ -178,7 +175,10 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 };
 
 mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
-	action.off( 'discard', this.showSuccessHandler );
+	// Acting again (recheck, dismiss, or re-starting edit) cancels an
+	// intent to complete from a previous 'edit' choice that never
+	// resolved via a natural discard.
+	action.cancelComplete();
 	// The 'interacted' tag was previously used for not showing the user
 	// the tone check again in pre-save if they had already interacted with it.
 	// Per T409991 this is no longer the behavior we want. Keeping the tag for future use.
@@ -201,7 +201,6 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			]
 		} ).then( ( reason ) => {
 			this.dismiss( action );
-			this.showSuccess();
 			return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 		} );
 	} else if ( choice === 'edit' && surface ) {
@@ -220,7 +219,9 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			const newAction = this.controller.getActions().find( ( cAct ) => cAct.equals( action ) );
 			if ( newAction ) {
 				newAction.updateStale( true );
-				newAction.once( 'discard', newAction.check.showSuccessHandler );
+				// Count revising as complete once this action is discarded,
+				// e.g. because the user's edit resolved the tone issue.
+				newAction.intendComplete();
 				// If we transitioned, this will result in us waiting until
 				// the sidebar is open:
 				this.controller.refresh( true ).then( () => {
@@ -267,7 +268,7 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		return $.when( recheckDeferred, minimumTimeDeferred ).then( ( result ) => {
 			action.updateStale( false );
 			action.untag( 'pending' );
-
+			action.complete();
 			progress.$element.remove();
 			if ( !result ) {
 				this.onSuccess( action );
@@ -277,7 +278,6 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 };
 
 mw.editcheck.ToneCheck.prototype.onSuccess = function ( action ) {
-	this.showSuccess();
 	this.controller.removeAction( 'onBranchNodeChange', action, false );
 };
 

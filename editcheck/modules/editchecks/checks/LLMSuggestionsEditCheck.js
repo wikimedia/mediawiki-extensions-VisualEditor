@@ -38,7 +38,6 @@ mw.editcheck.LLMSuggestionEditCheck.static.description = 'This suggestion comes 
 mw.editcheck.LLMSuggestionEditCheck.static.prompt = 'Do you think this suggestion is valid?';
 mw.editcheck.LLMSuggestionEditCheck.static.footer = msg( 'footer', 'Identified using an [https://www.mediawiki.org/wiki/VisualEditor/Suggestion_Mode/Model-generated_editing_suggestions#Research_findings open-weight language model]' );
 mw.editcheck.LLMSuggestionEditCheck.static.footerIcon = 'robot';
-mw.editcheck.LLMSuggestionEditCheck.static.success = 'Thank you for helping to ensure edit suggestions are reliable and useful';
 
 mw.editcheck.LLMSuggestionEditCheck.static.choices = [
 	{
@@ -145,8 +144,8 @@ mw.editcheck.LLMSuggestionEditCheck.prototype.act = function ( choice, action ) 
 	ve.track( `activity.editCheck-${ action.getName() }`, { action: `${ choice }-id-${ action.id }` } );
 	switch ( choice ) {
 		case 'valid': {
+			action.complete();
 			this.dismiss( action );
-			this.showSuccess();
 			break;
 		}
 		case 'invalid': {
@@ -170,7 +169,6 @@ mw.editcheck.LLMSuggestionEditCheck.prototype.act = function ( choice, action ) 
 				]
 			} ).then( ( reason ) => {
 				this.dismiss( action );
-				this.showSuccess();
 				ve.track( `activity.editCheck-${ action.getName() }`, { action: `${ choice }-id-${ action.id }-reason-${ reason }` } );
 				return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 			} );

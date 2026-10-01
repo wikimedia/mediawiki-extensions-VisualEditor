@@ -144,6 +144,7 @@ mw.editcheck.SuggestedLinkEditCheck.prototype.act = function ( choice, action, s
 			fragment.annotateContent( 'clear', ve.dm.MWInternalLinkAnnotation.static.name );
 			fragment.annotateContent( 'set', ve.dm.MWInternalLinkAnnotation.static.newFromTitle( link.title ) );
 			action.select( surface, true );
+			action.complete();
 		} );
 	}
 	// Parent method

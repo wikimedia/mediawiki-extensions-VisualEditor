@@ -91,6 +91,7 @@ mw.editcheck.RequiredTemplateParamEditCheck.prototype.act = function ( choice, a
 	if ( choice === 'edit' ) {
 		action.fragments[ 0 ].select();
 		surface.executeCommand( 'transclusion' );
+		action.intendComplete();
 		return;
 	}
 	// Parent method

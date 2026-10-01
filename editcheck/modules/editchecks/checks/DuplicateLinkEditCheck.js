@@ -249,6 +249,7 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.act = function ( choice, action, s
 	if ( choice === 'remove' ) {
 		action.fragments[ 0 ].annotateContent( 'clear', ve.ce.MWInternalLinkAnnotation.static.name );
 		action.select( surface, true );
+		action.complete();
 		return;
 	} else if ( choice === 'merge' ) {
 		let coveringRange;
@@ -273,6 +274,7 @@ mw.editcheck.DuplicateLinkEditCheck.prototype.act = function ( choice, action, s
 			coveringFragment.annotateContent( 'set', annotation );
 		} );
 		this.selectAnnotation( coveringFragment, surface );
+		action.complete();
 		return;
 	}
 	// Parent method

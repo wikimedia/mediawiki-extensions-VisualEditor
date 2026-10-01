@@ -64,6 +64,7 @@ mw.editcheck.DisambiguationEditCheck.prototype.act = function ( choice, action, 
 	if ( choice === 'edit' ) {
 		action.select( surface );
 		surface.executeCommand( 'link' );
+		action.intendComplete();
 		return;
 	}
 	// Parent method

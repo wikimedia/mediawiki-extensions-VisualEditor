@@ -44,8 +44,6 @@ mw.editcheck.LLMPasteCheck.static.description = ve.deferJQueryMsg( 'editcheck-co
 
 mw.editcheck.LLMPasteCheck.static.prompt = null;
 
-mw.editcheck.LLMPasteCheck.static.success = OO.ui.deferMsg( 'editcheck-copyvio-llm-remove-notify' );
-
 mw.editcheck.LLMPasteCheck.static.keepSuccess = OO.ui.deferMsg( 'editcheck-copyvio-llm-keep-notify' );
 
 mw.editcheck.LLMPasteCheck.static.choices = [

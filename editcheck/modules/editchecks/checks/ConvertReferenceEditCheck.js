@@ -132,6 +132,7 @@ mw.editcheck.ConvertReferenceEditCheck.prototype.act = function ( choice, action
 		const href = ve.ui.CitoidReferenceContextItem.static.getConvertibleHref( node.getInternalItem() );
 		const citoidAction = ve.ui.actionFactory.create( 'citoid', surface );
 		citoidAction.open( { replace: true, lookup: href } );
+		action.intendComplete();
 		return;
 	}
 

@@ -27,8 +27,6 @@ mw.editcheck.AddReferenceEditCheck.static.title = OO.ui.deferMsg( 'editcheck-dia
 
 mw.editcheck.AddReferenceEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-dialog-addref-description' );
 
-mw.editcheck.AddReferenceEditCheck.static.success = OO.ui.deferMsg( 'editcheck-dialog-addref-success-notify' );
-
 mw.editcheck.AddReferenceEditCheck.static.choices = [
 	{
 		action: 'accept',
@@ -176,9 +174,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, su
 				const citoidOrCiteDataPromise = citoidOrCiteDataDeferred.promise();
 				citoidOrCiteDataPromise.then( ( data ) => {
 					if ( data ) {
-						// Edit check inspector is already closed by this point, but
-						// we need to end the workflow.
-						this.showSuccess();
+						action.intendComplete();
 					}
 				} );
 				return citoidOrCiteDataPromise;

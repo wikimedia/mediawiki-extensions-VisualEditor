@@ -68,6 +68,7 @@ mw.editcheck.ExternalLinkEditCheck.prototype.act = function ( choice, action, su
 			fragment.annotateContent( 'clear', ve.ce.MWExternalLinkAnnotation.static.name );
 		} );
 		action.select( surface, true );
+		action.complete();
 		return;
 	}
 	// Parent method

@@ -30,8 +30,6 @@ mw.editcheck.CitationNeededEditCheck.static.title = OO.ui.deferMsg( 'editcheck-d
 
 mw.editcheck.CitationNeededEditCheck.static.description = ve.deferJQueryMsg( 'editcheck-dialog-addref-description' );
 
-mw.editcheck.CitationNeededEditCheck.static.success = OO.ui.deferMsg( 'editcheck-dialog-addref-success-notify' );
-
 mw.editcheck.CitationNeededEditCheck.static.footer = OO.ui.deferMsg( 'editcheck-citationneeded-footer' );
 
 mw.editcheck.CitationNeededEditCheck.static.footerIcon = 'userAvatar';
@@ -98,6 +96,7 @@ mw.editcheck.CitationNeededEditCheck.prototype.act = function ( choice, action, 
 		const node = action.fragments[ 0 ].getSelectedNode();
 		const context = new ve.ui.MWCitationNeededContextItem( surface.getContext(), node );
 		context.onAddClick();
+		action.intendComplete();
 		return;
 	}
 

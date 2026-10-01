@@ -93,6 +93,7 @@ mw.editcheck.FakeHeadingEditCheck.prototype.act = function ( choice, action, sur
 				.convertNodes( 'mwHeading', { level } );
 		} );
 		action.select( surface, true );
+		action.complete();
 		return;
 	}
 	// Parent method

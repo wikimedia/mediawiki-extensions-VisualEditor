@@ -32,8 +32,6 @@ mw.editcheck.PasteCheck.static.description = ve.deferJQueryMsg( 'editcheck-copyv
 
 mw.editcheck.PasteCheck.static.prompt = OO.ui.deferMsg( 'editcheck-copyvio-prompt' );
 
-mw.editcheck.PasteCheck.static.success = OO.ui.deferMsg( 'editcheck-copyvio-remove-notify' );
-
 /**
  * Message to show when the user keeps the pasted content
  *
@@ -172,7 +170,7 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 		case 'keep':
 			return action.widget.showFeedback( this.getKeepFeedback() ).then( ( reason ) => {
 				this.dismiss( action );
-				this.showSuccess( this.constructor.static.keepSuccess );
+				action.complete( this.constructor.static.keepSuccess );
 				return ve.createDeferred().resolve( { action: choice, reason } ).promise();
 			} );
 		case 'remove': {
@@ -194,7 +192,7 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 					action.fragments[ action.fragments.length - 1 ].select();
 					surface.getView().focus();
 				}, 500 );
-				this.showSuccess();
+				action.complete();
 			} );
 		}
 	}

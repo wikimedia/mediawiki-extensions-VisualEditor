@@ -78,6 +78,7 @@ mw.editcheck.DoubleBoldEditCheck.prototype.act = function ( choice, action, surf
 	if ( choice === 'remove' ) {
 		action.fragments[ 0 ].annotateContent( 'clear', 'textStyle/bold' );
 		action.select( surface, this );
+		action.complete();
 		return;
 	}
 	// Parent method

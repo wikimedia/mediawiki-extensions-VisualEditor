@@ -90,6 +90,7 @@ mw.editcheck.MaintenanceTemplateEditCheck.prototype.act = function ( choice, act
 	if ( choice === 'delete' ) {
 		action.fragments[ 0 ].removeContent();
 		action.select( surface, true );
+		action.complete();
 		return;
 	}
 

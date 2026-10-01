@@ -124,6 +124,7 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 				true
 			);
 			action.select( surface, true );
+			action.complete();
 			return;
 		}
 
@@ -143,6 +144,7 @@ mw.editcheck.YearLinkEditCheck.prototype.act = function ( choice, action, surfac
 			}
 			fragment.annotateContent( 'set', link );
 			action.select( surface, true );
+			action.complete();
 			return;
 		}
 	}

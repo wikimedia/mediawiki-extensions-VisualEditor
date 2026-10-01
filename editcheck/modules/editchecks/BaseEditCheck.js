@@ -98,15 +98,6 @@ mw.editcheck.BaseEditCheck.static.prompt = null;
 mw.editcheck.BaseEditCheck.static.actionModes = {};
 
 /**
- * Success message of the edit check
- *
- * TODO: Add a default success message?
- *
- * @type {jQuery|string|Function|OO.ui.HtmlSnippet}
- */
-mw.editcheck.BaseEditCheck.static.success = null;
-
-/**
  * Message that describes the change that will have been made
  * should this action be considered successfully completed
  *
@@ -1070,13 +1061,4 @@ mw.editcheck.BaseEditCheck.prototype.isTaggedId = function ( tag, id ) {
 	}
 	const ids = tags[ tag ];
 	return !!ids && ids.has( id );
-};
-
-/**
- * Show a success notification
- *
- * @param {string} [message] Message to show; defaults to static.success
- */
-mw.editcheck.BaseEditCheck.prototype.showSuccess = function ( message ) {
-	mw.notify( message || this.constructor.static.success, { type: 'success' } );
 };

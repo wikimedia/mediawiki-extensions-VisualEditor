@@ -84,6 +84,7 @@ mw.editcheck.ImageCaptionEditCheck.prototype.act = function ( choice, action, su
 	if ( choice === 'edit' ) {
 		action.fragments[ 0 ].select();
 		surface.executeCommand( 'media' );
+		action.intendComplete();
 		return;
 	}
 	// Parent method

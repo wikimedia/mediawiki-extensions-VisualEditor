@@ -35,7 +35,6 @@ mw.editcheck.SourceVerificationEditCheck.static.title = OO.ui.deferMsg( 'editche
 mw.editcheck.SourceVerificationEditCheck.static.description = OO.ui.deferMsg( 'editcheck-sourceveri-description' );
 mw.editcheck.SourceVerificationEditCheck.static.footer = ve.deferJQueryMsg( 'editcheck-sourceveri-footer' );
 mw.editcheck.SourceVerificationEditCheck.static.footerIcon = 'robot';
-mw.editcheck.SourceVerificationEditCheck.static.success = OO.ui.deferMsg( 'editcheck-sourceveri-thank' );
 mw.editcheck.SourceVerificationEditCheck.static.canBeStale = true;
 
 mw.editcheck.SourceVerificationEditCheck.static.choices = [
@@ -396,7 +395,6 @@ mw.editcheck.SourceVerificationEditCheck.prototype.act = function ( choice, acti
 			]
 		} ).then( ( reason ) => {
 			this.dismiss( action );
-			this.showSuccess();
 			this.controller.removeAction( 'onBranchNodeChange', action, false );
 			ve.track( 'activity.editCheck-' + this.constructor.static.name, { action: `${ choice }-reason-${ reason }-id-${ action.id }` } );
 			if ( reason === 'valid' && this.config.templateToInsert ) {
@@ -414,8 +412,8 @@ mw.editcheck.SourceVerificationEditCheck.prototype.act = function ( choice, acti
 		action.updateStale( true );
 	} else if ( choice === 'done' ) {
 		action.updateStale( false );
+		action.complete();
 		this.dismiss( action );
-		this.showSuccess();
 		this.controller.removeAction( 'onBranchNodeChange', action, false );
 	}
 };
