@@ -1,6 +1,8 @@
 <?php
 declare( strict_types = 1 );
 
+use MediaWiki\Context\ContextSource;
+
 /**
  * Stub MobileContext class from MobileFrontend extension
  */

@@ -10,7 +10,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use Deflate;
 use FlaggablePageView;
 use MediaWiki\Api\ApiBase;
 use MediaWiki\Api\ApiMain;
@@ -31,6 +30,7 @@ use MediaWiki\SpecialPage\SpecialPageFactory;
 use MediaWiki\Storage\PageEditStash;
 use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
+use Wikimedia\Deflate;
 use Wikimedia\ObjectCache\BagOStuff;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\Rdbms\IDBAccessObject;
