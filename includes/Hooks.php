@@ -1115,7 +1115,7 @@ class Hooks implements
 		$nsInfo = $services->getNamespaceInfo();
 		$namespacesWithSubpagesEnabled = array_values( array_filter(
 			$namespacesWithSubpagesEnabled,
-			[ $nsInfo, 'exists' ]
+			$nsInfo->exists( ... )
 		) );
 
 		$defaultSortPrefix = $services->getMagicWordFactory()->get( 'defaultsort' )->getSynonym( 0 );
