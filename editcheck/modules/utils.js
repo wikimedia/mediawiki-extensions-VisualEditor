@@ -184,6 +184,109 @@ mw.editcheck.flattenArray = function ( arr, depth = 1 ) {
 };
 
 /**
+ * Merge config objects in sequence, so later configs take priority
+ *
+ * A key with a plain name replaces the value from earlier configs.
+ *
+ * A key with a '+' prefix adds its value to the value from earlier configs:
+ * - Arrays are joined, with no duplicate items.
+ * - Objects are merged with the same rules, so their keys can also use prefixes.
+ *
+ * A key with a '-' prefix removes its value from the value from earlier configs:
+ * - From an array, it removes the given item or items.
+ * - From an object, it removes the given key or keys.
+ *
+ * In one config, plain keys apply first, then '+' keys, then '-' keys.
+ *
+ * @param {...Object} configs
+ * @return {Object} New merged config
+ */
+mw.editcheck.mergeConfigs = function ( ...configs ) {
+	return configs.reduce( ( result, config ) => mergeConfig( result, config ), {} );
+};
+
+/**
+ * @ignore
+ * @param {Object} base
+ * @param {Object} [config]
+ * @return {Object}
+ */
+function mergeConfig( base, config ) {
+	const result = Object.assign( {}, base );
+	if ( !config ) {
+		return result;
+	}
+	const keys = Object.keys( config );
+	const isModifier = ( key ) => key.length > 1 && ( key[ 0 ] === '+' || key[ 0 ] === '-' );
+	keys.filter( ( key ) => !isModifier( key ) ).forEach( ( key ) => {
+		result[ key ] = config[ key ];
+	} );
+	keys.filter( ( key ) => key[ 0 ] === '+' && isModifier( key ) ).forEach( ( key ) => {
+		const name = key.slice( 1 );
+		result[ name ] = addConfigValue( result[ name ], config[ key ], name );
+	} );
+	keys.filter( ( key ) => key[ 0 ] === '-' && isModifier( key ) ).forEach( ( key ) => {
+		const name = key.slice( 1 );
+		if ( result[ name ] !== undefined ) {
+			result[ name ] = removeConfigValue( result[ name ], config[ key ], name );
+		}
+	} );
+	return result;
+}
+
+/**
+ * @ignore
+ * @param {any} existing
+ * @param {any} value
+ * @param {string} name
+ * @return {any}
+ */
+function addConfigValue( existing, value, name ) {
+	// The server encodes an empty object as an empty array
+	const isEmptyArray = ( item ) => Array.isArray( item ) && item.length === 0;
+	if ( isEmptyArray( existing ) && ve.isPlainObject( value ) ) {
+		existing = {};
+	}
+	if ( isEmptyArray( value ) && ve.isPlainObject( existing ) ) {
+		value = {};
+	}
+	if ( Array.isArray( existing ) && Array.isArray( value ) ) {
+		return [ ...new Set( [ ...existing, ...value ] ) ];
+	}
+	if ( ve.isPlainObject( existing ) && ve.isPlainObject( value ) ) {
+		return mergeConfig( existing, value );
+	}
+	if ( existing !== undefined ) {
+		mw.log.warn( `Edit check config: cannot add to '${ name }', so it is replaced` );
+	}
+	// Resolve any prefixed keys in the value
+	return ve.isPlainObject( value ) ? mergeConfig( {}, value ) : value;
+}
+
+/**
+ * @ignore
+ * @param {any} existing
+ * @param {any} value
+ * @param {string} name
+ * @return {any}
+ */
+function removeConfigValue( existing, value, name ) {
+	const values = Array.isArray( value ) ? value : [ value ];
+	if ( Array.isArray( existing ) ) {
+		return existing.filter( ( item ) => !values.includes( item ) );
+	}
+	if ( ve.isPlainObject( existing ) ) {
+		const result = Object.assign( {}, existing );
+		values.forEach( ( key ) => {
+			delete result[ key ];
+		} );
+		return result;
+	}
+	mw.log.warn( `Edit check config: cannot remove from '${ name }', so it is not changed` );
+	return existing;
+}
+
+/**
  * Given item/rect pairs, find nearest surrounding items to user's current position
  *
  * Note: This was created for finding the nearest EditCheckActions, but doesn't do

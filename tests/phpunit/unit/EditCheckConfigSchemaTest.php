@@ -222,5 +222,24 @@ class EditCheckConfigSchemaTest extends MediaWikiUnitTestCase {
 			'lacksTemplate' => true
 		];
 		yield 'optional array overrides only accept false' => [ $invalidBooleanOverride ];
+
+		$invalidAddPrefix = $fixture;
+		$invalidAddPrefix['addReference'] = [
+			'+maximumEditCount' => 10
+		];
+		yield 'add prefix only accepts arrays and objects' => [ $invalidAddPrefix ];
+
+		$prefixInRuleConfig = $fixture;
+		$prefixInRuleConfig['textMatch']['matchRules'] = [
+			'bad' => [
+				'title' => 'Bad',
+				'message' => 'Avoid this term',
+				'query' => 'Foo',
+				'config' => [
+					'+ignoreSections' => [ 'References' ]
+				]
+			]
+		];
+		yield 'rule config does not accept prefixed keys' => [ $prefixInRuleConfig ];
 	}
 }

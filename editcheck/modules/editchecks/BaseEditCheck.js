@@ -14,7 +14,9 @@
  */
 mw.editcheck.BaseEditCheck = function MWBaseEditCheck( controller, config, includeSuggestions ) {
 	this.controller = controller;
-	this.config = ve.extendObject( {}, this.constructor.static.defaultConfig, config );
+	// Config from EditCheckFactory#buildConfig already includes the defaults, so this merge does
+	// not change it. The merge is necessary for callers that give a partial config.
+	this.config = mw.editcheck.mergeConfigs( this.constructor.static.defaultConfig, config );
 	this.includeSuggestions = includeSuggestions;
 };
 

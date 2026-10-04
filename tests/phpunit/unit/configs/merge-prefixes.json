@@ -1,0 +1,24 @@
+{
+	"*": {
+		"+ignoreSections": [
+			"References"
+		]
+	},
+	"externalLink": {
+		"+ignoreSections": [
+			"External links"
+		],
+		"-ignoreSections": "References",
+		"+extraNamespaces": {
+			"Draft": true
+		},
+		"-extraNamespaces": [
+			"User"
+		]
+	},
+	"textMatch": {
+		"+ignoreSections": [
+			"Further reading"
+		]
+	}
+}

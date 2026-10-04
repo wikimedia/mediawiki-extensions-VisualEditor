@@ -522,3 +522,39 @@ QUnit.test( 'applyCase', ( assert ) => {
 		assert.strictEqual( observed, test.expected, test.message );
 	} );
 } );
+
+QUnit.test( 'TextMatchRule config', ( assert ) => {
+	const cases = [
+		{
+			msg: 'Rule with no config gets the rule defaults',
+			ruleConfig: undefined,
+			expected: {
+				showAsCheck: false,
+				showAsSuggestion: true
+			}
+		},
+		{
+			msg: 'Rule config replaces the rule defaults',
+			ruleConfig: {
+				ignoreSections: [ 'See also' ],
+				showAsCheck: true
+			},
+			expected: {
+				ignoreSections: [ 'See also' ],
+				showAsCheck: true,
+				showAsSuggestion: true
+			}
+		}
+	];
+	cases.forEach( ( caseItem ) => {
+		const layers = [ caseItem.ruleConfig, mw.editcheck.TextMatchRule.static.defaultConfig ];
+		const layersBefore = ve.copy( layers );
+		const rule = new mw.editcheck.TextMatchRule(
+			{ title: 'Test', query: 'Foo', config: caseItem.ruleConfig },
+			'test',
+			new Intl.Collator( 'en' )
+		);
+		assert.deepEqual( rule.config, caseItem.expected, caseItem.msg );
+		assert.deepEqual( layers, layersBefore, caseItem.msg + ': rule config and defaults are not changed' );
+	} );
+} );

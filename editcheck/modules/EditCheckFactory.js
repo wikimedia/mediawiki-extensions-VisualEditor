@@ -208,12 +208,21 @@ mw.editcheck.EditCheckFactory.prototype.create = function ( checkName, controlle
 /**
  * Build the config for a check
  *
+ * See mw.editcheck.mergeConfigs for how the configs are merged.
+ *
  * @param {string} checkName
  * @param {Object} [extraConfig={}] extra configuration to apply
  * @return {Object}
  */
 mw.editcheck.EditCheckFactory.prototype.buildConfig = function ( checkName, extraConfig ) {
-	return ve.extendObject( {}, mw.editcheck.config[ '*' ], mw.editcheck.config[ checkName ], extraConfig );
+	const CheckClass = this.lookup( checkName );
+	return mw.editcheck.mergeConfigs(
+		// Include the defaults here, so that '+' and '-' keys apply to them
+		CheckClass ? CheckClass.static.defaultConfig : {},
+		mw.editcheck.config[ '*' ],
+		mw.editcheck.config[ checkName ],
+		extraConfig
+	);
 };
 
 mw.editcheck.editCheckFactory = new mw.editcheck.EditCheckFactory();

@@ -173,3 +173,85 @@ QUnit.test( 'createAllActionsByListener', ( assert ) => {
 	} );
 	/* eslint-enable es-x/no-promise-all-settled */
 } );
+
+QUnit.test( 'buildConfig', ( assert ) => {
+	const factory = new mw.editcheck.EditCheckFactory();
+	const Check = function () {};
+	OO.inheritClass( Check, mw.editcheck.BaseEditCheck );
+	Check.static.name = 'test';
+	Check.static.defaultConfig = {
+		ignoreSections: [ 'References' ],
+		extraNamespaces: { Draft: true },
+		maximumEditCount: 100
+	};
+	factory.register( Check );
+
+	mw.editcheck.config = {
+		'*': {
+			'+ignoreSections': [ 'Notes' ],
+			maximumEditCount: 50
+		},
+		test: {
+			'+ignoreSections': [ 'See also' ],
+			'-ignoreSections': [ 'References' ],
+			'+extraNamespaces': { User: true }
+		}
+	};
+
+	assert.deepEqual(
+		factory.buildConfig( 'test', { '+ignoreSections': [ 'Extra' ] } ),
+		{
+			ignoreSections: [ 'Notes', 'See also', 'Extra' ],
+			extraNamespaces: { Draft: true, User: true },
+			maximumEditCount: 50
+		},
+		'Prefixed keys apply to the check defaults and to earlier configs'
+	);
+	assert.deepEqual(
+		factory.buildConfig( 'unregistered' ),
+		{ ignoreSections: [ 'Notes' ], maximumEditCount: 50 },
+		'Unregistered check gets the shared config only'
+	);
+} );
+
+QUnit.test( 'buildConfig output is not changed by the check constructor', ( assert ) => {
+	const factory = new mw.editcheck.EditCheckFactory();
+	const Check = function ( controller, config ) {
+		mw.editcheck.BaseEditCheck.call( this, controller, config );
+	};
+	OO.inheritClass( Check, mw.editcheck.BaseEditCheck );
+	Check.static.name = 'test';
+	Check.static.defaultConfig = {
+		ignoreSections: [ 'References', 'Notes' ],
+		extraNamespaces: { Draft: true },
+		maximumEditCount: 100
+	};
+	factory.register( Check );
+
+	mw.editcheck.config = {
+		'*': {
+			'+ignoreSections': [ 'A' ],
+			'-ignoreSections': 'Notes',
+			'-extraNamespaces': [ 'Draft' ]
+		},
+		test: {
+			'+ignoreSections': [ 'B' ],
+			'-ignoreSections': [ 'References' ],
+			'+extraNamespaces': { User: true },
+			maximumEditCount: 5
+		}
+	};
+
+	const extraConfig = { '-ignoreSections': [ 'A' ] };
+	const layers = [ Check.static.defaultConfig, mw.editcheck.config, extraConfig ];
+	const layersBefore = ve.copy( layers );
+
+	const config = factory.buildConfig( 'test', extraConfig );
+	assert.deepEqual(
+		config,
+		{ ignoreSections: [ 'B' ], extraNamespaces: { User: true }, maximumEditCount: 5 },
+		'Removed items and keys are not in the config'
+	);
+	assert.deepEqual( new Check( null, config ).config, config, 'Check config is the same as the built config' );
+	assert.deepEqual( layers, layersBefore, 'Defaults, site config and extra config are not changed' );
+} );

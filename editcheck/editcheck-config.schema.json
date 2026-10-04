@@ -195,6 +195,16 @@
 					"$ref": "#/definitions/namespaceConfig"
 				}
 			},
+			"patternProperties": {
+				"^\\+.": {
+					"description": "Add to the inherited value of the key without the '+'. Arrays are joined with no duplicates. Objects are merged, and their keys can also use '+' and '-'.",
+					"type": [ "array", "object" ]
+				},
+				"^-.": {
+					"description": "Remove from the inherited value of the key without the '-'. For an array, give the items to remove. For an object, give the keys to remove.",
+					"type": [ "array", "string", "number", "boolean" ]
+				}
+			},
 			"additionalProperties": true
 		},
 		"namespaceConfig": {
@@ -230,6 +240,12 @@
 							"type": "integer",
 							"minimum": 1,
 							"deprecated": true
+						}
+					},
+					"patternProperties": {
+						"^[+-].": {
+							"description": "Rule config does not inherit the TextMatch check config, so '+' and '-' keys are not supported.",
+							"not": {}
 						}
 					},
 					"additionalProperties": true
