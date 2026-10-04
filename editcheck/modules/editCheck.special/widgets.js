@@ -10,22 +10,6 @@
 const factory = mw.editcheck && mw.editcheck.editCheckFactory;
 
 /**
- * Find a check class by name
- *
- * init.js can unregister a check (e.g. for an A/B test), but the page must show it.
- *
- * @param {string} name
- * @return {Function|undefined}
- */
-function getCheckClass( name ) {
-	return factory.lookup( name ) || Object.values( mw.editcheck ).find(
-		( value ) => typeof value === 'function' &&
-			value.prototype instanceof mw.editcheck.BaseEditCheck &&
-			value.static.name === name
-	);
-}
-
-/**
  * Render an action as a card
  *
  * @param {mw.editcheck.EditCheckAction} action
@@ -52,7 +36,7 @@ function renderAction( action ) {
  * @param {boolean} suggestion
  */
 function showCheck( $container, name, suggestion ) {
-	const CheckClass = getCheckClass( name );
+	const CheckClass = factory.getCheckClass( name );
 	if ( !CheckClass ) {
 		return;
 	}

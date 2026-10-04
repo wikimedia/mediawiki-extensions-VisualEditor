@@ -208,10 +208,25 @@ QUnit.test( 'buildConfig', ( assert ) => {
 		'Prefixed keys apply to the check defaults and to earlier configs'
 	);
 	assert.deepEqual(
-		factory.buildConfig( 'unregistered' ),
+		factory.buildConfig( 'unknown' ),
 		{ ignoreSections: [ 'Notes' ], maximumEditCount: 50 },
-		'Unregistered check gets the shared config only'
+		'Unknown check gets the shared config only'
 	);
+
+	const UnregisteredCheck = function () {};
+	OO.inheritClass( UnregisteredCheck, mw.editcheck.BaseEditCheck );
+	UnregisteredCheck.static.name = 'unregistered';
+	UnregisteredCheck.static.defaultConfig = { ignoreSections: [ 'References' ] };
+	mw.editcheck.UnregisteredTestCheck = UnregisteredCheck;
+	try {
+		assert.deepEqual(
+			factory.buildConfig( 'unregistered' ),
+			{ ignoreSections: [ 'References', 'Notes' ], maximumEditCount: 50 },
+			'Check that is not registered still gets its defaults'
+		);
+	} finally {
+		delete mw.editcheck.UnregisteredTestCheck;
+	}
 } );
 
 QUnit.test( 'buildConfig output is not changed by the check constructor', ( assert ) => {

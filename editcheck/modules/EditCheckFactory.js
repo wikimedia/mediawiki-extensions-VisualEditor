@@ -206,6 +206,22 @@ mw.editcheck.EditCheckFactory.prototype.create = function ( checkName, controlle
 };
 
 /**
+ * Find a check class by name, even if it is not registered
+ *
+ * init.js can unregister a check (e.g. for an A/B test), but Special:EditChecks must show it.
+ *
+ * @param {string} checkName
+ * @return {Function|undefined}
+ */
+mw.editcheck.EditCheckFactory.prototype.getCheckClass = function ( checkName ) {
+	return this.lookup( checkName ) || Object.values( mw.editcheck ).find(
+		( value ) => typeof value === 'function' &&
+			value.prototype instanceof mw.editcheck.BaseEditCheck &&
+			value.static.name === checkName
+	);
+};
+
+/**
  * Build the config for a check
  *
  * See mw.editcheck.mergeConfigs for how the configs are merged.
@@ -215,7 +231,7 @@ mw.editcheck.EditCheckFactory.prototype.create = function ( checkName, controlle
  * @return {Object}
  */
 mw.editcheck.EditCheckFactory.prototype.buildConfig = function ( checkName, extraConfig ) {
-	const CheckClass = this.lookup( checkName );
+	const CheckClass = this.getCheckClass( checkName );
 	return mw.editcheck.mergeConfigs(
 		// Include the defaults here, so that '+' and '-' keys apply to them
 		CheckClass ? CheckClass.static.defaultConfig : {},

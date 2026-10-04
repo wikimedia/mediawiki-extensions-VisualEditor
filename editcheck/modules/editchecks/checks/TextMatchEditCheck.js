@@ -171,11 +171,13 @@ mw.editcheck.TextMatchEditCheck.static.ensureMatchRulesLoaded = function () {
 	if ( this.matchRulesPromise ) {
 		return this.matchRulesPromise;
 	}
+	// Resolve any '+matchRules' from the site config
+	const textMatchConfig = mw.editcheck.mergeConfigs( mw.editcheck.config.textMatch );
 	const rawMatchRules = Object.assign(
 		{},
 		mw.editcheck.TextMatchEditCheck.static.matchRules || {},
 		// In T424678 we renamed matchItems to matchRules, but allow 'matchItems' for backwards compatibility temporarily
-		ve.getProp( mw.editcheck.config, 'textMatch', 'matchRules' ) || ve.getProp( mw.editcheck.config, 'textMatch', 'matchItems' ) || {}
+		textMatchConfig.matchRules || textMatchConfig.matchItems || {}
 	);
 
 	// Begin async processing and cache promise

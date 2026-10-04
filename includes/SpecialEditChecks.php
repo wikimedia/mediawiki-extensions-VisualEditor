@@ -8,6 +8,7 @@ namespace MediaWiki\Extension\VisualEditor;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Content\JsonContent;
+use MediaWiki\Extension\VisualEditor\EditCheck\ConfigMerger;
 use MediaWiki\Extension\VisualEditor\EditCheck\ResourceLoaderData;
 use MediaWiki\Html\Html;
 use MediaWiki\Html\TocGeneratorTrait;
@@ -20,6 +21,7 @@ class SpecialEditChecks extends SpecialPage {
 
 	private readonly Config $config;
 	private readonly EditCheckFileParser $parser;
+	private array $baseDefaultConfig = [];
 
 	/**
 	 * @inheritDoc
@@ -73,6 +75,11 @@ class SpecialEditChecks extends SpecialPage {
 			'AsyncTextCheck.js',
 		];
 		$onWikiConfig = ResourceLoaderData::getConfig( $this->getContext() );
+		$baseCheck = $this->collectChecks( $baseDir . '/BaseEditCheck.js', [], true );
+		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
+			$baseDefaultConfig = $this->parser->tryJsonDecodeObjectString( $baseCheck[0]['defaultConfig'] );
+			$this->baseDefaultConfig = is_array( $baseDefaultConfig ) ? $baseDefaultConfig : [];
+		}
 
 		$out->addHtml( $this->msg( 'editcheck-specialeditchecks-info' )->parseAsBlock() );
 
@@ -152,7 +159,6 @@ class SpecialEditChecks extends SpecialPage {
 			$out->addHTML( $this->buildTableHtml( $unsupportedChecks, $onWikiConfig ) );
 		}
 
-		$baseCheck = $this->collectChecks( $baseDir . '/BaseEditCheck.js', [], true );
 		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
 			$this->outputSection( 'base-check', $this->msg( 'editcheck-specialeditchecks-header-base' )->text() );
 			$out->addHTML( $this->configDetails(
@@ -403,28 +409,26 @@ class SpecialEditChecks extends SpecialPage {
 	}
 
 	/**
-	 * Get a configuration value for a given check from on-wiki config or default config.
+	 * Get a configuration value for a given check, merged in the same sequence as the client.
 	 *
 	 * @param array $checkData Check metadata
 	 * @param array $onWikiConfig On-wiki configuration overrides
 	 * @param string $key Configuration key to retrieve
-	 * @return mixed|null JSON encoded value or null if not found
+	 * @return mixed|null Value, or null if not found
 	 */
 	private function getConfigValueFromData( array $checkData, array $onWikiConfig, string $key ) {
-		// Check on-wiki config first
-		if ( isset( $onWikiConfig[$checkData['name']] ) &&
-			is_array( $onWikiConfig[$checkData['name']] ) &&
-			array_key_exists( $key, $onWikiConfig[$checkData['name']] )
-		) {
-			return $onWikiConfig[$checkData['name']][$key];
-		} elseif ( $checkData['defaultConfig'] !== '' ) {
-			// Fallback to default config
-			$defaultConfig = $this->parser->tryJsonDecodeObjectString( $checkData['defaultConfig'] );
-			if ( is_array( $defaultConfig ) && array_key_exists( $key, $defaultConfig ) ) {
-				return $defaultConfig[$key];
-			}
-		}
-		return null;
+		$defaultConfig = $checkData['defaultConfig'] !== '' ?
+			$this->parser->tryJsonDecodeObjectString( $checkData['defaultConfig'] ) :
+			null;
+		$sharedConfig = $onWikiConfig['*'] ?? null;
+		$checkConfig = $onWikiConfig[$checkData['name']] ?? null;
+		$config = ConfigMerger::merge(
+			$this->baseDefaultConfig,
+			is_array( $defaultConfig ) ? $defaultConfig : [],
+			is_array( $sharedConfig ) ? $sharedConfig : [],
+			is_array( $checkConfig ) ? $checkConfig : []
+		);
+		return $config[$key] ?? null;
 	}
 
 	/**
