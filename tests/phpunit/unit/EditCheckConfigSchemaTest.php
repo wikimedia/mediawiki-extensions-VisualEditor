@@ -229,17 +229,10 @@ class EditCheckConfigSchemaTest extends MediaWikiUnitTestCase {
 		];
 		yield 'add prefix only accepts arrays and objects' => [ $invalidAddPrefix ];
 
-		$prefixInRuleConfig = $fixture;
-		$prefixInRuleConfig['textMatch']['matchRules'] = [
-			'bad' => [
-				'title' => 'Bad',
-				'message' => 'Avoid this term',
-				'query' => 'Foo',
-				'config' => [
-					'+ignoreSections' => [ 'References' ]
-				]
-			]
+		$invalidDefaultRuleConfig = $fixture;
+		$invalidDefaultRuleConfig['textMatch']['defaultRuleConfig'] = [
+			'ignoreSections' => true
 		];
-		yield 'rule config does not accept prefixed keys' => [ $prefixInRuleConfig ];
+		yield 'defaultRuleConfig is validated as edit check config' => [ $invalidDefaultRuleConfig ];
 	}
 }

@@ -524,6 +524,10 @@ QUnit.test( 'applyCase', ( assert ) => {
 } );
 
 QUnit.test( 'TextMatchRule config', ( assert ) => {
+	const defaultRuleConfig = {
+		ignoreQuotedContent: true,
+		ignoreSections: [ 'References' ]
+	};
 	const cases = [
 		{
 			msg: 'Rule with no config gets the rule defaults',
@@ -544,17 +548,52 @@ QUnit.test( 'TextMatchRule config', ( assert ) => {
 				showAsCheck: true,
 				showAsSuggestion: true
 			}
+		},
+		{
+			msg: 'Rule with no config gets the shared rule config',
+			defaultRuleConfig,
+			ruleConfig: undefined,
+			expected: {
+				showAsCheck: false,
+				showAsSuggestion: true,
+				ignoreQuotedContent: true,
+				ignoreSections: [ 'References' ]
+			}
+		},
+		{
+			msg: 'Rule config can replace, add to and remove from the shared rule config',
+			defaultRuleConfig,
+			ruleConfig: {
+				ignoreQuotedContent: false,
+				'+ignoreSections': [ 'See also' ],
+				'-ignoreSections': 'References'
+			},
+			expected: {
+				showAsCheck: false,
+				showAsSuggestion: true,
+				ignoreQuotedContent: false,
+				ignoreSections: [ 'See also' ]
+			}
 		}
 	];
 	cases.forEach( ( caseItem ) => {
-		const layers = [ caseItem.ruleConfig, mw.editcheck.TextMatchRule.static.defaultConfig ];
+		const layers = [ caseItem.defaultRuleConfig, caseItem.ruleConfig, mw.editcheck.TextMatchRule.static.defaultConfig ];
 		const layersBefore = ve.copy( layers );
 		const rule = new mw.editcheck.TextMatchRule(
 			{ title: 'Test', query: 'Foo', config: caseItem.ruleConfig },
 			'test',
-			new Intl.Collator( 'en' )
+			new Intl.Collator( 'en' ),
+			caseItem.defaultRuleConfig
 		);
 		assert.deepEqual( rule.config, caseItem.expected, caseItem.msg );
-		assert.deepEqual( layers, layersBefore, caseItem.msg + ': rule config and defaults are not changed' );
+		assert.deepEqual( layers, layersBefore, caseItem.msg + ': configs are not changed' );
 	} );
+
+	const check = new mw.editcheck.TextMatchEditCheck( null, { defaultRuleConfig } );
+	check.instantiateMatchRules( { test: { title: 'Test', query: 'Foo', config: { '+ignoreSections': [ 'Notes' ] } } } );
+	assert.deepEqual(
+		check.matchRules[ 0 ].config.ignoreSections,
+		[ 'References', 'Notes' ],
+		'TextMatchEditCheck gives its defaultRuleConfig to its rules'
+	);
 } );

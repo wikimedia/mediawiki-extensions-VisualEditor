@@ -237,7 +237,7 @@ mw.editcheck.TextMatchEditCheck.prototype.instantiateMatchRules = function ( raw
 					mw.log.warn( 'MatchRule \'' + rule.title + '\' sets minOccurrences but is missing expand value.' );
 				}
 			}
-			const textMatchRule = new mw.editcheck.TextMatchRule( rule, id, this.collator );
+			const textMatchRule = new mw.editcheck.TextMatchRule( rule, id, this.collator, this.config.defaultRuleConfig );
 			this.matchRules.push( textMatchRule );
 		} catch ( e ) {
 			mw.log.error( `TextMatchEditCheck failed to instantiate rule '${ id }'`, e );
@@ -664,12 +664,13 @@ mw.editcheck.TextMatchEditCheckAction.prototype.isExperimental = function () {
  * @param {boolean} [rule.minOccurrences] Number of query instances that need to be found before it's declared a match
  * @param {string} id ID of matchRule in config
  * @param {Intl.Collator} collator Collator to use for comparisons
+ * @param {Object} [defaultRuleConfig] Config shared by all rules, which rule.config extends
  */
-mw.editcheck.TextMatchRule = function MWTextMatchRule( rule, id, collator ) {
+mw.editcheck.TextMatchRule = function MWTextMatchRule( rule, id, collator, defaultRuleConfig ) {
 	this.title = rule.title;
 	this.mode = rule.mode || '';
 	this.message = rule.message;
-	this.config = mw.editcheck.mergeConfigs( this.constructor.static.defaultConfig, rule.config );
+	this.config = mw.editcheck.mergeConfigs( this.constructor.static.defaultConfig, defaultRuleConfig, rule.config );
 	this.expand = rule.expand;
 	this.inNode = rule.inNode || null;
 	this.listener = rule.listener || null;

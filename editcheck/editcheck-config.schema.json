@@ -222,7 +222,7 @@
 			}
 		},
 		"textMatchRuleConfig": {
-			"description": "Per-rule config for TextMatch rules. This extends the shared edit check config. caseSensitive and minOccurrences are still accepted here for backwards compatibility, but new configs should set them on the rule itself.",
+			"description": "Per-rule config for TextMatch rules. This extends the shared edit check config, and the rule config inherits from the TextMatch defaultRuleConfig. caseSensitive and minOccurrences are still accepted here for backwards compatibility, but new configs should set them on the rule itself.",
 			"allOf": [
 				{
 					"$ref": "#/definitions/baseEditCheckConfig"
@@ -240,12 +240,6 @@
 							"type": "integer",
 							"minimum": 1,
 							"deprecated": true
-						}
-					},
-					"patternProperties": {
-						"^[+-].": {
-							"description": "Rule config does not inherit the TextMatch check config, so '+' and '-' keys are not supported.",
-							"not": {}
 						}
 					},
 					"additionalProperties": true
@@ -403,6 +397,10 @@
 				{
 					"type": "object",
 					"properties": {
+						"defaultRuleConfig": {
+							"description": "Config that all TextMatch rules inherit. A rule config can replace these keys, or use '+' and '-' keys to change them. This is not used as config for the TextMatch check itself.",
+							"$ref": "#/definitions/baseEditCheckConfig"
+						},
 						"matchRules": {
 							"description": "Preferred map of TextMatch rule IDs to definitions.",
 							"$ref": "#/definitions/textMatchRules"
