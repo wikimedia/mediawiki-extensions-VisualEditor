@@ -32,10 +32,16 @@ class EditSuggestionCountsPrecomputeJobTest extends MediaWikiUnitTestCase {
 	/**
 	 * @param bool $ok Whether the HTTP request's status isOK().
 	 * @param int $httpStatus The HTTP status code getStatus() reports.
+	 * @param string|null $message A message key that the status has, if any.
 	 */
-	private function newHttpRequestFactory( bool $ok, int $httpStatus ): HttpRequestFactory {
+	private function newHttpRequestFactory(
+		bool $ok, int $httpStatus, ?string $message = null
+	): HttpRequestFactory {
 		$status = $this->createMock( Status::class );
 		$status->method( 'isOK' )->willReturn( $ok );
+		$status->method( 'hasMessage' )->willReturnCallback(
+			static fn ( $key ) => $key === $message
+		);
 
 		$request = $this->createMock( MWHttpRequest::class );
 		$request->method( 'execute' )->willReturn( $status );
@@ -82,5 +88,23 @@ class EditSuggestionCountsPrecomputeJobTest extends MediaWikiUnitTestCase {
 		$this->assertFalse( $job->run() );
 		$this->assertNotFalse( $job->getLastError() );
 		$this->assertStringContainsString( '500', $job->getLastError() );
+	}
+
+	public function testTimeoutReturnsTrue(): void {
+		$factory = $this->newHttpRequestFactory( false, 0, 'http-timed-out' );
+
+		$job = new EditSuggestionCountsPrecomputeJob( self::PARAMS, $this->newConfig(), $factory );
+
+		$this->assertTrue( $job->run() );
+		$this->assertNull( $job->getLastError() );
+	}
+
+	public function testOtherTransportFailureReturnsFalse(): void {
+		$factory = $this->newHttpRequestFactory( false, 0, 'http-curl-error' );
+
+		$job = new EditSuggestionCountsPrecomputeJob( self::PARAMS, $this->newConfig(), $factory );
+
+		$this->assertFalse( $job->run() );
+		$this->assertNotFalse( $job->getLastError() );
 	}
 }

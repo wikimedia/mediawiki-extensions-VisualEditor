@@ -53,6 +53,12 @@ class EditSuggestionCountsPrecomputeJob extends Job {
 		if ( $status->isOK() ) {
 			return true;
 		}
+		if ( !$request->getStatus() && $status->hasMessage( 'http-timed-out' ) ) {
+			// LAC continues the computation and stores the result after the client disconnects.
+			// A retry would only start the same computation again. Same approach as
+			// ThumbnailRenderJob (T203135).
+			return true;
+		}
 
 		$this->setLastError(
 			__METHOD__ .

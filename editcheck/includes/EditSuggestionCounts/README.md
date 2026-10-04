@@ -29,10 +29,12 @@ viewed).
 **`linked_artifact_url_template`** — `string`
 : LAC endpoint URL template. The `{wiki_id}`, `{page_id}`, and `{revision_id}`
   placeholders are substituted (rawurlencoded) per revision. Default:
-  `https://linked-artifacts.discovery.wmnet:30443/v1/edit-suggestion-counts/{wiki_id}/{page_id}/{revision_id}`
+  `https://linked-artifacts.discovery.wmnet:30443/revisions/v1/edit_suggestions_counts/{wiki_id}/{page_id}/{revision_id}`
 
 **`linked_artifact_precompute_timeout`** — `int`, default `5`
-: HTTP request timeout, in seconds, for the precompute call to LAC.
+: HTTP request timeout, in seconds, for the precompute call to LAC. The job does
+  not wait for the counts: LAC completes and stores them after the request times
+  out, so a timeout counts as success and the job is not retried.
 
 **`namespaces_enabled`** — `int[]`, default `[ 0 ]`
 : Page namespaces the feature is enabled for. Only pages in these namespaces are
