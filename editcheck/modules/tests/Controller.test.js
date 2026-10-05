@@ -304,27 +304,18 @@ QUnit.test( 'A tool can suppress suggestions and still show its own check', asyn
 	assert.deepEqual( newActions, [ 'forced' ], 'The check is new, so that a dialog can focus it' );
 } );
 
-QUnit.test( 'whenSidebarShown waits only for a sidebar that is not yet the current window', ( assert ) => {
+QUnit.test( 'whenSidebarShown waits for a pending open', ( assert ) => {
 	const opening = ve.createDeferred();
-	const makeController = ( currentWindow ) => ( {
-		surface: {
-			getSidebarDialogs: () => ( { getCurrentWindow: () => currentWindow } )
-		},
-		sidebarOpeningPromise: opening.promise()
-	} );
 	const whenSidebarShown = mw.editcheck.Controller.prototype.whenSidebarShown;
 
-	assert.strictEqual(
-		whenSidebarShown.call( makeController( {} ) ).state(),
-		'resolved',
-		'A current window resolves at once, also while an open is pending'
-	);
-	const waiting = whenSidebarShown.call( makeController( null ) );
-	assert.strictEqual( waiting.state(), 'pending', 'With no current window, it waits for the open' );
+	// The window manager sets the current window before it runs the setup,
+	// so a current window does not stop the wait
+	const waiting = whenSidebarShown.call( { sidebarOpeningPromise: opening.promise() } );
+	assert.strictEqual( waiting.state(), 'pending', 'It waits for the open' );
 	opening.resolve();
 	assert.strictEqual( waiting.state(), 'resolved', 'It resolves when the open finishes' );
 	assert.strictEqual(
-		whenSidebarShown.call( { surface: makeController( null ).surface } ).state(),
+		whenSidebarShown.call( { sidebarOpeningPromise: null } ).state(),
 		'resolved',
 		'With no open, it resolves at once'
 	);
@@ -332,6 +323,10 @@ QUnit.test( 'whenSidebarShown waits only for a sidebar that is not yet the curre
 
 QUnit.test( 'ensureActionIsShown', async ( assert ) => {
 	const [ action ] = ve.test.utils.EditCheck.makeComparableActions( [ 'forced' ] );
+	// jQuery runs promise handlers in a later task
+	const nextTask = () => new Promise( ( resolve ) => {
+		setTimeout( resolve );
+	} );
 	const originalIsMobile = OO.ui.isMobile;
 	try {
 		// Mobile: wait for the gutter to render, then open the drawer on the action
@@ -350,10 +345,7 @@ QUnit.test( 'ensureActionIsShown', async ( assert ) => {
 			whenSidebarShown: () => ve.createDeferred().resolve().promise()
 		};
 		mw.editcheck.Controller.prototype.ensureActionIsShown.call( mobileController, action, true );
-		// jQuery runs promise handlers in a later task
-		await new Promise( ( resolve ) => {
-			setTimeout( resolve );
-		} );
+		await nextTask();
 		assert.strictEqual( shown.state(), 'pending', 'Mobile waits for the gutter to render the actions' );
 		rendered.resolve();
 		assert.deepEqual(
@@ -362,50 +354,79 @@ QUnit.test( 'ensureActionIsShown', async ( assert ) => {
 			'Mobile opens the drawer on the action, aligned to the top'
 		);
 
-		// Desktop: focus the action and scroll to it
+		// Desktop: focus the action and scroll to it, when the sidebar is open
 		OO.ui.isMobile = () => false;
 		const focused = [];
+		const opening = ve.createDeferred();
 		const desktopController = {
+			surface: {},
+			sidebarOpeningPromise: opening.promise(),
+			whenSidebarShown: mw.editcheck.Controller.prototype.whenSidebarShown,
 			focusAction: ( ...args ) => focused.push( args )
 		};
 		mw.editcheck.Controller.prototype.ensureActionIsShown.call( desktopController, action, true );
+		await nextTask();
+		assert.deepEqual( focused, [], 'Desktop does not focus the action while the sidebar opens' );
+		opening.resolve();
+		await nextTask();
 		assert.deepEqual( focused, [ [ action, true, { alignToTop: true } ] ], 'Desktop focuses the action and scrolls to it' );
+
+		// Desktop: the surface is destroyed while the sidebar opens
+		focused.length = 0;
+		const destroyedOpening = ve.createDeferred();
+		desktopController.sidebarOpeningPromise = destroyedOpening.promise();
+		mw.editcheck.Controller.prototype.ensureActionIsShown.call( desktopController, action, true );
+		desktopController.surface = null;
+		destroyedOpening.resolve();
+		await nextTask();
+		assert.deepEqual( focused, [], 'Desktop does not focus the action after the surface is destroyed' );
 	} finally {
 		OO.ui.isMobile = originalIsMobile;
 	}
 } );
 
 QUnit.test( 'showSidebar opens the sidebar only once while it opens', ( assert ) => {
+	const [ streamed, later ] = ve.test.utils.EditCheck.makeComparableActions( [ 'streamed', 'later' ] );
 	const openDeferred = ve.createDeferred();
 	let openCount = 0;
+	let openData = null;
+	let currentWindow = null;
 	const controller = {
 		target: { $element: $( '<div>' ) },
 		surface: {
-			getSidebarDialogs: () => ( { getCurrentWindow: () => null } )
+			getSidebarDialogs: () => ( { getCurrentWindow: () => currentWindow } )
 		},
 		inBeforeSave: false,
-		sidebarOpeningPromise: null
+		sidebarOpeningPromise: null,
+		sidebarOpeningNewActions: null
 	};
 
 	const originalOpen = ve.ui.WindowAction.prototype.open;
-	ve.ui.WindowAction.prototype.open = function () {
+	ve.ui.WindowAction.prototype.open = function ( name, data ) {
 		openCount++;
+		openData = data;
 		return openDeferred.promise();
 	};
+	const callerNewActions = [ streamed ];
 	let firstPromise, secondPromise;
 	try {
-		firstPromise = mw.editcheck.Controller.prototype.showSidebar.call( controller, [] );
-		secondPromise = mw.editcheck.Controller.prototype.showSidebar.call( controller, [] );
+		firstPromise = mw.editcheck.Controller.prototype.showSidebar.call( controller, callerNewActions );
+		// The window manager sets the current window before it runs the setup
+		currentWindow = { constructor: { static: { name: 'sidebarEditCheckDialog' } } };
+		secondPromise = mw.editcheck.Controller.prototype.showSidebar.call( controller, [ later ] );
 	} finally {
 		ve.ui.WindowAction.prototype.open = originalOpen;
 	}
 
 	assert.strictEqual( openCount, 1, 'A second call does not open the sidebar again' );
-	assert.strictEqual( secondPromise, firstPromise, 'A second call waits for the first open' );
+	assert.strictEqual( secondPromise, firstPromise, 'A second call waits for the first open, also after the current window is set' );
+	assert.deepEqual( openData.newActions, [ streamed, later ], 'The setup reads the new actions of both calls' );
+	assert.deepEqual( callerNewActions, [ streamed ], 'The array of the caller does not change' );
 
 	const done = assert.async();
 	firstPromise.always( () => {
 		assert.strictEqual( controller.sidebarOpeningPromise, null, 'The open is not pending after it resolves' );
+		assert.strictEqual( controller.sidebarOpeningNewActions, null, 'The new actions are cleared when the open finishes' );
 		done();
 	} );
 	openDeferred.resolve( { closed: ve.createDeferred().promise() } );
