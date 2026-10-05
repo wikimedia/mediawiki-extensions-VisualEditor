@@ -74,6 +74,7 @@
 	"editcheck-tone-reject-uncertain": "Ik weet niet goed hoe ik de toon moet aanpassen",
 	"editcheck-tone-reject-other": "Overige",
 	"editcheck-tone-thank": "Bedankt dat u rekening hebt gehouden met de toon!",
+	"editcheck-sourceveri-reject-other": "Overige",
 	"editcheck-yearlink-title": "Corrigeer de koppeling naar het jaartal",
 	"editcheck-yearlink-description": "Deze koppeling verwijst naar een ander jaartal dan in de tekst wordt weergegeven. Help de pagina nauwkeuriger te maken door het weergegeven jaartal en het jaartal in de koppeling aan te passen.",
 	"editcheck-yearlink-action-use": "$1 gebruiken",
