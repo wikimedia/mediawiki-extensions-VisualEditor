@@ -63,8 +63,37 @@
 
 		.ve-ui-editCheckDialog {
 			width: 100%;
+			// Remove the mobile drawer styles of the editor dialog
+			max-width: none;
+			margin: 0;
+			box-shadow: none;
+			transform: none;
+			transition: none;
 			background: @background-color-base;
 			border: @border-subtle;
+		}
+
+		// Show each value below its key. Long keys then do not push the
+		// values off the screen.
+		.mw-json {
+			&,
+			> tbody,
+			> tbody > tr,
+			> tbody > tr > th,
+			> tbody > tr > td {
+				display: block;
+			}
+
+			th,
+			td {
+				padding: @spacing-25 @spacing-50;
+				text-align: left;
+				overflow-wrap: anywhere;
+			}
+
+			th {
+				border-bottom: 0;
+			}
 		}
 	}
 }
