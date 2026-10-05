@@ -248,6 +248,7 @@
 		"BeforeInitialize": "VisualEditorHooks",
 		"BeforePageDisplay": "VisualEditorHooks",
 		"ChangeTagsListActive": "VisualEditorHooks",
+		"CommunityConfigurationProvider_initList": "EditCheckCommunityConfiguration",
 		"CustomEditor": "VisualEditorHooks",
 		"DifferenceEngineViewHeader": "VisualEditorHooks",
 		"TextSlotDiffRendererTablePrefix": "VisualEditorHooks",
@@ -315,6 +316,12 @@
 			"services": [
 				"MainConfig",
 				"ConfigFactory"
+			]
+		},
+		"EditCheckCommunityConfiguration": {
+			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\CommunityConfiguration\\Hooks",
+			"services": [
+				"MainConfig"
 			]
 		}
 	},
@@ -2713,6 +2720,30 @@
 		"visualeditor": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	},
 	"attributes": {
+		"CommunityConfiguration": {
+			"EditorCapabilities": {
+				"editCheckRedirect": {
+					"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\CommunityConfiguration\\EditCheckRedirectEditorCapability"
+				}
+			},
+			"Providers": {
+				"EditCheck": {
+					"store": {
+						"type": "static",
+						"args": [
+							{}
+						]
+					},
+					"validator": {
+						"type": "noop"
+					},
+					"type": "data",
+					"options": {
+						"editorCapability": "editCheckRedirect"
+					}
+				}
+			}
+		},
 		"EventLogging": {
 			"Schemas": {
 				"VisualEditorTemplateDialogUse": "/analytics/legacy/visualeditortemplatedialoguse/1.0.0"

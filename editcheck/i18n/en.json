@@ -160,5 +160,7 @@
 	"tag-editcheck-reference-decline-other": "Edit Check (references) declined (other)",
 	"tag-editcheck-reference-decline-other-description": "EditCheck reference was declined for an unlisted reason",
 	"tag-editcheck-reference-decline-uncertain": "Edit Check (references) declined (uncertain)",
-	"tag-editcheck-reference-decline-uncertain-description": "EditCheck reference was declined as being uncertain"
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck reference was declined as being uncertain",
+	"communityconfiguration-editcheck-title": "Edit check",
+	"communityconfiguration-editcheck-description": "Define the conditions that activate edit checks and suggestions, and decide who sees them"
 }
