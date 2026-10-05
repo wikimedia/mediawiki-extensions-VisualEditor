@@ -208,35 +208,92 @@ class SpecialEditChecks extends SpecialPage {
 				continue;
 			}
 
-			$checkData = [
+			$checks[] = [
 				'file' => $file,
 				'name' => $name,
 				'allowedContentLanguages' => $this->parser->extractStaticValue( $src, 'allowedContentLanguages' ),
 				'defaultConfig' => $this->parser->extractDefaultConfig( $src ),
 			];
-
-			// Filter by showAsCheck value if requested
-			if ( $showAsCheck !== null ) {
-				$showAsCheckValue = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'showAsCheck' ) ?? true;
-				if ( $showAsCheckValue !== $showAsCheck ) {
-					continue;
-				}
-			}
-
-			// Filter by showAsSuggestion value if requested
-			if ( $showAsSuggestion !== null ) {
-				$showAsSuggestionValue =
-					$this->getConfigValueFromData( $checkData, $onWikiConfig, 'showAsSuggestion' ) ?? true;
-				if ( $showAsSuggestionValue !== $showAsSuggestion ) {
-					continue;
-				}
-			}
-			$checks[] = $checkData;
 		}
 		usort( $checks, static function ( $a, $b ) {
 			return strcmp( basename( $a['file'] ), basename( $b['file'] ) );
 		} );
-		return $checks;
+
+		$filteredChecks = [];
+		foreach ( $checks as $checkData ) {
+			// Each textMatch rule has its own config, so it can be in a different section from textMatch
+			$entries = [ $checkData ];
+			if ( $checkData['name'] === 'textMatch' ) {
+				array_push( $entries, ...$this->getMatchRuleChecks( $checkData, $onWikiConfig ) );
+			}
+			foreach ( $entries as $entry ) {
+				if ( $showAsCheck !== null &&
+					$this->getShowValue( $entry, $onWikiConfig, 'showAsCheck' ) !== $showAsCheck
+				) {
+					continue;
+				}
+				if ( $showAsSuggestion !== null &&
+					$this->getShowValue( $entry, $onWikiConfig, 'showAsSuggestion' ) !== $showAsSuggestion
+				) {
+					continue;
+				}
+				$filteredChecks[] = $entry;
+			}
+		}
+		return $filteredChecks;
+	}
+
+	/**
+	 * Get check data for each matchRule of the textMatch check.
+	 *
+	 * @param array $checkData textMatch check data
+	 * @param array $onWikiConfig On-wiki configuration overrides
+	 * @return array List of matchRule check data
+	 */
+	private function getMatchRuleChecks( array $checkData, array $onWikiConfig ): array {
+		$matchRules = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchRules' )
+			// In T424678 we renamed matchItems to matchRules, but allow 'matchItems'
+			// for backwards compatibility temporarily
+			?? $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchItems' )
+			?? [];
+		$ruleChecks = [];
+		foreach ( $matchRules as $name => $item ) {
+			$importTitle = null;
+			if ( isset( $item['import'] ) ) {
+				$importTitle = Title::newFromText( $item['import'] );
+				$item = json_decode( $this->msg( $importTitle->getText() )->inContentLanguage()->text(), true );
+			}
+			$ruleChecks[] = [
+				'file' => '',
+				'name' => $checkData['name'] . " ($name)",
+				'matchRuleId' => (string)$name,
+				'parent' => $checkData,
+				'allowedContentLanguages' => '',
+				'defaultConfig' => json_encode( $item['config'] ?? '' ),
+				'matchItem' => $item,
+				'importTitle' => $importTitle,
+			];
+		}
+		return $ruleChecks;
+	}
+
+	/**
+	 * Get whether a check shows as a check or as a suggestion.
+	 *
+	 * @param array $checkData Check data
+	 * @param array $onWikiConfig On-wiki configuration overrides
+	 * @param string $key 'showAsCheck' or 'showAsSuggestion'
+	 * @return bool
+	 */
+	private function getShowValue( array $checkData, array $onWikiConfig, string $key ): bool {
+		if ( isset( $checkData['parent'] ) ) {
+			// A matchRule shows only if textMatch and the matchRule both permit it.
+			// Keep these defaults the same as TextMatchRule.static.defaultConfig.
+			$ruleDefaults = [ 'showAsCheck' => false, 'showAsSuggestion' => true ];
+			return $this->getShowValue( $checkData['parent'], $onWikiConfig, $key ) &&
+				(bool)( $checkData['matchItem']['config'][$key] ?? $ruleDefaults[$key] );
+		}
+		return (bool)( $this->getConfigValueFromData( $checkData, $onWikiConfig, $key ) ?? true );
 	}
 
 	/**
@@ -264,30 +321,6 @@ class SpecialEditChecks extends SpecialPage {
 		);
 		foreach ( $checks as $checkData ) {
 			$html .= $this->buildRowHtml( $checkData, $onWikiConfig, $suggestions );
-			if ( $checkData['name'] === 'textMatch' ) {
-				$matchRules = $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchRules' )
-					// In T424678 we renamed matchItems to matchRules, but allow 'matchItems'
-					// for backwards compatibility temporarily
-					?? $this->getConfigValueFromData( $checkData, $onWikiConfig, 'matchItems' )
-					?? [];
-				foreach ( $matchRules as $name => $item ) {
-					$importTitle = null;
-					if ( isset( $item['import'] ) ) {
-						$importTitle = Title::newFromText( $item['import'] );
-						$item = json_decode( $this->msg( $importTitle->getText() )->inContentLanguage()->text(), true );
-					}
-					$matchCheckData = [
-						'file' => '',
-						'name' => $checkData['name'] . " ($name)",
-						'matchRuleId' => (string)$name,
-						'allowedContentLanguages' => '',
-						'defaultConfig' => json_encode( $item['config'] ?? '' ),
-						'matchItem' => $item,
-						'importTitle' => $importTitle,
-					];
-					$html .= $this->buildRowHtml( $matchCheckData, $onWikiConfig, $suggestions );
-				}
-			}
 		}
 		$html .= Html::closeElement( 'table' );
 		return $html;
