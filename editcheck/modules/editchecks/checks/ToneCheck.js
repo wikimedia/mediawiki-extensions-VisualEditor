@@ -268,9 +268,9 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		return $.when( recheckDeferred, minimumTimeDeferred ).then( ( result ) => {
 			action.updateStale( false );
 			action.untag( 'pending' );
-			action.complete();
 			progress.$element.remove();
 			if ( !result ) {
+				action.complete();
 				this.onSuccess( action );
 			}
 		} );
