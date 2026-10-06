@@ -178,7 +178,7 @@
 			"value": {
 				"enabled": false,
 				"linked_artifact_url_template": "https://linked-artifacts.discovery.wmnet:30443/revisions/v1/edit_suggestions_counts/{wiki_id}/{page_id}/{revision_id}",
-				"linked_artifact_precompute_timeout": 5,
+				"linked_artifact_precompute_timeout": 50,
 				"namespaces_enabled": [ 0 ],
 				"page_sample_proportion": 1.0
 			}

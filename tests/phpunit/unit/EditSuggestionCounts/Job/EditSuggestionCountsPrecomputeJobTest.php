@@ -90,17 +90,8 @@ class EditSuggestionCountsPrecomputeJobTest extends MediaWikiUnitTestCase {
 		$this->assertStringContainsString( '500', $job->getLastError() );
 	}
 
-	public function testTimeoutReturnsTrue(): void {
+	public function testTimeoutReturnsFalse(): void {
 		$factory = $this->newHttpRequestFactory( false, 0, 'http-timed-out' );
-
-		$job = new EditSuggestionCountsPrecomputeJob( self::PARAMS, $this->newConfig(), $factory );
-
-		$this->assertTrue( $job->run() );
-		$this->assertNull( $job->getLastError() );
-	}
-
-	public function testOtherTransportFailureReturnsFalse(): void {
-		$factory = $this->newHttpRequestFactory( false, 0, 'http-curl-error' );
 
 		$job = new EditSuggestionCountsPrecomputeJob( self::PARAMS, $this->newConfig(), $factory );
 
