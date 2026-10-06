@@ -378,6 +378,7 @@
 	"visualeditor-savedialog-title-save": "Salvar as suas alterações",
 	"visualeditor-section-body-placeholder": "Nova seção",
 	"visualeditor-section-title-placeholder": "Assunto",
+	"visualeditor-sourceswitch-popup-dismiss": "Agora não",
 	"visualeditor-loaderror-revidconflict": "Os IDs de revisão retornados pelo servidor não correspondem (documento: $1, metadados: $2).",
 	"visualeditor-loaderror-wrongmode": "Tentou carregar o editor no modo errado (tipo de dados: \"$1\", modo editor: \"$2\").",
 	"visualeditor-settings-tool": "Configurações da página",
