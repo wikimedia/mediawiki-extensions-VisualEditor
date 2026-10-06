@@ -93,8 +93,7 @@ QUnit.test( 'showActions closes the dialog when there are no actions', ( assert 
 	[ true, false ].forEach( ( rejected ) => {
 		const closes = [];
 		const dialog = Object.assign( Object.create( ve.ui.EditCheckDialog.prototype ), {
-			close: ( data ) => closes.push( data ),
-			controller: { getUnshownSystemMessageUpdate: () => null }
+			close: ( data ) => closes.push( data )
 		} );
 		dialog.showActions( [], [], rejected );
 		assert.deepEqual(
@@ -103,28 +102,6 @@ QUnit.test( 'showActions closes the dialog when there are no actions', ( assert 
 			rejected ? 'A rejection closes with reject' : 'Otherwise it closes with complete'
 		);
 	} );
-} );
-
-QUnit.test( 'showActions waits for an unshown system message before it closes', async ( assert ) => {
-	const closes = [];
-	const update = Promise.resolve( [] );
-	const dialog = Object.assign( Object.create( ve.ui.EditCheckDialog.prototype ), {
-		close: ( data ) => closes.push( data ),
-		isOpened: () => true,
-		getScopedActions: () => [],
-		controller: { getUnshownSystemMessageUpdate: () => update }
-	} );
-	dialog.showActions( [], [], false );
-	assert.deepEqual( closes, [], 'The dialog stays open while the system message update is pending' );
-
-	await update;
-	// Let the dialog's handler for the update run
-	await Promise.resolve();
-	assert.deepEqual(
-		closes,
-		[ { action: 'complete' } ],
-		'The dialog closes if the update did not give it an action, and does not wait for the same update again'
-	);
 } );
 
 /**

@@ -603,7 +603,7 @@ QUnit.test( 'Completing an action registers a system message only once', async (
 		} );
 		controller.on( 'actionsUpdated', ( listener ) => {
 			updates.push( listener );
-			if ( listener === 'onSystemMessage' ) {
+			if ( listener === 'systemMessages' ) {
 				systemMessageUpdated();
 			}
 		} );
@@ -611,11 +611,10 @@ QUnit.test( 'Completing an action registers a system message only once', async (
 		// EditCheckAction#complete guards against firing its event twice
 		action.complete();
 		action.complete();
-		// registerSystemMessage now goes through the normal updateForListener
-		// pipeline, which resolves asynchronously even for a synchronous check
+		// registerSystemMessage announces the new action asynchronously
 		await systemMessageUpdate;
 
-		assert.strictEqual( controller.pendingSystemMessages.length, 1, 'Only one system message is registered' );
+		assert.strictEqual( controller.getActions( 'systemMessages' ).length, 1, 'Only one system message is registered' );
 		assert.strictEqual( updates.length, 1, 'actionsUpdated is only emitted once for the new system message' );
 	} finally {
 		mw.editcheck.editCheckFactory = originalFactory;
@@ -642,7 +641,7 @@ QUnit.test( 'Completing an action mid-save does not register a system message', 
 		action.complete();
 
 		assert.strictEqual(
-			controller.pendingSystemMessages.length, 0,
+			controller.getActions( 'systemMessages' ).length, 0,
 			'No system message is registered while saving, since there is nowhere to show it yet'
 		);
 	} finally {
@@ -691,33 +690,6 @@ QUnit.test( 'An action is tracked as shown once on mobile, with or without the g
 } );
 
 QUnit.test( 'dropStaleSystemMessages removes messages whose fragment changed, e.g. via undo', async ( assert ) => {
-	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
-	factory.register( mw.editcheck.SystemMessageEditCheck );
-
-	const originalFactory = mw.editcheck.editCheckFactory;
-	mw.editcheck.editCheckFactory = factory;
-	try {
-		const fragment = surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) );
-		// registerSystemMessage now goes through the normal updateForListener
-		// pipeline, which resolves asynchronously even for a synchronous check
-		await controller.registerSystemMessage( fragment, { title: 'Done!' } );
-		assert.strictEqual( controller.pendingSystemMessages.length, 1, 'The message is registered' );
-
-		controller.dropStaleSystemMessages();
-		assert.strictEqual( controller.pendingSystemMessages.length, 1, 'An unchanged fragment is kept' );
-
-		// Simulate an undo of the edit that resolved the original check: the
-		// fragment's text no longer matches what was recorded.
-		surfaceModel.change( ve.dm.TransactionBuilder.static.newFromRemoval( surfaceModel.getDocument(), new ve.Range( 1, 2 ) ) );
-
-		controller.dropStaleSystemMessages();
-		assert.strictEqual( controller.pendingSystemMessages.length, 0, 'A message whose fragment changed is dropped' );
-	} finally {
-		mw.editcheck.editCheckFactory = originalFactory;
-	}
-} );
-
-QUnit.test( 'getUnshownSystemMessageUpdate', async ( assert ) => {
 	const clock = sinon.useFakeTimers();
 	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
 	factory.register( mw.editcheck.SystemMessageEditCheck );
@@ -725,19 +697,73 @@ QUnit.test( 'getUnshownSystemMessageUpdate', async ( assert ) => {
 	const originalFactory = mw.editcheck.editCheckFactory;
 	mw.editcheck.editCheckFactory = factory;
 	try {
-		assert.strictEqual( controller.getUnshownSystemMessageUpdate(), null, 'Null when no message is registered' );
+		const fragment = surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) );
+		await controller.registerSystemMessage( fragment, { title: 'Done!' } );
+		const action = controller.getActions( 'systemMessages' )[ 0 ];
+
+		controller.dropStaleSystemMessages();
+		assert.deepEqual( controller.getActions( 'systemMessages' ), [ action ], 'An unchanged fragment is kept' );
+
+		// Simulate an undo of the edit that resolved the original check: the
+		// fragment's text no longer matches what was recorded.
+		surfaceModel.change( ve.dm.TransactionBuilder.static.newFromRemoval( surfaceModel.getDocument(), new ve.Range( 1, 2 ) ) );
+
+		controller.dropStaleSystemMessages();
+		assert.deepEqual( controller.getActions( 'systemMessages' ), [], 'A message whose fragment changed is removed' );
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+		clock.restore();
+	}
+} );
+
+QUnit.test( 'A system message is added at once and announced as new later', async ( assert ) => {
+	const clock = sinon.useFakeTimers();
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const updates = [];
+		controller.on( 'actionsUpdated', ( listener, actions, newActions ) => updates.push( newActions ) );
 
 		const fragment = surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) );
-		const update = controller.registerSystemMessage( fragment, { title: 'Done!' } );
-		assert.strictEqual(
-			controller.getUnshownSystemMessageUpdate(), update,
-			'Before the update resolves, the message has no action, so the update is returned'
-		);
+		const announced = controller.registerSystemMessage( fragment, { title: 'Done!' } );
+		const action = controller.getActions( 'systemMessages' )[ 0 ];
+		assert.true( action.check instanceof mw.editcheck.SystemMessageEditCheck, 'The action is added at once' );
+		assert.deepEqual( updates, [], 'The action is not announced in the same tick' );
 
-		await update;
-		assert.strictEqual(
-			controller.getUnshownSystemMessageUpdate(), null,
-			'Null once the message has an action'
+		await announced;
+		assert.deepEqual( updates, [ [ action ] ], 'The action is announced as new once' );
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+		clock.restore();
+	}
+} );
+
+QUnit.test( 'A system message removed before it is announced is not announced', async ( assert ) => {
+	const clock = sinon.useFakeTimers();
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const updates = [];
+		controller.on( 'actionsUpdated', ( listener, actions, newActions, discardedActions ) => {
+			updates.push( { newActions, discardedActions } );
+		} );
+
+		const fragment = surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) );
+		const announced = controller.registerSystemMessage( fragment, { title: 'Done!' } );
+		const action = controller.getActions( 'systemMessages' )[ 0 ];
+		controller.removeSystemMessage( action );
+
+		await announced;
+		assert.deepEqual(
+			updates,
+			[ { newActions: [], discardedActions: [ action ] } ],
+			'Only the removal is reported'
 		);
 	} finally {
 		mw.editcheck.editCheckFactory = originalFactory;
@@ -745,30 +771,51 @@ QUnit.test( 'getUnshownSystemMessageUpdate', async ( assert ) => {
 	}
 } );
 
-QUnit.test( 'editChecksArePossible ignores system checks', ( assert ) => {
-	const { controller, factory } = makeStubCheckController( { checks: [], suggestions: [] } );
+QUnit.test( 'A system message with dismissOnOtherFocus is removed when another action gets focus', async ( assert ) => {
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
 	factory.register( mw.editcheck.SystemMessageEditCheck );
 
 	const originalFactory = mw.editcheck.editCheckFactory;
-	const originalSuggestionsModeAvailable = mw.editcheck.suggestionsModeAvailable;
 	mw.editcheck.editCheckFactory = factory;
-	mw.editcheck.suggestionsModeAvailable = false;
 	try {
-		const StubCheck = factory.lookup( 'stub' );
-		factory.unregister( 'stub' );
-		assert.strictEqual(
-			controller.editChecksArePossible(), false,
-			'A registry with only a system check reports no checks possible'
-		);
+		const fragment = surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) );
+		await controller.registerSystemMessage( fragment, { title: 'Done!', messageType: 'publishPath', dismissOnOtherFocus: true } );
+		const action = controller.getActions( 'systemMessages' )[ 0 ];
 
-		factory.register( StubCheck );
-		assert.strictEqual(
-			controller.editChecksArePossible(), true,
-			'A normal check alongside it makes checks possible again'
-		);
+		controller.emit( 'focusAction', action );
+		assert.deepEqual( controller.getActions( 'systemMessages' ), [ action ], 'Focus on the message itself keeps it' );
+
+		const otherAction = new mw.editcheck.EditCheckAction( {
+			check: factory.create( 'stub', controller ),
+			choices: [],
+			fragments: [ surfaceModel.getLinearFragment( new ve.Range( 5, 6 ) ) ]
+		} );
+		controller.emit( 'focusAction', otherAction );
+		assert.deepEqual( controller.getActions( 'systemMessages' ), [], 'Focus on another action removes the message' );
 	} finally {
 		mw.editcheck.editCheckFactory = originalFactory;
-		mw.editcheck.suggestionsModeAvailable = originalSuggestionsModeAvailable;
+	}
+} );
+
+QUnit.test( 'clearState stops the auto-dismiss of system messages', async ( assert ) => {
+	const clock = sinon.useFakeTimers();
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	factory.register( mw.editcheck.SystemMessageEditCheck );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const fragment = surfaceModel.getLinearFragment( new ve.Range( 1, 4 ) );
+		await controller.registerSystemMessage( fragment, { title: 'Done!' } );
+
+		const updates = [];
+		controller.on( 'actionsUpdated', ( listener ) => updates.push( listener ) );
+		controller.clearState();
+		clock.tick( 5000 );
+		assert.deepEqual( updates, [], 'The timeout of the old message does nothing' );
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+		clock.restore();
 	}
 } );
 

@@ -17,8 +17,7 @@ mw.editcheck.EditCheckFactory = function MWEditCheckFactory() {
 	this.checksByListener = {
 		onDocumentChange: [],
 		onBranchNodeChange: [],
-		onBeforeSave: [],
-		onSystemMessage: []
+		onBeforeSave: []
 	};
 };
 
@@ -156,11 +155,7 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
 					}
 					actions = actions.filter( ( action ) => action !== null );
 					for ( const action of actions ) {
-						// SystemMessageEditCheck already sets a fixed suggestion status,
-						// independent of which scan pass produced it, so don't override that
-						if ( action.suggestion === undefined ) {
-							action.suggestion = includeSuggestions;
-						}
+						action.suggestion = includeSuggestions;
 						if ( onProgress ) {
 							onProgress( action );
 						}

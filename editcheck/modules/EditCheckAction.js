@@ -470,8 +470,8 @@ mw.editcheck.EditCheckAction.prototype.cancelComplete = function () {
 /**
  * Method called when the action is completed successfully
  *
- * Call this before the action is removed from the action list. Then a dialog
- * that becomes empty can wait for the system message, and does not close.
+ * Call this before the action is removed from the action list. Then the system
+ * message is in the list when a dialog updates, and the dialog does not close.
  *
  * @param {jQuery|string|Function|OO.ui.HtmlSnippet} [message] Message to show for this
  *  outcome that overrides the check's successResult message

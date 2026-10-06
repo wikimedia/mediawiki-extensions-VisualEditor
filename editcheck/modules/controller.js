@@ -1,6 +1,9 @@
 'use strict';
 
-const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange', 'onSystemMessage' ];
+const midEditListeners = [ 'onDocumentChange', 'onBranchNodeChange' ];
+// System messages have no listener. #registerSystemMessage adds them to the 'systemMessages'
+// action list, which actionsByListener, #getActions and #removeAction accept as a listener.
+const midEditActionLists = [ ...midEditListeners, 'systemMessages' ];
 
 /**
  * EditCheck controller
@@ -110,7 +113,8 @@ OO.mixinClass( Controller, OO.EventEmitter );
  * Actions for a given listener are updated
  *
  * @event EditCheckController#actionsUpdated
- * @param {string} listener The listener type (e.g. 'onBeforeSave')
+ * @param {string} listener The action list that changed: a listener type (e.g. 'onBeforeSave'),
+ *  or 'systemMessages' for the actions from #registerSystemMessage
  * @param {mw.editcheck.EditCheckAction[]} actions All current actions
  * @param {mw.editcheck.EditCheckAction[]} newActions Actions newly added
  * @param {mw.editcheck.EditCheckAction[]} discardedActions Actions newly removed
@@ -154,6 +158,9 @@ OO.mixinClass( Controller, OO.EventEmitter );
  * Reset controller state (on init or teardown)
  */
 Controller.prototype.clearState = function () {
+	if ( this.systemMessages ) {
+		[ ...this.systemMessages.keys() ].forEach( ( action ) => this.forgetSystemMessage( action ) );
+	}
 	this.actionsByListener = {};
 	this.surface = null;
 	this.inBeforeSave = false;
@@ -164,10 +171,8 @@ Controller.prototype.clearState = function () {
 	this.taggedFragments = {};
 	this.taggedIds = {};
 	this.ephemeralTags = [];
-	// Registrations made at #registerSystemMessage
-	this.pendingSystemMessages = [];
-	// Latest #updateForListener promise for onSystemMessage
-	this.systemMessageUpdate = null;
+	// State of each system message action from #registerSystemMessage
+	this.systemMessages = new Map();
 	this.lastBranchNodeChangeHistoryPointer = null;
 	this.refreshDeferred = null;
 	this.sidebarOpeningPromise = null;
@@ -301,8 +306,7 @@ Controller.prototype.editChecksArePossible = function () {
 	}
 	return [ 'onBeforeSave', 'onDocumentChange', 'onBranchNodeChange' ].some(
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
-			( checkName ) => !mw.editcheck.editCheckFactory.lookup( checkName ).static.isSystemCheck &&
-				this.canBeShown( checkName )
+			( checkName ) => this.canBeShown( checkName )
 		)
 	);
 };
@@ -512,9 +516,7 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	};
 	let actionsPromise;
 	// Create all actions for this listener
-	if ( listener !== 'onSystemMessage' && this.suggestionsModeAvailable && !this.inBeforeSave ) {
-		// onSystemMessage's only check doesn't distinguish suggestions from checks,
-		// so there's no need to run twice
+	if ( this.suggestionsModeAvailable && !this.inBeforeSave ) {
 		// eslint-disable-next-line no-jquery/no-when
 		actionsPromise = $.when(
 			mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), true, onProgress ),
@@ -599,10 +601,6 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 				// Notify listeners that actions have been updated
 				this.emit( 'actionsUpdated', listener, this.getActions(), newActions, discardedActions, false );
 			}
-			if ( listener !== 'onSystemMessage' && listener !== 'onBeforeSave' && this.pendingSystemMessages.length ) {
-				// If there are pending messages, see if any of them have been made stale by this document/branch node change
-				this.updateForListener( 'onSystemMessage' );
-			}
 			// Return the updated actions
 			return actions;
 		} ).catch( ( error ) => {
@@ -610,9 +608,6 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 			return [];
 		} );
 	actionsPromise.then( clearPending, clearPending );
-	if ( listener === 'onSystemMessage' ) {
-		this.systemMessageUpdate = actionsPromise;
-	}
 	return actionsPromise;
 };
 
@@ -810,7 +805,7 @@ Controller.prototype.getActions = function ( listener ) {
 		}
 		return lsActions;
 	}
-	const listeners = this.inBeforeSave ? [ 'onBeforeSave' ] : midEditListeners;
+	const listeners = this.inBeforeSave ? [ 'onBeforeSave' ] : midEditActionLists;
 	let actions = [].concat( ...listeners.map( ( lr ) => this.actionsByListener[ lr ] || [] ) );
 	if ( this.suppressSuggestions ) {
 		actions = actions.filter( ( action ) => !action.isSuggestion() );
@@ -862,71 +857,91 @@ Controller.prototype.registerEphemeralTag = function ( name, tag, fragment ) {
  *
  * Shown as an EditCheckAction card at a resolved action's location.
  *
+ * The action is added at once, so that a dialog whose last action completed
+ * has the message to show, and does not close.
+ *
  * @param {ve.dm.SurfaceFragment} fragment Fragment where the resolved action was
  * @param {Object} config EditCheckAction configuration
  * @param {string} [config.messageType='success'] Name of a static.messageTypes entry to use as a base
  * @param {boolean} [config.dismissOnOtherFocus] If this suggestion card should be dismissed as soon as user moves on
  *  to a different check or suggestion
- * @return {Promise<mw.editcheck.EditCheckAction[]>} Resolves with the updated onSystemMessage actions
+ * @return {Promise} Resolves when the action is announced as new
+ * @fires EditCheckController#actionsUpdated
  */
 Controller.prototype.registerSystemMessage = function ( fragment, config ) {
 	const messageTypes = mw.editcheck.SystemMessageEditCheck.static.messageTypes;
-	const typeConfig = messageTypes[ config.messageType ] || messageTypes.success;
-	const record = {
-		fragment,
-		config: ve.extendObject( {}, typeConfig, config )
-	};
-	record.originalData = record.fragment.getData();
-	this.pendingSystemMessages.push( record );
+	const actionConfig = ve.extendObject( {}, messageTypes[ config.messageType ] || messageTypes.success, config );
+	const action = new mw.editcheck.EditCheckAction( ve.extendObject( {}, actionConfig, {
+		check: mw.editcheck.editCheckFactory.create( mw.editcheck.SystemMessageEditCheck.static.name, this ),
+		fragments: [ fragment ]
+	} ) );
+	const message = { originalData: fragment.getData() };
+	this.systemMessages.set( action, message );
+	this.actionsByListener.systemMessages = ( this.actionsByListener.systemMessages || [] ).concat( action );
+	this.trackAction( action );
 
-	if ( config.dismissOnOtherFocus ) {
-		const onOtherFocus = ( focusedAction ) => {
-			if ( !focusedAction || focusedAction.systemMessageRecord === record ) {
-				return;
+	if ( actionConfig.dismissOnOtherFocus ) {
+		message.onOtherFocus = ( focusedAction ) => {
+			if ( focusedAction && focusedAction !== action ) {
+				this.removeSystemMessage( action );
 			}
-			this.off( 'focusAction', onOtherFocus );
-			mw.editcheck.SystemMessageEditCheck.static.dismissRecord( this, record );
 		};
-		this.on( 'focusAction', onOtherFocus );
+		this.on( 'focusAction', message.onOtherFocus );
 	}
 
 	// Auto-dismiss after the specified time
 	// (if not specified, this message type stays until the user acts on it or navigates away)
-	if ( record.config.autoDismiss ) {
-		record.autoDismissTimeout = setTimeout( () => mw.editcheck.SystemMessageEditCheck.static.dismissRecord( this, record ), record.config.autoDismiss );
+	if ( actionConfig.autoDismiss ) {
+		message.autoDismissTimeout = setTimeout( () => this.removeSystemMessage( action ), actionConfig.autoDismiss );
 	}
 
-	return this.updateForListener( 'onSystemMessage' );
+	// This can occur in an actionsUpdated handler, so do not emit the event again until it is finished
+	return Promise.resolve().then( () => {
+		if ( this.systemMessages.has( action ) ) {
+			this.emit( 'actionsUpdated', 'systemMessages', this.getActions(), [ action ], [], false );
+		}
+	} );
 };
 
 /**
- * Get the update that will show the registered system messages that have no action yet
+ * Remove a system message and its action
  *
- * A dialog uses this to stay open when its last action completes, because the
- * system message for that action arrives async.
- *
- * @return {Promise<mw.editcheck.EditCheckAction[]>|null} Null if all system messages have actions
+ * @param {mw.editcheck.EditCheckAction} action Action of the system message
  */
-Controller.prototype.getUnshownSystemMessageUpdate = function () {
-	const unshown = this.pendingSystemMessages.some(
-		( record ) => !mw.editcheck.SystemMessageEditCheck.static.findCurrentAction( this, record )
-	);
-	return unshown ? this.systemMessageUpdate : null;
+Controller.prototype.removeSystemMessage = function ( action ) {
+	if ( this.forgetSystemMessage( action ) ) {
+		this.removeAction( 'systemMessages', action, false );
+	}
 };
 
 /**
- * Remove any system messages whose fragments no longer exist
+ * Stop the timeout and the focus handler of a system message, and forget its state
  *
+ * @private
+ * @param {mw.editcheck.EditCheckAction} action Action of the system message
+ * @return {boolean} The system message was registered
+ */
+Controller.prototype.forgetSystemMessage = function ( action ) {
+	const message = this.systemMessages.get( action );
+	if ( !message ) {
+		// Already removed, e.g. by the user or because it was stale
+		return false;
+	}
+	this.systemMessages.delete( action );
+	clearTimeout( message.autoDismissTimeout );
+	if ( message.onOtherFocus ) {
+		this.off( 'focusAction', message.onOtherFocus );
+	}
+	return true;
+};
+
+/**
+ * Remove any system messages whose fragments changed, e.g. by an undo
  */
 Controller.prototype.dropStaleSystemMessages = function () {
-	const pending = this.pendingSystemMessages;
-	for ( let i = pending.length - 1; i >= 0; i-- ) {
-		const record = pending[ i ];
-		if ( !ve.compare( record.fragment.getData(), record.originalData ) ) {
-			pending.splice( i, 1 );
-			clearTimeout( record.autoDismissTimeout );
-		}
-	}
+	[ ...this.systemMessages ]
+		.filter( ( [ action, message ] ) => !ve.compare( action.fragments[ 0 ].getData(), message.originalData ) )
+		.forEach( ( [ action ] ) => this.removeSystemMessage( action ) );
 };
 
 /**
@@ -1053,6 +1068,7 @@ Controller.prototype.onPosition = function ( passive ) {
  */
 Controller.prototype.onUndoStackChange = function () {
 	if ( !this.inBeforeSave ) {
+		this.dropStaleSystemMessages();
 		this.updateForListener( 'onDocumentChange' );
 	}
 };
@@ -1673,29 +1689,34 @@ Controller.prototype.onActionCompleted = function ( action, message ) {
 		// it could suddenly appear alongside unrelated ones - which we don't want
 		return;
 	}
-	const fragment = action.fragments[ action.fragments.length - 1 ];
-	let title = action.suggestion ? OO.ui.deferMsg( 'editcheck-dialog-success-suggestion' ) : OO.ui.deferMsg( 'editcheck-dialog-success-check' );
-	if ( action.check.constructor.static.successResult ) {
-		title = action.check.constructor.static.successResult;
+	const config = {
+		title: message || action.check.constructor.static.successResult || OO.ui.deferMsg(
+			action.suggestion ? 'editcheck-dialog-success-suggestion' : 'editcheck-dialog-success-check'
+		),
+		suggestion: action.suggestion
+	};
+	if ( action.isSuggestion() && this.consumePublishPath() ) {
+		config.messageType = 'publishPath';
+		config.dismissOnOtherFocus = true;
 	}
-	if ( message ) {
-		title = message;
+	this.registerSystemMessage( action.fragments[ action.fragments.length - 1 ], config );
+};
+
+/**
+ * Check if the publish path card can show, and if so, do not show it again
+ *
+ * @return {boolean} The publish path card can show
+ */
+Controller.prototype.consumePublishPath = function () {
+	if ( !mw.editcheck.showPublishPath || OO.ui.isMobile() ) {
+		return false;
 	}
-	if ( action.isSuggestion() && mw.editcheck.showPublishPath && !OO.ui.isMobile() ) {
-		mw.editcheck.showPublishPath = false;
-		if ( !mw.user.isAnon() ) {
-			new mw.Api().saveOption( 'visualeditor-editcheck-showpublishpath', '0' );
-			mw.user.options.set( 'visualeditor-editcheck-showpublishpath', '0' );
-		}
-		this.registerSystemMessage( fragment, {
-			title,
-			messageType: 'publishPath',
-			suggestion: action.suggestion,
-			dismissOnOtherFocus: true
-		} );
-		return;
+	mw.editcheck.showPublishPath = false;
+	if ( !mw.user.isAnon() ) {
+		new mw.Api().saveOption( 'visualeditor-editcheck-showpublishpath', '0' );
+		mw.user.options.set( 'visualeditor-editcheck-showpublishpath', '0' );
 	}
-	this.registerSystemMessage( fragment, { title, suggestion: action.suggestion } );
+	return true;
 };
 
 module.exports = {

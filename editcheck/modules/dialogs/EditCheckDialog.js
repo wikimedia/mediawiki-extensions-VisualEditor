@@ -232,17 +232,6 @@ ve.ui.EditCheckDialog.prototype.setScope = function ( scope, focusAction ) {
  */
 ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, lastActionRejected ) {
 	if ( actions.length === 0 ) {
-		const update = this.controller.getUnshownSystemMessageUpdate();
-		if ( update && update !== this.awaitedSystemMessageUpdate ) {
-			// The system message for the completed action arrives async. Keep the dialog open for it.
-			this.awaitedSystemMessageUpdate = update;
-			update.then( () => {
-				if ( this.isOpened() && !this.getScopedActions().length ) {
-					this.showScopedActions( [], lastActionRejected );
-				}
-			} );
-			return;
-		}
 		this.close( { action: lastActionRejected ? 'reject' : 'complete' } );
 		return;
 	}
@@ -345,8 +334,7 @@ ve.ui.EditCheckDialog.prototype.setCurrentAction = function ( action, fromUserAc
 		cAction.widget.toggleCollapse( i !== offset );
 	} );
 
-	// Don't show footer for a system check
-	if ( offset !== null && !action.check.isSystemCheck() ) {
+	if ( offset !== null ) {
 		this.footerLabel.setLabel(
 			ve.msg( 'visualeditor-find-and-replace-results',
 				ve.init.platform.formatNumber( offset + 1 ),
