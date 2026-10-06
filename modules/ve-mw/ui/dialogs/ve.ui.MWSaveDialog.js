@@ -727,6 +727,14 @@ ve.ui.MWSaveDialog.prototype.updateReviewMode = function () {
 					this.diffElement = diffElement;
 					this.$reviewVisualDiff.empty().append( diffElement.$element );
 					this.positionDiffElement();
+				}, ( code, errorObject ) => {
+					this.$reviewVisualDiff.empty().append(
+						new OO.ui.MessageWidget( {
+							type: 'error',
+							label: ve.init.target.extractErrorMessages( errorObject )
+						} ).$element
+					);
+					this.updateSize();
 				} );
 			}
 			return;

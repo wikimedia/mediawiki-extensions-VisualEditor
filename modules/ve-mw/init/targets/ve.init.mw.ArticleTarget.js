@@ -1119,11 +1119,24 @@ ve.init.mw.ArticleTarget.prototype.onSaveDialogReviewComplete = function ( wikit
 ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 	return mw.loader.using( 'ext.visualEditor.diffLoader' ).then( () => {
 		const mode = this.getSurface().getMode();
+		const fetchOriginal = ( section ) => {
+			if ( !this.revid ) {
+				// A new page has no revision, so compare with an empty document
+				return ve.createDeferred().resolve(
+					this.constructor.static.createModelFromDom( ve.createDocumentFromHtml( '' ), 'visual' )
+				).promise();
+			}
+			return mw.libs.ve.diffLoader.fetchRevision( this.revid, this.getPageName(), section ).then( null, ( ...args ) => {
+				// Do not cache errors, so that the next review tries again
+				this.originalDmDocPromise = null;
+				return ve.createDeferred().reject( ...args ).promise();
+			} );
+		};
 
 		if ( !this.originalDmDocPromise ) {
 			if ( mode === 'source' ) {
 				// Always load full doc in source mode for correct reference diffing (T260008)
-				this.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( this.revid, this.getPageName() );
+				this.originalDmDocPromise = fetchOriginal( null );
 			} else {
 				if ( !this.fromEditedState ) {
 					const dmDoc = this.constructor.static.createModelFromDom( this.doc, 'visual' );
@@ -1135,7 +1148,7 @@ ve.init.mw.ArticleTarget.prototype.getVisualDiffGeneratorPromise = function () {
 					}
 					this.originalDmDocPromise = ve.createDeferred().resolve( dmDocOrNode ).promise();
 				} else {
-					this.originalDmDocPromise = mw.libs.ve.diffLoader.fetchRevision( this.revid, this.getPageName(), this.section );
+					this.originalDmDocPromise = fetchOriginal( this.section );
 				}
 			}
 		}
