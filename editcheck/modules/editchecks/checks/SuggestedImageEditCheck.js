@@ -41,7 +41,7 @@ mw.editcheck.SuggestedImageEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.SuggestedImageEditCheck.static.cachedPromises = new Map();
+mw.editcheck.SuggestedImageEditCheck.static.cachedPromises = new WeakMap();
 
 /* Static methods */
 

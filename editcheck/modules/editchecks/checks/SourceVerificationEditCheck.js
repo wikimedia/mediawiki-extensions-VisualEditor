@@ -57,7 +57,7 @@ mw.editcheck.SourceVerificationEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.SourceVerificationEditCheck.static.cachedPromises = new Map();
+mw.editcheck.SourceVerificationEditCheck.static.cachedPromises = new WeakMap();
 
 /* Static methods */
 

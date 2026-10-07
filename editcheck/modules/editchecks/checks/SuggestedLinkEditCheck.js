@@ -53,7 +53,7 @@ mw.editcheck.SuggestedLinkEditCheck.static.choices = [
 
 mw.editcheck.SuggestedLinkEditCheck.static.linkClasses = [ ve.dm.MWInternalLinkAnnotation ];
 
-mw.editcheck.SuggestedLinkEditCheck.static.cachedPromises = new Map();
+mw.editcheck.SuggestedLinkEditCheck.static.cachedPromises = new WeakMap();
 
 /* Static methods */
 

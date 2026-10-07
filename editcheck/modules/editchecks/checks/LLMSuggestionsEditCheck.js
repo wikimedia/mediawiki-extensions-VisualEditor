@@ -50,7 +50,7 @@ mw.editcheck.LLMSuggestionEditCheck.static.choices = [
 	}
 ];
 
-mw.editcheck.LLMSuggestionEditCheck.static.cachedPromises = new Map();
+mw.editcheck.LLMSuggestionEditCheck.static.cachedPromises = new WeakMap();
 
 /* Static methods */
 
