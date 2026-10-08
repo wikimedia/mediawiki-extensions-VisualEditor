@@ -644,7 +644,6 @@ QUnit.test( 'doesConfigMatch respects inCategory and notInCategory', ( assert ) 
 				{ type: 'mwCategory', attributes: { category: 'Category:' + category, sortkey: '' } },
 				{ type: '/mwCategory' }
 			] ) )
-			// TODO: Test template-generated categories
 		] );
 		assert.strictEqual(
 			mw.editcheck.BaseEditCheck.static.doesConfigMatch(
@@ -658,6 +657,29 @@ QUnit.test( 'doesConfigMatch respects inCategory and notInCategory', ( assert ) 
 			caseItem.description
 		);
 	} );
+} );
+
+QUnit.test( 'doesConfigMatch respects template-generated categories', ( assert ) => {
+	mw.config.set( {
+		wgServer: 'http://example.com',
+		wgScript: '/w/index.php',
+		wgArticlePath: '/wiki/$1'
+	} );
+	const htmlDoc = ve.createDocumentFromHtml(
+		'<base href="http://example.com/wiki/">' +
+		'<body>' +
+		'<div about="#mwt1" typeof="mw:Transclusion" data-mw=\'{"parts":[{"template":{"target":{"wt":"Test","href":"./Template:Test"},"params":{},"i":0}}]}\'>Hello</div>' +
+		'<link rel="mw:PageProp/Category" href="./Category:Foo#Sortkey" about="#mwt1">' +
+		'</body>'
+	);
+	const doc = ve.dm.converter.getModelFromDom( htmlDoc );
+	const doesConfigMatch = ( inCategory, notInCategory ) => mw.editcheck.BaseEditCheck.static.doesConfigMatch(
+		ve.extendObject( {}, mw.editcheck.BaseEditCheck.static.defaultConfig, { inCategory, notInCategory } ),
+		doc
+	);
+
+	assert.true( doesConfigMatch( [ 'Foo' ], [] ), 'matches when template adds a required category' );
+	assert.false( doesConfigMatch( [], [ 'Foo' ] ), 'does not match when template adds a forbidden category' );
 } );
 
 QUnit.test( 'doesConfigMatch treats hasTemplate and lacksTemplate false as unset', ( assert ) => {
