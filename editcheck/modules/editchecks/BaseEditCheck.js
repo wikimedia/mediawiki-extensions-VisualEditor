@@ -199,8 +199,14 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 				} );
 				candidateElements.forEach( ( domElement ) => {
 					if ( ve.dm.modelRegistry.matchElement( domElement ) === 'mwCategory' ) {
-						const category = ve.dm.MWCategoryMetaItem.static.toDataElement( [ domElement ] );
-						categoryTitles.push( category.attributes.category );
+						const targetData = mw.libs.ve.getTargetDataFromHref(
+							domElement.getAttribute( 'href' ),
+							documentModel.getHtmlDocument()
+						);
+						if ( targetData.isInternal ) {
+							// Remove the sort key
+							categoryTitles.push( targetData.title.split( '#' )[ 0 ] );
+						}
 					}
 				} );
 
