@@ -388,6 +388,7 @@
 	"visualeditor-section-body-placeholder": "قسم جديد",
 	"visualeditor-section-title-placeholder": "الموضوع",
 	"visualeditor-sourceswitch-popup-title": "هل تعلم أن هناك طريقة أخرى للتعديل؟",
+	"visualeditor-sourceswitch-popup-text": "يتيح لك تحرير المصدر العمل مباشرة مع [{{int:visualeditor-sourceswitch-popup-wtlink}} wikitext]، مما يمنحك مزيدًا من التحكم في التنسيق والقوالب وميزات التحرير المتقدمة الأخرى.",
 	"visualeditor-sourceswitch-popup-dismiss": "ليس الآن",
 	"visualeditor-sourceswitch-popup-trysource": "جرب تحرير المصدر",
 	"visualeditor-loaderror-revidconflict": "معرفات المراجعة المرجعة بواسطة الخادم لا تتطابق (الوثيقة: $1، البيانات الوصفية: $2).",
