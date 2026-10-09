@@ -31,7 +31,7 @@ mw.editcheck = {
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || experimentalPref || ecenable === '2' ),
 	suggestionsModeAvailable: !!mw.user.options.get( 'visualeditor-editcheck-suggestions' ),
 	showPublishPath: storedShowPublishPath !== null ?
-		storedShowPublishPath !== '0' :
+		!!+storedShowPublishPath :
 		mw.config.get( 'wgUserEditCount', 0 ) <= 10,
 	// runtime performance logging config that we can adjust from the console
 	sessionPerfConfig: { checksMax: 5000, typingMaxSamples: 5000 },
