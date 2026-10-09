@@ -51,6 +51,10 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 
 	this.sections = [];
 	this.navigableActions = [];
+	// More than one system message can coexist (such as several plain 'success' messages,
+	// each with their own autoDismiss timer, in different sections), so track each one
+	// that we've auto-shown, not just the most recent
+	this.autoShownSystemActions = new Set();
 	this.hasActionInSectionInitially = false;
 	this.renderDeferred = ve.createDeferred();
 	// Many actions can arrive together, and each render measures all of them
@@ -196,19 +200,36 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onPosition = function () {
 };
 
 /**
- * Scroll to the action nearest the user's current position, defaulting to above
+ * Scroll to the action nearest the user's current position
+ *
+ * If actions exist both above and below, it will default to scrolling
+ * to the action above, unless the direction parameter is passed.
+ *
+ * @param {string} [direction] Direction to scroll if actions exist both above and below
+ * @return {boolean} An action was found and focused
  */
-ve.ui.GutterSidebarEditCheckDialog.prototype.scrollToNearestAction = function () {
+ve.ui.GutterSidebarEditCheckDialog.prototype.scrollToNearestAction = function ( direction ) {
 	this.fromSection = false;
 	this.controller.originSection = null;
 	const nearestActions = this.findNearestActions();
-	if ( nearestActions ) {
-		// Default to scrolling to the action above, to stay consistent with the button's arrow behavior
-		const actionToFocus = nearestActions.above ? nearestActions.above : nearestActions.below;
-		if ( actionToFocus ) {
-			this.showDialogWithAction( actionToFocus, { alignToTop: true, duration: 'slow' } );
-		}
+	if ( !nearestActions ) {
+		return false;
 	}
+	// Default to scrolling to the action above, to stay consistent with the button's arrow behavior
+	let actionToFocus = nearestActions.above ? nearestActions.above : nearestActions.below;
+
+	// Adjust scroll direction if one was specified
+	if ( direction === 'above' && nearestActions.above ) {
+		actionToFocus = nearestActions.above;
+	} else if ( direction === 'below' && nearestActions.below ) {
+		actionToFocus = nearestActions.below;
+	}
+
+	if ( !actionToFocus ) {
+		return false;
+	}
+	this.showDialogWithAction( actionToFocus, { alignToTop: true, duration: 'slow' } );
+	return true;
 };
 
 /**
@@ -239,6 +260,11 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( newActio
 	newActions = mw.editcheck.EditCheckAction.static.findEqualActions( newActions, actions );
 	this.sections = [];
 	this.navigableActions = [];
+	for ( const action of this.autoShownSystemActions ) {
+		if ( !actions.includes( action ) ) {
+			this.autoShownSystemActions.delete( action );
+		}
+	}
 	if ( this.scrollIntoView ) {
 		this.scrollIntoView.clear();
 	}
@@ -280,7 +306,11 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( newActio
 
 	// Now try to reuse old widgets if possible, to avoid icons flickering
 	const oldWidgets = this.widgets || [];
-	let shown = newActions.length === 0; // Skip this entirely if there are no new actions
+	const hasSystemAction = actions.some( ( action ) => action.check.isSystemCheck() );
+	// Skip autofocusing entirely if there's nothing new, unless there's a system message
+	// (system messages can be added to the action list before the check it follows up on is removed,
+	// so the render where it becomes the only action left in its section can be one with no newActions)
+	let shown = newActions.length === 0 && !hasSystemAction;
 	this.widgets = [];
 	this.sections.forEach( ( section ) => {
 		let widget = this.findReusableWidget( oldWidgets, section.actions );
@@ -306,10 +336,21 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( newActio
 		// See if one of these should be autofocused; it's simplest to check
 		// here rather than doing a separate loop because we need to call this
 		// on the section widget.
-		const actionToShow = !shown && section.actions.find( ( action ) => (
-			action.check.takesFocus() && newActions.includes( action )
-		) );
+		const actionToShow = !shown && section.actions.find( ( action ) => {
+			if ( !action.check.takesFocus() ) {
+				return false;
+			}
+			// Show a system message as soon as it exists, even if other actions remain in its section,
+			// but not if a synchronously re-entered render already triggered its display a moment ago
+			if ( action.check.isSystemCheck() ) {
+				return !this.autoShownSystemActions.has( action );
+			}
+			return newActions.includes( action );
+		} );
 		if ( actionToShow ) {
+			if ( actionToShow.check.isSystemCheck() ) {
+				this.autoShownSystemActions.add( actionToShow );
+			}
 			widget.showDialogWithAction( actionToShow );
 			shown = true;
 		}

@@ -241,6 +241,7 @@ ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, la
 
 	let currentAction = this.currentAction;
 	let fromUserAction = false;
+	let wasSystemMessage = false;
 	if ( currentAction && !actions.includes( this.currentAction ) ) {
 		// The current action has been removed. Was this a replacement with an
 		// equivalent action due to a focus-change? (Allow overlaps in
@@ -250,6 +251,7 @@ ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, la
 		if ( replacementAction ) {
 			currentAction = replacementAction;
 		} else {
+			wasSystemMessage = currentAction.check.isSystemCheck();
 			currentAction = null;
 			if ( this.constructor.static.alwaysFocusAction ) {
 				fromUserAction = true;
@@ -259,6 +261,21 @@ ve.ui.EditCheckDialog.prototype.showActions = function ( actions, newActions, la
 	if ( !this.currentAction && newActions.length > 0 ) {
 		// There was no focused action, and new actions have arrived
 		currentAction = newActions[ 0 ];
+	}
+	if ( !currentAction && wasSystemMessage && !this.constructor.static.alwaysFocusAction && this.scope ) {
+		// This dialog is scoped to a single action or section (e.g. MobileEditCheckDialog),
+		// its current action was a system message, and nothing replaced it in this update.
+		// This means it has nothing left to show and should close.
+		this.setCurrentAction( null, fromUserAction, true );
+		Promise.resolve().then( () => {
+			// Defer the actual close by a tick, because a caller can still navigate this dialog
+			// to a different action synchronously (such as with the 'view more' button),
+			// immediately after this call returns, in which case we don't want to close out from under that
+			if ( !this.currentAction ) {
+				this.close( { action: 'complete' } );
+			}
+		} );
+		return;
 	}
 	if ( !currentAction && this.constructor.static.alwaysFocusAction ) {
 		// This dialog must always have an action focused
@@ -595,17 +612,34 @@ ve.ui.EditCheckDialog.prototype.navigateToAdjacentAction = function ( next ) {
 };
 
 /**
- * Scroll to the action nearest the user's current position, defaulting to above
+ * Scroll to the action nearest the user's current position
+ *
+ * If actions exist both above and below, it will default to scrolling
+ * to the action above, unless the direction parameter is passed.
+ *
+ * @param {string} [direction] If actions exist both above and below, it will scroll in this direction
+ * @return {boolean} An action was found and focused
  */
-ve.ui.EditCheckDialog.prototype.scrollToNearestAction = function () {
+ve.ui.EditCheckDialog.prototype.scrollToNearestAction = function ( direction ) {
 	const nearestActions = this.findNearestActions();
-	if ( nearestActions ) {
-		// Default to scrolling to the action above, to stay consistent with the button's arrow behavior
-		const actionToFocus = nearestActions.above ? nearestActions.above : nearestActions.below;
-		if ( actionToFocus ) {
-			this.controller.focusAction( actionToFocus, true, { alignToTop: true, duration: 'slow' } );
-		}
+	if ( !nearestActions ) {
+		return false;
 	}
+	// Default to scrolling to the action above, to stay consistent with the button's arrow behavior
+	let actionToFocus = nearestActions.above ? nearestActions.above : nearestActions.below;
+
+	// Adjust scroll direction if one was specified
+	if ( direction === 'above' && nearestActions.above ) {
+		actionToFocus = nearestActions.above;
+	} else if ( direction === 'below' && nearestActions.below ) {
+		actionToFocus = nearestActions.below;
+	}
+
+	if ( !actionToFocus ) {
+		return false;
+	}
+	this.controller.focusAction( actionToFocus, true, { alignToTop: true, duration: 'slow' } );
+	return true;
 };
 
 /**

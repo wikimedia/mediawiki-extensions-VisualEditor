@@ -788,6 +788,17 @@ Controller.prototype.ensureActionIsShown = function ( action, scrollConfig ) {
 };
 
 /**
+ * Scroll to the action nearest the user's current position
+ *
+ * @param {string} [direction] If actions exist both above and below, it will scroll in this direction
+ * @return {boolean} An action was found and focused
+ */
+Controller.prototype.scrollToNearestAction = function ( direction ) {
+	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
+	return !!( currentWindow && currentWindow.scrollToNearestAction && currentWindow.scrollToNearestAction( direction ) );
+};
+
+/**
  * Get actions by listener
  *
  * If no listener is specified, then get all actions relevant to the current moment, i.e.:
@@ -1707,6 +1718,13 @@ Controller.prototype.onActionCompleted = function ( action, message ) {
 	if ( action.isSuggestion() && this.consumePublishPath() ) {
 		config.messageType = 'publishPath';
 		config.dismissOnOtherFocus = true;
+		const hasOtherSuggestions = this.getActions().some(
+			( candidate ) => candidate !== action && candidate.isSuggestion() && !candidate.check.isSystemCheck()
+		);
+		if ( !hasOtherSuggestions ) {
+			config.choices = mw.editcheck.SystemMessageEditCheck.static.messageTypes.publishPath.choices
+				.filter( ( choice ) => choice.action !== 'viewMoreSuggestions' );
+		}
 	}
 	this.registerSystemMessage( action.fragments[ action.fragments.length - 1 ], config );
 };
@@ -1717,7 +1735,7 @@ Controller.prototype.onActionCompleted = function ( action, message ) {
  * @return {boolean} The publish path card can show
  */
 Controller.prototype.consumePublishPath = function () {
-	if ( !mw.editcheck.showPublishPath || OO.ui.isMobile() ) {
+	if ( !mw.editcheck.showPublishPath ) {
 		return false;
 	}
 	mw.editcheck.showPublishPath = false;

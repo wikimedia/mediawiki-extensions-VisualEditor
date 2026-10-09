@@ -88,17 +88,10 @@ mw.editcheck.SystemMessageEditCheck.prototype.act = function ( choice, action ) 
 		return;
 	}
 	if ( choice === 'viewMoreSuggestions' ) {
-		const position = action.getFocusSelection().getCoveringRange().start;
-		const otherSuggestions = controller.getActions().filter(
-			( candidate ) => candidate !== action && candidate.isSuggestion() && !candidate.check.isSystemCheck()
-		);
-		const nextAction = otherSuggestions.find(
-			( candidate ) => candidate.getFocusSelection().getCoveringRange().start >= position
-		) || otherSuggestions[ otherSuggestions.length - 1 ] || null;
 		controller.removeSystemMessage( action );
-		if ( nextAction ) {
-			controller.ensureActionIsShown( nextAction, { alignToTop: true } );
-		}
+		// Tell #onAct not to close the dialog if we've actually navigated it to
+		// another action above, rather than resolving/dismissing this one
+		return ve.createDeferred().resolve( { navigated: controller.scrollToNearestAction( 'below' ) } ).promise();
 	}
 };
 

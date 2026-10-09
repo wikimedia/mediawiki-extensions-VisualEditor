@@ -48,7 +48,19 @@ ve.ui.MobileEditCheckDialog.prototype.onAct = function ( action, widget, promise
 	this.acting = true;
 	this.updateNavigationState();
 	this.updateSize();
-	promise.then( () => {
+	promise.then( ( data ) => {
+		if ( data && data.navigated ) {
+			// The check already navigated this dialog to another action,
+			// so don't close it out from under that.
+			return;
+		}
+		if ( this.currentAction && this.currentAction.check.isSystemCheck() ) {
+			// A check that completes synchronously can register a publish card
+			// that gets shown in this same dialog before this promise settles.
+			// In that case, we'll leave the dialog open to show it.
+			this.controller.refresh();
+			return;
+		}
 		// On mobile, the dialog should close after a check is acted on
 		this.close( { action: 'complete' } ).closed.then( () => {
 			// Don't refresh until dialog is finished tearing down,

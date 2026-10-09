@@ -50,14 +50,17 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.isFocused = function () {
  * @return {mw.editcheck.EditCheckAction}
  */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.getPrimaryAction = function () {
-	if ( this.controller.focusedAction && this.actions.includes( this.controller.focusedAction ) ) {
+	// Regular actions take priority over systemCheck actions
+	const filteredActions = this.actions.filter( ( action ) => !action.check.isSystemCheck() );
+	if ( this.controller.focusedAction && filteredActions.includes( this.controller.focusedAction ) ) {
 		return this.controller.focusedAction;
 	}
-	const check = this.actions.find( ( action ) => !action.isSuggestion() );
+	// And checks take priority over suggestion actions
+	const check = filteredActions.find( ( action ) => !action.isSuggestion() );
 	if ( check ) {
 		return check;
 	}
-	return this.actions[ 0 ];
+	return filteredActions[ 0 ] || this.actions[ 0 ];
 };
 
 /**
@@ -82,7 +85,8 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.update = function () {
 		.toggleClass( 've-ui-editCheck-gutter-action-suggestion', action.isSuggestion() )
 		.toggleClass( 've-ui-editCheck-gutter-action-quickaction', !!action.gutterQuickAction );
 
-	this.iconWidget.setAction( action, this.actions.length, allExperimentalSuggestions );
+	const realActions = this.actions.filter( ( act ) => !act.check.isSystemCheck() );
+	this.iconWidget.setAction( action, realActions.length, allExperimentalSuggestions );
 };
 
 /**

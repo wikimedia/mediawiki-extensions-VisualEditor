@@ -102,7 +102,7 @@ mw.editcheck.EditCheckGutterSectionIconWidget.static.getStickyMetrics = function
  * Update the icon to represent an action
  *
  * @param {mw.editcheck.EditCheckAction} action Primary action of the section
- * @param {number} count Number of actions in the section
+ * @param {number} count Number of actions in the section, excluding any systemCheck actions
  * @param {boolean} allExperimentalSuggestions If each action in the section is an experimental suggestion
  */
 mw.editcheck.EditCheckGutterSectionIconWidget.prototype.setAction = function ( action, count, allExperimentalSuggestions ) {
@@ -115,7 +115,7 @@ mw.editcheck.EditCheckGutterSectionIconWidget.prototype.setAction = function ( a
 		}
 		this.icon.clearFlags().setFlags( action.getType() );
 		this.countLabel.setLabel( count.toString() );
-		this.countLabel.setInvisibleLabel( count === 1 );
+		this.countLabel.setInvisibleLabel( count <= 1 );
 	}
 	this.icon.toggle( !quickAction );
 	this.countLabel.toggle( !quickAction );
