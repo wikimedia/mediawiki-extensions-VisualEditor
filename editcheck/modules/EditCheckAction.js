@@ -318,11 +318,10 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 	this.widget.connect( this, {
 		actionClick: [ 'onActionClick', surface ]
 	} );
-	// On mobile, 'shown' is already emitted by the GutterSidebarEditCheckDialog, so skip emitting here
-	// (though technically the controller should dedupe anyway)
-	if ( !OO.ui.isMobile() ) {
-		this.emit( 'shown' );
-	}
+	// On mobile, the gutter usually emits 'shown' before this. The pre-save
+	// dialog has no gutter, so emit here too. The controller records 'shown'
+	// once for each action.
+	this.emit( 'shown' );
 	this.widget.once( 'actionSeen', this.onActionSeen.bind( this ) );
 	this.widget.toggleCollapse( collapsed );
 

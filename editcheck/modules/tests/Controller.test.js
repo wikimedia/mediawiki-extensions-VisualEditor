@@ -650,6 +650,46 @@ QUnit.test( 'Completing an action mid-save does not register a system message', 
 	}
 } );
 
+QUnit.test( 'An action is tracked as shown once on mobile, with or without the gutter', ( assert ) => {
+	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
+	const check = factory.create( 'stub', controller );
+	// The stub does not call the parent constructor, so set the config that isSuggestion reads
+	check.config = { showAsCheck: true };
+	const makeAction = ( start ) => {
+		const action = new mw.editcheck.EditCheckAction( {
+			check,
+			choices: [],
+			fragments: [ surfaceModel.getLinearFragment( new ve.Range( start, start + 1 ) ) ]
+		} );
+		controller.trackAction( action );
+		return action;
+	};
+	const originalIsMobile = OO.ui.isMobile;
+	const trackStub = sinon.stub( ve, 'track' );
+	const shownEvents = () => trackStub.args
+		.filter( ( [ topic, data ] ) => topic.startsWith( 'activity.editCheck-' ) && data.action.includes( '-shown-' ) )
+		.map( ( [ , data ] ) => data.action );
+	try {
+		OO.ui.isMobile = () => true;
+
+		const midEditAction = makeAction( 1 );
+		// The gutter emits 'shown', then the drawer renders the action
+		midEditAction.emit( 'shown' );
+		midEditAction.render( false, true );
+		assert.deepEqual( shownEvents(), [ 'check-shown-midedit' ], 'Gutter and drawer track the action once' );
+
+		trackStub.resetHistory();
+		controller.inBeforeSave = true;
+		const preSaveAction = makeAction( 3 );
+		preSaveAction.render( false, true );
+		preSaveAction.render( true, false );
+		assert.deepEqual( shownEvents(), [ 'check-shown-presave' ], 'The pre-save dialog tracks the action once, without the gutter' );
+	} finally {
+		trackStub.restore();
+		OO.ui.isMobile = originalIsMobile;
+	}
+} );
+
 QUnit.test( 'dropStaleSystemMessages removes messages whose fragment changed, e.g. via undo', async ( assert ) => {
 	const { controller, factory, surfaceModel } = makeStubCheckController( { checks: [], suggestions: [] } );
 	factory.register( mw.editcheck.SystemMessageEditCheck );
