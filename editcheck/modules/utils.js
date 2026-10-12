@@ -331,6 +331,28 @@ mw.editcheck.findNearestByRect = function ( itemRects, surface ) {
 };
 
 /**
+ * Choose which of a dialog's nearest actions (#findNearestByRect) to scroll to
+ *
+ * Used by EditCheckDialog#scrollToNearestAction and the GutterSidebarEditCheckDialog equivalent
+ *
+ * @param {{above: mw.editcheck.EditCheckAction, below: mw.editcheck.EditCheckAction}|null} nearestActions
+ * @param {string} [direction] direction to prioritize when actions exist in both directions
+ * @return {mw.editcheck.EditCheckAction|null} The chosen action, or null if none was found
+ */
+mw.editcheck.chooseScrollAction = function ( nearestActions, direction ) {
+	if ( !nearestActions ) {
+		return null;
+	}
+	if ( direction === 'above' && nearestActions.above ) {
+		return nearestActions.above;
+	}
+	if ( direction === 'below' && nearestActions.below ) {
+		return nearestActions.below;
+	}
+	return nearestActions.above || nearestActions.below || null;
+};
+
+/**
  * Apply uppercasing rules to a phrase, using another string as a model
  *
  * Either the phrase is fully uppercased, or just initial letters are uppercased, or no change,

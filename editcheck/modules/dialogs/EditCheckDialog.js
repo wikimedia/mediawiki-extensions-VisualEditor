@@ -621,25 +621,12 @@ ve.ui.EditCheckDialog.prototype.navigateToAdjacentAction = function ( next ) {
  * @return {boolean} An action was found and focused
  */
 ve.ui.EditCheckDialog.prototype.scrollToNearestAction = function ( direction ) {
-	const nearestActions = this.findNearestActions();
-	if ( !nearestActions ) {
-		return false;
+	const actionToFocus = mw.editcheck.chooseScrollAction( this.findNearestActions(), direction );
+	if ( actionToFocus ) {
+		this.controller.focusAction( actionToFocus, true, { alignToTop: true, duration: 'slow' } );
+		return true;
 	}
-	// Default to scrolling to the action above, to stay consistent with the button's arrow behavior
-	let actionToFocus = nearestActions.above ? nearestActions.above : nearestActions.below;
-
-	// Adjust scroll direction if one was specified
-	if ( direction === 'above' && nearestActions.above ) {
-		actionToFocus = nearestActions.above;
-	} else if ( direction === 'below' && nearestActions.below ) {
-		actionToFocus = nearestActions.below;
-	}
-
-	if ( !actionToFocus ) {
-		return false;
-	}
-	this.controller.focusAction( actionToFocus, true, { alignToTop: true, duration: 'slow' } );
-	return true;
+	return false;
 };
 
 /**
