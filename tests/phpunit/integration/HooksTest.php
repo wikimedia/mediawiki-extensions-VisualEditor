@@ -17,12 +17,23 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 	public function newHooks( array $overrides = [] ): Hooks {
 		$services = $this->getServiceContainer();
 		return new Hooks(
+			$services->getConnectionProvider(),
 			$overrides['ExtensionRegistry'] ??
 				ExtensionRegistry::getInstance(),
 			$overrides[VisualEditorAvailabilityLookup::SERVICE_NAME] ??
 				$services->get( VisualEditorAvailabilityLookup::SERVICE_NAME ),
+			$services->getLanguageConverterFactory(),
+			$services->getMagicWordFactory(),
+			$services->getNamespaceInfo(),
+			$services->getPageProps(),
+			$services->getPermissionManager(),
+			$services->getReadOnlyMode(),
+			$services->getShadowPageLoader(),
+			$services->getUrlUtils(),
 			$overrides['UserOptionsLookup'] ??
 				$services->getUserOptionsLookup(),
+			$services->getUserOptionsManager(),
+			$services->getWikiPageFactory(),
 			$overrides['HookContainer'] ??
 				$services->getHookContainer(),
 			$overrides['ConfigFactory'] ??
