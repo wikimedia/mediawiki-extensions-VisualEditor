@@ -82,3 +82,36 @@ QUnit.test( 'language codes entered in the editor are stored unescaped', functio
 		'plain-text description is not escaped'
 	);
 } );
+
+// Variant text which didn't come from Parsoid, e.g. when pasted (T441027)
+const unsafeText = '<b onmouseover="alert(1)">Bar</b><script>alert(1)</script>';
+
+QUnit.test.each( 'insertPreviewElements sanitizes variant text', {
+	disabled: { disabled: { t: unsafeText } },
+	filter: { filter: { l: [ 'en' ], t: unsafeText } },
+	twoway: { describe: true, twoway: [ { l: 'en', t: unsafeText } ] },
+	'oneway, from': { describe: true, oneway: [ { f: unsafeText, l: 'en', t: 'foo' } ] },
+	'oneway, to': { describe: true, oneway: [ { f: 'foo', l: 'en', t: unsafeText } ] },
+	nested: { disabled: { t: '<span typeof="mw:LanguageVariant" data-mw-variant="' +
+		ve.escapeHtml( JSON.stringify( { disabled: { t: unsafeText } } ) ) + '"></span>' } }
+}, ( assert, variantInfo ) => {
+	// Use an inert document, so that a failure does not run the payload.
+	const element = document.implementation.createHTMLDocument( '' ).createElement( 'span' );
+
+	ve.dm.MWLanguageVariantNode.static.insertPreviewElements( element, variantInfo );
+
+	assert.notStrictEqual( element.querySelector( 'b' ), null, 'variant text is rendered as HTML' );
+	assert.strictEqual( element.querySelector( '[onmouseover]' ), null, 'event handler removed' );
+	assert.strictEqual( element.querySelector( 'script' ), null, 'script removed' );
+} );
+
+QUnit.test( 'unsafe variant text is kept in the model', ( assert ) => {
+	const doc = document.implementation.createHTMLDocument( '' ),
+		variantInfo = { disabled: { t: unsafeText } },
+		dataElement = { type: 'mwLanguageVariantInline', attributes: { variantInfo } },
+		converter = { doesModeNeedRendering: () => true };
+
+	const domElement = ve.dm.MWLanguageVariantInlineNode.static.toDomElements( dataElement, doc, converter )[ 0 ];
+	assert.deepEqual( JSON.parse( domElement.getAttribute( 'data-mw-variant' ) ), variantInfo, 'data-mw-variant is unchanged' );
+	assert.strictEqual( domElement.querySelector( '[onmouseover]' ), null, 'preview is sanitized' );
+} );
