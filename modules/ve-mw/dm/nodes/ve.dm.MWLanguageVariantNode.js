@@ -190,7 +190,14 @@ ve.dm.MWLanguageVariantNode.static.processVariants = function ( container, opts 
  */
 ve.dm.MWLanguageVariantNode.static.insertPreviewElements = function ( element, variantInfo, opts ) {
 	// Note that `element` can't be a <meta> (or other void tag)
-	element.innerHTML = this.getPreviewHtml( variantInfo, opts );
+	element.textContent = '';
+	// The variant text is HTML from data-mw-variant, which may not have come
+	// from Parsoid (e.g. when pasted), so sanitize it for display. The model
+	// keeps the unsanitized HTML, so it round-trips losslessly. (T441027)
+	// TODO: This is temporary. The variant text should be treated as Parsoid
+	// HTML and edited in a VisualEditor sub-instance, so that it only ever
+	// contains content which the model layer can represent.
+	element.append( ...ve.sanitizeHtml( this.getPreviewHtml( variantInfo, opts ) ) );
 	// This recurses into the children added by the `html` clause to ensure
 	// that nested variants are expanded.
 	this.processVariants( element, opts );
