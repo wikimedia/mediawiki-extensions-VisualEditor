@@ -30,8 +30,6 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 			$services->getReadOnlyMode(),
 			$services->getShadowPageLoader(),
 			$services->getUrlUtils(),
-			$overrides['UserOptionsLookup'] ??
-				$services->getUserOptionsLookup(),
 			$services->getUserOptionsManager(),
 			$services->getWikiPageFactory(),
 			$overrides['HookContainer'] ??

@@ -298,7 +298,6 @@
 				"ReadOnlyMode",
 				"ShadowPageLoader",
 				"UrlUtils",
-				"UserOptionsLookup",
 				"UserOptionsManager",
 				"WikiPageFactory",
 				"HookContainer",

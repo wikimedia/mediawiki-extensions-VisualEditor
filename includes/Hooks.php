@@ -65,7 +65,6 @@ use MediaWiki\SpecialPage\Hook\RedirectSpecialArticleRedirectParamsHook;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\Title;
-use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
@@ -153,7 +152,6 @@ class Hooks implements
 		private readonly ReadOnlyMode $readOnlyMode,
 		private readonly ShadowPageLoader $shadowPageLoader,
 		private readonly UrlUtils $urlUtils,
-		private readonly UserOptionsLookup $userOptionsLookup,
 		private readonly UserOptionsManager $userOptionsManager,
 		private readonly WikiPageFactory $wikiPageFactory,
 		HookContainer $hookContainer,
@@ -354,7 +352,7 @@ class Hooks implements
 	 * @return bool
 	 */
 	private function isWikitextAvailable( Title $title, UserIdentity $user ): bool {
-		return $this->userOptionsLookup->getOption( $user, 'visualeditor-newwikitext' ) &&
+		return $this->userOptionsManager->getOption( $user, 'visualeditor-newwikitext' ) &&
 			$title->getContentModel() === 'wikitext';
 	}
 
@@ -535,7 +533,7 @@ class Hooks implements
 		$user = $skin->getUser();
 		if (
 			$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) &&
-			$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'prefer-wt'
+			$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'prefer-wt'
 		) {
 			return;
 		}
@@ -545,8 +543,8 @@ class Hooks implements
 			wfTimestampNow() < $this->veConfig->get( 'VisualEditorSingleEditTabSwitchTimeEnd' ) &&
 			$user->isNamed() &&
 			$this->visualEditorAvailabilityLookup->isEnabledForUser( $user ) &&
-			!$this->userOptionsLookup->getOption( $user, 'visualeditor-hidetabdialog' ) &&
-			$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last'
+			!$this->userOptionsManager->getOption( $user, 'visualeditor-hidetabdialog' ) &&
+			$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'remember-last'
 		) {
 			// Check if the user has made any edits before the SET switch time
 			$dbr = $this->dbProvider->getReplicaDatabase();
@@ -678,9 +676,9 @@ class Hooks implements
 					$isAvailable &&
 					$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) &&
 					(
-						$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'prefer-ve' ||
+						$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'prefer-ve' ||
 						(
-							$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
+							$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
 							$editor === 'visualeditor'
 						)
 					)
@@ -691,7 +689,7 @@ class Hooks implements
 					$isAvailable &&
 					(
 						!$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
-						$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab'
+						$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab'
 					)
 				) {
 					// Change icon
@@ -709,9 +707,9 @@ class Hooks implements
 				} elseif (
 					!$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
 					!$isAvailable ||
-					$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab' ||
+					$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab' ||
 					(
-						$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
+						$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
 						$editor === 'wikitext'
 					)
 				) {
@@ -896,7 +894,7 @@ class Hooks implements
 
 		$editor = self::getLastEditor( $user, $request );
 		if (
-				$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
+				$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'remember-last' &&
 				$editor === 'wikitext'
 		) {
 			$popts->setOption( 'visibleLinks', SectionLinkBehaviour::LINK_WT );
@@ -904,7 +902,7 @@ class Hooks implements
 
 		if (
 			!$this->veConfig->get( 'VisualEditorUseSingleEditTab' ) ||
-			$this->userOptionsLookup->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab'
+			$this->userOptionsManager->getOption( $user, 'visualeditor-tabs' ) === 'multi-tab'
 		) {
 			if ( $this->visualEditorAvailabilityLookup->isAvailable( $article->getTitle(), $request, $user ) ) {
 				$popts->setOption( 'visibleLinks', SectionLinkBehaviour::LINK_BOTH );
@@ -958,8 +956,8 @@ class Hooks implements
 				'type' => 'toggle',
 				'label-message' => 'visualeditor-preference-visualeditor',
 				'section' => 'editing/editor',
-				'default' => $this->userOptionsLookup->getOption( $user, 'visualeditor-betatempdisable' ) ||
-					$this->userOptionsLookup->getOption( $user, 'visualeditor-autodisable' )
+				'default' => $this->userOptionsManager->getOption( $user, 'visualeditor-betatempdisable' ) ||
+					$this->userOptionsManager->getOption( $user, 'visualeditor-autodisable' )
 			];
 		}
 
