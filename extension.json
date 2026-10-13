@@ -2465,6 +2465,7 @@
 			"modules/ve-mw/tests/preinit/ve.init.mw.ArticleCopyHandler.test.js",
 			"modules/ve-mw/tests/dm/nodes/ve.dm.MWExtensionNode.test.js",
 			"modules/ve-mw/tests/dm/nodes/ve.dm.MWTransclusionNode.test.js",
+			"modules/ve-mw/tests/dm/nodes/ve.dm.MWLanguageVariantNode.test.js",
 			"modules/ve-mw/tests/dm/ve.dm.Document.test.js",
 			"modules/ve-mw/tests/dm/ve.dm.SurfaceFragment.test.js",
 			"modules/ve-mw/tests/dm/ve.dm.mwExample.js",
