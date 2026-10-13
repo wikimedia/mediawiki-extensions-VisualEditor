@@ -95,9 +95,12 @@ mw.editcheck.CitationNeededEditCheck.prototype.act = function ( choice, action, 
 		action.fragments[ 0 ].select();
 		const node = action.fragments[ 0 ].getSelectedNode();
 		const context = new ve.ui.MWCitationNeededContextItem( surface.getContext(), node );
-		context.onAddClick();
-		action.intendComplete();
-		return;
+		return context.onAddClick().then( ( data ) => {
+			if ( data ) {
+				action.intendComplete();
+			}
+			return data;
+		} );
 	}
 
 	// Parent method
