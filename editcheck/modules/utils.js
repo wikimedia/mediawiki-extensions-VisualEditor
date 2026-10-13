@@ -398,3 +398,33 @@ mw.editcheck.applyCase = function ( phrase, model, lang ) {
 // We must compile the RegExp at runtime because eslint does not understand \p yet
 // eslint-disable-next-line prefer-regex-literals, no-useless-escape
 mw.editcheck.applyCase.lowerFirst = new RegExp( '(^|[^\\p{Lu}\\p{Ll}\p{Lt}\\p{M}])(\\p{Ll})', 'gu' );
+
+/**
+ * Show a citation dialog
+ *
+ * Opens Citoid if it is installed, otherwise the plain reference dialog.
+ *
+ * @param {ve.ui.Surface} surface
+ * @return {jQuery.Promise} Promise which resolves when the dialog closes
+ */
+mw.editcheck.showCitationDialog = function ( surface ) {
+	const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
+	if ( !ve.ui.windowFactory.lookup( 'citoid' ) ) {
+		return windowAction.open( 'reference' ).then( ( instance ) => instance.closing );
+	}
+	return windowAction.open( 'citoid' ).then( ( instance ) => instance.closing ).then( ( citoidData ) => {
+		const citoidOrCiteDataDeferred = ve.createDeferred();
+		if ( citoidData && citoidData.action === 'manual-choose' ) {
+			// The plain reference dialog has been launched. Wait for the data from
+			// the basic Cite closing promise instead.
+			surface.getDialogs().once( 'closing', ( win, closed, citeData ) => {
+				citoidOrCiteDataDeferred.resolve( citeData );
+			} );
+		} else {
+			// "Auto"/"re-use"/"close" means Citoid is finished and we can
+			// use the data form the Citoid closing promise.
+			citoidOrCiteDataDeferred.resolve( citoidData );
+		}
+		return citoidOrCiteDataDeferred.promise();
+	} );
+};

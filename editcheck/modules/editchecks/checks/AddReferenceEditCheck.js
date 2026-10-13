@@ -151,33 +151,17 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 
 mw.editcheck.AddReferenceEditCheck.prototype.act = function ( choice, action, surface ) {
 	// The complex citoid workflow means that we can't just count on a single "windowAction" here...
-	const windowAction = ve.ui.actionFactory.create( 'window', surface, 'check' );
 	switch ( choice ) {
 		case 'accept':
 			ve.track( 'activity.editCheckReferences', { action: 'edit-check-confirm' } );
 
 			this.adjustForPunctuation( action.fragments[ 0 ].collapseToEnd() ).select();
 
-			return windowAction.open( 'citoid' ).then( ( instance ) => instance.closing ).then( ( citoidData ) => {
-				const citoidOrCiteDataDeferred = ve.createDeferred();
-				if ( citoidData && citoidData.action === 'manual-choose' ) {
-					// The plain reference dialog has been launched. Wait for the data from
-					// the basic Cite closing promise instead.
-					surface.getDialogs().once( 'closing', ( win, closed, citeData ) => {
-						citoidOrCiteDataDeferred.resolve( citeData );
-					} );
-				} else {
-					// "Auto"/"re-use"/"close" means Citoid is finished and we can
-					// use the data form the Citoid closing promise.
-					citoidOrCiteDataDeferred.resolve( citoidData );
+			return mw.editcheck.showCitationDialog( surface ).then( ( data ) => {
+				if ( data ) {
+					action.intendComplete();
 				}
-				const citoidOrCiteDataPromise = citoidOrCiteDataDeferred.promise();
-				citoidOrCiteDataPromise.then( ( data ) => {
-					if ( data ) {
-						action.intendComplete();
-					}
-				} );
-				return citoidOrCiteDataPromise;
+				return data;
 			} );
 		case 'reject':
 			ve.track( 'activity.editCheckReferences', { action: 'edit-check-reject' } );
