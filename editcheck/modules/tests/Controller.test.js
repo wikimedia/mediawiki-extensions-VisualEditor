@@ -362,7 +362,10 @@ QUnit.test( 'ensureActionIsShown', async ( assert ) => {
 			surface: {},
 			sidebarOpeningPromise: opening.promise(),
 			whenSidebarShown: mw.editcheck.Controller.prototype.whenSidebarShown,
-			focusAction: ( ...args ) => focused.push( args )
+			focusAction: ( ...args ) => {
+				focused.push( args );
+				return ve.createDeferred().resolve().promise();
+			}
 		};
 		mw.editcheck.Controller.prototype.ensureActionIsShown.call( desktopController, action, true );
 		await nextTask();

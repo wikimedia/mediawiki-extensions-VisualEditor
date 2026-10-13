@@ -88,10 +88,12 @@ mw.editcheck.SystemMessageEditCheck.prototype.act = function ( choice, action ) 
 		return;
 	}
 	if ( choice === 'viewMoreSuggestions' ) {
-		controller.removeSystemMessage( action );
-		// Tell #onAct not to close the dialog if we've actually navigated it to
-		// another action above, rather than resolving/dismissing this one
-		return ve.createDeferred().resolve( { navigated: controller.scrollToNearestAction( 'below' ) } ).promise();
+		return controller.ensureAdjacentActionIsShown( action ).then( ( navigated ) => {
+			controller.removeSystemMessage( action );
+			// Tell #onAct not to close the dialog if we've actually navigated it to
+			// another action above, rather than resolving/dismissing this one
+			return { navigated };
+		} );
 	}
 };
 

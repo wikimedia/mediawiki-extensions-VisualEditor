@@ -780,6 +780,8 @@ Controller.prototype.focusAction = function ( action, scrollTo, scrollConfig ) {
  *
  * @param {mw.editcheck.EditCheckAction} action Action to focus
  * @param {Object|boolean} [scrollConfig] Configuration for scrolling or (deprecated) a boolean to set alignToTop
+ * @return {jQuery.Promise} Promise resolved with true once the action has been shown,
+ *  or false if it could not be (e.g. the surface was destroyed while waiting)
  */
 Controller.prototype.ensureActionIsShown = function ( action, scrollConfig ) {
 	if ( scrollConfig === true ) {
@@ -788,35 +790,46 @@ Controller.prototype.ensureActionIsShown = function ( action, scrollConfig ) {
 	// If this is called directly from refresh then the sidebar was opened
 	// by an actionsUpdated that *immediately* precedes this call, so it
 	// can still be opening. A dialog gets no events before its setup.
-	this.whenSidebarShown().then( () => {
+	return this.whenSidebarShown().then( () => {
 		if ( !this.surface ) {
 			// The surface was destroyed while we waited
-			return;
+			return false;
 		}
 		if ( !OO.ui.isMobile() ) {
-			this.focusAction( action, true, scrollConfig );
-			return;
+			return this.focusAction( action, true, scrollConfig ).then( () => true );
 		}
 		const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
 		if ( !currentWindow || currentWindow.constructor.static.name !== 'gutterSidebarEditCheckDialog' ) {
-			return;
+			return false;
 		}
-		currentWindow.whenActionsRendered().then( () => {
+		return currentWindow.whenActionsRendered().then( () => {
 			// This will ultimately focus the action and scroll it into view as well:
 			currentWindow.showDialogWithAction( action, ve.extendObject( { alignToTop: true }, scrollConfig ) );
+			return true;
 		} );
 	} );
 };
 
 /**
- * Scroll to the action nearest the user's current position
+ * Show the action adjacent to a given action in the display list
  *
- * @param {string} [direction] If actions exist both above and below, it will scroll in this direction
- * @return {boolean} An action was found and focused
+ * Shows the next action, or the previous if no action follows the given one
+ *
+ * @param {mw.editcheck.EditCheckAction} action Action to find the neighbor of
+ * @return {jQuery.Promise} Promise resolved with true once a neighboring action
+ *  has been found and shown, or false if none was found or it could not be shown
  */
-Controller.prototype.scrollToNearestAction = function ( direction ) {
-	const currentWindow = this.surface.getSidebarDialogs().getCurrentWindow();
-	return !!( currentWindow && currentWindow.scrollToNearestAction && currentWindow.scrollToNearestAction( direction ) );
+Controller.prototype.ensureAdjacentActionIsShown = function ( action ) {
+	const actions = this.getDisplayActions();
+	const index = actions.indexOf( action );
+	if ( index === -1 ) {
+		return ve.createDeferred().resolve( false ).promise();
+	}
+	const adjacentAction = actions[ index + 1 ] || actions[ index - 1 ];
+	if ( !adjacentAction ) {
+		return ve.createDeferred().resolve( false ).promise();
+	}
+	return this.ensureActionIsShown( adjacentAction, { alignToTop: true, duration: 'slow' } );
 };
 
 /**
