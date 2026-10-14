@@ -107,6 +107,8 @@
 	"editcheck-headinglevel-title": "Popraw poziom nagłówka",
 	"editcheck-headinglevel-description": "Ten poziom nagłówka może nie zgadzać się z prawidłową strukturą sekwencyjną. Ułatwiaj czytelnikom nawigację po treści, używając prawidłowego [{{int:editcheck-headinglevel-descriptionlink}} poziomu nagłówka].",
 	"editcheck-headinglevel-action-adjust": "Dostosuj nagłówek",
+	"editcheck-leadlength-reject-uncertain": "Nie wiem, jak skrócić ten tekst",
+	"editcheck-leadlength-reject-other": "Inny powód",
 	"editcheck-image-caption-title": "Dodaj podpis ilustracji",
 	"editcheck-image-caption-description": "Ta ilustracja nie ma podpisu. Pomóż czytelnikom zrozumieć, co ona przedstawia, dodając [{{int:editcheck-image-caption-descriptionlink}} krótki podpis].",
 	"editcheck-convertreference-title": "Konwertuj przypis",
@@ -142,5 +144,6 @@
 	"tag-editcheck-reference-decline-other": "Kontrola edycji (przypisy): odrzucono (inne)",
 	"tag-editcheck-reference-decline-other-description": "Kontrola edycji: osoba odrzuciła sugestię dodania przypisu z innego powodu",
 	"tag-editcheck-reference-decline-uncertain": "Kontrola edycji (przypisy): odrzucono (niepewność)",
-	"tag-editcheck-reference-decline-uncertain-description": "Kontrola edycji: osoba odrzuciła sugestię dodania przypisu, ponieważ nie była pewna, jaki przypis dodać"
+	"tag-editcheck-reference-decline-uncertain-description": "Kontrola edycji: osoba odrzuciła sugestię dodania przypisu, ponieważ nie była pewna, jaki przypis dodać",
+	"communityconfiguration-editcheck-title": "Kontrola edycji"
 }

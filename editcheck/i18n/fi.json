@@ -105,6 +105,12 @@
 	"editcheck-disambiguation-description": "Tämä linkki johtaa [{{int:editcheck-disambiguation-descriptionlink}} täsmennyssivulle]. Auta lukijoita löytämään oikea aihe linkittämällä tarkemmalle sivulle.",
 	"editcheck-headinglevel-title": "Säädä väliotsikon tasoa",
 	"editcheck-headinglevel-action-adjust": "Säädä väliotsikkoa",
+	"editcheck-leadlength-title": "Paranna luettavuutta",
+	"editcheck-leadlength-description": "Tämä osio on pidempi kuin [{{int:editcheck-leadlength-descriptionlink}} {{GRAMMAR:genitive|{{SITENAME}}}} ohjeet] suosittelevat. Harkitse sen lyhentämistä esimerkiksi siirtämällä tietoja muihin osioihin tai korvaamalla pitkiä lauseita lyhyemmillä.",
+	"editcheck-leadlength-reject-appropriate": "Pituus on sopiva tälle artikkelille",
+	"editcheck-leadlength-reject-uncertain": "En ole varma, miten tekisin siitä lyhyemmän",
+	"editcheck-leadlength-reject-other": "Muu",
+	"editcheck-leadlength-thank": "Kiitos, kun harkitsit johdanto-osan pituutta!",
 	"editcheck-image-caption-title": "Lisää kuvateksti",
 	"editcheck-convertreference-title": "Muunna lähdeviite",
 	"editcheck-convertreference-description": "Tästä lähdeviitteestä puuttuu tietoja. Auta lukijoita ymmärtämään, mistä tieto tulee muuntamalla tätä viite muotoilluksi [{{int:editcheck-convertreference-descriptionlink}} lähdeviitteeksi]. Muunnettuasi sen tarkista, että työkalun lisäämät viitetiedot pitävät paikkaansa, ja poista väärät tai harhaanjohtavat tiedot.",
@@ -139,5 +145,6 @@
 	"tag-editcheck-reference-decline-other": "Muokkaustarkistin (lähteet) hylätty (muu syy)",
 	"tag-editcheck-reference-decline-other-description": "Muokkaustarkistimen ehdotus hylättiin muusta syystä",
 	"tag-editcheck-reference-decline-uncertain": "Muokkaustarkistin (lähteet) hylätty (epävarma)",
-	"tag-editcheck-reference-decline-uncertain-description": "Muokkaustarkistimen ehdotus hylättiin, koska käyttäjä oli epävarma"
+	"tag-editcheck-reference-decline-uncertain-description": "Muokkaustarkistimen ehdotus hylättiin, koska käyttäjä oli epävarma",
+	"communityconfiguration-editcheck-title": "Muokkaustarkistin"
 }

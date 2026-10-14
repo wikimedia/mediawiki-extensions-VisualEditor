@@ -108,6 +108,12 @@
 	"editcheck-headinglevel-title": "Level der Überschrift anpassen",
 	"editcheck-headinglevel-description": "Diese Überschriftenebene entspricht möglicherweise nicht der korrekten sequenziellen Struktur. Erleichtere den Lesern die Navigation durch den Inhalt, indem du die korrekte Überschriftenebene [{{int:editcheck-headinglevel-descriptionlink}} verwendest].",
 	"editcheck-headinglevel-action-adjust": "Überschrift anpassen",
+	"editcheck-leadlength-title": "Lesbarkeit verbessern",
+	"editcheck-leadlength-description": "Dieser Abschnitt ist länger als von den [{{int:editcheck-leadlength-descriptionlink}} {{SITENAME}} Richtlinien] empfohlen. Überlege, ihn zu kürzen, indem du beispielsweise Informationen in andere Abschnitte verschiebst oder lange Formulierungen durch einfachere ersetzt.",
+	"editcheck-leadlength-reject-appropriate": "Die Länge ist für diesen Artikel angemessen.",
+	"editcheck-leadlength-reject-uncertain": "Ich bin mir nicht sicher, wie ich es kürzer fassen kann.",
+	"editcheck-leadlength-reject-other": "Andere",
+	"editcheck-leadlength-thank": "Vielen Dank, dass du die Länge des Einleitungsabschnitts berücksichtigt hast!",
 	"editcheck-image-caption-title": "Bildunterschrift hinzufügen",
 	"editcheck-image-caption-description": "Dieses Bild hat keine Bildunterschrift. Hilf den Lesern zu verstehen, warum das Bild relevant ist, indem du eine [{{int:editcheck-image-caption-descriptionlink}} kurze Bildunterschrift] hinzufügst.",
 	"editcheck-convertreference-title": "Einzelnachweis konvertieren",
@@ -143,5 +149,7 @@
 	"tag-editcheck-reference-decline-other": "Bearbeitungsprüfung (Belege) abgelehnt (andere)",
 	"tag-editcheck-reference-decline-other-description": "EditCheck: Beleg wurde aus einem nicht aufgeführten Grund abgelehnt",
 	"tag-editcheck-reference-decline-uncertain": "Bearbeitungsprüfung (Belege) abgelehnt (unklar)",
-	"tag-editcheck-reference-decline-uncertain-description": "EditCheck: Beleg wurde als unklar abgelehnt"
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck: Beleg wurde als unklar abgelehnt",
+	"communityconfiguration-editcheck-title": "Bearbeitungsprüfung",
+	"communityconfiguration-editcheck-description": "Definiere die Bedingungen, die Bearbeitungsprüfungen und Vorschläge aktivieren, und lege fest, wer diese sieht."
 }

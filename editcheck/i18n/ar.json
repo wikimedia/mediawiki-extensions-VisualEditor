@@ -110,6 +110,12 @@
 	"editcheck-headinglevel-title": "ضبط مستوى الصفحة",
 	"editcheck-headinglevel-description": "قد لا يتبع مستوى العنوان هذا البنية التسلسلية الصحيحة. ساعدوا القراء على تصفح المحتوى بسهولة أكبر باستخدام [{{int:editcheck-headinglevel-descriptionlink}} مستوى العنوان] الصحيح.",
 	"editcheck-headinglevel-action-adjust": "ضبط العنوان",
+	"editcheck-leadlength-title": "تحسين قابلية القراءة",
+	"editcheck-leadlength-description": "هذا القسم أطول من التوصيات الموصى بها في إرشادات [{{int:editcheck-leadlength-descriptionlink}} {{SITENAME}}]. يُرجى تقصيره بنقل المعلومات إلى أقسام أخرى أو استبدال العبارات الطويلة بعبارات أبسط.",
+	"editcheck-leadlength-reject-appropriate": "طول هذه المقالة مناسب",
+	"editcheck-leadlength-reject-uncertain": "لست متأكدًا من كيفية تقصيره",
+	"editcheck-leadlength-reject-other": "غير ذلك",
+	"editcheck-leadlength-thank": "شكراً لكم على مراعاة طول الجزء الرئيسي!",
 	"editcheck-image-caption-title": "إضافة شرح الصورة",
 	"editcheck-image-caption-description": "لا تحتوي هذه الصورة على شرح. ساعدوا القراء على العلم بأهمية الصورة عن طريق إضافة [{{int:editcheck-image-caption-descriptionlink}} شرح قصير].",
 	"editcheck-convertreference-title": "تحويل المرجع",
@@ -145,5 +151,7 @@
 	"tag-editcheck-reference-decline-other": "تم رفض (سبب آخر) التحقّق من التحرير (مراجع)",
 	"tag-editcheck-reference-decline-other-description": "تم رفض مرجع EditCheck (أداة التحقق) لسبب غير مدرج",
 	"tag-editcheck-reference-decline-uncertain": "تم رفض (ثقافة عامة) التحقّق من التحرير (غير متحقِّق)",
-	"tag-editcheck-reference-decline-uncertain-description": "تم رفض مرجع EditCheck (أداة النحقّق) لأنه غير متحقِّق"
+	"tag-editcheck-reference-decline-uncertain-description": "تم رفض مرجع EditCheck (أداة النحقّق) لأنه غير متحقِّق",
+	"communityconfiguration-editcheck-title": " فحص التحرير",
+	"communityconfiguration-editcheck-description": "تحديد الشروط التي تُفعّل عمليات فحص التحرير والاقتراحات، وتحديد من يراها"
 }

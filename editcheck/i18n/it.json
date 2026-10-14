@@ -94,6 +94,8 @@
 	"editcheck-adjacent-link-description": "Questi collegamenti adiacenti o separati solamente da uno spazio sono identici. Aiuta i lettori a navigare più facilmente unendoli in un solo collegamento.",
 	"editcheck-disambiguation-title": "Collega una pagina più specifica",
 	"editcheck-disambiguation-description": "Questo collegamento rimanda a una [{{int:editcheck-disambiguation-descriptionlink}} pagina di disambiguazione]. Aiuta i lettori a trovare l'argomento giusto collegandosi a una pagina più specifica.",
+	"editcheck-leadlength-title": "Migliorare la leggibilità",
+	"editcheck-leadlength-reject-other": "Altro",
 	"editcheck-image-caption-title": "Aggiungi didascalia immagine",
 	"editcheck-image-caption-description": "Questa immagine non ha una didascalia. Aiuta i lettori a capire perché l'immagine è rilevante aggiungendo una [{{int:editcheck-image-caption-descriptionlink}} breve didascalia].",
 	"editcheck-review-title": "Rivedi modifiche",

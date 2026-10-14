@@ -106,6 +106,13 @@
 	"editcheck-headinglevel-title": "Axustar o nivel da cabeceira",
 	"editcheck-headinglevel-description": "Se cadra este nivel de cabeceira non segue a estrutura secuencial correcta. Axuda aos lectores a navegar polo contido máis facilmente usando o [{{int:editcheck-headinglevel-descriptionlink}} nivel de cabeceira] correcto.",
 	"editcheck-headinglevel-action-adjust": "Axustar a cabeceira",
+	"editcheck-leadlength-title": "Mellorar a lexibilidade",
+	"editcheck-leadlength-description": "Esta sección é máis longa do que recomendan as [{{int:editcheck-leadlength-descriptionlink}} directrices de {{SITENAME}}]. Considera a posibilidade de facela máis curta movendo información a outras seccións ou substituíndo frases longas por outras máis sinxelas.",
+	"editcheck-leadlength-descriptionlink": "//gl.wikipedia.org/wiki/Wikipedia:Libro_de_estilo#Introdución",
+	"editcheck-leadlength-reject-appropriate": "A lonxitude é axeitada para este artigo",
+	"editcheck-leadlength-reject-uncertain": "Non sei como facela máis curto",
+	"editcheck-leadlength-reject-other": "Outro",
+	"editcheck-leadlength-thank": "Grazas por ter en conta a lonxitude da introdución!",
 	"editcheck-image-caption-title": "Engadir un pé de foto",
 	"editcheck-image-caption-description": "Esta imaxe non ten pé de foto. Axuda aos lectores a comprender por que a imaxe é relevante engadindo un [{{int:editcheck-image-caption-descriptionlink}} pé de foto breve].",
 	"editcheck-convertreference-title": "Converter a referencia",
@@ -141,5 +148,7 @@
 	"tag-editcheck-reference-decline-other": "Verificación de edición (referencias) rexeitada (outro)",
 	"tag-editcheck-reference-decline-other-description": "A referencia da verificación de edición rexeitouse por un motivo non indicado",
 	"tag-editcheck-reference-decline-uncertain": "Verificación de edición (referencias) rexeitada (incerteza)",
-	"tag-editcheck-reference-decline-uncertain-description": "A referencia da verificación de edición rexeitouse por non ter certeza"
+	"tag-editcheck-reference-decline-uncertain-description": "A referencia da verificación de edición rexeitouse por non ter certeza",
+	"communityconfiguration-editcheck-title": "Verificación de edición",
+	"communityconfiguration-editcheck-description": "Define as condicións que activan as verificacións de edicións e mais as suxestións e decide quen as ve"
 }

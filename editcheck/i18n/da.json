@@ -106,6 +106,12 @@
 	"editcheck-headinglevel-title": "Juster overskriftsniveau",
 	"editcheck-headinglevel-description": "Dette overskriftsniveau følger muligvis ikke den korrekte sekventielle struktur. Hjælp læserne med at navigere i indholdet lettere ved at bruge det korrekte [{{int:editcheck-headinglevel-descriptionlink}} overskriftsniveau].",
 	"editcheck-headinglevel-action-adjust": "Juster overskrift",
+	"editcheck-leadlength-title": "Forbedr læsbarheden",
+	"editcheck-leadlength-description": "Dette afsnit er længere end [{{int:editcheck-leadlength-descriptionlink}} {{SITENAME}} retningslinjer] anbefaler. Overvej at gøre det kortere ved at flytte information til andre afsnit eller erstatte lange sætninger med enklere.",
+	"editcheck-leadlength-reject-appropriate": "Længden er passende til denne artikel",
+	"editcheck-leadlength-reject-uncertain": "Jeg er ikke sikker på, hvordan jeg kan gøre det kortere",
+	"editcheck-leadlength-reject-other": "Andet",
+	"editcheck-leadlength-thank": "Tak fordi du overvejede længden af ledningsafsnittet!",
 	"editcheck-image-caption-title": "Tilføj billedtekst",
 	"editcheck-image-caption-description": "Dette billede har ingen billedtekst. Hjælp læserne med at forstå, hvorfor billedet er relevant, ved at tilføje en [{{int:editcheck-image-caption-descriptionlink}} kort billedtekst].",
 	"editcheck-convertreference-title": "Konvertér reference",
@@ -141,5 +147,7 @@
 	"tag-editcheck-reference-decline-other": "Redigeringstjek (referencer) afvist (andet)",
 	"tag-editcheck-reference-decline-other-description": "EditCheck-reference blev afvist af en ikke-opført grund",
 	"tag-editcheck-reference-decline-uncertain": "Redigeringstjek (referencer) afvist (usikker)",
-	"tag-editcheck-reference-decline-uncertain-description": "Redigeringstjek-reference blev afvist som værende usikker"
+	"tag-editcheck-reference-decline-uncertain-description": "Redigeringstjek-reference blev afvist som værende usikker",
+	"communityconfiguration-editcheck-title": "Rediger check",
+	"communityconfiguration-editcheck-description": "Definer de betingelser, der aktiverer redigeringstjek og forslag, og bestem, hvem der ser dem"
 }

@@ -59,6 +59,7 @@
 	"editcheck-external-link-title": "বহিঃসংযোগ সরিয়ে ফেলুন",
 	"editcheck-duplicate-link-title": "সদৃশ লিঙ্ক সরিয়ে ফেলুন",
 	"editcheck-duplicate-link-description": "এই লিঙ্কটি এই অংশে একাধিকবার দেওয়া হয়েছে। [{{int:editcheck-duplicate-link-descriptionlink}} পুনরাবৃত্ত লিঙ্কগুলো] সরিয়ে পাঠকদের উইকিপিডিয়া ব্রাউজ করা আরও সহজ করুন।",
+	"editcheck-leadlength-reject-other": "অন্যান্য",
 	"editcheck-image-caption-title": "ছবির ক্যাপশন যোগ করুন",
 	"editcheck-review-title": "পরিবর্তন পর্যালোচনা করুন",
 	"editcheck-specialeditchecks-col-title": "শিরোনাম",
@@ -75,5 +76,6 @@
 	"tag-editcheck-reference-decline-other": "সম্পাদনা পরীক্ষা (তথ্যসূত্র) প্রত্যাখ্যান (অন্যান্য)",
 	"tag-editcheck-reference-decline-other-description": "সম্পাদনা পরীক্ষা তথ্যসূত্র একটি তালিকাহীন কারণে প্রত্যাখ্যান করা হয়েছে",
 	"tag-editcheck-reference-decline-uncertain": "সম্পাদনা পরীক্ষা (তথ্যসূত্র) প্রত্যাখ্যান (অনিশ্চিত)",
-	"tag-editcheck-reference-decline-uncertain-description": "সম্পাদনা পরীক্ষা তথ্যসূত্র অনিশ্চিত হিসেবে প্রত্যাখ্যান করা হয়েছে"
+	"tag-editcheck-reference-decline-uncertain-description": "সম্পাদনা পরীক্ষা তথ্যসূত্র অনিশ্চিত হিসেবে প্রত্যাখ্যান করা হয়েছে",
+	"communityconfiguration-editcheck-title": "সম্পাদনা পরীক্ষা"
 }

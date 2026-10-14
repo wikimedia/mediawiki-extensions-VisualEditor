@@ -107,6 +107,12 @@
 	"editcheck-headinglevel-title": "Başlıq səviyyəsini tənzimlə",
 	"editcheck-headinglevel-description": "Bu başlıq səviyyəsi düzgün ardıcıllıq strukturuna uyğun gəlməyə bilər. Düzgün [{{int:editcheck-headinglevel-descriptionlink}} başlıq səviyyəsindən] istifadə edərək oxucuların məzmunda daha asan naviqasiya etməsinə kömək edin.",
 	"editcheck-headinglevel-action-adjust": "Başlığı tənzimlə",
+	"editcheck-leadlength-title": "Oxunabilərliyi artır",
+	"editcheck-leadlength-description": "Bu bölmə [{{int:editcheck-leadlength-descriptionlink}} {{SITENAME}} təlimatlarında] tərəfindən tövsiyə ediləndən uzundur. Məlumatı digər bölmələrə köçürmək və ya uzun ifadələri daha sadə ifadələrlə əvəz edərək onu qısaltmağı nəzərdən keçirin.",
+	"editcheck-leadlength-reject-appropriate": "Uzunluq bu məqalə üçün uyğundur",
+	"editcheck-leadlength-reject-uncertain": "Bunu necə qısaldacağımı bilmirəm",
+	"editcheck-leadlength-reject-other": "Digər",
+	"editcheck-leadlength-thank": "Giriş hissəsinin uzunluğunu nəzərə aldığınız üçün təşəkkür edirik!",
 	"editcheck-image-caption-title": "Şəkil başlığı əlavə et",
 	"editcheck-image-caption-description": "Bu şəklin təsviri yoxdur. Oxucular üçün [{{int:editcheck-image-caption-descriptionlink}} qısa başlıq] əlavə etməklə şəklin nə üçün aktual olduğunu başa düşməyə kömək edin.",
 	"editcheck-convertreference-title": "İstinadı çevir",
@@ -142,5 +148,7 @@
 	"tag-editcheck-reference-decline-other": "Redaktə Yoxlanışı (istinadlar) rədd edildi (digər)",
 	"tag-editcheck-reference-decline-other-description": "EditCheck istinadı siyahıya alınmamış səbəbə görə rədd edildi",
 	"tag-editcheck-reference-decline-uncertain": "Redaktə Yoxlanışı (istinadlar) rədd edildi (qeyri-müəyyən)",
-	"tag-editcheck-reference-decline-uncertain-description": "EditCheck istinadı qeyri-müəyyən olduğu üçün rədd edildi"
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck istinadı qeyri-müəyyən olduğu üçün rədd edildi",
+	"communityconfiguration-editcheck-title": "Redaktə yoxlanışı",
+	"communityconfiguration-editcheck-description": "Redaktə yoxlanışlarını və təkliflərini aktivləşdirən şərtləri müəyyənləşdirin və onları kimin görəcəyinə qərar verin"
 }
