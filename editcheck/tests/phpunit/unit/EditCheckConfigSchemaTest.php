@@ -47,7 +47,7 @@ class EditCheckConfigSchemaTest extends MediaWikiUnitTestCase {
 	/**
 	 * Wrap a single named definition as a standalone schema, keeping the other
 	 * definitions available for internal $ref resolution. Mirrors
-	 * MediaWikiJsonSchemaValidator::validateOnSave().
+	 * MediaWikiJsonSchemaValidator::validate().
 	 *
 	 * @param string $definition
 	 * @return \stdClass

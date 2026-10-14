@@ -105,6 +105,25 @@ class EditCheckHooksTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $status->isGood() );
 	}
 
+	public function testOnMultiContentSaveRejectsInvalidImportedRule(): void {
+		$hooks = $this->newHooks();
+		$status = Status::newGood();
+
+		$result = $hooks->onMultiContentSave(
+			$this->newRenderedRevision(
+				new TitleValue( NS_MEDIAWIKI, 'Editcheck-config-foo.json' ),
+				json_encode( [ 'title' => 'Bad', 'minOccurrences' => 0 ] )
+			),
+			$this->createMock( UserIdentity::class ),
+			$this->createMock( CommentStoreComment::class ),
+			0,
+			$status
+		);
+
+		$this->assertFalse( $result );
+		$this->assertFalse( $status->isGood() );
+	}
+
 	public function testOnMultiContentSaveIgnoresOtherPages(): void {
 		$hooks = $this->newHooks();
 		$status = Status::newGood();
