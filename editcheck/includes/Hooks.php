@@ -15,6 +15,7 @@ use MediaWiki\Content\TextContent;
 use MediaWiki\Extension\VisualEditor\MediaWikiJsonSchemaValidator;
 use MediaWiki\Hook\UnitTestsListHook;
 use MediaWiki\HTMLForm\HTMLForm;
+use MediaWiki\Language\MessageCache;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Preferences\Hook\PreferencesFormPreSaveHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
@@ -38,6 +39,7 @@ class Hooks implements
 	public function __construct(
 		private readonly UserOptionsLookup $userOptionsLookup,
 		private readonly UserOptionsManager $userOptionsManager,
+		private readonly MessageCache $messageCache,
 	) {
 	}
 
@@ -114,7 +116,11 @@ class Hooks implements
 	 * Validate on-wiki edit check config updates against the bundled JSON schema.
 	 *
 	 * The main MediaWiki:Editcheck-config.json page is validated against the whole
-	 * schema. Pages imported by a TextMatch rule via the "import" key
+	 * schema. Saves of its language subpages (e.g. MediaWiki:Editcheck-config.json/de)
+	 * always fail. The message cache can use them as language fallbacks, and the
+	 * config must have one source.
+	 *
+	 * Pages imported by a TextMatch rule via the "import" key
 	 * (MediaWiki:Editcheck-config-<name>.json) hold a single inline rule, so they are
 	 * validated against just the textMatchRuleInline part of the schema.
 	 *
@@ -133,7 +139,11 @@ class Hooks implements
 		}
 
 		$dbKey = strtolower( $page->getDBkey() );
-		if ( $dbKey === 'editcheck-config.json' ) {
+		[ $messageKey ] = $this->messageCache->figureMessage( $dbKey );
+		if ( $messageKey === 'editcheck-config.json' && $dbKey !== $messageKey ) {
+			$status->fatal( 'editcheck-config-save-language-subpage' );
+			return false;
+		} elseif ( $dbKey === 'editcheck-config.json' ) {
 			$definition = null;
 		} elseif ( preg_match( '/^editcheck-config-.+\.json$/', $dbKey ) ) {
 			$definition = 'textMatchRuleInline';

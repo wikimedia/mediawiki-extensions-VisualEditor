@@ -7,6 +7,7 @@
 	},
 	"editchecks": "Edit checks",
 	"editcheck-config.json": "null",
+	"editcheck-config-save-language-subpage": "The edit check configuration cannot have language subpages. Edit [[MediaWiki:Editcheck-config.json]] instead.",
 	"editcheck-toolbar-suggestions-title": "Toggle suggestions",
 	"editcheck-toolbar-suggestions-count": "{{PLURAL:$1|$1|100={{formatnum:99}}+}}",
 	"editcheck-suggestions-turned-on": "Suggestions turned on",

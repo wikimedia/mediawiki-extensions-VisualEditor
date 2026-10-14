@@ -311,7 +311,8 @@
 			"class": "MediaWiki\\Extension\\VisualEditor\\EditCheck\\Hooks",
 			"services": [
 				"UserOptionsLookup",
-				"UserOptionsManager"
+				"UserOptionsManager",
+				"MessageCache"
 			]
 		},
 		"betapreferences": {

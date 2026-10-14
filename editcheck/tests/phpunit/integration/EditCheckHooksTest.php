@@ -21,7 +21,8 @@ class EditCheckHooksTest extends MediaWikiIntegrationTestCase {
 		$services = $this->getServiceContainer();
 		return new Hooks(
 			$services->getUserOptionsLookup(),
-			$services->getUserOptionsManager()
+			$services->getUserOptionsManager(),
+			$services->getMessageCache()
 		);
 	}
 
@@ -122,6 +123,45 @@ class EditCheckHooksTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertFalse( $result );
 		$this->assertFalse( $status->isGood() );
+	}
+
+	public function testOnMultiContentSaveRejectsLanguageSubpage(): void {
+		$config = self::loadFixtureData( 'enwiki.json' );
+		$hooks = $this->newHooks();
+		$status = Status::newGood();
+
+		$result = $hooks->onMultiContentSave(
+			$this->newRenderedRevision(
+				new TitleValue( NS_MEDIAWIKI, 'Editcheck-config.json/de' ),
+				json_encode( $config )
+			),
+			$this->createMock( UserIdentity::class ),
+			$this->createMock( CommentStoreComment::class ),
+			0,
+			$status
+		);
+
+		$this->assertFalse( $result );
+		$this->assertStatusError( 'editcheck-config-save-language-subpage', $status );
+	}
+
+	public function testOnMultiContentSaveIgnoresNonLanguageSubpage(): void {
+		$hooks = $this->newHooks();
+		$status = Status::newGood();
+
+		$result = $hooks->onMultiContentSave(
+			$this->newRenderedRevision(
+				new TitleValue( NS_MEDIAWIKI, 'Editcheck-config.json/notes' ),
+				'{ invalid json'
+			),
+			$this->createMock( UserIdentity::class ),
+			$this->createMock( CommentStoreComment::class ),
+			0,
+			$status
+		);
+
+		$this->assertNull( $result );
+		$this->assertTrue( $status->isGood() );
 	}
 
 	public function testOnMultiContentSaveIgnoresOtherPages(): void {

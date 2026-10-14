@@ -10,6 +10,7 @@
 	},
 	"editchecks": "{{doc-special|EditChecks}}",
 	"editcheck-config.json": "{{notranslate}}\n{{ignored}}\nJSON object configuring some edit check behavior.",
+	"editcheck-config-save-language-subpage": "Error shown when a user tries to save a language subpage of the edit check configuration, such as MediaWiki:Editcheck-config.json/de. These pages are blocked, because the message cache can use them as language fallbacks.",
 	"editcheck-toolbar-suggestions-title": "Title for the toolbar button that toggles suggestion mode",
 	"editcheck-toolbar-suggestions-count": "{{optional}}\nBadge showing the number of suggestions.\nParameters:\n* $1 - Number of suggestions. For 100 or greater, 100 will be passed.",
 	"editcheck-suggestions-turned-on": "Auto-dismiss notification shown when the user turns on suggestions using the toolbar button.",
