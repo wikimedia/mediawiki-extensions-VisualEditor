@@ -126,34 +126,32 @@ class Hooks implements
 	 * @return bool|void
 	 */
 	public function onMultiContentSave( $renderedRevision, $user, $summary, $flags, $status ) {
-		$schemaPath = dirname( __DIR__ ) . '/editcheck-config.schema.json';
-		$result = MediaWikiJsonSchemaValidator::validateOnSave(
-			$renderedRevision,
-			$status,
-			'editcheck-config.json',
-			$schemaPath
-		);
-
-		if ( $result === false ) {
-			return false;
-		}
-
-		$page = $renderedRevision->getRevision()->getPageAsLinkTarget();
+		$revision = $renderedRevision->getRevision();
+		$page = $revision->getPageAsLinkTarget();
 		if ( $page->getNamespace() !== NS_MEDIAWIKI ) {
 			return;
 		}
 
 		$dbKey = strtolower( $page->getDBkey() );
-		if ( preg_match( '/^editcheck-config-.+\.json$/', $dbKey ) ) {
-			$content = $renderedRevision->getRevision()->getMainContentRaw();
-			if ( $content instanceof TextContent ) {
-				return MediaWikiJsonSchemaValidator::validate(
-					$content,
-					$status,
-					$schemaPath,
-					'textMatchRuleInline'
-				);
-			}
+		if ( $dbKey === 'editcheck-config.json' ) {
+			$definition = null;
+		} elseif ( preg_match( '/^editcheck-config-.+\.json$/', $dbKey ) ) {
+			$definition = 'textMatchRuleInline';
+		} else {
+			return;
 		}
+
+		$content = $revision->getMainContentRaw();
+		if ( !( $content instanceof TextContent ) ) {
+			// If for some reason the content isn't text, we can't validate it
+			return;
+		}
+
+		return MediaWikiJsonSchemaValidator::validate(
+			$content,
+			$status,
+			dirname( __DIR__ ) . '/editcheck-config.schema.json',
+			$definition
+		);
 	}
 }

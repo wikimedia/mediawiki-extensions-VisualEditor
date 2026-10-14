@@ -2,8 +2,7 @@
 /**
  * Helper for validating on-wiki JSON config pages.
  *
- * Validates a specific JSON message page against a bundled JSON schema file when
- * it is saved.
+ * Validates the content of a JSON message page against a bundled JSON schema file.
  *
  * @file
  * @ingroup Extensions
@@ -22,21 +21,18 @@ use Wikimedia\Message\MessageValue;
 class MediaWikiJsonSchemaValidator {
 
 	/**
-	 * Validate against a JSON schema.
+	 * Validate a specific MediaWiki: page against a JSON schema when it is saved.
 	 *
 	 * Intended to be called from a MultiContentSave hook handler, returning its
 	 * result directly. Saves of unrelated pages, or non-text content, are ignored.
 	 *
 	 * @param RenderedRevision $renderedRevision The revision being saved
-	 * @param Status $status Status to populate with a fatal error on failure
+	 * @param Status $status See validate()
 	 * @param string $pageDBkey Lower-cased DB key of the MediaWiki: page to validate,
 	 *   e.g. 'editcheck-config.json'
-	 * @param string $schemaPath Absolute path to the JSON schema file to validate against
-	 * @param string|null $definition Name of an entry within the schema's "definitions" to
-	 *   validate against instead of the whole schema, e.g. 'textMatchRuleInline'. This is
-	 *   used to validate files that hold just one part of the config (such as a TextMatch
-	 *   rule imported via the "import" key). When null, the full schema is used.
-	 * @return bool|null False to abort the save when validation fails, null otherwise
+	 * @param string $schemaPath See validate()
+	 * @param string|null $definition See validate()
+	 * @return bool|null See validate()
 	 */
 	public static function validateOnSave(
 		RenderedRevision $renderedRevision,
@@ -64,11 +60,17 @@ class MediaWikiJsonSchemaValidator {
 	/**
 	 * Validate specific JSON content against a JSON schema.
 	 *
+	 * Intended to be called from a MultiContentSave hook handler, returning its
+	 * result directly.
+	 *
 	 * @param TextContent $content The content being saved
-	 * @param Status $status See validateOnSave()
-	 * @param string $schemaPath See validateOnSave()
-	 * @param string|null $definition See validateOnSave()
-	 * @return bool|null See validateOnSave()
+	 * @param Status $status Status to populate with a fatal error on failure
+	 * @param string $schemaPath Absolute path to the JSON schema file to validate against
+	 * @param string|null $definition Name of an entry within the schema's "definitions" to
+	 *   validate against instead of the whole schema, e.g. 'textMatchRuleInline'. This is
+	 *   used to validate files that hold just one part of the config (such as a TextMatch
+	 *   rule imported via the "import" key). When null, the full schema is used.
+	 * @return bool|null False to abort the save when validation fails, null otherwise
 	 */
 	public static function validate(
 		TextContent $content,
