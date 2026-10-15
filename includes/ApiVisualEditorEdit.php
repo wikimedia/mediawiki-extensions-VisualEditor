@@ -279,14 +279,20 @@ class ApiVisualEditorEdit extends ApiBase {
 		$status = $ok ? 'ok' : 'failed';
 		$this->getStats()->increment( "editstash.ve_serialization_cache.set_" . $status );
 
-		// Also parse and prepare the edit in case it might be saved later
-		$pageUpdater = $this->wikiPageFactory->newFromTitle( $title )->newPageUpdater( $this->getUser() );
-		$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
+		// Also parse and prepare the edit in case it might be saved later.
+		// Apply the same checks as ApiStashEdit. If they fail, do not stash.
+		// The stash is only an optimization, so the serialization still succeeds.
+		if ( !$this->getUser()->authorizeWrite( 'stashedit', $title ) ) {
+			$status = 'ratelimited';
+		} else {
+			$pageUpdater = $this->wikiPageFactory->newFromTitle( $title )->newPageUpdater( $this->getUser() );
+			$content = ContentHandler::makeContent( $wikitext, $title, CONTENT_MODEL_WIKITEXT );
 
-		$status = $this->pageEditStash->parseAndCache( $pageUpdater, $content, $this->getUser(), '' );
-		if ( $status === $this->pageEditStash::ERROR_NONE ) {
-			$logger = LoggerFactory::getInstance( 'StashEdit' );
-			$logger->debug( "Cached parser output for VE content key '$key'." );
+			$status = $this->pageEditStash->parseAndCache( $pageUpdater, $content, $this->getUser(), '' );
+			if ( $status === $this->pageEditStash::ERROR_NONE ) {
+				$logger = LoggerFactory::getInstance( 'StashEdit' );
+				$logger->debug( "Cached parser output for VE content key '$key'." );
+			}
 		}
 		$this->getStats()->increment( "editstash.ve_cache_stores.$status" );
 
