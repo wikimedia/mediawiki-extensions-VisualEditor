@@ -19,6 +19,7 @@ ve.ui.EditCheckDialog = function VeUiEditCheckDialog() {
 	this.$element.addClass( 've-ui-editCheckDialog' );
 
 	this.acting = false;
+	this.actionWidgets = [];
 
 	this.afterRefreshDebounced = ve.debounce( this.afterRefresh.bind( this ) );
 };
@@ -299,7 +300,7 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 		this.scrollIntoView.clear();
 	}
 
-	this.$actions.empty();
+	this.clearActionWidgets();
 
 	this.currentActions.forEach( ( action ) => {
 		this.renderAction( action );
@@ -317,11 +318,22 @@ ve.ui.EditCheckDialog.prototype.afterRefresh = function () {
 	this.controller.updatePositions();
 };
 
+/**
+ * Remove all action widgets
+ */
+ve.ui.EditCheckDialog.prototype.clearActionWidgets = function () {
+	// A widget can add elements outside of $actions, such as a menu in the overlay
+	this.actionWidgets.forEach( ( widget ) => widget.destroy() );
+	this.actionWidgets = [];
+	this.$actions.empty();
+};
+
 ve.ui.EditCheckDialog.prototype.renderAction = function ( action ) {
 	const widget = action.render( action !== this.currentAction, this.singleAction, this.surface );
 	widget.on( 'togglecollapse', this.onToggleCollapse, [ action ], this );
 	action.off( 'act', this.onAct, this ).on( 'act', this.onAct, [ action, widget ], this );
 
+	this.actionWidgets.push( widget );
 	this.$actions.append( widget.$element );
 	if ( this.scrollIntoView ) {
 		this.scrollIntoView.observe( widget.$element[ 0 ] );
@@ -481,7 +493,7 @@ ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) 
 		this.controller.off( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, this );
 		this.controller.off( 'focusAction', this.onFocusAction, this );
 		this.surface.getTarget().off( 'virtualKeyboardChange', this.onVirtualKeyboardChange, this );
-		this.$actions.empty();
+		this.clearActionWidgets();
 		if ( this.scrollIntoView ) {
 			this.scrollIntoView.clear();
 		}

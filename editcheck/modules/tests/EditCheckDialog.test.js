@@ -268,3 +268,43 @@ QUnit.test( 'A gutter quick action finishes after a redraw removed its widget', 
 
 	assert.strictEqual( positionUpdates, 1, 'The positions are updated, and the removed widget does nothing more' );
 } );
+
+QUnit.test( 'destroy closes and removes the feedback menu', ( assert ) => {
+	const [ suggestion, warning ] = ve.test.utils.EditCheck.makeDisplayActions();
+	const widget = suggestion.render( true, false );
+	const menu = widget.suggestionFeedbackMenuSelect.getMenu();
+	assert.true( menu.$element[ 0 ].isConnected, 'The menu is in the overlay' );
+
+	menu.toggle( true );
+	widget.destroy();
+	assert.false( menu.isVisible(), 'destroy closes the menu' );
+	assert.false( menu.$element[ 0 ].isConnected, 'destroy removes the menu from the overlay' );
+
+	const warningWidget = warning.render( true, false );
+	assert.strictEqual( warningWidget.suggestionFeedbackMenuSelect, null, 'A widget for a check has no feedback menu' );
+	warningWidget.destroy();
+} );
+
+QUnit.test( 'refresh destroys the old action widgets', ( assert ) => {
+	const [ suggestion, warning ] = ve.test.utils.EditCheck.makeDisplayActions();
+	const dialog = Object.assign( Object.create( ve.ui.EditCheckDialog.prototype ), {
+		$actions: $( '<div>' ),
+		actionWidgets: [],
+		currentActions: [ suggestion, warning ],
+		currentAction: null,
+		singleAction: false,
+		afterRefresh: () => {}
+	} );
+
+	dialog.refresh();
+	const oldMenu = suggestion.widget.suggestionFeedbackMenuSelect.getMenu();
+	assert.true( oldMenu.$element[ 0 ].isConnected, 'The menu of the rendered widget is in the overlay' );
+
+	dialog.refresh();
+	assert.false( oldMenu.$element[ 0 ].isConnected, 'Refresh removes the menu of the old widget' );
+	assert.strictEqual( dialog.actionWidgets.length, 2, 'Only the new widgets are kept' );
+	assert.strictEqual( dialog.$actions.children().length, 2, 'Only the new widgets are shown' );
+
+	dialog.clearActionWidgets();
+	assert.false( suggestion.widget.suggestionFeedbackMenuSelect.getMenu().$element[ 0 ].isConnected, 'clearActionWidgets removes the menu of each widget' );
+} );

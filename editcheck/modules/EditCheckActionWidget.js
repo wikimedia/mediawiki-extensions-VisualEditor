@@ -185,6 +185,21 @@ mw.editcheck.EditCheckActionWidget.static.iconMap.progressive = 'lightbulb';
 /* Methods */
 
 /**
+ * Remove the elements that this widget added outside of its own element
+ *
+ * Call this when the widget is removed from the page.
+ */
+mw.editcheck.EditCheckActionWidget.prototype.destroy = function () {
+	if ( this.suggestionFeedbackMenuSelect ) {
+		const menu = this.suggestionFeedbackMenuSelect.getMenu();
+		// Close the menu first, to remove its document and window handlers
+		menu.toggle( false );
+		// The menu is in the overlay, not in this.$element
+		menu.$element.remove();
+	}
+};
+
+/**
  * Set the mode
  *
  * @param {string} mode
