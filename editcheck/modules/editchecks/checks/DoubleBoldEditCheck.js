@@ -52,7 +52,7 @@ mw.editcheck.DoubleBoldEditCheck.prototype.onDocumentChange = function ( surface
 		.filter( ( annRange ) => annRange.annotation instanceof ve.dm.BoldAnnotation &&
 			!this.isDismissedRange( annRange.range ) &&
 			this.isRangeInValidSection( annRange.range, documentModel ) &&
-			modified.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
+			mw.editcheck.rangesContainRange( modified, annRange.range ) &&
 			( node = documentModel.getBranchNodeFromOffset( annRange.range.start ) ) &&
 			(
 				(

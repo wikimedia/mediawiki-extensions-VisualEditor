@@ -184,6 +184,23 @@ mw.editcheck.flattenArray = function ( arr, depth = 1 ) {
 };
 
 /**
+ * Check whether one of a list of ranges contains a range
+ *
+ * @param {ve.Range[]} ranges Ranges in document order that do not overlap,
+ *  e.g. from BaseEditCheck#getModifiedRanges
+ * @param {ve.Range} range
+ * @return {boolean}
+ */
+mw.editcheck.rangesContainRange = function ( ranges, range ) {
+	// Use a binary search. A large document can have tens of thousands of ranges,
+	// and callers do this check for each annotation.
+	// The search function never returns 0, thus the result is the first range that starts after range.
+	const index = OO.binarySearch( ranges, ( r ) => range.start < r.start ? -1 : 1, true );
+	// Only the last range that starts at or before range can contain it.
+	return index > 0 && ranges[ index - 1 ].containsRange( range );
+};
+
+/**
  * Merge config objects in sequence, so later configs take priority
  *
  * A key with a plain name replaces the value from earlier configs.

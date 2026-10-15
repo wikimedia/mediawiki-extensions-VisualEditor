@@ -484,7 +484,7 @@ mw.editcheck.BaseEditCheck.prototype.getModifiedContentRanges = function ( docum
 mw.editcheck.BaseEditCheck.prototype.getModifiedAnnotationRanges = function ( documentModel, modifiedContentRanges, names, scopeNode ) {
 	return ( scopeNode || documentModel.getDocumentNode() ).getAnnotationRanges().filter(
 		// Try to apply fastest filters first
-		( annRange ) => modifiedContentRanges.some( ( modifiedRange ) => modifiedRange.containsRange( annRange.range ) ) &&
+		( annRange ) => mw.editcheck.rangesContainRange( modifiedContentRanges, annRange.range ) &&
 			( !names || names.includes( annRange.annotation.name ) ) &&
 			!this.isDismissedRange( annRange.range ) &&
 			// isRangeInValidSection is relatively expensive, so check last
