@@ -525,6 +525,43 @@ QUnit.test( 'A streamed action opens the sidebar before all checks finish', asyn
 	}
 } );
 
+QUnit.test( 'getActionsWithPending compares IDs and selections', async ( assert ) => {
+	let releaseSlow;
+	const slow = new Promise( ( resolve ) => {
+		releaseSlow = resolve;
+	} );
+	const spec = {
+		checks: [ [ 'fast', 1 ], [ 'slow', 3, slow ] ],
+		suggestions: [ [ 'other', 1 ], [ 'fast', 1 ], [ 'fast', 5 ] ]
+	};
+	const { controller, factory } = makeStubCheckController( spec );
+	const nextTask = () => new Promise( ( resolve ) => {
+		setTimeout( resolve );
+	} );
+
+	const originalFactory = mw.editcheck.editCheckFactory;
+	mw.editcheck.editCheckFactory = factory;
+	try {
+		const updating = controller.updateForListener( 'onDocumentChange' );
+		await nextTask();
+		const actions = controller.getActionsWithPending();
+		assert.deepEqual(
+			ve.test.utils.EditCheck.actionIds( actions ).sort(),
+			[ 'fast', 'fast', 'other' ],
+			'Actions with the same selection and different IDs are both kept, and actions with the same ID and different selections are both kept'
+		);
+		assert.deepEqual(
+			actions.filter( ( action ) => action.id === 'fast' ).map( ( action ) => [ action.fragments[ 0 ].getSelection().getRange().start, action.isSuggestion() ] ),
+			[ [ 1, false ], [ 5, true ] ],
+			'The check replaces only the equal suggestion'
+		);
+		releaseSlow();
+		await updating;
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+	}
+} );
+
 QUnit.test( 'refresh runs the mid-edit listeners at the same time', async ( assert ) => {
 	let releaseSlow;
 	const slow = new Promise( ( resolve ) => {

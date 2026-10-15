@@ -637,13 +637,34 @@ Controller.prototype.getActionsWithPending = function () {
 	if ( this.inBeforeSave ) {
 		return actions;
 	}
+	// This runs for each streamed action, and a page can have thousands of actions.
+	// Equal actions have equal selections, thus their covering ranges start at the same offset.
+	// Compare only actions with the same start offset.
+	const getKey = ( action ) => {
+		const range = action.fragments.length ? action.fragments[ 0 ].getSelection().getCoveringRange() : null;
+		return range ? range.start : -1;
+	};
+	let indexesByKey = null;
+	const addIndex = ( key, index ) => {
+		if ( !indexesByKey.has( key ) ) {
+			indexesByKey.set( key, [] );
+		}
+		indexesByKey.get( key ).push( index );
+	};
 	midEditListeners.forEach( ( listener ) => {
 		( this.pendingActionsByListener[ listener ] || [] ).forEach( ( action ) => {
 			if ( this.suppressSuggestions && action.isSuggestion() ) {
 				return;
 			}
-			const index = actions.findIndex( ( listAction ) => listAction.equals( action ) );
-			if ( index === -1 ) {
+			if ( !indexesByKey ) {
+				// Make the index only when an action is pending. Usually no action is pending.
+				indexesByKey = new Map();
+				actions.forEach( ( listAction, i ) => addIndex( getKey( listAction ), i ) );
+			}
+			const key = getKey( action );
+			const index = ( indexesByKey.get( key ) || [] ).find( ( i ) => actions[ i ].equals( action ) );
+			if ( index === undefined ) {
+				addIndex( key, actions.length );
 				actions.push( action );
 			} else if ( actions[ index ].isSuggestion() && !action.isSuggestion() ) {
 				actions[ index ] = action;
