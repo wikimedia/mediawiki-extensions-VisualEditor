@@ -392,7 +392,9 @@ ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
 	this.footerLabel.setDisabled( this.acting );
 	const onSystemMessage = !!( currentAction && currentAction.check.isSystemCheck() );
 	this.footer.toggle( this.footerVisible && !onSystemMessage );
-	this.closeButton.toggle( this.closeButtonVisible && !onSystemMessage );
+	this.closeButton.toggle(
+		this.closeButtonVisible && !( onSystemMessage && currentAction.messageType !== 'publishPath' )
+	);
 	this.nextButton.setDisabled(
 		this.acting ||
 		( this.currentOffset !== null && this.currentOffset >= this.currentActions.length - 1 )
