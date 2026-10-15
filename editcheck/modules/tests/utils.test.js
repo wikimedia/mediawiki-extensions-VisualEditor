@@ -86,6 +86,26 @@ QUnit.test( 'sanitizeStatsvLabel keeps different IDs apart', ( assert ) => {
 	} );
 } );
 
+QUnit.test( 'rangesContainRange', ( assert ) => {
+	const ranges = [ new ve.Range( 5, 10 ), new ve.Range( 10, 15 ), new ve.Range( 20, 30 ) ];
+	const cases = [
+		{ msg: 'Before all ranges', range: new ve.Range( 1, 3 ), expected: false },
+		{ msg: 'Inside first range', range: new ve.Range( 6, 9 ), expected: true },
+		{ msg: 'Equal to a range', range: new ve.Range( 5, 10 ), expected: true },
+		{ msg: 'At start of a touching range', range: new ve.Range( 10, 12 ), expected: true },
+		{ msg: 'Across two touching ranges', range: new ve.Range( 8, 12 ), expected: false },
+		{ msg: 'Across the end of a range', range: new ve.Range( 12, 18 ), expected: false },
+		{ msg: 'In a gap', range: new ve.Range( 16, 19 ), expected: false },
+		{ msg: 'Inside last range', range: new ve.Range( 25, 30 ), expected: true },
+		{ msg: 'After all ranges', range: new ve.Range( 31, 35 ), expected: false },
+		{ msg: 'Backwards range', range: new ve.Range( 29, 21 ), expected: true }
+	];
+	cases.forEach( ( caseItem ) => {
+		assert.strictEqual( mw.editcheck.rangesContainRange( ranges, caseItem.range ), caseItem.expected, caseItem.msg );
+	} );
+	assert.false( mw.editcheck.rangesContainRange( [], new ve.Range( 1, 2 ) ), 'No ranges' );
+} );
+
 QUnit.test( 'mergeConfigs', ( assert ) => {
 	const cases = [
 		{
