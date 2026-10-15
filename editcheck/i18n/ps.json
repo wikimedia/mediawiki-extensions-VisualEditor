@@ -92,6 +92,7 @@
 	"editcheck-headinglevel-title": "سرليک کچې سمون",
 	"editcheck-headinglevel-description": "د سرليک دا کچه ښايي د سم ترتيب جوړښت ونه‌څاري. لوستونکو سره د سمې [{{int:editcheck-headinglevel-descriptionlink}} سرليک کچې] په کارولو سره د منځپانگې په اسانۍ سره د چلېدو وړ کولو کې مرسته وکړئ.",
 	"editcheck-headinglevel-action-adjust": "سرليک سمون",
+	"editcheck-leadlength-reject-other": "نور",
 	"editcheck-image-caption-title": "انځور نيونگ ورگډول",
 	"editcheck-image-caption-description": "دا انځور نيونگ نه‌لري. د دې انځور اړوند [{{int:editcheck-image-caption-descriptionlink}} لنډ نيونگ] ورگډولو سره د لوستونکو سره د دې په پوهېدلو کې مرسته وکړئ.",
 	"editcheck-convertreference-title": "سرچينه وراړول",

@@ -10,6 +10,8 @@
 	"editcheck-sourceveri-reject-other": "ٻیا",
 	"editcheck-suggestedlink-action-add-link": "لنک شامل کرو",
 	"editcheck-action-convert-reference": "تبدیل کرو",
+	"editcheck-leadlength-descriptionlink": "//en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Lead_section#Length",
+	"editcheck-leadlength-reject-other": "ٻیا",
 	"editcheck-specialeditchecks-imported-configs": "$1 کنوں امپورٹ تھیا",
 	"editcheck-specialeditchecks-col-title": "عنوان"
 }
