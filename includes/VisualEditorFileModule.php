@@ -23,7 +23,7 @@ class VisualEditorFileModule extends FileModule {
 
 		$jsonPath = __DIR__ . '/../lib/ve/build/modules.json';
 		$cache = MediaWikiServices::getInstance()->getLocalServerObjectCache();
-		$cacheKey = $cache->makeKey(
+		$cacheKey = $cache->makeGlobalKey(
 			'visualeditor-modules-json',
 			$jsonPath,
 			filemtime( $jsonPath )
