@@ -5,137 +5,170 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-QUnit.module( 've.dm.MWTransclusionNode', ve.test.utils.newMwEnvironment() );
+{
+	QUnit.module( 've.dm.MWTransclusionNode', ve.test.utils.newMwEnvironment() );
 
-QUnit.test.each( 'getWikitext', {
-		'mix of numbered and named parameters': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					1: { wt: 'bar' },
-					baz: { wt: 'quux' }
-				}
+	QUnit.test.each( 'getWikitext', {
+			'mix of numbered and named parameters': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						1: { wt: 'bar' },
+						baz: { wt: 'quux' }
+					}
+				},
+				wikitext: '{{foo|1=bar|baz=quux}}'
 			},
-			wikitext: '{{foo|1=bar|baz=quux}}'
-		},
-		'parameter with self-closing nowiki': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					bar: { wt: 'l\'<nowiki />\'\'\'Étranger\'\'\'' }
-				}
+			'parameter with self-closing nowiki': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						bar: { wt: 'l\'<nowiki />\'\'\'Étranger\'\'\'' }
+					}
+				},
+				wikitext: '{{foo|bar=l\'<nowiki />\'\'\'Étranger\'\'\'}}'
 			},
-			wikitext: '{{foo|bar=l\'<nowiki />\'\'\'Étranger\'\'\'}}'
-		},
-		'parameter with self-closing nowiki without space': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					bar: { wt: 'l\'<nowiki/>\'\'\'Étranger\'\'\'' }
-				}
+			'parameter with self-closing nowiki without space': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						bar: { wt: 'l\'<nowiki/>\'\'\'Étranger\'\'\'' }
+					}
+				},
+				wikitext: '{{foo|bar=l\'<nowiki/>\'\'\'Étranger\'\'\'}}'
 			},
-			wikitext: '{{foo|bar=l\'<nowiki/>\'\'\'Étranger\'\'\'}}'
-		},
-		'parameter with spanning-nowiki': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					bar: { wt: 'You should use <nowiki>\'\'\'</nowiki> to make things bold.' }
-				}
+			'parameter with spanning-nowiki': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						bar: { wt: 'You should use <nowiki>\'\'\'</nowiki> to make things bold.' }
+					}
+				},
+				wikitext: '{{foo|bar=You should use <nowiki>\'\'\'</nowiki> to make things bold.}}'
 			},
-			wikitext: '{{foo|bar=You should use <nowiki>\'\'\'</nowiki> to make things bold.}}'
-		},
-		'parameter with spanning-nowiki and nested transclusion': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					bar: { wt: 'You should try using <nowiki>{{ping|foo=bar|2=1}}</nowiki> as a transclusion!' }
-				}
+			'parameter with spanning-nowiki and nested transclusion': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						bar: { wt: 'You should try using <nowiki>{{ping|foo=bar|2=1}}</nowiki> as a transclusion!' }
+					}
+				},
+				wikitext: '{{foo|bar=You should try using <nowiki>{{ping|foo=bar|2=1}}</nowiki> as a transclusion!}}'
 			},
-			wikitext: '{{foo|bar=You should try using <nowiki>{{ping|foo=bar|2=1}}</nowiki> as a transclusion!}}'
-		},
-		'parameter containing another template invocation': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					bar: { wt: '{{ping|foo=bar|2=1}}' }
-				}
+			'parameter containing another template invocation': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						bar: { wt: '{{ping|foo=bar|2=1}}' }
+					}
+				},
+				wikitext: '{{foo|bar={{ping|foo=bar|2=1}}}}'
 			},
-			wikitext: '{{foo|bar={{ping|foo=bar|2=1}}}}'
-		},
-		'parameter containing another parameter': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					bar: { wt: '{{{1}}}' }
-				}
+			'parameter containing another parameter': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						bar: { wt: '{{{1}}}' }
+					}
+				},
+				wikitext: '{{foo|bar={{{1}}}}}'
 			},
-			wikitext: '{{foo|bar={{{1}}}}}'
-		},
-		'parameter containing unmatched close brackets and floating pipes': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					bar: { wt: '}} | {{a|{{b}}}} |' }
-				}
+			'parameter containing unmatched close brackets and floating pipes': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						bar: { wt: '}} | {{a|{{b}}}} |' }
+					}
+				},
+				wikitext: '{{foo|bar=<nowiki>}}</nowiki> <nowiki>|</nowiki> {{a|{{b}}}} <nowiki>|</nowiki>}}'
 			},
-			wikitext: '{{foo|bar=<nowiki>}}</nowiki> <nowiki>|</nowiki> {{a|{{b}}}} <nowiki>|</nowiki>}}'
-		},
-		'parameter containing piped link': {
-			mw: {
-				target: { wt: 'foo' },
-				params: {
-					bar: { wt: '[[baz|quux]]' }
-				}
-			},
-			wikitext: '{{foo|bar=[[baz|quux]]}}'
-		}
-	}, ( assert, caseItem ) => {
-		const node = new ve.dm.MWTransclusionNode(
-			{ type: 'mwTransclusion', attributes: { mw: caseItem.mw } }
-		);
-		assert.strictEqual( node.getWikitext(), caseItem.wikitext );
-	}
-);
-
-QUnit.test.each( 'getSingleTemplatePart and getSingleTemplateName', {
-		'not a template transclusion': {
-			parts: [ '/n' ],
-			expectedPart: undefined
-		},
-		'not a single part': {
-			parts: [ {
-				template: {
-					target: {
-						wt: 'Infobox',
-						href: './Template:Infobox'
-					},
-					params: {}
-				}
-			}, '/n' ],
-			expectedPart: undefined
-		},
-		'valid single template': {
-			parts: [ {
-				template: {
-					target: {
-						wt: 'Infobox',
-						href: './Template:Infobox'
-					},
-					params: {}
-				}
-			} ],
-			expectedPart: {
-				template: 'Infobox',
-				templatePage: 'Template:Infobox',
-				params: {}
+			'parameter containing piped link': {
+				mw: {
+					target: { wt: 'foo' },
+					params: {
+						bar: { wt: '[[baz|quux]]' }
+					}
+				},
+				wikitext: '{{foo|bar=[[baz|quux]]}}'
 			}
+		}, ( assert, caseItem ) => {
+			const node = new ve.dm.MWTransclusionNode(
+				{ type: 'mwTransclusion', attributes: { mw: caseItem.mw } }
+			);
+			assert.strictEqual( node.getWikitext(), caseItem.wikitext );
 		}
-	}, ( assert, caseItem ) => {
-		const node = new ve.dm.MWTransclusionNode(
-			{ type: 'mwTransclusion', attributes: { mw: { parts: caseItem.parts } } }
-		);
-		assert.deepEqual( node.getSingleTemplatePart(), caseItem.expectedPart );
-		assert.deepEqual( node.getSingleTemplateName(), caseItem.expectedPart && caseItem.expectedPart.template );
-	}
-);
+	);
+
+	const infoBoxTemplatePart = {
+		template: {
+			target: {
+				wt: 'Infobox',
+				href: './Template:Infobox'
+			},
+			params: {}
+		}
+	};
+
+	QUnit.test.each( 'getSingleTemplatePart and getSingleTemplateName', {
+			'not a template transclusion': {
+				parts: [ '/n' ],
+				expectedPart: undefined
+			},
+			'not a single part': {
+				parts: [ infoBoxTemplatePart, '/n' ],
+				expectedPart: undefined
+			},
+			'valid single template': {
+				parts: [ infoBoxTemplatePart ],
+				expectedPart: {
+					template: 'Infobox',
+					templatePage: 'Template:Infobox',
+					params: {}
+				}
+			}
+		}, ( assert, caseItem ) => {
+			const node = new ve.dm.MWTransclusionNode(
+				{ type: 'mwTransclusion', attributes: { mw: { parts: caseItem.parts } } }
+			);
+			assert.deepEqual( node.getSingleTemplatePart(), caseItem.expectedPart );
+			assert.strictEqual(
+				node.getSingleTemplateName(),
+				caseItem.expectedPart && caseItem.expectedPart.template
+			);
+		}
+	);
+
+	QUnit.test.each( 'isSingleTemplate', {
+			'not a template transclusion': {
+				parts: [ '/n' ],
+				allowedList: undefined,
+				expected: false
+			},
+			'not a single part': {
+				parts: [ infoBoxTemplatePart, '/n' ],
+				allowedList: undefined,
+				expected: false
+			},
+			'template not allowed': {
+				parts: [ infoBoxTemplatePart ],
+				allowedList: [ 'Cite_book' ],
+				expected: false
+			},
+			'all templates allowed': {
+				parts: [ infoBoxTemplatePart ],
+				allowedList: undefined,
+				expected: true
+			},
+			'specific template allowed': {
+				parts: [ infoBoxTemplatePart ],
+				allowedList: [ 'Infobox' ],
+				expected: true
+			}
+		}, ( assert, caseItem ) => {
+			const node = new ve.dm.MWTransclusionNode(
+				{ type: 'mwTransclusion', attributes: { mw: { parts: caseItem.parts } } }
+			);
+			assert.strictEqual( node.isSingleTemplate( caseItem.allowedList ), caseItem.expected );
+		}
+	);
+}
