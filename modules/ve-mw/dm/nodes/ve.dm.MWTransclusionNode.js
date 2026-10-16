@@ -426,10 +426,11 @@ ve.dm.MWTransclusionNode.prototype.onAttributeChange = function ( key ) {
 };
 
 /**
- * Check if transclusion contains only a single template.
+ * Check if transclusion contains only a single template and optionally check if
+ * it's part of a list of allowed template names.
  *
- * @param {string|string[]} [allowedTemplates] Names of templates to allow, omit to allow any template name
- * @return {boolean} Transclusion only contains a single template, which is one of the ones in templates
+ * @param {string|string[]} [allowedTemplates] Names of allowed templates, omit to allow any template name
+ * @return {boolean}
  */
 ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( allowedTemplates ) {
 	const templateNS = mw.config.get( 'wgNamespaceIds' ).template;
@@ -439,8 +440,12 @@ ve.dm.MWTransclusionNode.prototype.isSingleTemplate = function ( allowedTemplate
 	}
 
 	const templatePart = this.getSingleTemplatePart();
-	if ( !templatePart || !allowedTemplates ) {
+	if ( !templatePart ) {
 		return false;
+	}
+
+	if ( !allowedTemplates ) {
+		return true;
 	}
 
 	if ( typeof allowedTemplates === 'string' ) {
