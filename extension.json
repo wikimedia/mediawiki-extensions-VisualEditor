@@ -2628,7 +2628,8 @@
 			"editcheck/modules/tests/ImageCaptionEditCheck.test.js",
 			"editcheck/modules/tests/Controller.test.js",
 			"editcheck/modules/tests/EditCheckDialog.test.js",
-			"editcheck/modules/tests/GutterSidebarEditCheckDialog.test.js"
+			"editcheck/modules/tests/GutterSidebarEditCheckDialog.test.js",
+			"editcheck/modules/tests/SidebarEditCheckDialog.test.js"
 		],
 		"dependencies": [
 			"ext.visualEditor.core",

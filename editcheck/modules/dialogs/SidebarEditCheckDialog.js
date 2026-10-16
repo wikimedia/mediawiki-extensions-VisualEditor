@@ -73,9 +73,12 @@ ve.ui.SidebarEditCheckDialog.prototype.onPosition = function () {
 	}
 	const surfaceView = this.surface.getView();
 	const surfaceTop = surfaceView.$element.offset().top + 8;
+	const widgetElements = [];
+	const targets = new Map();
 	this.currentActions.forEach( ( action ) => {
 		const widget = action.widget;
 		if ( widget ) {
+			widgetElements.push( widget.$element[ 0 ] );
 			let top = Infinity;
 			let isNativeCursor = false;
 			action.getHighlightSelections().forEach( ( selection, i ) => {
@@ -89,15 +92,56 @@ ve.ui.SidebarEditCheckDialog.prototype.onPosition = function () {
 				}
 				top = Math.min( top, rect.top );
 			} );
-			widget.$element.css( 'margin-top', '' );
-			widget.$element.css(
-				'margin-top',
-				Math.max( 0,
-					top + surfaceTop - widget.$element.offset().top +
-					// Adjust alignment with text selection highlights
-					( isNativeCursor ? -2 : 0 )
-				)
-			);
+			// A widget with no visible selection keeps its default margin
+			if ( top !== Infinity ) {
+				// Adjust alignment with text selection highlights
+				targets.set( widget.$element[ 0 ], top + surfaceTop + ( isNativeCursor ? -2 : 0 ) );
+			}
+		}
+	} );
+
+	// A margin moves the widgets below it. Setting each margin and then reading the
+	// position of the next widget makes the browser do a layout for each widget.
+	// Thus, read all positions in one layout, and calculate how each margin moves
+	// the widgets below it.
+	const setMargin = ( element, offsetTop ) => {
+		const margin = Math.max( 0, targets.get( element ) - offsetTop );
+		element.style.marginTop = margin + 'px';
+		return margin;
+	};
+	widgetElements.forEach( ( element ) => {
+		element.style.marginTop = '';
+	} );
+	// A hidden widget does not move other widgets
+	const shown = this.$actions.children().toArray().filter( ( element ) => element.offsetParent );
+	if ( shown.length && targets.has( shown[ 0 ] ) ) {
+		// The margin of the first widget can collapse with margins outside $actions.
+		// Thus, set it before the other positions are read.
+		setMargin( shown[ 0 ], $( shown[ 0 ] ).offset().top );
+	}
+	const items = shown.map( ( element ) => {
+		const style = getComputedStyle( element );
+		return {
+			element,
+			offsetTop: $( element ).offset().top,
+			marginTop: parseFloat( style.marginTop ),
+			marginBottom: parseFloat( style.marginBottom )
+		};
+	} );
+	let shift = 0;
+	items.forEach( ( item, i ) => {
+		if ( i === 0 || !targets.has( item.element ) ) {
+			return;
+		}
+		const margin = setMargin( item.element, item.offsetTop + shift );
+		const previousMarginBottom = items[ i - 1 ].marginBottom;
+		// Adjacent vertical margins collapse into the larger margin
+		shift += Math.max( previousMarginBottom, margin ) - Math.max( previousMarginBottom, item.marginTop );
+	} );
+	const done = new Set( shown );
+	targets.forEach( ( target, element ) => {
+		if ( !done.has( element ) ) {
+			setMargin( element, $( element ).offset().top );
 		}
 	} );
 };
