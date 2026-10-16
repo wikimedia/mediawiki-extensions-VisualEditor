@@ -29,7 +29,7 @@ ve.init.mw.DesktopArticleTarget = function VeInitMwDesktopArticleTarget( config 
 	// Properties
 	this.onBeforeUnloadFallback = null;
 	this.onBeforeUnload = this.onBeforeUnload.bind( this );
-	this.onUnloadHandler = this.onUnload.bind( this );
+	this.onPageHideHandler = this.onPageHide.bind( this );
 	this.activating = false;
 	this.deactivating = false;
 	this.deactivatingDeferred = null;
@@ -1278,7 +1278,7 @@ ve.init.mw.DesktopArticleTarget.prototype.replacePageContent = function (
 };
 
 /**
- * Add onunload and onbeforeunload handlers.
+ * Add pagehide and beforeunload handlers.
  */
 ve.init.mw.DesktopArticleTarget.prototype.setupUnloadHandlers = function () {
 	if ( window.onbeforeunload !== this.onBeforeUnload ) {
@@ -1286,17 +1286,17 @@ ve.init.mw.DesktopArticleTarget.prototype.setupUnloadHandlers = function () {
 		this.onBeforeUnloadFallback = window.onbeforeunload;
 		// Attach our handlers
 		window.onbeforeunload = this.onBeforeUnload;
-		window.addEventListener( 'unload', this.onUnloadHandler );
+		window.addEventListener( 'pagehide', this.onPageHideHandler );
 	}
 };
 /**
- * Remove onunload and onbeforunload handlers.
+ * Remove pagehide and beforeunload handlers.
  */
 ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
 	// Restore whatever previous onbeforeunload hook existed
 	window.onbeforeunload = this.onBeforeUnloadFallback;
 	this.onBeforeUnloadFallback = null;
-	window.removeEventListener( 'unload', this.onUnloadHandler );
+	window.removeEventListener( 'pagehide', this.onPageHideHandler );
 };
 
 /**
@@ -1392,9 +1392,12 @@ ve.init.mw.DesktopArticleTarget.prototype.onBeforeUnload = function () {
 };
 
 /**
- * Handle unload event.
+ * Handle pagehide event.
+ *
+ * Use pagehide, not unload: browsers can skip unload handlers, and an unload
+ * handler stops the page from entering the back/forward cache.
  */
-ve.init.mw.DesktopArticleTarget.prototype.onUnload = function () {
+ve.init.mw.DesktopArticleTarget.prototype.onPageHide = function () {
 	if ( !this.submitting ) {
 		ve.track( 'editAttemptStep', {
 			action: 'abort',
