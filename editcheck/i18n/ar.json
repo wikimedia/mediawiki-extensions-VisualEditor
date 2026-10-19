@@ -9,6 +9,7 @@
 		]
 	},
 	"editchecks": " فحص التحرير",
+	"editcheck-config-save-language-subpage": "لا يمكن أن يحتوي ملف إعدادات فحص التحرير على صفحات فرعية للغات. بدلاً من ذلك، قم بتحرير الملف [[MediaWiki:Editcheck-config.json]].",
 	"editcheck-toolbar-suggestions-title": "إظهار/إخفاء الاقتراحات",
 	"editcheck-suggestions-turned-on": "تم تفعيل الاقتراحات",
 	"editcheck-suggestions-turned-off": "تم إيقاف الاقتراحات",

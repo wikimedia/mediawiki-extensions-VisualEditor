@@ -5,6 +5,7 @@
 		]
 	},
 	"editchecks": "Verificacións de edicións",
+	"editcheck-config-save-language-subpage": "A configuración da verificación de edicións non pode ter subpáxinas de lingua. Edita «[[MediaWiki:Editcheck-config.json]]» no seu lugar.",
 	"editcheck-toolbar-suggestions-title": "Activar ou desactivar as suxestións",
 	"editcheck-suggestions-turned-on": "Suxestións activadas",
 	"editcheck-suggestions-turned-off": "Suxestións desactivadas",

@@ -5,6 +5,7 @@
 		]
 	},
 	"editchecks": "Hubinta wax ka beddelka",
+	"editcheck-config-save-language-subpage": "Qaabeynta hubinta wax ka beddelku ma yeelan karto bogag hoosaadyo luuqadeed. Bedelkeeda, wax ka beddel [[MediaWiki:Editcheck-config.json]].",
 	"editcheck-toolbar-suggestions-title": "Dami ama daar talooyinka",
 	"editcheck-suggestions-turned-on": "Talooyin waa la shiday",
 	"editcheck-suggestions-turned-off": "Talooyin waa la damiyay",
@@ -108,7 +109,6 @@
 	"editcheck-headinglevel-action-adjust": "Hagaaji cinwaanka",
 	"editcheck-leadlength-title": "Hagaaji akhris fudaydka",
 	"editcheck-leadlength-description": "Qaybtani way ka dheer tahay inta ay [{{int:editcheck-leadlength-descriptionlink}} tilmaamaha {{SITENAME}}] ku talinayaan. Ka fiirso inaad soo gaabiso adigoo xogta u raraya qaybo kale ama weedhaha dhaadheer ku beddelaya kuwo fudud.",
-	"editcheck-leadlength-descriptionlink": "//en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Lead_section#Length",
 	"editcheck-leadlength-reject-appropriate": "Dhererku wuxuu ku habboon yahay maqaalkan",
 	"editcheck-leadlength-reject-uncertain": "Ma hubo sida loo soo gaabin karo",
 	"editcheck-leadlength-reject-other": "Kale",

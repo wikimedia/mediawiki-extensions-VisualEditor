@@ -16,6 +16,7 @@
 		]
 	},
 	"editchecks": "编辑检查",
+	"editcheck-config-save-language-subpage": "编辑检查配置不能包含语言子页面。请改为编辑[[MediaWiki:Editcheck-config.json]]。",
 	"editcheck-toolbar-suggestions-title": "切换建议",
 	"editcheck-suggestions-turned-on": "已开启建议",
 	"editcheck-suggestions-turned-off": "已关闭建议",

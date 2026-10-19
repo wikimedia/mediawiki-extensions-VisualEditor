@@ -7,6 +7,7 @@
 		]
 	},
 	"editchecks": "Semakan suntingan",
+	"editcheck-config-save-language-subpage": "Konfigurasi semakan suntingan tidak boleh mempunyai sublaman bahasa. Sunting [[MediaWiki:Editcheck-config.json]] sebagai gantinya.",
 	"editcheck-toolbar-suggestions-title": "Togol cadangan",
 	"editcheck-suggestions-turned-on": "Cadangan dihidupkan",
 	"editcheck-suggestions-turned-off": "Cadangan dimatikan",

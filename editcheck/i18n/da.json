@@ -5,6 +5,7 @@
 		]
 	},
 	"editchecks": "Rediger checks",
+	"editcheck-config-save-language-subpage": "Redigeringskontrolkonfigurationen må ikke have sproglige undersider. Rediger [[MediaWiki:Editcheck-config.json]] i stedet.",
 	"editcheck-toolbar-suggestions-title": "Slå forslag til/fra",
 	"editcheck-suggestions-turned-on": "Forslag aktiveret",
 	"editcheck-suggestions-turned-off": "Forslag er slået fra",
