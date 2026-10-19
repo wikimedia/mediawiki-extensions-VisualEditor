@@ -4,6 +4,7 @@
 
 .ve-ui-gutterSidebarEditCheckDialog {
 	background-color: @background-color-interactive-subtle;
+	border-left: @border-width-base solid @border-color-muted;
 
 	.ve-ui-editCheck-gutter-action {
 		position: absolute;
@@ -49,11 +50,18 @@
 			}
 		}
 
-		.ve-ui-editCheck-sidebar-active .ve-init-mw-target-surface {
-			margin: 0;
+		.ve-ui-editCheck-sidebar-active {
+			.ve-init-mw-target-surface {
+				margin: 0;
 
-			.ve-ce-surface {
-				margin-left: 16px;
+				.ve-ce-surface {
+					margin-left: 16px;
+				}
+			}
+
+			// Continue the rail's separator border up through the toolbar
+			.ve-ui-toolbar-group-save {
+				box-shadow: -@border-width-base 0 0 0 @border-color-muted;
 			}
 		}
 	}
