@@ -164,7 +164,7 @@ class EditCheckConfigMergerTest extends MediaWikiUnitTestCase {
 		if ( !is_array( $value ) ) {
 			return $value;
 		}
-		$value = array_map( [ self::class, 'normalize' ], $value );
+		$value = array_map( self::normalize( ... ), $value );
 		if ( array_is_list( $value ) ) {
 			usort( $value, static fn ( $a, $b ) => strcmp( json_encode( $a ), json_encode( $b ) ) );
 		} else {

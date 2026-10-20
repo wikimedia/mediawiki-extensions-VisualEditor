@@ -49,7 +49,7 @@ class EditSuggestionCountsConfig {
 		$this->enabled = (bool)( $config['enabled'] ?? false );
 		$this->linkedArtifactUrlTemplate = (string)( $config['linked_artifact_url_template'] ?? '' );
 		$this->linkedArtifactPrecomputeTimeout = (int)( $config['linked_artifact_precompute_timeout'] ?? 0 );
-		$this->namespacesEnabled = array_map( 'intval', $config['namespaces_enabled'] ?? [] );
+		$this->namespacesEnabled = array_map( intval( ... ), $config['namespaces_enabled'] ?? [] );
 		$this->pageSampleProportion = (float)( $config['page_sample_proportion'] ?? 1.0 );
 
 		if ( $this->pageSampleProportion < 0.0 || $this->pageSampleProportion > 1.0 ) {
