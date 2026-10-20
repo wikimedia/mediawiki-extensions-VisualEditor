@@ -32,7 +32,7 @@ return [
 	},
 	VisualEditorAvailabilityLookup::SERVICE_NAME => static function (
 		MediaWikiServices $services
-	) {
+	): VisualEditorAvailabilityLookup {
 		return new VisualEditorAvailabilityLookup(
 			new ServiceOptions(
 				VisualEditorAvailabilityLookup::CONSTRUCTOR_OPTIONS,
