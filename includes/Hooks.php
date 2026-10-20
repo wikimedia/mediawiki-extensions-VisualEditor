@@ -24,6 +24,7 @@ use MediaWiki\Diff\Hook\DifferenceEngineViewHeaderHook;
 use MediaWiki\Diff\Hook\TextSlotDiffRendererTablePrefixHook;
 use MediaWiki\Diff\TextSlotDiffRenderer;
 use MediaWiki\EditPage\EditPage;
+use MediaWiki\Extension\Disambiguator\Lookup as DisambiguatorLookup;
 use MediaWiki\Extension\VisualEditor\EditCheck\ApiEditCheckReferenceUrl;
 use MediaWiki\Extension\VisualEditor\Services\VisualEditorAvailabilityLookup;
 use MediaWiki\Hook\BeforeInitializeHook;
@@ -41,7 +42,6 @@ use MediaWiki\Output\Hook\OutputPageBodyAttributesHook;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\Hook\ArticleParserOptionsHook;
-use MediaWiki\Page\PageProps;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Parser\Hook\ParserOptionsDefaultsHook;
 use MediaWiki\Parser\MagicWordFactory;
@@ -147,7 +147,6 @@ class Hooks implements
 		private readonly LanguageConverterFactory $languageConverterFactory,
 		private readonly MagicWordFactory $magicWordFactory,
 		private readonly NamespaceInfo $namespaceInfo,
-		private readonly PageProps $pageProps,
 		private readonly PermissionManager $permissionManager,
 		private readonly ReadOnlyMode $readOnlyMode,
 		private readonly ShadowPageLoader $shadowPageLoader,
@@ -224,7 +223,8 @@ class Hooks implements
 
 		// TODO: Move to EditCheck
 		$isDisambiguation = $output->getTitle()->exists() &&
-			$this->pageProps->getProperties( $output->getTitle(), 'disambiguation' ) !== [];
+			class_exists( DisambiguatorLookup::class ) &&
+			DisambiguatorLookup::isMarkedAsDisambiguationPage( $output );
 		$output->addJsConfigVars( 'wgVisualEditorPageIsDisambiguation', $isDisambiguation );
 
 		// Don't index VE edit pages (T319124)

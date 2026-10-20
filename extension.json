@@ -293,7 +293,6 @@
 				"LanguageConverterFactory",
 				"MagicWordFactory",
 				"NamespaceInfo",
-				"PageProps",
 				"PermissionManager",
 				"ReadOnlyMode",
 				"ShadowPageLoader",
