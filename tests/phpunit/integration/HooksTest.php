@@ -25,7 +25,6 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 			$services->getLanguageConverterFactory(),
 			$services->getMagicWordFactory(),
 			$services->getNamespaceInfo(),
-			$services->getPageProps(),
 			$services->getPermissionManager(),
 			$services->getReadOnlyMode(),
 			$services->getShadowPageLoader(),
