@@ -3,5 +3,23 @@
 		"authors": [
 			"INNERLMNT"
 		]
-	}
+	},
+	"editcheck-dialog-action-no": "Jo",
+	"editcheck-dialog-action-yes": "Po",
+	"editcheck-dialog-addref-description": "Ndihmoji lexuesit të kuptojë se nga vjen ky informacion duke shtuar një citim.",
+	"editcheck-dialog-addref-reject-question": "Pse nuk po e shton një citim?",
+	"editcheck-dialog-addref-reject-irrelevant": "Nuk mendoj se citimet kanë të bëjnë me ndryshimin që po bëj",
+	"editcheck-dialog-addref-reject-common-knowledge": "Informata që po shtoj dihet gjerësisht",
+	"editcheck-dialog-addref-reject-uncertain": "Nuk e di çfarë citimi të shtoj",
+	"editcheck-dialog-addref-reject-other": "Tjetër",
+	"editcheck-dialog-addref-title": "Shtoje një citim",
+	"editcheck-dialog-title": "Para publikimit",
+	"tag-editcheck-reference-decline-common-knowledge": "Kontrolli i redaktimit (referime) u refuzua (dije e përgjithshme)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "Kontrolli i redaktimit për referime u refuzua si dije e përgjithshme",
+	"tag-editcheck-reference-decline-irrelevant": "Kontrolli i redaktimit (referime) u refuzua (pa lidhje)",
+	"tag-editcheck-reference-decline-irrelevant-description": "Kontrolli i redaktimit për referime u refuzua si i palidhur",
+	"tag-editcheck-reference-decline-other": "Kontrolli i redaktimit (referime) u refuzua (tjetër)",
+	"tag-editcheck-reference-decline-other-description": "Kontrolli i redaktimit për referime u refuzua për një arsye të pacaktuar",
+	"tag-editcheck-reference-decline-uncertain": "Kontrolli i redaktimit (referime) u refuzua (i pasigurt)",
+	"tag-editcheck-reference-decline-uncertain-description": "Kontrolli i redaktimit për referime u refuzua si i pasigurt"
 }
