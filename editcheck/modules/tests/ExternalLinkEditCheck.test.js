@@ -11,7 +11,39 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		}
 	} );
 
+	const tableCell = ( ...content ) => [
+		{ type: 'table' },
+		{ type: 'tableSection', attributes: { style: 'body' } },
+		{ type: 'tableRow' },
+		{ type: 'tableCell', attributes: { style: 'data' } },
+		{ type: 'paragraph', internal: { generated: 'wrapper' } },
+		...content,
+		{ type: '/paragraph' },
+		{ type: '/tableCell' },
+		{ type: '/tableRow' },
+		{ type: '/tableSection' },
+		{ type: '/table' }
+	];
+
 	const cases = [
+		{
+			name: 'External link filling a table cell ignored',
+			data: tableCell( ...ve.dm.example.annotateText( 'Foo', link( 'https://example.org/Foo' ) ) ),
+			isInterwiki: false,
+			expectedActions: 0
+		},
+		{
+			name: 'External link filling a table cell, with surrounding whitespace, ignored',
+			data: tableCell( ' ', ...ve.dm.example.annotateText( 'Foo', link( 'https://example.org/Foo' ) ), ' ' ),
+			isInterwiki: false,
+			expectedActions: 0
+		},
+		{
+			name: 'External link with other text in a table cell produces action',
+			data: tableCell( ...'Bar ', ...ve.dm.example.annotateText( 'Foo', link( 'https://example.org/Foo' ) ) ),
+			isInterwiki: false,
+			expectedActions: 1
+		},
 		{
 			name: 'Non-interwiki external link produces action',
 			data: [

@@ -49,7 +49,9 @@ mw.editcheck.ExternalLinkEditCheck.static.linkClasses = [ ve.dm.MWExternalLinkAn
 
 mw.editcheck.ExternalLinkEditCheck.prototype.checkNode = function ( node, surfaceModel, modifiedContentRanges ) {
 	return this.getModifiedLinkRanges( surfaceModel, modifiedContentRanges, node )
-		.filter( ( annRange ) => annRange.annotation.name === ve.dm.MWExternalLinkAnnotation.static.name )
+		.filter( ( annRange ) => annRange.annotation.name === ve.dm.MWExternalLinkAnnotation.static.name &&
+			!this.fillsTableCell( annRange.range, node, surfaceModel.getDocument() )
+		)
 		.map( ( annRange ) => {
 			const href = annRange.annotation.getAttribute( 'href' );
 			return this.controller.getTarget().isInterwikiUrl( href ).then( ( isInterwiki ) => {
@@ -60,6 +62,23 @@ mw.editcheck.ExternalLinkEditCheck.prototype.checkNode = function ( node, surfac
 				return this.buildActionFromLinkRange( annRange.range, surfaceModel );
 			} );
 		} );
+};
+
+/**
+ * Check if a link range fills an entier table cell
+ *
+ * @param {ve.Range} range Link range
+ * @param {ve.dm.ContentBranchNode} node Content branch node containing the link
+ * @param {ve.dm.Document} documentModel
+ * @return {boolean}
+ */
+mw.editcheck.ExternalLinkEditCheck.prototype.fillsTableCell = function ( range, node, documentModel ) {
+	const cell = node.getParent();
+	return cell instanceof ve.dm.TableCellNode &&
+		cell.getChildren().length === 1 &&
+		documentModel.data.trimOuterSpaceFromRange( range ).equals(
+			documentModel.data.trimOuterSpaceFromRange( node.getRange() )
+		);
 };
 
 mw.editcheck.ExternalLinkEditCheck.prototype.act = function ( choice, action, surface ) {
