@@ -13,18 +13,13 @@ use Wikimedia\ParamValidator\ParamValidator;
 
 class ApiEditCheckReferenceUrl extends ApiBase {
 
-	private ?IBlockedDomainStorage $blockedDomainStorage;
-	private ?BlockedDomainValidator $blockedDomainValidator;
-
 	public function __construct(
 		ApiMain $main,
 		string $name,
-		?IBlockedDomainStorage $blockedDomainStorage,
-		?BlockedDomainValidator $blockedDomainValidator
+		private readonly ?IBlockedDomainStorage $blockedDomainStorage,
+		private readonly ?BlockedDomainValidator $blockedDomainValidator,
 	) {
 		parent::__construct( $main, $name );
-		$this->blockedDomainStorage = $blockedDomainStorage;
-		$this->blockedDomainValidator = $blockedDomainValidator;
 	}
 
 	/**

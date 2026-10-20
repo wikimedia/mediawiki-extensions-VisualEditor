@@ -7,11 +7,10 @@ use MediaWiki\SpecialPage\SpecialPage;
 
 class SpecialEditCheckHeadless extends SpecialPage {
 
-	private SkinFactory $skinFactory;
-
-	public function __construct( SkinFactory $skinFactory ) {
+	public function __construct(
+		private readonly SkinFactory $skinFactory,
+	) {
 		parent::__construct( 'EditCheckHeadless' );
-		$this->skinFactory = $skinFactory;
 	}
 
 	/**

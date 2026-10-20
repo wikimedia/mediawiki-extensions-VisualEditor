@@ -20,17 +20,12 @@ class EditSuggestionCountsPrecomputeJob extends Job {
 
 	public const JOB_NAME = 'editSuggestionCountsPrecompute';
 
-	private EditSuggestionCountsConfig $config;
-	private HttpRequestFactory $httpRequestFactory;
-
 	public function __construct(
 		array $params,
-		EditSuggestionCountsConfig $config,
-		HttpRequestFactory $httpRequestFactory
+		private readonly EditSuggestionCountsConfig $config,
+		private readonly HttpRequestFactory $httpRequestFactory,
 	) {
 		parent::__construct( self::JOB_NAME, $params );
-		$this->config = $config;
-		$this->httpRequestFactory = $httpRequestFactory;
 	}
 
 	/** @inheritDoc */

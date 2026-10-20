@@ -40,15 +40,10 @@ class EditSuggestionCountsPrecomputeIngress
 		],
 	];
 
-	private JobQueueGroup $jobQueueGroup;
-	private EditSuggestionCountsConfig $config;
-
 	public function __construct(
-		JobQueueGroup $jobQueueGroup,
-		EditSuggestionCountsConfig $config
+		private readonly JobQueueGroup $jobQueueGroup,
+		private readonly EditSuggestionCountsConfig $config,
 	) {
-		$this->jobQueueGroup = $jobQueueGroup;
-		$this->config = $config;
 	}
 
 	public function handlePageLatestRevisionChangedEvent(
