@@ -252,6 +252,8 @@ Controller.prototype.setup = function () {
 		// that may be affected, e.g. the VE toolbar
 		window.dispatchEvent( new Event( 'resize' ) );
 
+		this.hideHelpPanelCtaIfNeeded();
+
 		this.surface.getView().connect( this, {
 			position: 'onPositionDebounced'
 		} );
@@ -465,6 +467,20 @@ Controller.prototype.whenSidebarShown = function () {
 };
 
 /**
+ * Hide GrowthExperiments' help panel CTA button, if suggestions are visible
+ *
+ * The button otherwise floats on top of/alongside our own suggestion-mode
+ * UI. There is no corresponding "show" hook, so once hidden this stays
+ * hidden for the rest of the session, even if suggestion mode is toggled
+ * off again (T431320).
+ */
+Controller.prototype.hideHelpPanelCtaIfNeeded = function () {
+	if ( this.suggestionsVisible ) {
+		mw.hook( 'helpPanel.hideCta' ).fire();
+	}
+};
+
+/**
  * Toggle whether suggestions are shown to the user.
  */
 Controller.prototype.toggleSuggestionsVisible = function () {
@@ -475,6 +491,7 @@ Controller.prototype.toggleSuggestionsVisible = function () {
 	if ( !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' ) !== this.suggestionsVisible ) {
 		ve.userConfig( 'visualeditor-editcheck-suggestions-toggle', this.suggestionsVisible );
 	}
+	this.hideHelpPanelCtaIfNeeded();
 	mw.notify(
 		ve.msg( this.suggestionsVisible ?
 			( this.lastAvailableSuggestionCount > 0 ? 'editcheck-suggestions-turned-on' : 'editcheck-suggestions-none' ) :
