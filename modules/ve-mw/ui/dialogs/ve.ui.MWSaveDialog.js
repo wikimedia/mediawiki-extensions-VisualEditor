@@ -926,14 +926,10 @@ ve.ui.MWSaveDialog.prototype.getActionProcess = function ( action ) {
 
 	if ( action === 'save' ) {
 		return new OO.ui.Process( () => {
-			if ( this.panels.getCurrentItem() !== this.savePanel ) {
-				this.swapPanel( 'save' );
-			} else {
-				const saveDeferred = ve.createDeferred();
-				this.clearMessage( 'keyboard-shortcut-submit' );
-				this.emit( 'save', saveDeferred );
-				return saveDeferred.promise();
-			}
+			const saveDeferred = ve.createDeferred();
+			this.clearMessage( 'keyboard-shortcut-submit' );
+			this.emit( 'save', saveDeferred );
+			return saveDeferred.promise();
 		} );
 	}
 	if ( action === 'review' || action === 'preview' || action === 'resolve' ) {
