@@ -5,7 +5,7 @@
  * @extends mw.editcheck.LinkEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */

@@ -704,6 +704,7 @@
 				"editcheck/modules/controller.js",
 				"editcheck/modules/EditCheckPreSaveToolbarTools.js",
 				"editcheck/modules/EditCheckSuggestionsTool.js",
+				"editcheck/modules/TagStore.js",
 				"editcheck/modules/EditCheckFactory.js",
 				"editcheck/modules/EditCheckAction.js",
 				"editcheck/modules/EditCheckActionWidget.js",

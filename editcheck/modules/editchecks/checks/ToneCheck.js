@@ -5,7 +5,7 @@
  * @extends mw.editcheck.BaseEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {number} [config.predictionThreshold=0.8] Threshold for the prediction value, between 0.5 and 1
  * @param {boolean} [includeSuggestions=false]
@@ -174,7 +174,7 @@ mw.editcheck.ToneCheck.prototype.newAction = function ( fragment, outcome ) {
 	return action;
 };
 
-mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface, controller ) {
 	// Acting again (recheck, dismiss, or re-starting edit) cancels an
 	// intent to complete from a previous 'edit' choice that never
 	// resolved via a natural discard.
@@ -208,13 +208,13 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 		// edit that this action is discarded, or will `act` again and this
 		// event-handler will be removed above:
 		// If in pre-save mode, close the check dialog
-		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
+		const closePromise = controller.inBeforeSave ? controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
 			const fragment = action.fragments[ action.fragments.length - 1 ].collapseToEnd();
 			// If we transitioned from the pre-save mode to mid-edit we need
 			// to switch to the new action-object. If we didn't, this will just
 			// find `action` again.
-			const newAction = this.controller.getActions().find( ( cAct ) => cAct.equals( action ) );
+			const newAction = controller.getActions().find( ( cAct ) => cAct.equals( action ) );
 			if ( newAction ) {
 				newAction.startRevising();
 				// Count revising as complete once this action is discarded,
@@ -222,8 +222,8 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 				newAction.intendComplete();
 				// If we transitioned, this will result in us waiting until
 				// the sidebar is open:
-				this.controller.refresh( true ).then( () => {
-					this.controller.ensureActionIsShown( newAction );
+				controller.refresh( true ).then( () => {
+					controller.ensureActionIsShown( newAction );
 					// select won't have refocused the article if it didn't change:
 					surface.getView().focus();
 				} );
@@ -269,14 +269,14 @@ mw.editcheck.ToneCheck.prototype.act = function ( choice, action, surface ) {
 			progress.$element.remove();
 			if ( !result ) {
 				action.complete();
-				this.onSuccess( action );
+				this.onSuccess( action, controller );
 			}
 		} );
 	}
 };
 
-mw.editcheck.ToneCheck.prototype.onSuccess = function ( action ) {
-	this.controller.removeAction( 'onBranchNodeChange', action, false );
+mw.editcheck.ToneCheck.prototype.onSuccess = function ( action, controller ) {
+	controller.removeAction( 'onBranchNodeChange', action, false );
 };
 
 /* Registration */

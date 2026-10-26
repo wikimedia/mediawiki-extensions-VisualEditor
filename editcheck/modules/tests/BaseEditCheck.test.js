@@ -821,26 +821,20 @@ QUnit.test( 'tagFragments', ( assert ) => {
 	const surface = new ve.dm.Surface( doc );
 	const fragment = surface.getLinearFragment( new ve.Range( 1, 3 ) );
 
-	const ephemeralCalls = [];
-	const controller = {
-		taggedFragments: {},
-		registerEphemeralTag: function ( name, tag, frag ) {
-			ephemeralCalls.push( { name, tag, frag } );
-		}
-	};
-	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+	const tags = new mw.editcheck.TagStore();
+	const check = new mw.editcheck.BaseEditCheck( { tags }, {}, false );
 	const name = check.constructor.static.name;
 
 	check.tagFragments( 'plain', [ fragment ] );
-	assert.strictEqual( controller.taggedFragments[ name ].plain.length, 1, 'Fragment stored under the check name' );
-	assert.strictEqual( ephemeralCalls.length, 0, 'Non-ephemeral tag is not registered for auto-clearing' );
+	assert.strictEqual( tags.fragments[ name ].plain.length, 1, 'Fragment stored under the check name' );
+	assert.strictEqual( tags.ephemeral.length, 0, 'Non-ephemeral tag is not registered for auto-clearing' );
 
 	check.tagFragments( 'temporary', [ fragment ], true );
-	assert.strictEqual( controller.taggedFragments[ name ].temporary.length, 1, 'Ephemeral fragment stored' );
-	assert.strictEqual( ephemeralCalls.length, 1, 'Ephemeral tag is registered for auto-clearing' );
-	assert.strictEqual( ephemeralCalls[ 0 ].tag, 'temporary', 'Registered under the right tag' );
+	assert.strictEqual( tags.fragments[ name ].temporary.length, 1, 'Ephemeral fragment stored' );
+	assert.strictEqual( tags.ephemeral.length, 1, 'Ephemeral tag is registered for auto-clearing' );
+	assert.strictEqual( tags.ephemeral[ 0 ].tag, 'temporary', 'Registered under the right tag' );
 	assert.strictEqual(
-		ephemeralCalls[ 0 ].frag, controller.taggedFragments[ name ].temporary[ 0 ],
+		tags.ephemeral[ 0 ].fragment, tags.fragments[ name ].temporary[ 0 ],
 		'Registered the same clone that was stored'
 	);
 } );
@@ -851,13 +845,8 @@ QUnit.test( 'tagFragments includeInsertions and untagFragments', ( assert ) => {
 		{ type: 'internalList' }, { type: '/internalList' }
 	] );
 	const surface = new ve.dm.Surface( doc );
-	const controller = {
-		taggedFragments: {},
-		ephemeralTags: [],
-		registerEphemeralTag: ve.test.utils.EditCheck.dummyController.registerEphemeralTag,
-		unregisterEphemeralTag: ve.test.utils.EditCheck.dummyController.unregisterEphemeralTag
-	};
-	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+	const tags = new mw.editcheck.TagStore();
+	const check = new mw.editcheck.BaseEditCheck( { tags }, {}, false );
 
 	check.tagFragments( 'excluding', [ surface.getLinearFragment( new ve.Range( 1, 3 ) ) ] );
 	check.tagFragments( 'including', [ surface.getLinearFragment( new ve.Range( 1, 3 ) ) ], true, null, true );
@@ -868,7 +857,7 @@ QUnit.test( 'tagFragments includeInsertions and untagFragments', ( assert ) => {
 
 	check.untagFragments( 'including', [ surface.getLinearFragment( new ve.Range( 2, 3 ) ) ] );
 	assert.strictEqual( check.isTaggedRange( 'including', new ve.Range( 1, 4 ) ), false, 'Tag covering the fragment is removed' );
-	assert.strictEqual( controller.ephemeralTags.length, 0, 'Ephemeral tag is unregistered' );
+	assert.strictEqual( tags.ephemeral.length, 0, 'Ephemeral tag is unregistered' );
 	assert.strictEqual( check.isTaggedRange( 'excluding', new ve.Range( 1, 3 ) ), true, 'Other tags are kept' );
 } );
 
@@ -879,8 +868,7 @@ QUnit.test( 'tag stores under the action tag name', ( assert ) => {
 	] );
 	const surface = new ve.dm.Surface( doc );
 	const range = new ve.Range( 1, 3 );
-	const controller = { taggedFragments: {}, taggedIds: {} };
-	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+	const check = new mw.editcheck.BaseEditCheck( null, {}, false );
 
 	// An action whose getTagName differs from the check's own name, as
 	// TextMatchEditCheckAction does. The tag must land under that name, not the check's.

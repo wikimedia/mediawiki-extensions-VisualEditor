@@ -315,17 +315,10 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 
 		const dummyTarget = new ve.init.mw.ArticleTarget();
 
-		// Minimal controller stub.
-		// Checks use controller for:
-		//   taggedIds / taggedFragments — dismissed/tagged state (empty = nothing dismissed)
-		//   suggestionsVisible — true so checks run against the whole document
-		//   getTarget() — used by ExternalLinkEditCheck to test interwiki URLs
-		const controller = {
-			suggestionsVisible: true,
-			taggedIds: {},
-			taggedFragments: {},
-			inBeforeSave: false,
-			getTarget: () => dummyTarget
+		// No tags, so nothing is dismissed. ExternalLinkEditCheck uses the target to test interwiki URLs.
+		const state = {
+			target: dummyTarget,
+			suggestionsVisible: true
 		};
 
 		// Run suggestion-mode checks for onDocumentChange and onBranchNodeChange.
@@ -334,7 +327,7 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 		// evaluates the full article content.
 		return Promise.all( [ 'onDocumentChange', 'onBranchNodeChange' ].map(
 			( listener ) => mw.editcheck.editCheckFactory.createAllActionsByListener(
-				controller,
+				state,
 				listener,
 				surfaceModel,
 				true // includeSuggestions

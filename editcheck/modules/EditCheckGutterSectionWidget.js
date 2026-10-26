@@ -143,7 +143,7 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
 	const surface = controller.surface;
 	if ( action.gutterQuickAction ) {
 		// This is an abridged set of what ve.ui.EditCheckDialog.prototype.onAct does
-		const promise = action.check.act( action.gutterQuickAction, action, surface );
+		const promise = action.check.act( action.gutterQuickAction, action, surface, controller );
 		this.iconWidget.setActing( true );
 		this.acting = true;
 		( promise || ve.createDeferred().resolve().promise() ).always( () => {

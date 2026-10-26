@@ -5,7 +5,7 @@
  * @extends mw.editcheck.BaseEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {string} [config.strict='url-only'] How strict to be in determining whether a reference is convertible:
  * - 'url-only': the reference must entirely consist of only a single URL

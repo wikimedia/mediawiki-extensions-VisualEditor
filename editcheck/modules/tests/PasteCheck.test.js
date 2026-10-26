@@ -172,14 +172,9 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			{ type: '/internalList' }
 		] );
 		const surfaceModel = new ve.dm.Surface( doc );
-		const dummyController = Object.assign( {}, ve.test.utils.EditCheck.dummyController, {
-			taggedIds: {
-				[ checkName ]: {
-					dismissed: new Set( caseItem.dismissedIds || [] )
-				}
-			}
-		} );
-		const check = new CheckClass( dummyController, caseItem.config, true );
+		const tags = new mw.editcheck.TagStore();
+		( caseItem.dismissedIds || [] ).forEach( ( id ) => tags.tagId( checkName, 'dismissed', id ) );
+		const check = new CheckClass( { tags }, caseItem.config, true );
 		const actions = check.onDocumentChange( surfaceModel ).filter( ( action ) => action.getName() === checkName );
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
@@ -195,7 +190,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			caseItem.expectedData( data );
 			const dummySurface = ve.test.utils.createModelOnlySurface( surfaceModel );
 			actions.forEach( ( action ) => {
-				check.act( 'remove', action, dummySurface );
+				check.act( 'remove', action, dummySurface, { inBeforeSave: false } );
 			} );
 			assert.equalLinearData(
 				surfaceModel.getDocument().getFullData(),

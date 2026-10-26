@@ -329,7 +329,7 @@ ve.ui.EditCheckDialog.prototype.clearActionWidgets = function () {
 };
 
 ve.ui.EditCheckDialog.prototype.renderAction = function ( action ) {
-	const widget = action.render( action !== this.currentAction, this.singleAction, this.surface );
+	const widget = action.render( action !== this.currentAction, this.singleAction, this.surface, this.controller );
 	widget.on( 'togglecollapse', this.onToggleCollapse, [ action ], this );
 	action.off( 'act', this.onAct, this ).on( 'act', this.onAct, [ action, widget ], this );
 

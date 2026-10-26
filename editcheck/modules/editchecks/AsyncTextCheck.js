@@ -8,7 +8,7 @@
  *
  * @class
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  */
 mw.editcheck.AsyncTextCheck = function MWAsyncTextCheck() {
@@ -147,15 +147,15 @@ mw.editcheck.AsyncTextCheck.prototype.afterMemoized = function ( outcome ) {
 /**
  * @inheritdoc
  */
-mw.editcheck.AsyncTextCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.AsyncTextCheck.prototype.act = function ( choice, action, surface, controller ) {
 	this.tag( 'interacted', action );
 	if ( choice === 'dismiss' ) {
 		this.dismiss( action );
 		// HACK: Recalculate check list
-		this.controller.updateForListener( 'onBranchNodeChange' );
+		controller.updateForListener( 'onBranchNodeChange' );
 		return ve.createDeferred().resolve( { action: choice } ).promise();
 	} else if ( choice === 'edit' && surface ) {
-		return this.controller.closeDialog().then( () => {
+		return controller.closeDialog().then( () => {
 			surface.getView().activate();
 			action.fragments[ action.fragments.length - 1 ].collapseToEnd().select();
 		} );

@@ -293,9 +293,10 @@ mw.editcheck.EditCheckAction.prototype.refreshWidget = function () {
  * @param {boolean} collapsed Start collapsed
  * @param {boolean} singleAction This is the only action shown
  * @param {ve.ui.Surface} surface Surface
+ * @param {mw.editcheck.Controller} controller Controller that shows the action
  * @return {mw.editcheck.EditCheckActionWidget}
  */
-mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleAction, surface ) {
+mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleAction, surface, controller ) {
 	this.widget = new mw.editcheck.EditCheckActionWidget( {
 		type: this.getType(),
 		icon: this.icon,
@@ -316,7 +317,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		classes: this.messageType ? [ 've-ui-editCheckActionWidget-' + this.messageType ] : undefined
 	} );
 	this.widget.connect( this, {
-		actionClick: [ 'onActionClick', surface ]
+		actionClick: [ 'onActionClick', surface, controller ]
 	} );
 	// On mobile, the gutter usually emits 'shown' before this. The pre-save
 	// dialog has no gutter, so emit here too. The controller records 'shown'
@@ -344,11 +345,12 @@ mw.editcheck.EditCheckAction.prototype.setMode = function ( mode ) {
  * Handle click events from an action button
  *
  * @param {ve.ui.Surface} surface Surface
+ * @param {mw.editcheck.Controller} controller Controller that shows the action
  * @param {OO.ui.ActionWidget} actionWidget Clicked action widget
  * @fires mw.editcheck.EditCheckAction#act
  */
-mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, actionWidget ) {
-	const promise = this.check.act( actionWidget.action, this, surface );
+mw.editcheck.EditCheckAction.prototype.onActionClick = function ( surface, controller, actionWidget ) {
+	const promise = this.check.act( actionWidget.action, this, surface, controller );
 	this.emit( 'act', promise || ve.createDeferred().resolve().promise(), actionWidget.action );
 };
 

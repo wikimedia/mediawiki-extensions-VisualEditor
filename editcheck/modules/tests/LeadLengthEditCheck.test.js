@@ -46,8 +46,7 @@ QUnit.module( 'mw.editcheck.LeadLengthEditCheck', ve.test.utils.newEditCheckEnvi
 		cases.forEach( ( caseItem ) => {
 			const doc = ve.dm.example.createExampleDocumentFromData( [ ...caseItem.data, ...internalList ] );
 			const surface = new ve.dm.Surface( doc );
-			const controller = { taggedFragments: {}, taggedIds: {} };
-			const check = new mw.editcheck.LeadLengthEditCheck( controller, { maximumWords: 3 }, true );
+			const check = new mw.editcheck.LeadLengthEditCheck( null, { maximumWords: 3 }, true );
 			const actions = check.onBranchNodeChange( surface );
 
 			assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
@@ -63,9 +62,7 @@ QUnit.module( 'mw.editcheck.LeadLengthEditCheck', ve.test.utils.newEditCheckEnvi
 			...paragraph( 'one two three four' ), ...heading( 'Heading' ), ...paragraph( 'x' ), ...internalList
 		] );
 		const surface = new ve.dm.Surface( doc );
-		const controller = { taggedFragments: {}, taggedIds: {} };
-
-		const check = new mw.editcheck.LeadLengthEditCheck( controller, { maximumWords: 3 }, false );
+		const check = new mw.editcheck.LeadLengthEditCheck( null, { maximumWords: 3 }, false );
 		assert.strictEqual( check.onBranchNodeChange( surface ).length, 0, 'Check mode ignores an unmodified lead' );
 
 		surface.getLinearFragment( new ve.Range( 30 ) ).insertContent( 'y' );

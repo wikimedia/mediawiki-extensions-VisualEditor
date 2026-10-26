@@ -31,7 +31,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		] );
 		const surface = new ve.dm.Surface( doc );
 
-		const check = new mw.editcheck.HeadingLevelEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
+		const check = new mw.editcheck.HeadingLevelEditCheck( ve.test.utils.EditCheck.dummyState, {}, true );
 		const actions = check.onDocumentChange( surface );
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );

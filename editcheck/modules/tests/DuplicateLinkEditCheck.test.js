@@ -140,7 +140,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		] );
 		const surface = new ve.dm.Surface( doc );
 
-		const check = new mw.editcheck.DuplicateLinkEditCheck( ve.test.utils.EditCheck.dummyController, caseItem.config, true );
+		const check = new mw.editcheck.DuplicateLinkEditCheck( ve.test.utils.EditCheck.dummyState, caseItem.config, true );
 		const actions = check.onDocumentChange( surface );
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
@@ -243,7 +243,7 @@ QUnit.test( 'act (merge)', ( assert ) => {
 		const surface = ve.test.utils.createModelOnlySurface( surfaceModel );
 
 		const check = new mw.editcheck.DuplicateLinkEditCheck(
-			ve.test.utils.EditCheck.dummyController, { scope: 'paragraph' }, true
+			ve.test.utils.EditCheck.dummyState, { scope: 'paragraph' }, true
 		);
 		const actions = check.onDocumentChange( surfaceModel );
 

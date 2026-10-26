@@ -5,7 +5,7 @@
  * @extends mw.editcheck.BaseEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */
@@ -165,7 +165,7 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 // TODO: enable this once issues editing content from pre-save are resolved (T407543)
 // mw.editcheck.PasteCheck.prototype.onBeforeSave = mw.editcheck.PasteCheck.prototype.onDocumentChange;
 
-mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface, controller ) {
 	switch ( choice ) {
 		case 'keep':
 			return action.widget.showFeedback( this.getKeepFeedback() ).then( ( reason ) => {
@@ -185,7 +185,7 @@ mw.editcheck.PasteCheck.prototype.act = function ( choice, action, surface ) {
 				}
 			} );
 			// If in pre-save mode, close the check dialog
-			const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
+			const closePromise = controller.inBeforeSave ? controller.closeDialog() : ve.createDeferred().resolve().promise();
 			return closePromise.then( () => {
 				// Auto-scrolling causes selection and focus changes...
 				setTimeout( () => {

@@ -5,7 +5,7 @@
  * @extends mw.editcheck.BaseEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {boolean} [config.beforePunctuation=false] Insert the reference before any trailing punctuation
  * @param {boolean} [includeSuggestions=false]
@@ -60,7 +60,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave = function ( surfaceMo
 
 mw.editcheck.AddReferenceEditCheck.prototype.onBranchNodeChange = function () {
 	// Show mid-edit in suggestion mode only (for now)
-	if ( this.includeSuggestions || this.controller.suggestionsVisible ) {
+	if ( this.includeSuggestions || this.suggestionsVisible ) {
 		return mw.editcheck.AddReferenceEditCheck.prototype.onBeforeSave.apply( this, arguments );
 	}
 	return [];
@@ -80,7 +80,7 @@ mw.editcheck.AddReferenceEditCheck.prototype.findAddedContent = function ( docum
 	// TODO: More generic de-conflicting logic could be added at the controller level.
 	const citationNeededRanges = documentModel.getOrInsertCachedData( () => {
 		if ( mw.editcheck.CitationNeededEditCheck ) {
-			const citationNeededCheck = mw.editcheck.editCheckFactory.create( 'citationNeeded', this.controller, {}, this.includeSuggestions );
+			const citationNeededCheck = mw.editcheck.editCheckFactory.create( 'citationNeeded', this.getState(), {}, this.includeSuggestions );
 			if ( citationNeededCheck.canBeShown( documentModel, this.includeSuggestions ) ) {
 				return citationNeededCheck.getCitationNeededRanges( documentModel );
 			}

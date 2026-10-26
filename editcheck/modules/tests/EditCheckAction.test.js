@@ -3,8 +3,8 @@ QUnit.module( 'mw.editcheck.EditCheckAction', ve.test.utils.newEditCheckEnvironm
 QUnit.test( 'equals', ( assert ) => {
 	const doc = new ve.dm.Document( [ { type: 'paragraph' }, ...'abcdef', { type: '/paragraph' } ] ),
 		surface = new ve.dm.Surface( doc ),
-		check1 = new mw.editcheck.BaseEditCheck( ve.test.utils.EditCheck.dummyController, {}, false ),
-		check2 = new mw.editcheck.BaseEditCheck( ve.test.utils.EditCheck.dummyController, {}, false );
+		check1 = new mw.editcheck.BaseEditCheck( ve.test.utils.EditCheck.dummyState, {}, false ),
+		check2 = new mw.editcheck.BaseEditCheck( ve.test.utils.EditCheck.dummyState, {}, false );
 
 	const cases = [
 		{
@@ -386,14 +386,8 @@ QUnit.test( 'stale and revising', ( assert ) => {
 		{ type: 'internalList' }, { type: '/internalList' }
 	] );
 	const surface = new ve.dm.Surface( doc );
-	const controller = {
-		taggedFragments: {},
-		taggedIds: {},
-		ephemeralTags: [],
-		registerEphemeralTag: ve.test.utils.EditCheck.dummyController.registerEphemeralTag,
-		unregisterEphemeralTag: ve.test.utils.EditCheck.dummyController.unregisterEphemeralTag
-	};
-	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+	const tags = new mw.editcheck.TagStore();
+	const check = new mw.editcheck.BaseEditCheck( { tags }, {}, false );
 	check.canBeStale = () => true;
 	const name = check.getName();
 	const newAction = ( config ) => new mw.editcheck.EditCheckAction( ve.extendObject( {
@@ -409,7 +403,7 @@ QUnit.test( 'stale and revising', ( assert ) => {
 
 	action.startRevising();
 	assert.true( action.isStale(), 'Revising action is stale' );
-	assert.strictEqual( controller.ephemeralTags.length, 1, 'Revising tag is ephemeral' );
+	assert.strictEqual( tags.ephemeral.length, 1, 'Revising tag is ephemeral' );
 
 	surface.getLinearFragment( new ve.Range( 4 ) ).insertContent( 'x' );
 	assert.true( action.isRevising(), 'Text typed at the end stays in the revising range' );
@@ -418,7 +412,7 @@ QUnit.test( 'stale and revising', ( assert ) => {
 
 	action.stopRevising();
 	assert.false( action.isStale(), 'Action is not stale after stopRevising' );
-	assert.strictEqual( controller.ephemeralTags.length, 0, 'Revising tag is unregistered' );
+	assert.strictEqual( tags.ephemeral.length, 0, 'Revising tag is unregistered' );
 	assert.deepEqual( events, [ true, false ], 'Stale events' );
 
 	surface.getLinearFragment( new ve.Range( 2 ) ).insertContent( 'y' );
@@ -427,8 +421,8 @@ QUnit.test( 'stale and revising', ( assert ) => {
 
 	action.startRevising();
 	surface.getLinearFragment( new ve.Range( 2 ) ).insertContent( 'z' );
-	// Same as Controller#clearEphemeralTagsForSelection
-	controller.taggedFragments[ name ].revising = [];
+	// Same as TagStore#clearEphemeralOutside
+	tags.fragments[ name ].revising = [];
 	assert.true( action.updateStale(), 'Clearing the revising tag changes the stale state' );
 	assert.false( action.isStale(), 'Text typed while revising does not keep the action stale' );
 
@@ -443,14 +437,8 @@ QUnit.test( 'Revising does not apply to new actions in the tagged range', ( asse
 		{ type: 'internalList' }, { type: '/internalList' }
 	] );
 	const surface = new ve.dm.Surface( doc );
-	const controller = {
-		taggedFragments: {},
-		taggedIds: {},
-		ephemeralTags: [],
-		registerEphemeralTag: ve.test.utils.EditCheck.dummyController.registerEphemeralTag,
-		unregisterEphemeralTag: ve.test.utils.EditCheck.dummyController.unregisterEphemeralTag
-	};
-	const check = new mw.editcheck.BaseEditCheck( controller, {}, false );
+	const tags = new mw.editcheck.TagStore();
+	const check = new mw.editcheck.BaseEditCheck( { tags }, {}, false );
 	check.canBeStale = () => true;
 	const newAction = ( range ) => new mw.editcheck.EditCheckAction( {
 		check,

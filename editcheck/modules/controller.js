@@ -168,9 +168,12 @@ Controller.prototype.clearState = function () {
 	this.focusedAction = null;
 	this.inSetup = null;
 	this.ignoreNextSelectionChange = null;
-	this.taggedFragments = {};
-	this.taggedIds = {};
-	this.ephemeralTags = [];
+	// Checks keep a reference to the store, so empty it and do not replace it
+	if ( this.tags ) {
+		this.tags.clear();
+	} else {
+		this.tags = new mw.editcheck.TagStore();
+	}
 	// State of each system message action from #registerSystemMessage
 	this.systemMessages = new Map();
 	this.lastBranchNodeChangeHistoryPointer = null;
@@ -262,6 +265,19 @@ Controller.prototype.getTarget = function () {
 };
 
 /**
+ * Get the session state to make checks with
+ *
+ * @return {Object} See the state parameter of mw.editcheck.BaseEditCheck
+ */
+Controller.prototype.getCheckState = function () {
+	return {
+		tags: this.tags,
+		target: this.target,
+		suggestionsVisible: this.suggestionsVisible
+	};
+};
+
+/**
  * Handle sidebar dialog open/close events
  *
  * Transition skin/VE components around to make room for sidebar
@@ -319,7 +335,7 @@ Controller.prototype.editChecksArePossible = function () {
  * @return {boolean}
  */
 Controller.prototype.canBeShown = function ( checkName, suggestion = false ) {
-	const check = mw.editcheck.editCheckFactory.create( checkName, this );
+	const check = mw.editcheck.editCheckFactory.create( checkName, this.getCheckState() );
 	try {
 		return check.canBeShown( this.surface.getModel().getDocument(), suggestion );
 	} catch ( e ) {
@@ -519,15 +535,15 @@ Controller.prototype.updateForListener = function ( listener, fromRefresh ) {
 	if ( this.suggestionsModeAvailable && !this.inBeforeSave ) {
 		// eslint-disable-next-line no-jquery/no-when
 		actionsPromise = $.when(
-			mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), true, onProgress ),
-			mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false, onProgress )
+			mw.editcheck.editCheckFactory.createAllActionsByListener( this.getCheckState(), listener, this.surface.getModel(), true, onProgress ),
+			mw.editcheck.editCheckFactory.createAllActionsByListener( this.getCheckState(), listener, this.surface.getModel(), false, onProgress )
 		).then( ( suggestionActions, checkActions ) => [
 			...checkActions,
 			// Discard any suggestions that have an equivalent non-suggestion
 			...suggestionActions.filter( ( suggestion ) => !checkActions.find( ( action ) => action.equals( suggestion, true ) ) )
 		] );
 	} else {
-		actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this, listener, this.surface.getModel(), false, onProgress );
+		actionsPromise = mw.editcheck.editCheckFactory.createAllActionsByListener( this.getCheckState(), listener, this.surface.getModel(), false, onProgress );
 	}
 	actionsPromise = actionsPromise
 		.then( ( actionsFromListener ) => {
@@ -887,17 +903,6 @@ Controller.prototype.onSelect = function () {
 };
 
 /**
- * Register an ephemeral tag, to be cleared once the selection leaves its range
- *
- * @param {string} name Tag namespace (check name)
- * @param {string} tag Tag
- * @param {ve.dm.SurfaceFragment} fragment The tagged fragment, as stored in taggedFragments
- */
-Controller.prototype.registerEphemeralTag = function ( name, tag, fragment ) {
-	this.ephemeralTags.push( { name, tag, fragment } );
-};
-
-/**
  * Register a system message tied to a fragment
  *
  * Shown as an EditCheckAction card at a resolved action's location.
@@ -917,7 +922,7 @@ Controller.prototype.registerSystemMessage = function ( fragment, config ) {
 	const messageTypes = mw.editcheck.SystemMessageEditCheck.static.messageTypes;
 	const actionConfig = ve.extendObject( {}, messageTypes[ config.messageType ] || messageTypes.success, config );
 	const action = new mw.editcheck.EditCheckAction( ve.extendObject( {}, actionConfig, {
-		check: mw.editcheck.editCheckFactory.create( mw.editcheck.SystemMessageEditCheck.static.name, this ),
+		check: mw.editcheck.editCheckFactory.create( mw.editcheck.SystemMessageEditCheck.static.name, this.getCheckState() ),
 		fragments: [ fragment ]
 	} ) );
 	const message = { originalData: fragment.getData() };
@@ -990,38 +995,15 @@ Controller.prototype.dropStaleSystemMessages = function () {
 };
 
 /**
- * Stop clearing a tag when the selection leaves its range
- *
- * @param {ve.dm.SurfaceFragment} fragment The tagged fragment, as given to #registerEphemeralTag
- */
-Controller.prototype.unregisterEphemeralTag = function ( fragment ) {
-	this.ephemeralTags = this.ephemeralTags.filter( ( entry ) => entry.fragment !== fragment );
-};
-
-/**
  * Clear any ephemeral tags whose range the selection has left, and refresh if so
  */
 Controller.prototype.clearEphemeralTagsForSelection = function () {
 	// Debounced via onSelect; may fire after teardown.
-	if ( !this.surface || !this.ephemeralTags.length ) {
+	if ( !this.surface || !this.tags.ephemeral.length ) {
 		return;
 	}
 	const covering = this.surface.getModel().getSelection().getCoveringRange();
-	let cleared = false;
-	this.ephemeralTags = this.ephemeralTags.filter( ( entry ) => {
-		const range = entry.fragment.getSelection().getCoveringRange();
-		if ( range && covering && range.containsRange( covering ) ) {
-			return true;
-		}
-		const tagged = this.taggedFragments[ entry.name ] && this.taggedFragments[ entry.name ][ entry.tag ];
-		const index = tagged ? tagged.indexOf( entry.fragment ) : -1;
-		if ( index !== -1 ) {
-			tagged.splice( index, 1 );
-		}
-		cleared = true;
-		return false;
-	} );
-	if ( cleared ) {
+	if ( this.tags.clearEphemeralOutside( covering ) ) {
 		this.refresh();
 	}
 };

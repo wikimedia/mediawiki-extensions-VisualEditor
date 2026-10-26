@@ -5,7 +5,7 @@
  * @extends mw.editcheck.BaseEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {number} [config.maximumWords=400] Maximum number of words in the lead section
  * @param {boolean} [includeSuggestions=false]
@@ -200,7 +200,7 @@ mw.editcheck.LeadLengthEditCheck.prototype.onBranchNodeChange = function ( surfa
 /**
  * @inheritdoc
  */
-mw.editcheck.LeadLengthEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.LeadLengthEditCheck.prototype.act = function ( choice, action, surface, controller ) {
 	// Acting again (recheck, dismiss, or re-starting edit) cancels an
 	// intent to complete from a previous 'edit' choice that never
 	// resolved via a natural discard.
@@ -229,18 +229,18 @@ mw.editcheck.LeadLengthEditCheck.prototype.act = function ( choice, action, surf
 	} else if ( choice === 'edit' && surface ) {
 		// Same flow as ToneCheck: put the action in the bounded "revising"
 		// state, and thank the user if a later run discards the action.
-		const closePromise = this.controller.inBeforeSave ? this.controller.closeDialog() : ve.createDeferred().resolve().promise();
+		const closePromise = controller.inBeforeSave ? controller.closeDialog() : ve.createDeferred().resolve().promise();
 		return closePromise.then( () => {
 			const fragment = action.fragments[ 0 ].collapseToEnd();
 			// After pre-save, the mid-edit action is a different object
-			const newAction = this.controller.getActions().find( ( cAct ) => cAct.equals( action ) );
+			const newAction = controller.getActions().find( ( cAct ) => cAct.equals( action ) );
 			if ( newAction ) {
 				newAction.startRevising();
 				// Count revising as complete once this action is discarded,
 				// e.g. because the user's edit resolved the tone issue.
 				newAction.intendComplete();
-				this.controller.refresh( true ).then( () => {
-					this.controller.ensureActionIsShown( newAction );
+				controller.refresh( true ).then( () => {
+					controller.ensureActionIsShown( newAction );
 					surface.getView().focus();
 				} );
 			} else {
@@ -252,7 +252,7 @@ mw.editcheck.LeadLengthEditCheck.prototype.act = function ( choice, action, surf
 		action.stopRevising();
 		if ( this.countLeadWords( surface.getModel().getDocument() ) <= this.config.maximumWords ) {
 			action.complete();
-			this.controller.removeAction( 'onBranchNodeChange', action, false );
+			controller.removeAction( 'onBranchNodeChange', action, false );
 		}
 		return;
 	}

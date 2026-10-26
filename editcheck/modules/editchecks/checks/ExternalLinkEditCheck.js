@@ -5,7 +5,7 @@
  * @extends mw.editcheck.LinkEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */
@@ -54,7 +54,7 @@ mw.editcheck.ExternalLinkEditCheck.prototype.checkNode = function ( node, surfac
 		)
 		.map( ( annRange ) => {
 			const href = annRange.annotation.getAttribute( 'href' );
-			return this.controller.getTarget().isInterwikiUrl( href ).then( ( isInterwiki ) => {
+			return this.target.isInterwikiUrl( href ).then( ( isInterwiki ) => {
 				if ( isInterwiki ) {
 					// Ignore interwiki links
 					return null;

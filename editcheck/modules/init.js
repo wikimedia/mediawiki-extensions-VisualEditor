@@ -69,6 +69,7 @@ const nonDefaultChecks = new Set();
 require( './utils.js' );
 require( './EditCheckPerformance.js' );
 require( './EditCheckPreSaveToolbarTools.js' );
+require( './TagStore.js' );
 require( './EditCheckFactory.js' );
 require( './EditCheckAction.js' );
 require( './EditCheckActionWidget.js' );
@@ -112,14 +113,17 @@ if ( abCheck === 'paste' ) {
 /**
  * Check if the document has content needing a reference, for AddReferenceEditCheck
  *
+ * Content where the user dismissed the check is included.
+ *
  * @param {ve.dm.Document} documentModel
+ * @param {ve.init.mw.Target} target
  * @param {boolean} includeReferencedContent Include content that already contains a reference
  * @return {boolean}
  */
-mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, includeReferencedContent ) {
+mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, target, includeReferencedContent ) {
 	// TODO: This should be factored out into a static method so we don't have to construct a dummy check
 	// Check might not be registered so we can't use the factory.
-	const check = new mw.editcheck.AddReferenceEditCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'addReference', { showAsCheck: true } ) );
+	const check = new mw.editcheck.AddReferenceEditCheck( { target }, mw.editcheck.editCheckFactory.buildConfig( 'addReference', { showAsCheck: true } ) );
 	// Tag anything in the allowed namespaces, regardless of other eligibility checks
 	if ( !check.inAllowedNamespace() ) {
 		return false;
@@ -132,9 +136,9 @@ mw.editcheck.hasAddedContentNeedingReference = function ( documentModel, include
 	}
 };
 
-mw.editcheck.hasFailingToneCheck = function ( surfaceModel ) {
+mw.editcheck.hasFailingToneCheck = function ( surfaceModel, target ) {
 	// Check might not be registered so we can't use the factory.
-	const check = new mw.editcheck.ToneCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'tone', { showAsCheck: true } ) );
+	const check = new mw.editcheck.ToneCheck( { target }, mw.editcheck.editCheckFactory.buildConfig( 'tone', { showAsCheck: true } ) );
 	// Run actual check eligibility before calling API
 	let canBeShown;
 	try {
@@ -194,7 +198,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheckTagging ) {
 			// from appearing. If the tone check isn't finished by save time we will just log
 			// an error.
 			hasFailingToneCheck = null;
-			mw.editcheck.hasFailingToneCheck( target.getSurface().getModel() ).then( ( result ) => {
+			mw.editcheck.hasFailingToneCheck( target.getSurface().getModel(), target ).then( ( result ) => {
 				hasFailingToneCheck = result;
 			} );
 		} );
@@ -279,7 +283,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		// Temporary logging for T394952
 		if ( abCheck === 'tone' && !enableAbCheck ) {
 			const checkForTone = function ( listener ) {
-				mw.editcheck.hasFailingToneCheck( controller.surface.getModel() ).then( ( result ) => {
+				mw.editcheck.hasFailingToneCheck( controller.surface.getModel(), target ).then( ( result ) => {
 					if ( result ) {
 						ve.track( 'activity.editCheck-tone', { action: 'check-control-' + listener } );
 					}
@@ -322,7 +326,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			target.getSurface().getView().on( 'paste', ( data ) => {
 				const defaults = mw.editcheck.editCheckFactory.buildConfig( 'paste' );
 				// Check might not be registered so we can't use the factory.
-				const check = new mw.editcheck.PasteCheck( null, mw.editcheck.editCheckFactory.buildConfig( 'paste', { showAsCheck: true } ) );
+				const check = new mw.editcheck.PasteCheck( { target }, mw.editcheck.editCheckFactory.buildConfig( 'paste', { showAsCheck: true } ) );
 				if ( check.canBeShown( target.getSurface().getModel().getDocument(), false ) && data.fragment.getSelection().getCoveringRange().getLength() >= check.config.minimumCharacters ) {
 					// The check would be shown for the current viewer, and there's enough content that we care about it:
 					if ( data.source ) {

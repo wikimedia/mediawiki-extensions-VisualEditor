@@ -8,12 +8,18 @@
  *
  * @class
  * @abstract
- * @param {mw.editcheck.Controller} controller Edit check controller
+ * @param {Object} [state] State of the editing session; omit for a check outside a session
+ * @param {mw.editcheck.TagStore} [state.tags] Tags of the session; defaults to an empty store
+ * @param {ve.init.mw.Target} [state.target] The VisualEditor target
+ * @param {boolean} [state.suggestionsVisible=false] Suggestions are visible in the editor
  * @param {Object} [config] Configuration options
  * @param {boolean} [includeSuggestions=false]
  */
-mw.editcheck.BaseEditCheck = function MWBaseEditCheck( controller, config, includeSuggestions ) {
-	this.controller = controller;
+mw.editcheck.BaseEditCheck = function MWBaseEditCheck( state, config, includeSuggestions ) {
+	state = state || {};
+	this.tags = state.tags || new mw.editcheck.TagStore();
+	this.target = state.target || null;
+	this.suggestionsVisible = !!state.suggestionsVisible;
 	// Config from EditCheckFactory#buildConfig already includes the defaults, so this merge does
 	// not change it. The merge is necessary for callers that give a partial config.
 	this.config = mw.editcheck.mergeConfigs( this.constructor.static.defaultConfig, config );
@@ -288,6 +294,19 @@ mw.editcheck.BaseEditCheck.static.doesConfigMatch = function ( config, documentM
 /* Methods */
 
 /**
+ * Get the session state this check was made with, e.g. to make another check in the same session
+ *
+ * @return {Object} See the state parameter of the constructor
+ */
+mw.editcheck.BaseEditCheck.prototype.getState = function () {
+	return {
+		tags: this.tags,
+		target: this.target,
+		suggestionsVisible: this.suggestionsVisible
+	};
+};
+
+/**
  * Get the name of the check type
  *
  * @return {string} Check type name
@@ -348,6 +367,7 @@ mw.editcheck.BaseEditCheck.prototype.onBranchNodeChange = null;
  * @param {string} choice `action` key from static.choices
  * @param {mw.editcheck.EditCheckAction} action
  * @param {ve.ui.Surface} surface
+ * @param {mw.editcheck.Controller} controller Controller that shows the action
  * @return {jQuery.Promise|undefined} Promise which resolves when action is complete, or undefined if there's nothing to wait on
  */
 mw.editcheck.BaseEditCheck.prototype.act = function ( choice, action ) {
@@ -939,10 +959,7 @@ mw.editcheck.BaseEditCheck.prototype.dismiss = function ( action ) {
 mw.editcheck.BaseEditCheck.prototype.tag = function ( tag, action ) {
 	const name = action.getTagName();
 	if ( action.id ) {
-		const taggedIds = this.controller.taggedIds;
-		taggedIds[ name ] = taggedIds[ name ] || {};
-		taggedIds[ name ][ tag ] = taggedIds[ name ][ tag ] || new Set();
-		taggedIds[ name ][ tag ].add( action.id );
+		this.tags.tagId( name, tag, action.id );
 	} else {
 		this.tagFragments( tag, action.fragments, false, name );
 	}
@@ -958,20 +975,7 @@ mw.editcheck.BaseEditCheck.prototype.tag = function ( tag, action ) {
  * @param {boolean} [includeInsertions=false] Grow the tagged range when content is inserted at its edges
  */
 mw.editcheck.BaseEditCheck.prototype.tagFragments = function ( tag, fragments, ephemeral, name, includeInsertions ) {
-	if ( !name ) {
-		name = this.constructor.static.name;
-	}
-	const taggedFragments = this.controller.taggedFragments;
-	taggedFragments[ name ] = taggedFragments[ name ] || {};
-	taggedFragments[ name ][ tag ] = taggedFragments[ name ][ tag ] || [];
-	fragments.forEach( ( fragment ) => {
-		// By default, exclude insertions so we don't accidentally block unrelated changes:
-		const clone = fragment.clone().setExcludeInsertions( !includeInsertions );
-		taggedFragments[ name ][ tag ].push( clone );
-		if ( ephemeral ) {
-			this.controller.registerEphemeralTag( name, tag, clone );
-		}
-	} );
+	this.tags.tagFragments( name || this.constructor.static.name, tag, fragments, ephemeral, includeInsertions );
 };
 
 /**
@@ -982,22 +986,7 @@ mw.editcheck.BaseEditCheck.prototype.tagFragments = function ( tag, fragments, e
  * @param {string} [name] Tag namespace; defaults to this check's name
  */
 mw.editcheck.BaseEditCheck.prototype.untagFragments = function ( tag, fragments, name ) {
-	if ( !name ) {
-		name = this.constructor.static.name;
-	}
-	const tags = this.controller.taggedFragments[ name ];
-	if ( !tags || !tags[ tag ] ) {
-		return;
-	}
-	const ranges = fragments.map( ( fragment ) => fragment.getSelection().getCoveringRange() );
-	tags[ tag ] = tags[ tag ].filter( ( taggedFragment ) => {
-		const taggedRange = taggedFragment.getSelection().getCoveringRange();
-		if ( taggedRange && ranges.some( ( range ) => range && taggedRange.containsRange( range ) ) ) {
-			this.controller.unregisterEphemeralTag( taggedFragment );
-			return false;
-		}
-		return true;
-	} );
+	this.tags.untagCoveringFragments( name || this.constructor.static.name, tag, fragments );
 };
 
 /**
@@ -1013,26 +1002,9 @@ mw.editcheck.BaseEditCheck.prototype.untagFragments = function ( tag, fragments,
 mw.editcheck.BaseEditCheck.prototype.untag = function ( tag, action ) {
 	const name = action.getTagName();
 	if ( action.id ) {
-		const taggedIds = this.controller.taggedIds;
-		if ( taggedIds[ name ] && taggedIds[ name ][ tag ] ) {
-			taggedIds[ name ][ tag ].delete( action.id );
-			return true;
-		}
-	} else {
-		const taggedFragments = this.controller.taggedFragments;
-		if ( taggedFragments[ name ] && taggedFragments[ name ][ tag ] ) {
-			action.fragments.forEach( ( fragment ) => {
-				const selection = fragment.getSelection();
-				const index = taggedFragments[ name ][ tag ].findIndex(
-					( taggedFragment ) => taggedFragment.getSelection().equals( selection )
-				);
-				if ( index !== -1 ) {
-					taggedFragments[ name ][ tag ].splice( index, 1 );
-					return true;
-				}
-			} );
-		}
+		return this.tags.untagId( name, tag, action.id );
 	}
+	this.tags.untagExactFragments( name, tag, action.fragments );
 	return false;
 };
 
@@ -1056,18 +1028,7 @@ mw.editcheck.BaseEditCheck.prototype.isDismissedRange = function ( range, name )
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isTaggedRange = function ( tag, range, name ) {
-	if ( !name ) {
-		name = this.constructor.static.name;
-	}
-	const tags = this.controller.taggedFragments[ name ];
-	if ( tags === undefined ) {
-		return false;
-	}
-
-	const fragments = tags[ tag ];
-	return !!fragments && fragments.some(
-		( fragment ) => fragment.getSelection().getCoveringRange().containsRange( range )
-	);
+	return this.tags.isTaggedRange( name || this.constructor.static.name, tag, range );
 };
 
 /**
@@ -1088,10 +1049,5 @@ mw.editcheck.BaseEditCheck.prototype.isDismissedId = function ( id ) {
  * @return {boolean}
  */
 mw.editcheck.BaseEditCheck.prototype.isTaggedId = function ( tag, id ) {
-	const tags = this.controller.taggedIds[ this.constructor.static.name ];
-	if ( tags === undefined ) {
-		return false;
-	}
-	const ids = tags[ tag ];
-	return !!ids && ids.has( id );
+	return this.tags.isTaggedId( this.constructor.static.name, tag, id );
 };

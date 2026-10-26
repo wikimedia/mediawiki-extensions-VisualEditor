@@ -59,7 +59,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		] );
 
 		const surface = new ve.dm.Surface( doc );
-		const check = new mw.editcheck.FakeHeadingEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
+		const check = new mw.editcheck.FakeHeadingEditCheck( ve.test.utils.EditCheck.dummyState, {}, true );
 		const actionPromises = check.onDocumentChange( surface );
 		Promise.all( actionPromises ).then( ( actions ) => {
 			actions = actions.filter( ( action ) => action );

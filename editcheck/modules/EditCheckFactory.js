@@ -96,20 +96,20 @@ mw.editcheck.EditCheckFactory.prototype.getNamesByListener = function ( listener
  * Checks are created statelessly and then mapped to their 'originals' by the controller. This way if we track state
  * on the original, or use object identity with the actions to track UI updates, the object remains stable.
  *
- * @param {mw.editcheck.Controller} controller
+ * @param {Object|null} state See mw.editcheck.BaseEditCheck
  * @param {string} listenerName Listener name
  * @param {ve.dm.Surface} surfaceModel Surface model
  * @param {boolean} [includeSuggestions=false]
  * @param {function(mw.editcheck.EditCheckAction)} [onProgress]
  * @return {Promise} Promise that resolves with an updated list of Actions
  */
-mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( controller, listenerName, surfaceModel, includeSuggestions, onProgress ) {
+mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( state, listenerName, surfaceModel, includeSuggestions, onProgress ) {
 	const run = {};
 	const actionOrPromiseList = [];
 	this.getNamesByListener( listenerName ).forEach( ( checkName ) => {
 		let check;
 		try {
-			check = this.create( checkName, controller, {}, includeSuggestions );
+			check = this.create( checkName, state, {}, includeSuggestions );
 		} catch ( e ) {
 			mw.log.error( `Error constructing ${ checkName }`, e );
 			return;
@@ -190,16 +190,16 @@ mw.editcheck.EditCheckFactory.prototype.createAllActionsByListener = function ( 
  * This generates the configuration to pass to the check from the various overrides.
  *
  * @param {string} checkName
- * @param {mw.editcheck.Controller} controller
+ * @param {Object|null} state See mw.editcheck.BaseEditCheck
  * @param {Object} [extraConfig={}] extra configuration to apply
  * @param {boolean} [includeSuggestions=false]
  * @return {mw.editcheck.BaseEditCheck}
  */
-mw.editcheck.EditCheckFactory.prototype.create = function ( checkName, controller, extraConfig = {}, includeSuggestions = false ) {
+mw.editcheck.EditCheckFactory.prototype.create = function ( checkName, state, extraConfig = {}, includeSuggestions = false ) {
 	return this.constructor.super.prototype.create.call(
 		this,
 		checkName,
-		controller,
+		state,
 		this.buildConfig( checkName, extraConfig ),
 		includeSuggestions
 	);

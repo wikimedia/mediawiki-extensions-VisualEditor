@@ -5,7 +5,7 @@
  * @extends mw.editcheck.LinkEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {string} [config.scope='paragraph'] Scope to check for duplicates: 'paragraph' or 'section'
  * @param {boolean} [includeSuggestions=false]

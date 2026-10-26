@@ -381,7 +381,6 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 		},
 		{
 			msg: 'Dismissed ranges ignored',
-			controller: { taggedFragments: {}, taggedIds: {} },
 			matchRules: {
 				bad: {
 					title: 'Bad',
@@ -445,14 +444,13 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 	function runCase( caseItem ) {
 		resetStaticState( caseItem.matchRules );
 
-		const controller = caseItem.controller || ve.test.utils.EditCheck.dummyController;
 		const doc = ve.dm.example.createExampleDocumentFromData( [
 			...caseItem.data,
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		] );
 		const surfaceModel = new ve.dm.Surface( doc );
-		const check = new mw.editcheck.TextMatchEditCheck( controller, caseItem.checkConfig || {}, true );
+		const check = new mw.editcheck.TextMatchEditCheck( null, caseItem.checkConfig || {}, true );
 
 		return check.onDocumentChange( surfaceModel ).then( ( actions ) => {
 			assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );

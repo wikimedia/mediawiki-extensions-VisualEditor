@@ -136,7 +136,7 @@ QUnit.test( 'onDocumentChange: strict modes', ( assert ) => {
 			}
 
 			const check = new mw.editcheck.ConvertReferenceEditCheck(
-				ve.test.utils.EditCheck.dummyController,
+				ve.test.utils.EditCheck.dummyState,
 				{ strict },
 				true
 			);

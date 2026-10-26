@@ -61,7 +61,7 @@ QUnit.test( 'onBranchNodeChange', ( assert ) => {
 		] );
 		const surface = new ve.dm.Surface( doc );
 
-		const check = new mw.editcheck.ImageCaptionEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
+		const check = new mw.editcheck.ImageCaptionEditCheck( ve.test.utils.EditCheck.dummyState, {}, true );
 		const actions = check.onBranchNodeChange( surface );
 
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
@@ -85,8 +85,8 @@ QUnit.test( 'onBranchNodeChange skips images tagged as freshly-added', ( assert 
 	const surface = new ve.dm.Surface( doc );
 	const image = doc.getDocumentNode().children[ 0 ];
 
-	const controller = { taggedFragments: {}, getTarget: () => ve.init.target };
-	const check = new mw.editcheck.ImageCaptionEditCheck( controller, {}, true );
+	const tags = new mw.editcheck.TagStore();
+	const check = new mw.editcheck.ImageCaptionEditCheck( { tags, target: ve.init.target }, {}, true );
 
 	assert.strictEqual(
 		check.onBranchNodeChange( surface ).length, 1,
@@ -94,7 +94,7 @@ QUnit.test( 'onBranchNodeChange skips images tagged as freshly-added', ( assert 
 	);
 
 	// Simulate SuggestedImageEditCheck having ephemerally tagged the just-added image.
-	controller.taggedFragments[ mw.editcheck.SuggestedImageEditCheck.static.name ] = {
+	tags.fragments[ mw.editcheck.SuggestedImageEditCheck.static.name ] = {
 		newImage: [ surface.getLinearFragment( image.getOuterRange() ) ]
 	};
 

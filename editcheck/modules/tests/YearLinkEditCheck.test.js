@@ -109,7 +109,7 @@ QUnit.test( 'checkNode', ( assert ) => {
 	cases.forEach( ( caseItem ) => {
 		const surfaceModel = createSurfaceWithInternalLink( caseItem.targetTitle, caseItem.labelText );
 		const node = surfaceModel.getDocument().getDocumentNode().children[ 0 ];
-		const check = new mw.editcheck.YearLinkEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
+		const check = new mw.editcheck.YearLinkEditCheck( ve.test.utils.EditCheck.dummyState, {}, true );
 		const modified = check.getModifiedContentRanges( surfaceModel.getDocument() );
 		const actions = check.checkNode( node, surfaceModel, modified ).filter( Boolean );
 

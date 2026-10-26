@@ -83,7 +83,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			{ type: '/internalList' }
 		] );
 		const surface = new ve.dm.Surface( doc );
-		const check = new mw.editcheck.DoubleBoldEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
+		const check = new mw.editcheck.DoubleBoldEditCheck( ve.test.utils.EditCheck.dummyState, {}, true );
 		const actions = check.onDocumentChange( surface );
 		assert.strictEqual( actions.length, caseItem.expectedActions, caseItem.msg );
 	} );

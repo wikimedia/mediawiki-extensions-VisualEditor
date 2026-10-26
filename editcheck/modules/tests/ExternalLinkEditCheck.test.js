@@ -76,9 +76,9 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			{ type: '/internalList' }
 		] );
 		const surfaceModel = new ve.dm.Surface( doc );
-		const check = new mw.editcheck.ExternalLinkEditCheck( ve.test.utils.EditCheck.dummyController, {}, true );
-		const isInterwikiUrlOrig = check.controller.getTarget().isInterwikiUrl;
-		check.controller.getTarget().isInterwikiUrl = () => Promise.resolve( caseItem.isInterwiki );
+		const check = new mw.editcheck.ExternalLinkEditCheck( ve.test.utils.EditCheck.dummyState, {}, true );
+		const isInterwikiUrlOrig = check.target.isInterwikiUrl;
+		check.target.isInterwikiUrl = () => Promise.resolve( caseItem.isInterwiki );
 
 		return Promise.all( check.onDocumentChange( surfaceModel ) ).then( ( results ) => {
 			const actions = results.filter( Boolean );
@@ -99,7 +99,7 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 					caseItem.name + ': data'
 				);
 			}
-			check.controller.getTarget().isInterwikiUrl = isInterwikiUrlOrig;
+			check.target.isInterwikiUrl = isInterwikiUrlOrig;
 		} );
 	} ) ).then( () => {
 		done();

@@ -15,7 +15,7 @@
  * @extends mw.editcheck.BaseEditCheck
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */
@@ -80,8 +80,7 @@ mw.editcheck.SystemMessageEditCheck.static.messageTypes = {
 /**
  * @inheritdoc
  */
-mw.editcheck.SystemMessageEditCheck.prototype.act = function ( choice, action ) {
-	const controller = this.controller;
+mw.editcheck.SystemMessageEditCheck.prototype.act = function ( choice, action, surface, controller ) {
 	if ( choice === 'publish' ) {
 		controller.target.showSaveDialog( null );
 		controller.removeSystemMessage( action );

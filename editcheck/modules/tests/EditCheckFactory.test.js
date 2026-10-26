@@ -155,7 +155,7 @@ QUnit.test( 'createAllActionsByListener', ( assert ) => {
 		const done = assert.async();
 		let progressEvents = 0;
 		factory.createAllActionsByListener(
-			ve.test.utils.EditCheck.dummyController,
+			ve.test.utils.EditCheck.dummyState,
 			caseItem.listener || 'onDocumentChange',
 			surface,
 			caseItem.includeSuggestions,
@@ -231,8 +231,8 @@ QUnit.test( 'buildConfig', ( assert ) => {
 
 QUnit.test( 'buildConfig output is not changed by the check constructor', ( assert ) => {
 	const factory = new mw.editcheck.EditCheckFactory();
-	const Check = function ( controller, config ) {
-		mw.editcheck.BaseEditCheck.call( this, controller, config );
+	const Check = function ( state, config ) {
+		mw.editcheck.BaseEditCheck.call( this, state, config );
 	};
 	OO.inheritClass( Check, mw.editcheck.BaseEditCheck );
 	Check.static.name = 'test';

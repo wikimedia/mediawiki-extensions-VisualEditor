@@ -6,7 +6,7 @@
  * @class
  *
  * @constructor
- * @param {mw.editcheck.Controller} controller
+ * @param {Object} [state] See mw.editcheck.BaseEditCheck
  * @param {Object} [config]
  * @param {boolean} [includeSuggestions=false]
  */
@@ -374,7 +374,7 @@ mw.editcheck.SourceVerificationEditCheck.prototype.followedByUrl = function ( do
 	};
 };
 
-mw.editcheck.SourceVerificationEditCheck.prototype.act = function ( choice, action, surface ) {
+mw.editcheck.SourceVerificationEditCheck.prototype.act = function ( choice, action, surface, controller ) {
 	if ( choice === 'dismiss' ) {
 		return action.widget.showFeedback( {
 			allowInSuggestions: true,
@@ -395,7 +395,7 @@ mw.editcheck.SourceVerificationEditCheck.prototype.act = function ( choice, acti
 			]
 		} ).then( ( reason ) => {
 			this.dismiss( action );
-			this.controller.removeAction( 'onBranchNodeChange', action, false );
+			controller.removeAction( 'onBranchNodeChange', action, false );
 			ve.track( 'activity.editCheck-' + this.constructor.static.name, { action: `${ choice }-reason-${ reason }-id-${ action.id }` } );
 			if ( reason === 'valid' && this.config.templateToInsert ) {
 				return this.insertFailedVerificationTemplate(
@@ -411,7 +411,7 @@ mw.editcheck.SourceVerificationEditCheck.prototype.act = function ( choice, acti
 		action.stopRevising();
 		action.complete();
 		this.dismiss( action );
-		this.controller.removeAction( 'onBranchNodeChange', action, false );
+		controller.removeAction( 'onBranchNodeChange', action, false );
 	}
 };
 
