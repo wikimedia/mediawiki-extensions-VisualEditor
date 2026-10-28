@@ -112,6 +112,7 @@
 	"editcheck-headinglevel-action-adjust": "ضبط العنوان",
 	"editcheck-leadlength-title": "تحسين قابلية القراءة",
 	"editcheck-leadlength-description": "هذا القسم أطول من التوصيات الموصى بها في إرشادات [{{int:editcheck-leadlength-descriptionlink}} {{SITENAME}}]. يُرجى تقصيره بنقل المعلومات إلى أقسام أخرى أو استبدال العبارات الطويلة بعبارات أبسط.",
+	"editcheck-leadlength-descriptionlink": "//ar.wikipedia.org/wiki/ويكيبيديا:دليل_الأسلوب/مقدمة_المقالة#الأقسام_الفرعية_الطويلة",
 	"editcheck-leadlength-reject-appropriate": "طول هذه المقالة مناسب",
 	"editcheck-leadlength-reject-uncertain": "لست متأكدًا من كيفية تقصيره",
 	"editcheck-leadlength-reject-other": "غير ذلك",

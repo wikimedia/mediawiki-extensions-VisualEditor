@@ -16,7 +16,8 @@
 			"Vigorous action",
 			"Whym",
 			"おはぐろ蜻蛉",
-			"아라"
+			"아라",
+			"Waki285"
 		]
 	},
 	"tag-editcheck-newcontent-description": "編集チェックは新しいコンテンツがページに追加されたと判断した",
@@ -31,6 +32,9 @@
 	"tag-editcheck-tone-shown-description": "編集チェックは追加されたコンテンツに語調の調整が必要な箇所があると判断したため、UIが表示された",
 	"tag-editcheck-paste-shown": "編集チェック（転写）が表示",
 	"tag-editcheck-paste-shown-description": "編集チェックは編集者が貼り付けたコンテンツについて説明を求め、そのコンテンツは除去されたか、あるいは問題のないものであると確認された",
+	"tag-editcheck-llm-paste-description": "編集チェックは、AIが生成したと思われるソースから貼り付けられたコンテンツを検出しました",
+	"tag-editcheck-llm-paste-shown": "編集チェック（LLM貼り付け）が表示",
+	"tag-editcheck-llm-paste-shown-description": "編集チェックは、編集者がAI生成と思われるソースから貼り付けたコンテンツについて説明を求め、その後、そのコンテンツは削除されたか、または許容範囲内であると確認しました",
 	"tag-editsuggestion-seen": "編集のおすすめが表示",
 	"tag-editsuggestion-seen-description": "1つ以上の編集のおすすめが利用者に表示された可能性が高い",
 	"tag-editsuggestion-used": "編集のおすすめを実行",

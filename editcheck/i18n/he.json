@@ -23,6 +23,11 @@
 	"editcheck-dialog-action-submit": "שליחה",
 	"editcheck-dialog-action-done": "סיום",
 	"editcheck-dialog-scroll-into-view": "הצגת הצעות",
+	"editcheck-dialog-success-suggestion": "ההצעה הושלמה!",
+	"editcheck-dialog-success-check": "הבדיקה הושלמה!",
+	"editcheck-dialog-publish-path-message": "השינוי שלך מוכן לפרסום באתר {{SITENAME}}. אפשר לפרסם את השינוי הזה כעת או לחפש שיפורים נוספים.",
+	"editcheck-dialog-action-view-more-suggestions": "להציג עוד",
+	"editcheck-dialog-action-publish": "פרסום",
 	"editcheck-dialog-toggle": "הצגה או הסתרה",
 	"editcheck-dialog-addref-description": "{{GENDER:|עזור|עזרי}} לקוראים להבין מאין המידע הזה מגיע על־ידי הוספת הערת שוליים.",
 	"editcheck-dialog-addref-reject-question": "למה אינך {{GENDER:|מוסיף|מוסיפה}} הערת שוליים?",
@@ -105,6 +110,12 @@
 	"editcheck-headinglevel-title": "התאמת רמת הכותרת",
 	"editcheck-headinglevel-description": "ייתכן שרמת הכותרת הזאת אינה פועלת לפי המבנה הרציף הנכון. {{GENDER:|עזור|עזרי}} לקוראים לנווט בתוכן ביתר קלות על־ידי שימוש ב[{{int:editcheck-headinglevel-descriptionlink}} רמת הכותרת הנכונה].",
 	"editcheck-headinglevel-action-adjust": "התאמת הכותרת",
+	"editcheck-leadlength-title": "שיפור קריאות",
+	"editcheck-leadlength-description": "הפרק הזה ארוך יותר ממה שמומלץ ב[{{int:editcheck-leadlength-descriptionlink}} הנחיות של {{SITENAME}}]. נא לשקול לקצר אותו על־ידי פעולות כמו העברת מידע לפרקים אחרים או החלפת ביטויים ארוכים בביטויים פשוטים יותר.",
+	"editcheck-leadlength-reject-appropriate": "האורך מתאים לערך הזה",
+	"editcheck-leadlength-reject-uncertain": "לא ברור לי איך לקצר את זה",
+	"editcheck-leadlength-reject-other": "אחר",
+	"editcheck-leadlength-thank": "תודה שחשבת על אורך הפרק הפותח!",
 	"editcheck-image-caption-title": "הוספת כיתוב תמונה",
 	"editcheck-image-caption-description": "לתמונה הזאת אין כיתוב. {{GENDER:|עזור|עזרי}} לקוראים להבין למה התמונה רלוונטית על־ידי הוספת [{{int:editcheck-image-caption-descriptionlink}} כיתוב קצר].",
 	"editcheck-convertreference-title": "המרת הערת שוליים",
@@ -140,5 +151,7 @@
 	"tag-editcheck-reference-decline-other": "מערכת בדיקת עריכה (הערות שוליים) – נדחה (אחר)",
 	"tag-editcheck-reference-decline-other-description": "הערת שוליים שהוצעה דרך מערכת בדיקת עריכה נדחתה בשל סיבה שאינה רשומה",
 	"tag-editcheck-reference-decline-uncertain": "מערכת בדיקת עריכה (הערות שוליים) – נדחה (לא בטוח)",
-	"tag-editcheck-reference-decline-uncertain-description": "הערת שוליים שהוצעה דרך מערכת בדיקת עריכה נדחתה בשל היותה לא ודאית"
+	"tag-editcheck-reference-decline-uncertain-description": "הערת שוליים שהוצעה דרך מערכת בדיקת עריכה נדחתה בשל היותה לא ודאית",
+	"communityconfiguration-editcheck-title": "בדיקות עריכה",
+	"communityconfiguration-editcheck-description": "נא להגדיר את התנאים שמפעילים בדיקות עריכה והצעות, ולהחליט מי רואה אותן."
 }

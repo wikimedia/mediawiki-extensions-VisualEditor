@@ -6,7 +6,8 @@
 			"Martin Urbanec",
 			"Matěj Suchánek",
 			"Mormegil",
-			"WikipedistaOndra"
+			"WikipedistaOndra",
+			"Henryk Siuda"
 		]
 	},
 	"editchecks": "Kontroly editací",
@@ -24,6 +25,7 @@
 	"editcheck-dialog-action-submit": "Odeslat",
 	"editcheck-dialog-action-done": "Hotovo",
 	"editcheck-dialog-scroll-into-view": "Zobrazit návrhy",
+	"editcheck-dialog-success-suggestion": "Návrh dokončen!",
 	"editcheck-dialog-toggle": "Přepnout viditelnost",
 	"editcheck-dialog-addref-description": "Pomozte čtenářům pochopit, odkud vámi přidaná informace pochází, tím, že přidáte referenci.",
 	"editcheck-dialog-addref-reject-question": "Z jakého důvodu nepřidáváte žádnou referenci?",

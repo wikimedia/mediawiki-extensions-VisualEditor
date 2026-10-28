@@ -22,6 +22,11 @@
 	"editcheck-dialog-action-submit": "Xác nhận",
 	"editcheck-dialog-action-done": "Xong",
 	"editcheck-dialog-scroll-into-view": "Xem gợi ý",
+	"editcheck-dialog-success-suggestion": "Gợi ý hoàn tất!",
+	"editcheck-dialog-success-check": "Kiểm tra hoàn tất!",
+	"editcheck-dialog-publish-path-message": "Thay đổi của bạn đã sẵn sàng để được đăng lên {{SITENAME}}. Bạn có thể xuất bản thay đổi này ngay bây giờ hoặc tiếp tục tìm thêm những chỗ cần cải thiện.",
+	"editcheck-dialog-action-view-more-suggestions": "Xem thêm",
+	"editcheck-dialog-action-publish": "Đăng",
 	"editcheck-dialog-toggle": "Bật/tắt hiển thị",
 	"editcheck-dialog-addref-description": "Giúp người đọc hiểu thông tin này đến từ đâu bằng cách thêm trích dẫn.",
 	"editcheck-dialog-addref-reject-question": "Tại sao bạn không thêm chú thích?",
@@ -104,6 +109,12 @@
 	"editcheck-headinglevel-title": "Điều chỉnh cấp độ của tiêu đề",
 	"editcheck-headinglevel-description": "Cấp độ của tiêu đề này có thể không tuân theo cấu trúc tuần tự chính xác. Hãy giúp người đọc dễ dàng điều hướng nội dung hơn bằng cách sử dụng [{{int:editcheck-headinglevel-descriptionlink}} cấp độ tiêu đề] chính xác.",
 	"editcheck-headinglevel-action-adjust": "Điều chỉnh tiêu đề",
+	"editcheck-leadlength-title": "Cải thiện khả năng đọc",
+	"editcheck-leadlength-description": "Phần này dài hơn mức khuyến nghị so với [{{int:editcheck-leadlength-descriptionlink}} hướng dẫn của {{SITENAME}}]. Bạn nên cân nhắc rút ngắn bằng cách chuyển bớt thông tin sang các phần khác hoặc thay các cụm từ dài bằng những cách diễn đạt đơn giản hơn.",
+	"editcheck-leadlength-reject-appropriate": "Độ dài này phù hợp với bài viết này",
+	"editcheck-leadlength-reject-uncertain": "Tôi không biết làm thế nào để viết ngắn gọn hơn",
+	"editcheck-leadlength-reject-other": "Khác",
+	"editcheck-leadlength-thank": "Cảm ơn bạn đã xem xét độ dài của phần mở đầu!",
 	"editcheck-image-caption-title": "Thêm chú thích hình ảnh",
 	"editcheck-image-caption-description": "Hình ảnh này không có chú thích. Hãy giúp người đọc hiểu tại sao hình ảnh này lại quan trọng bằng cách thêm một [{{int:editcheck-image-caption-descriptionlink}} chú thích ngắn].",
 	"editcheck-convertreference-title": "Chuyển đổi tài liệu tham khảo",
@@ -139,5 +150,7 @@
 	"tag-editcheck-reference-decline-other": "Kiểm tra Sửa đổi (nguồn tham khảo) bị từ chối (khác)",
 	"tag-editcheck-reference-decline-other-description": "Kiểm tra Sửa đổi nguồn tham khảo bị từ chối vì lý do không được nêu",
 	"tag-editcheck-reference-decline-uncertain": "Kiểm tra Sửa đổi (nguồn tham khảo) bị từ chối (không chắc chắn)",
-	"tag-editcheck-reference-decline-uncertain-description": "Kiểm tra Sửa đổi nguồn tham khảo bị từ chối vì không chắc chắn"
+	"tag-editcheck-reference-decline-uncertain-description": "Kiểm tra Sửa đổi nguồn tham khảo bị từ chối vì không chắc chắn",
+	"communityconfiguration-editcheck-title": "Kiểm tra sửa đổi",
+	"communityconfiguration-editcheck-description": "Định nghĩa các điều kiện kích hoạt kiểm tra và gợi ý sửa đổi, đồng thời quyết định ai sẽ nhìn thấy chúng"
 }

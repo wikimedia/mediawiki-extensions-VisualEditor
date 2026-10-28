@@ -54,7 +54,7 @@
 	"editcheck-copyvio-keep-other": "上記のいずれにも該当しない",
 	"editcheck-copyvio-keep-notify": "貼り付けられた文章を保持する理由を教えてくださり、ありがとうございます!",
 	"editcheck-copyvio-llm-title": "AI生成のコンテンツである可能性があります",
-	"editcheck-copyvio-llm-description": "貼り付けられた文章はAIによって生成されたもののようですが、通常、AI生成の文章は'''許可されていません'''。記事の信頼性を維持するために、[{{int:editcheck-copyvio-llm-policylink}} このウィキのAI使用に関するポリシー]に従っていることを確認してください。",
+	"editcheck-copyvio-llm-description": "貼り付けられた文章はAIによって生成されたもののようですが、通常、AI生成の文章は'''許可されていません'''。記事の信頼性を維持するために、[{{int:editcheck-copyvio-llm-policylink}} このウィキのAI使用に関する方針]に従っていることを確認してください。",
 	"editcheck-copyvio-llm-action-keep": "そのままにする",
 	"editcheck-copyvio-llm-action-remove": "除去する",
 	"editcheck-copyvio-llm-keep-edited": "この文章は私が自分で書き、AIを使って若干の編集を加えました。",
@@ -114,6 +114,13 @@
 	"editcheck-headinglevel-title": "見出しレベルを調整しましょう",
 	"editcheck-headinglevel-description": "この見出しレベルは、正しい順序構造に従っていない可能性があります。読者が目的の節を見つけやすくするために、正しい見出しレベルへ調整してください。",
 	"editcheck-headinglevel-action-adjust": "見出しを調整する",
+	"editcheck-leadlength-title": "読みやすさの向上",
+	"editcheck-leadlength-description": "この節は、[{{int:editcheck-leadlength-descriptionlink}} {{SITENAME}}のガイドライン]で推奨されているよりも長くなっています。情報を他の節に移動したり、長いフレーズをより簡潔な表現に置き換えたりするなどして、短くすることを検討してください。",
+	"editcheck-leadlength-descriptionlink": "//ja.wikipedia.org/wiki/Wikipedia:%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB#%E7%AF%80%E3%83%BB%E3%82%BB%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3",
+	"editcheck-leadlength-reject-appropriate": "この節の長さは記事にとって適切です",
+	"editcheck-leadlength-reject-uncertain": "どう短くすればいいかわからない",
+	"editcheck-leadlength-reject-other": "その他",
+	"editcheck-leadlength-thank": "リード文の長さについてご検討いただき、ありがとうございます！",
 	"editcheck-image-caption-title": "画像にキャプションを追加しましょう",
 	"editcheck-image-caption-description": "この画像にはキャプションがありません。読者が画像の関連性を理解できるよう、[{{int:editcheck-image-caption-descriptionlink}} 短いキャプション]を追加してください。",
 	"editcheck-convertreference-title": "脚注を変換しましょう",
@@ -149,5 +156,7 @@
 	"tag-editcheck-reference-decline-other": "編集チェック（出典）を拒否（その他）",
 	"tag-editcheck-reference-decline-other-description": "編集チェックが提案した出典は、その他の理由により却下された",
 	"tag-editcheck-reference-decline-uncertain": "編集チェック（出典）を拒否（不確定）",
-	"tag-editcheck-reference-decline-uncertain-description": "編集チェックが提案した出典は、不確定であるという理由により却下された"
+	"tag-editcheck-reference-decline-uncertain-description": "編集チェックが提案した出典は、不確定であるという理由により却下された",
+	"communityconfiguration-editcheck-title": "編集チェック",
+	"communityconfiguration-editcheck-description": "編集チェックと提案を有効にする条件を定義し、それらを誰が見るかを決定します"
 }

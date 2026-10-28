@@ -12,7 +12,8 @@
 			"Yfdyh000",
 			"人间百态",
 			"星海",
-			"沈澄心"
+			"沈澄心",
+			"Ouclie"
 		]
 	},
 	"editchecks": "编辑检查",
@@ -117,6 +118,13 @@
 	"editcheck-headinglevel-title": "调整标题级别",
 	"editcheck-headinglevel-description": "此标题级别可能不符合正确的顺序结构。请使用正确的[{{int:editcheck-headinglevel-descriptionlink}} 标题级别]，以帮助读者更轻松地浏览内容。",
 	"editcheck-headinglevel-action-adjust": "调整标题",
+	"editcheck-leadlength-title": "提升可读性",
+	"editcheck-leadlength-description": "此章节的篇幅超过了[{{int:editcheck-leadlength-descriptionlink}} {{SITENAME}}指南]所建议的篇幅。建议您采取将信息移至其他章节或将较长的短语替换为更简洁的表达等方式，来缩短此章节内容。",
+	"editcheck-leadlength-descriptionlink": "//en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Lead_section#Length",
+	"editcheck-leadlength-reject-appropriate": "此条目篇幅合适。",
+	"editcheck-leadlength-reject-uncertain": "我不确定如何缩短",
+	"editcheck-leadlength-reject-other": "其他",
+	"editcheck-leadlength-thank": "感谢您考虑序言章节的篇幅！",
 	"editcheck-image-caption-title": "添加图像说明",
 	"editcheck-image-caption-description": "此图像缺少标题。请添加一个[{{int:editcheck-image-caption-descriptionlink}} 简短的标题]，以帮助读者理解此图像为何相关。",
 	"editcheck-convertreference-title": "转换参考资料",
@@ -152,5 +160,7 @@
 	"tag-editcheck-reference-decline-other": "拒绝（参考资料）编辑检查（其他）",
 	"tag-editcheck-reference-decline-other-description": "参考资料编辑检查以其他原因被拒绝",
 	"tag-editcheck-reference-decline-uncertain": "拒绝（参考资料）编辑检查（不确定）",
-	"tag-editcheck-reference-decline-uncertain-description": "参考资料编辑检查以不确定为由被拒绝"
+	"tag-editcheck-reference-decline-uncertain-description": "参考资料编辑检查以不确定为由被拒绝",
+	"communityconfiguration-editcheck-title": "编辑检查",
+	"communityconfiguration-editcheck-description": "定义激活编辑检查和建议的条件，并决定谁可以看见"
 }

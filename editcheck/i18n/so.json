@@ -108,7 +108,7 @@
 	"editcheck-headinglevel-action-adjust": "Hagaaji cinwaanka",
 	"editcheck-leadlength-title": "Hagaaji akhris fudaydka",
 	"editcheck-leadlength-description": "Qaybtani way ka dheer tahay inta ay [{{int:editcheck-leadlength-descriptionlink}} tilmaamaha {{SITENAME}}] ku talinayaan. Ka fiirso inaad soo gaabiso adigoo xogta u raraya qaybo kale ama weedhaha dhaadheer ku beddelaya kuwo fudud.",
-	"editcheck-leadlength-descriptionlink": "//en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Lead_section#Length",
+	"editcheck-leadlength-descriptionlink": "//so.wikipedia.org/wiki/Wikipedia:Buugga Hab qoraalka/Qaybta Hordhaca#Dhererka",
 	"editcheck-leadlength-reject-appropriate": "Dhererku wuxuu ku habboon yahay maqaalkan",
 	"editcheck-leadlength-reject-uncertain": "Ma hubo sida loo soo gaabin karo",
 	"editcheck-leadlength-reject-other": "Kale",
