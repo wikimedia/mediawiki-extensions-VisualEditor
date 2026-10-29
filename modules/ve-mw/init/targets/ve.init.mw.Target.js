@@ -812,6 +812,7 @@ ve.init.mw.Target.prototype.getLocalApi = function ( options = {} ) {
 };
 
 const interwikiMapPromiseCache = {};
+const interwikiRegexCache = new WeakMap();
 
 // TODO: Deduplicate this with mw.widgets.TitleWidget.prototype.getInterwikiMapPromise
 function getInterwikiMapPromise( api ) {
@@ -843,9 +844,13 @@ function getInterwikiMapPromise( api ) {
  * @return {jQuery.Promise<boolean>} Promise resolving to true if the URL is an interwiki link, false otherwise
  */
 ve.init.mw.Target.prototype.isInterwikiUrl = function ( url ) {
-	return getInterwikiMapPromise( this.getContentApi() ).then(
-		( interwikiMap ) => interwikiMap.some(
-			( iw ) => mw.libs.ve.getRegexFromUrlPattern( iw.url ).test( url )
-		)
-	);
+	return getInterwikiMapPromise( this.getContentApi() ).then( ( interwikiMap ) => {
+		// Build the regexes once per map. Edit check calls this for each external link.
+		let regexes = interwikiRegexCache.get( interwikiMap );
+		if ( !regexes ) {
+			regexes = interwikiMap.map( ( iw ) => mw.libs.ve.getRegexFromUrlPattern( iw.url ) );
+			interwikiRegexCache.set( interwikiMap, regexes );
+		}
+		return regexes.some( ( regex ) => regex.test( url ) );
+	} );
 };
