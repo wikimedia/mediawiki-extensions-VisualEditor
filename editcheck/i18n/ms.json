@@ -111,7 +111,6 @@
 	"editcheck-headinglevel-action-adjust": "Laraskan tajuk",
 	"editcheck-leadlength-title": "Tingkatkan kebolehbacaan",
 	"editcheck-leadlength-description": "Bahagian ini lebih panjang daripada yang disyorkan oleh [{{int:editcheck-leadlength-descriptionlink}} garis panduan {{SITENAME}}]. Pertimbangkan untuk memendekkannya dengan melakukan perkara seperti memindahkan maklumat ke bahagian lain atau menggantikan frasa panjang dengan frasa yang lebih ringkas.",
-	"editcheck-leadlength-descriptionlink": "//en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Lead_section#Length",
 	"editcheck-leadlength-reject-appropriate": "Panjang pendahuluan tersebut sesuai untuk rencana ini",
 	"editcheck-leadlength-reject-uncertain": "Saya tidak pasti bagaimana untuk memendekkan pendahuluan tersebut",
 	"editcheck-leadlength-reject-other": "Lain-lain",

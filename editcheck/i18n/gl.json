@@ -109,7 +109,6 @@
 	"editcheck-headinglevel-action-adjust": "Axustar a cabeceira",
 	"editcheck-leadlength-title": "Mellorar a lexibilidade",
 	"editcheck-leadlength-description": "Esta sección é máis longa do que recomendan as [{{int:editcheck-leadlength-descriptionlink}} directrices de {{SITENAME}}]. Considera a posibilidade de facela máis curta movendo información a outras seccións ou substituíndo frases longas por outras máis sinxelas.",
-	"editcheck-leadlength-descriptionlink": "//gl.wikipedia.org/wiki/Wikipedia:Libro_de_estilo#Introdución",
 	"editcheck-leadlength-reject-appropriate": "A lonxitude é axeitada para este artigo",
 	"editcheck-leadlength-reject-uncertain": "Non sei como facela máis curto",
 	"editcheck-leadlength-reject-other": "Outro",

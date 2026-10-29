@@ -115,7 +115,6 @@
 	"editcheck-headinglevel-action-adjust": "Koptekst aanpassen",
 	"editcheck-leadlength-title": "Leesbaarheid verbeteren",
 	"editcheck-leadlength-description": "Deze sectie is langer dan door de [{{int:editcheck-leadlength-descriptionlink}} {{SITENAME}} richtlijnen] wordt aanbevolen. U kunt de sectie inkorten door bijvoorbeeld informatie naar andere secties te verplaatsen of lange zinnen te vereenvoudigen.",
-	"editcheck-leadlength-descriptionlink": "//en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Lead_section#Length",
 	"editcheck-leadlength-reject-appropriate": "De lengte is geschikt voor dit artikel.",
 	"editcheck-leadlength-reject-uncertain": "Ik weet niet hoe ik het korter kan maken.",
 	"editcheck-leadlength-reject-other": "Anders",
