@@ -72,7 +72,7 @@ class ApiVisualEditor extends ApiBase {
 		private readonly WatchlistLabelStore $watchlistLabelStore,
 		private readonly WatchedItemStoreInterface $watchedItemStore,
 		private readonly ContentTransformer $contentTransformer,
-		private readonly StatsFactory $statsFactory,
+		StatsFactory $statsFactory,
 		private readonly WikiPageFactory $wikiPageFactory,
 		private readonly IntroMessageBuilder $introMessageBuilder,
 		private readonly PreloadedContentBuilder $preloadedContentBuilder,
