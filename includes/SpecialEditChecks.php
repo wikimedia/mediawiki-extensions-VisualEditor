@@ -5,8 +5,6 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
-use MediaWiki\Config\Config;
-use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Content\JsonContent;
 use MediaWiki\Extension\VisualEditor\EditCheck\ConfigMerger;
 use MediaWiki\Extension\VisualEditor\EditCheck\ResourceLoaderData;
@@ -19,21 +17,14 @@ use MediaWiki\Title\Title;
 class SpecialEditChecks extends SpecialPage {
 	use TocGeneratorTrait;
 
-	private readonly Config $config;
-	private readonly EditCheckFileParser $parser;
+	private EditCheckFileParser $parser;
 	private array $baseDefaultConfig = [];
 
 	/**
 	 * @inheritDoc
 	 */
-	public function __construct(
-		private readonly Config $coreConfig,
-		ConfigFactory $configFactory
-	) {
+	public function __construct() {
 		parent::__construct( 'EditChecks' );
-
-		$this->config = $configFactory->makeConfig( 'visualeditor' );
-		$this->parser = new EditCheckFileParser( $this->getContext() );
 	}
 
 	/**
@@ -76,6 +67,7 @@ class SpecialEditChecks extends SpecialPage {
 		];
 		$onWikiConfig = ResourceLoaderData::getConfig( $this->getContext() );
 		$baseCheck = $this->collectChecks( $baseDir . '/BaseEditCheck.js', [], true );
+		$this->parser = new EditCheckFileParser( $this->getContext() );
 		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
 			$baseDefaultConfig = $this->parser->tryJsonDecodeObjectString( $baseCheck[0]['defaultConfig'] );
 			$this->baseDefaultConfig = is_array( $baseDefaultConfig ) ? $baseDefaultConfig : [];
@@ -94,7 +86,7 @@ class SpecialEditChecks extends SpecialPage {
 		$experimentalEnabledChecks = $this->collectChecks(
 			$checksDir . '/*.js', [], false, false, true, $onWikiConfig
 		);
-		$abTest = $this->coreConfig->get( 'VisualEditorEditCheckABTest' );
+		$abTest = $this->getConfig()->get( 'VisualEditorEditCheckABTest' );
 		if ( $abTest !== null ) {
 			foreach ( [ &$defaultChecks, &$disabledChecks, &$experimentalEnabledChecks ] as &$checks ) {
 				foreach ( $checks as $i => $check ) {
@@ -122,7 +114,7 @@ class SpecialEditChecks extends SpecialPage {
 			$out->addHTML( $this->buildTableHtml( $abChecks, $onWikiConfig ) );
 		}
 
-		if ( $this->coreConfig->get( 'VisualEditorEnableEditCheckSuggestionsBeta' ) ) {
+		if ( $this->getConfig()->get( 'VisualEditorEnableEditCheckSuggestionsBeta' ) ) {
 			// Split beta and experimental checks based on if they are enabled by default
 			$this->addTocSection( 'betafeatures', 'editcheck-specialeditchecks-header-betafeatures' );
 			$out->addHTML( Html::rawElement( 'h2', [ 'id' => Sanitizer::escapeIdForLink( 'betafeatures' ) ],

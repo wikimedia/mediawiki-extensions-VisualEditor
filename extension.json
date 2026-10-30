@@ -2704,11 +2704,7 @@
 			]
 		},
 		"EditChecks": {
-			"class": "MediaWiki\\Extension\\VisualEditor\\SpecialEditChecks",
-			"services": [
-				"MainConfig",
-				"ConfigFactory"
-			]
+			"class": "MediaWiki\\Extension\\VisualEditor\\SpecialEditChecks"
 		}
 	},
 	"DomainEventIngresses": [
