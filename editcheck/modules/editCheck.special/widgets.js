@@ -97,10 +97,15 @@ function showMatchRule( $container, ruleId, suggestion ) {
 	} );
 }
 
+// Whether we've already tried to correct the scroll position for the URL fragment
+// on this page view (see below).
+let hashScrollChecked = false;
+
 mw.hook( 'wikipage.content' ).add( ( $content ) => {
 	if ( !factory ) {
 		return;
 	}
+	const renderPromises = [];
 	$content.find( '.mw-editchecks-widget' ).each( ( i, element ) => {
 		// The hook can fire again for the same content
 		if ( element.dataset.rendered ) {
@@ -113,9 +118,9 @@ mw.hook( 'wikipage.content' ).add( ( $content ) => {
 		const suggestion = !!element.dataset.suggestion;
 		try {
 			if ( ruleId !== undefined ) {
-				showMatchRule( $container, ruleId, suggestion ).catch( ( e ) => {
+				renderPromises.push( showMatchRule( $container, ruleId, suggestion ).catch( ( e ) => {
 					mw.log.error( `Special:EditChecks failed to show rule '${ ruleId }'`, e );
-				} );
+				} ) );
 			} else {
 				showCheck( $container, name, suggestion );
 			}
@@ -123,4 +128,19 @@ mw.hook( 'wikipage.content' ).add( ( $content ) => {
 			mw.log.error( `Special:EditChecks failed to show check '${ name }'`, e );
 		}
 	} );
+
+	// Each check/rule card is rendered into what was initially an empty placeholder,
+	// growing the page as they load (matchRule cards in particular, since they must
+	// fetch their config). If the browser already auto-scrolled to a #section/#check
+	// fragment before that growth happened, the target ends up far from the top of the
+	// viewport. Wait for all the cards above to settle, then redo the scroll. (T435278)
+	if ( !hashScrollChecked && location.hash ) {
+		hashScrollChecked = true;
+		Promise.all( renderPromises ).then( () => {
+			const target = mw.util.getTargetFromFragment();
+			if ( target ) {
+				target.scrollIntoView();
+			}
+		} );
+	}
 } );
