@@ -5,6 +5,6 @@
 	],
 	"rules": {
 		"no-descending-specificity": null,
-		"selector-class-pattern": "^(ve|mw|oo-ui|client|skin|vector)-"
+		"wikimedia/selector-class-prefix": [ true, { "additionalPrefixes": [ "ve", "vector" ] } ]
 	}
 }

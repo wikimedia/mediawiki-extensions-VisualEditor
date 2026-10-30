@@ -95,13 +95,13 @@ a[ rel~='mw:PageProp/Category' ] {
 	display: none;
 
 	// ... unless in a category list (e.g. visual diff)
-	.catlinks & { /* stylelint-disable-line selector-class-pattern */
+	.catlinks & { /* stylelint-disable-line wikimedia/selector-class-prefix */
 		display: inline;
 	}
 }
 
 // Increase specificity of catlink margin reset when nested in body content (e.g. in visual diff)
-.mw-body-content .catlinks ul { /* stylelint-disable-line selector-class-pattern */
+.mw-body-content .catlinks ul { /* stylelint-disable-line wikimedia/selector-class-prefix */
 	margin: 0;
 }
 
