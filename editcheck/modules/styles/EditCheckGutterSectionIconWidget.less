@@ -5,6 +5,29 @@
 .ve-ui-editCheck-gutter-action-sticky {
 	position: relative;
 
+	.mw-pulsating-dot.ve-ui-editCheck-gutter-action-pulsatingDot {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate( -50%, -50% );
+
+		&::before {
+			animation-duration: 2s;
+			animation-delay: -1.33s;
+		}
+
+		&::after {
+			background-color: transparent;
+		}
+
+		@media ( prefers-reduced-motion: reduce ) {
+			&::before,
+			&::after {
+				animation: none;
+			}
+		}
+	}
+
 	> .oo-ui-iconElement-icon {
 		width: 20px;
 		height: 20px;

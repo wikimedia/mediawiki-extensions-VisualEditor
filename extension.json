@@ -170,6 +170,10 @@
 			"value": {},
 			"description": "Override default Edit Check config. Same as editing [[MediaWiki:Editcheck-config.json]]."
 		},
+		"VisualEditorDiscoverabilityWelcomeImage": {
+			"value": false,
+			"description": "URL of an image to show in the suggestion mode discoverability welcome dialog. If false, no image is shown."
+		},
 		"VisualEditorUseSingleEditTab": {
 			"value": false
 		}
@@ -704,6 +708,7 @@
 				"editcheck/modules/dialogs/MobileEditCheckDialog.js",
 				"editcheck/modules/dialogs/SidebarEditCheckDialog.js",
 				"editcheck/modules/dialogs/GutterSidebarEditCheckDialog.js",
+				"editcheck/modules/dialogs/EditCheckDiscoverabilityDialog.js",
 				"editcheck/modules/editchecks/BaseEditCheck.js",
 				"editcheck/modules/editchecks/ContentBranchNodeCheck.js",
 				"editcheck/modules/editchecks/LinkEditCheck.js",
@@ -723,7 +728,8 @@
 				"editcheck/modules/styles/EditCheckSuggestionsTool.less",
 				"editcheck/modules/dialogs/styles/EditCheckDialog.less",
 				"editcheck/modules/dialogs/styles/EditCheckScrollIntoViewWidget.less",
-				"editcheck/modules/dialogs/styles/GutterSidebarEditCheckDialog.less"
+				"editcheck/modules/dialogs/styles/GutterSidebarEditCheckDialog.less",
+				"editcheck/modules/dialogs/styles/EditCheckDiscoverabilityDialog.less"
 			],
 			"dependencies": [
 				"ext.visualEditor.articleTarget",
@@ -747,6 +753,9 @@
 				"editcheck-dialog-publish-path-message",
 				"editcheck-dialog-action-view-more-suggestions",
 				"editcheck-dialog-action-publish",
+				"editcheck-dialog-discoverability-title",
+				"editcheck-dialog-discoverability-message",
+				"editcheck-dialog-action-nothanks",
 				"editcheck-dialog-addref-description",
 				"editcheck-dialog-addref-reject-question",
 				"editcheck-dialog-addref-reject-description",

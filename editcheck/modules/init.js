@@ -28,11 +28,24 @@ const experimentalPref = !!mw.user.options.get( 'visualeditor-editcheck-experime
 // if user should be shown the publish path card after successfully completing a check
 // this will default to true for newer editors
 const storedShowPublishPath = mw.user.options.get( 'visualeditor-editcheck-showpublishpath' );
+// if user should be shown the discoverability welcome dialog
+const storedShowDiscoverabilityWelcome = mw.user.options.get( 'visualeditor-editcheck-showdiscoverabilitywelcome' );
+// if user should be shown discoverability hints
+const storedEnableDiscoverabilityHints = mw.user.options.get( 'visualeditor-editcheck-enablediscoverabilityhints' );
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || experimentalPref || ecenable === '2' ),
-	suggestionsModeAvailable: !!mw.config.get( 'wgVisualEditor', {} ).editCheckSuggestionsAvailable,
+	suggestionsModeAvailable: !!mw.config.get( 'wgVisualEditor', {} ).editCheckSuggestionsAvailable ||
+		!!+mw.user.options.get( 'visualeditor-editcheck-suggestions' ),
+	enableDiscoverabilityHints: storedEnableDiscoverabilityHints !== null ?
+		!!+storedEnableDiscoverabilityHints :
+		true,
+	discoverabilityEnabled: !!+mw.user.options.get( 'visualeditor-editcheck-discoverability' ),
+	showDiscoverabilityWelcome: storedShowDiscoverabilityWelcome !== null ?
+		!!+storedShowDiscoverabilityWelcome :
+		true,
+	discoverabilityOptOut: false,
 	showPublishPath: storedShowPublishPath !== null ?
 		!!+storedShowPublishPath :
 		mw.config.get( 'wgUserEditCount', 0 ) <= 10,
@@ -86,6 +99,7 @@ require( './dialogs/FixedEditCheckDialog.js' );
 require( './dialogs/MobileEditCheckDialog.js' );
 require( './dialogs/SidebarEditCheckDialog.js' );
 require( './dialogs/GutterSidebarEditCheckDialog.js' );
+require( './dialogs/EditCheckDiscoverabilityDialog.js' );
 require( './editchecks/BaseEditCheck.js' );
 require( './editchecks/ContentBranchNodeCheck.js' );
 require( './editchecks/LinkEditCheck.js' );
@@ -284,6 +298,88 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 		}
 
 		target.editcheckController = controller;
+
+		let discoverabilityWelcomeShownThisSession = false;
+		let discoverabilityWelcomeTimedOut = false;
+		let discoverabilityDeadlineStarted = false;
+		let discoverabilityDeadlineTimeout = null;
+		target.on( 'teardown', () => {
+			discoverabilityWelcomeShownThisSession = false;
+			discoverabilityWelcomeTimedOut = false;
+			discoverabilityDeadlineStarted = false;
+			clearTimeout( discoverabilityDeadlineTimeout );
+			discoverabilityDeadlineTimeout = null;
+		} );
+		target.on( 'surfaceReady', () => {
+			if ( discoverabilityDeadlineStarted ) {
+				return;
+			}
+			discoverabilityDeadlineStarted = true;
+			discoverabilityDeadlineTimeout = setTimeout( () => {
+				if (
+					discoverabilityWelcomeShownThisSession ||
+					!mw.editcheck.showDiscoverabilityWelcome ||
+					!controller.isDiscoverabilityEnabled()
+				) {
+					return;
+				}
+				discoverabilityWelcomeTimedOut = true;
+				if ( controller.getActions().some( ( action ) => action.isSuggestion() ) ) {
+					ve.track( 'activity.editCheck', { action: 'discoverability-welcome-timed-out' } );
+				}
+			}, 2000 );
+			controller.on( 'actionsUpdated', () => {
+				if (
+					discoverabilityWelcomeShownThisSession ||
+					discoverabilityWelcomeTimedOut ||
+					!mw.editcheck.showDiscoverabilityWelcome ||
+					!controller.isDiscoverabilityEnabled() ||
+					!controller.getActions().some( ( action ) => action.isSuggestion() )
+				) {
+					return;
+				}
+				discoverabilityWelcomeShownThisSession = true;
+				controller.setScrollIntoViewSuppressed( true );
+				ve.track( 'activity.editCheck', { action: 'discoverability-welcome-shown' } );
+				target.getSurface().dialogs.openWindow( 'editCheckDiscoverability' )
+					.closed.then( ( data ) => {
+						controller.setScrollIntoViewSuppressed( false );
+						const chosenAction = data && data.action ? data.action : 'close';
+						ve.track( 'activity.editCheck', { action: 'discoverability-welcome-' + chosenAction } );
+						if ( data && data.action === 'view' ) {
+							const visible = controller.suggestionsVisible ?
+								ve.createDeferred().resolve().promise() :
+								controller.toggleSuggestionsVisible();
+							visible.then( () => {
+								if ( !controller.surface ) {
+									// Editor was torn down (e.g. back-button nav) while this was pending
+									return;
+								}
+								const currentWindow = controller.surface.getSidebarDialogs().getCurrentWindow();
+								if ( currentWindow && currentWindow.onScrollIntoViewShowClick ) {
+									currentWindow.onScrollIntoViewShowClick();
+								}
+								controller.markSuggestionDiscovered();
+							} );
+						} else if ( data && data.action === 'nothanks' ) {
+							controller.disableDiscoverability();
+						} else {
+							// track which attention target is visible
+							const currentWindow = controller.surface.getSidebarDialogs().getCurrentWindow();
+							const scrollIntoView = currentWindow && currentWindow.scrollIntoView;
+							const hasVisibleSuggestion = !!( scrollIntoView && scrollIntoView.getVisibleElement() );
+							const isReduced = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ? '-reduced-motion' : '';
+							let intervention = 'none' + isReduced;
+							if ( hasVisibleSuggestion ) {
+								intervention = 'gutter-icon' + isReduced;
+							} else if ( scrollIntoView && scrollIntoView.isVisible() ) {
+								intervention = 'scroll-into-view-button' + isReduced;
+							}
+							ve.track( 'activity.editCheck', { action: 'discoverability-welcome-close-intervention-' + intervention } );
+						}
+					} );
+			} );
+		} );
 
 		// Temporary logging for T394952
 		if ( abCheck === 'tone' && !enableAbCheck ) {

@@ -1,5 +1,23 @@
 @import 'mediawiki.skin.variables.less';
 
+@keyframes ve-editCheck-bounce {
+	0%,
+	20%,
+	50%,
+	80%,
+	100% {
+		transform: translateX( -50% ) translateY( 0 );
+	}
+
+	40% {
+		transform: translateX( -50% ) translateY( -6px );
+	}
+
+	60% {
+		transform: translateX( -50% ) translateY( -3px );
+	}
+}
+
 .ve-ui-editCheck-scrollIntoView {
 	position: fixed;
 	box-shadow: 0 2px 2px 0 rgba( 0, 0, 0, 0.2 );
@@ -7,6 +25,14 @@
 	transition-property: opacity, transform;
 	transition-duration: @transition-duration-base;
 	white-space: nowrap;
+
+	&-attention&-visible {
+		animation: ve-editCheck-bounce 1.5s ease-in-out infinite;
+
+		@media ( prefers-reduced-motion: reduce ) {
+			animation: none;
+		}
+	}
 
 	&-top {
 		top: @spacing-200;

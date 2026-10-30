@@ -40,6 +40,10 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 
 	this.trackedElements = new Map();
 	this.fullPageIntersecting = false;
+	this.attentionActive = false;
+	this.suppressed = false;
+	this.visible = false;
+	this.updateDebounced = ve.debounce( this.update.bind( this ), 300 );
 
 	// Events
 	this.showButton.connect( this, { click: [ 'emit', 'showClick' ] } );
@@ -57,7 +61,8 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 			entries.forEach( ( entry ) => {
 				this.trackedElements.set( entry.target, entry );
 			} );
-			this.update();
+			this.emit( 'visibilityChange' );
+			this.updateDebounced();
 		},
 		{ threshold: [ 0.3 ] }
 	) : null;
@@ -70,7 +75,7 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 				entries.forEach( ( entry ) => {
 					this.fullPageIntersecting = entry.isIntersecting;
 				} );
-				this.update();
+				this.updateDebounced();
 			},
 			{ threshold: [ 0 ] }
 		) : null;
@@ -80,6 +85,14 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 /* Inheritance */
 
 OO.inheritClass( ve.ui.EditCheckScrollIntoViewWidget, OO.ui.ButtonGroupWidget );
+
+/* Events */
+
+/**
+ * Fired when a tracked element's visibility was (re)computed
+ *
+ * @event ve.ui.EditCheckScrollIntoViewWidget#visibilityChange
+ */
 
 /* Methods */
 
@@ -133,6 +146,71 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.observeFullPageButton = function (
 };
 
 /**
+ * Get one of the currently visible tracked elements, if any
+ *
+ * Picks arbitrarily among visible elements, because callers just need *a* visible
+ * suggestion to draw attention to, not a specific one.
+ *
+ * @return {Element|null}
+ */
+ve.ui.EditCheckScrollIntoViewWidget.prototype.getVisibleElement = function () {
+	for ( const entry of this.trackedElements.values() ) {
+		if ( entry.isIntersecting ) {
+			return entry.target;
+		}
+	}
+	return null;
+};
+
+/**
+ * Get whether the button is currently shown
+ *
+ * @return {boolean}
+ */
+ve.ui.EditCheckScrollIntoViewWidget.prototype.isVisible = function () {
+	return this.visible;
+};
+
+/**
+ * Set whether the button is currently shown and update its visible class
+ *
+ * @private
+ * @param {boolean} visible
+ */
+ve.ui.EditCheckScrollIntoViewWidget.prototype.setVisible = function ( visible ) {
+	this.visible = visible;
+	this.$element.toggleClass( 've-ui-editCheck-scrollIntoView-visible', visible );
+};
+
+/**
+ * Set whether the suggestion discoverability attention effect is active
+ *
+ * @param {boolean} active
+ */
+ve.ui.EditCheckScrollIntoViewWidget.prototype.setAttentionActive = function ( active ) {
+	if ( this.attentionActive === active ) {
+		return;
+	}
+	this.attentionActive = active;
+	this.updateDebounced();
+};
+
+/**
+ * Set whether the button is suppressed, hiding it regardless of other state
+ *
+ * @param {boolean} suppressed
+ */
+ve.ui.EditCheckScrollIntoViewWidget.prototype.setSuppressed = function ( suppressed ) {
+	if ( this.suppressed === suppressed ) {
+		return;
+	}
+	this.suppressed = suppressed;
+	// Update straight away in both directions, so callers can rely on #isVisible
+	// immediately afterwards, e.g. right as a dialog closes
+	this.update();
+};
+
+/**
  * Set state for suggestions outside current section. For use on mobile.
  *
  * @param {Object|null} state State object
@@ -142,16 +220,23 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.observeFullPageButton = function (
  */
 ve.ui.EditCheckScrollIntoViewWidget.prototype.setOutsideSectionState = function ( state ) {
 	this.outsideSectionState = state || null;
-	this.update();
+	this.updateDebounced();
 };
 
 /**
  * Update classes based on the visibility of the tracked elements.
  */
 ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
+	if ( this.suppressed || mw.editcheck.discoverabilityOptOut ) {
+		this.setVisible( false );
+		this.$element.removeClass( 've-ui-editCheck-scrollIntoView-attention' );
+		return;
+	}
+
 	if ( mw.config.get( 'wgVisualEditorConfig' ).enableVisualSectionEditing ) {
 		if ( this.fullPageIntersecting ) {
-			this.$element.removeClass( 've-ui-editCheck-scrollIntoView-visible' );
+			this.setVisible( false );
+			this.$element.removeClass( 've-ui-editCheck-scrollIntoView-attention' );
 			return;
 		}
 
@@ -161,13 +246,15 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
 
 		if ( forced && !this.target.isVirtualKeyboardOpen() ) {
 			this.showButton.setIcon( this.outsideSectionState.hasAbove ? 'arrowUp' : 'arrowDown' );
-			this.$element.addClass( 've-ui-editCheck-scrollIntoView-visible' );
+			this.setVisible( true );
+			this.$element.toggleClass( 've-ui-editCheck-scrollIntoView-attention', this.attentionActive );
 			return;
 		}
 	}
 
 	if ( !this.observer || !this.trackedElements.size || this.target.isVirtualKeyboardOpen() ) {
-		this.$element.removeClass( 've-ui-editCheck-scrollIntoView-visible' );
+		this.setVisible( false );
+		this.$element.removeClass( 've-ui-editCheck-scrollIntoView-attention' );
 		return;
 	}
 
@@ -183,8 +270,10 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
 			this.$element.toggleClass( 've-ui-editCheck-scrollIntoView-bottom', !isUp );
 		}
 
+		this.visible = true;
 		requestAnimationFrame( () => {
-			this.$element.addClass( 've-ui-editCheck-scrollIntoView-visible' );
+			this.$element.toggleClass( 've-ui-editCheck-scrollIntoView-visible', true );
+			this.$element.toggleClass( 've-ui-editCheck-scrollIntoView-attention', this.attentionActive );
 		} );
 
 		if ( !this.loggedShown ) {
@@ -192,8 +281,10 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
 			this.loggedShown = true;
 		}
 	} else {
+		this.visible = false;
 		requestAnimationFrame( () => {
-			this.$element.removeClass( 've-ui-editCheck-scrollIntoView-visible' );
+			this.$element.toggleClass( 've-ui-editCheck-scrollIntoView-visible', false );
+			this.$element.removeClass( 've-ui-editCheck-scrollIntoView-attention' );
 		} );
 	}
 };

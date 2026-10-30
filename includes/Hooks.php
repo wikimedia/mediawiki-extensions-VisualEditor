@@ -1187,6 +1187,7 @@ class Hooks implements
 			'VisualEditorEditCheckABTest',
 			'VisualEditorEnableEditCheckExperimental',
 			'VisualEditorEnableEditCheckSuggestionsBeta',
+			'VisualEditorDiscoverabilityWelcomeImage',
 			'VisualEditorEnableSourceEducationPopup',
 			'VisualEditorFeedbackTitle',
 			'VisualEditorSourceFeedbackTitle',

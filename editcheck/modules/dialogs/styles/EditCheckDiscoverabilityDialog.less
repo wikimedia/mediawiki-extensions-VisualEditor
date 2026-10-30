@@ -1,0 +1,51 @@
+@import 'mediawiki.skin.variables.less';
+
+.ve-ui-editCheckDiscoverabilityDialog {
+	.oo-ui-processDialog.oo-ui-isMobile & {
+		.oo-ui-processDialog-location {
+			padding: 1em;
+			margin-right: 1em;
+			margin-left: 0;
+		}
+
+		.oo-ui-processDialog-title {
+			line-height: 1em;
+			white-space: normal;
+		}
+
+		// bring close button to the top right
+		.oo-ui-processDialog-actions-safe,
+		.oo-ui-processDialog-actions-primary {
+			align-items: flex-start;
+			left: unset;
+			right: 0;
+		}
+
+		.oo-ui-processDialog-actions-other .oo-ui-actionWidget.oo-ui-labelElement > .oo-ui-buttonElement-button {
+			line-height: 1.2 !important;  /* stylelint-disable-line declaration-no-important */
+		}
+	}
+
+	.oo-ui-processDialog-actions-other {
+		display: flex;
+
+		.oo-ui-actionWidget {
+			flex-grow: 1;
+			white-space: normal;
+
+			> .oo-ui-buttonElement-button {
+				width: 100%;
+				white-space: normal;
+				align-content: center;
+			}
+		}
+	}
+}
+
+.ve-ui-editCheckDiscoverabilityDialog-gif {
+	margin-top: @spacing-100;
+	height: 150px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}

@@ -41,6 +41,10 @@ mw.editcheck.EditCheckGutterSectionIconWidget = function MWEditCheckGutterSectio
 	} );
 	this.actionButton.toggle( false );
 
+	this.$pulsatingDot = $( '<div>' )
+		.addClass( 'mw-pulsating-dot ve-ui-editCheck-gutter-action-pulsatingDot oo-ui-element-hidden' );
+	this.attentionActive = false;
+
 	// Sticky emulation state, see #setStickyMetrics
 	this.state = null;
 	this.line = null;
@@ -53,7 +57,7 @@ mw.editcheck.EditCheckGutterSectionIconWidget = function MWEditCheckGutterSectio
 
 	this.$element
 		.addClass( 've-ui-editCheck-gutter-action-sticky' )
-		.append( this.icon.$element, this.countLabel.$element, this.actionButton.$element );
+		.append( this.$pulsatingDot, this.icon.$element, this.countLabel.$element, this.actionButton.$element );
 
 	// Hidden icon-tall band at the section's bottom, see #setStickyMetrics. It sits
 	// on the section rather than on $element, which moves, so #teardown removes it.
@@ -129,6 +133,16 @@ mw.editcheck.EditCheckGutterSectionIconWidget.prototype.setAction = function ( a
  */
 mw.editcheck.EditCheckGutterSectionIconWidget.prototype.setActing = function ( acting ) {
 	this.actionButton.setDisabled( acting );
+};
+
+/**
+ * Toggle the icon's attention effect
+ *
+ * @param {boolean} active
+ */
+mw.editcheck.EditCheckGutterSectionIconWidget.prototype.setAttentionActive = function ( active ) {
+	this.attentionActive = active;
+	this.$pulsatingDot.toggleClass( 'oo-ui-element-hidden', !active );
 };
 
 /**

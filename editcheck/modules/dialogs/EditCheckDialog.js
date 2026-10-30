@@ -142,6 +142,28 @@ ve.ui.EditCheckDialog.prototype.onVirtualKeyboardChange = function ( isOpen ) {
 };
 
 /**
+ * Handle attentionActiveChange events from the controller
+ *
+ * @param {boolean} active
+ */
+ve.ui.EditCheckDialog.prototype.onAttentionActiveChange = function ( active ) {
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.setAttentionActive( active );
+	}
+};
+
+/**
+ * Handle scrollIntoViewSuppressedChange events from the controller
+ *
+ * @param {boolean} suppressed
+ */
+ve.ui.EditCheckDialog.prototype.onScrollIntoViewSuppressedChange = function ( suppressed ) {
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.setSuppressed( suppressed );
+	}
+};
+
+/**
  * Handle updates to the list of edit check actions.
  *
  * @param {string} listener Check listener
@@ -311,7 +333,7 @@ ve.ui.EditCheckDialog.prototype.refresh = function () {
 
 ve.ui.EditCheckDialog.prototype.afterRefresh = function () {
 	if ( this.scrollIntoView ) {
-		this.scrollIntoView.update();
+		this.scrollIntoView.updateDebounced();
 	}
 
 	// Update positions immediately to prevent flicker
@@ -430,7 +452,11 @@ ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scroll
 		return;
 	}
 	this.setCurrentAction( action, scrollTo, true );
-	this.onScrollIntoViewCloseClick();
+	// Don't tear down the scroll-into-view button out from under the discoverability
+	// flow while it's active
+	if ( !this.controller.isDiscoverabilityEnabled() || this.controller.discoverySeen ) {
+		this.onScrollIntoViewCloseClick();
+	}
 };
 
 /**
@@ -442,6 +468,8 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.controller.on( 'actionsUpdated', this.onActionsUpdated, false, this );
 		this.controller.on( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, false, this );
 		this.controller.on( 'focusAction', this.onFocusAction, false, this );
+		this.controller.on( 'attentionActiveChange', this.onAttentionActiveChange, false, this );
+		this.controller.on( 'scrollIntoViewSuppressedChange', this.onScrollIntoViewSuppressedChange, false, this );
 
 		if ( !Object.prototype.hasOwnProperty.call( data, 'inBeforeSave' ) ) {
 			throw new Error( 'inBeforeSave argument required' );
@@ -481,6 +509,11 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 			// called immediately so margin-top is set before the animation starts.
 			this.onPosition();
 		}
+		// Sync with controller's attention state in case it changed while this dialog was closed
+		if ( this.scrollIntoView ) {
+			this.scrollIntoView.setAttentionActive( this.controller.attentionActive );
+			this.scrollIntoView.setSuppressed( this.controller.scrollIntoViewSuppressed );
+		}
 	}, this );
 };
 
@@ -492,6 +525,8 @@ ve.ui.EditCheckDialog.prototype.getTeardownProcess = function ( data, process ) 
 		this.controller.off( 'actionsUpdated', this.onActionsUpdated, this );
 		this.controller.off( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, this );
 		this.controller.off( 'focusAction', this.onFocusAction, this );
+		this.controller.off( 'attentionActiveChange', this.onAttentionActiveChange, this );
+		this.controller.off( 'scrollIntoViewSuppressedChange', this.onScrollIntoViewSuppressedChange, this );
 		this.surface.getTarget().off( 'virtualKeyboardChange', this.onVirtualKeyboardChange, this );
 		this.clearActionWidgets();
 		if ( this.scrollIntoView ) {

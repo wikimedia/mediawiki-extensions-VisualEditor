@@ -83,6 +83,17 @@ function Controller( target, config ) {
 	// These are not in clearState as we may want them to persist when switching sections (surface reload)
 	this.lastAvailableSuggestionCount = 0;
 
+	// Suggestion discoverability attention effects
+	// Set lazily by #scheduleAttentionIdleTimer, once we know edit checks can run on this page
+	this.attentionIdleDelay = null;
+	this.attentionActive = false;
+	this.iconAttentionActive = false;
+	this.attentionIdleTimeout = null;
+	// Once any suggestion has been opened, both attention effects stop reappearing
+	this.discoverySeen = false;
+	// Hide the "View suggestions" button entirely
+	this.scrollIntoViewSuppressed = false;
+
 	this.clearState();
 
 	const teardownCheck = () => !!this.surface;
@@ -93,6 +104,7 @@ function Controller( target, config ) {
 	this.onContextChangeDebounced = ve.debounceWithTest( teardownCheck, this.onContextChange.bind( this ), 100 );
 	this.updatePositionsDebounced = ve.debounceWithTest( teardownCheck, this.updatePositions.bind( this ), 50 );
 	this.updateSuggestionCountDebounced = ve.debounceWithTest( teardownCheck, this.updateSuggestionCount.bind( this ), 500 );
+	this.registerActivityOnScrollDebounced = ve.debounceWithTest( teardownCheck, this.registerActivity.bind( this ), 100 );
 
 	this.target.connect( this, {
 		virtualKeyboardChange: 'onVirtualKeyboardChange'
@@ -152,6 +164,27 @@ OO.mixinClass( Controller, OO.EventEmitter );
  * @param {ve.dm.BranchNode} branchNode
  */
 
+/**
+ * The "View suggestions" button's attention effect changed active state
+ *
+ * @event EditCheckController#attentionActiveChange
+ * @param {boolean} active
+ */
+
+/**
+ * A suggestion icon's attention effect changed active state
+ *
+ * @event EditCheckController#iconAttentionActiveChange
+ * @param {boolean} active
+ */
+
+/**
+ * The "View suggestions" button's suppressed state changed
+ *
+ * @event EditCheckController#scrollIntoViewSuppressedChange
+ * @param {boolean} suppressed
+ */
+
 /* Methods */
 
 /**
@@ -182,6 +215,11 @@ Controller.prototype.clearState = function () {
 	this.sidebarOpeningNewActions = null;
 	this.runsByListener = {};
 	this.pendingActionsByListener = {};
+	this.setAttentionActive( false );
+	this.setIconAttentionActive( false );
+	clearTimeout( this.attentionIdleTimeout );
+	this.attentionIdleTimeout = null;
+	this.attentionIdleDelay = null;
 };
 
 /**
@@ -227,6 +265,10 @@ Controller.prototype.setup = function () {
 			closing: 'onSidebarDialogsOpeningOrClosing'
 		} );
 
+		if ( this.isDiscoverabilityEnabled() ) {
+			this.target.$scrollListener.on( 'scroll', this.registerActivityOnScrollDebounced );
+		}
+
 		this.on( 'branchNodeChange', this.onBranchNodeChange, null, this );
 		this.on( 'actionsUpdated', this.onActionsUpdated, null, this );
 
@@ -236,9 +278,13 @@ Controller.prototype.setup = function () {
 			this.inSetup = null;
 		} ), 100 );
 
+		this.scheduleAttentionIdleTimer();
+
 		this.surface.on( 'destroy', () => {
 			this.perf.recordTypingLagSummary();
 			this.off( 'actionsUpdated' );
+
+			this.target.$scrollListener.off( 'scroll', this.registerActivityOnScrollDebounced );
 
 			const win = this.surface.getSidebarDialogs().getCurrentWindow();
 			if ( win ) {
@@ -419,7 +465,7 @@ Controller.prototype.whenSidebarShown = function () {
  */
 Controller.prototype.toggleSuggestionsVisible = function () {
 	if ( !this.suggestionsModeAvailable ) {
-		return;
+		return ve.createDeferred().resolve().promise();
 	}
 	this.suggestionsVisible = !this.suggestionsVisible;
 	if ( !!ve.userConfig( 'visualeditor-editcheck-suggestions-toggle' ) !== this.suggestionsVisible ) {
@@ -437,7 +483,7 @@ Controller.prototype.toggleSuggestionsVisible = function () {
 	// Treat this refresh as being as if we were in initial setup -- we don't
 	// want the "new" suggestions to be focused.
 	this.inSetup = true;
-	this.refresh().always( () => {
+	return this.refresh().always( () => {
 		this.inSetup = null;
 	} );
 };
@@ -471,6 +517,134 @@ Controller.prototype.updateSuggestionCount = function ( count ) {
 			ve.msg( 'editcheck-toolbar-suggestions-count', Math.min( 100, count ) )
 		);
 	}
+};
+
+/**
+ * Register that the user edited, scrolled, or opened a suggestion
+ * Used for the suggestion discoverability attention effect
+ *
+ * Cancels the current attention effect (if any) and restarts the idle countdown
+ */
+Controller.prototype.registerActivity = function () {
+	this.setAttentionActive( false );
+	this.scheduleAttentionIdleTimer();
+};
+
+/**
+ * (Re)start the idle countdown that brings the attention effect back after a delay
+ *
+ * Does nothing if discoverability isn't active, no suggestion exists anywhere on the
+ * page, or once a suggestion has been opened
+ */
+Controller.prototype.scheduleAttentionIdleTimer = function () {
+	clearTimeout( this.attentionIdleTimeout );
+	this.attentionIdleTimeout = null;
+	if ( !this.isDiscoverabilityEnabled() || this.discoverySeen || !this.getActions().some( ( action ) => action.isSuggestion() ) ) {
+		return;
+	}
+	if ( this.attentionIdleDelay === null ) {
+		// A read-only check: don't persist that hints have been used up until
+		// the hint actually activates (see below), in case it never gets that far
+		this.attentionIdleDelay = mw.editcheck.enableDiscoverabilityHints ? 500 : false;
+	}
+	if ( this.attentionIdleDelay === false ) {
+		return;
+	}
+	this.attentionIdleTimeout = setTimeout( () => {
+		if ( this.scrollIntoViewSuppressed ) {
+			// The welcome dialog is covering the UI; #setScrollIntoViewSuppressed
+			// restarts this timer once it's dismissed
+			return;
+		}
+		// Only now record that the hint has been used, since it's actually about to show
+		this.consumeDiscoverabilityHintsEnabled();
+		this.setAttentionActive( true );
+		this.setIconAttentionActive( true );
+	}, this.attentionIdleDelay );
+};
+
+/**
+ * Record that the user has opened a suggestion
+ *
+ * Used to turn off both attention effects
+ */
+Controller.prototype.markSuggestionDiscovered = function () {
+	if ( this.discoverySeen ) {
+		return;
+	}
+	this.discoverySeen = true;
+	this.setIconAttentionActive( false );
+	this.registerActivity();
+};
+
+/**
+ * Set whether the "View suggestions" button's attention effect is active
+ *
+ * @param {boolean} value
+ * @fires EditCheckController#attentionActiveChange
+ */
+Controller.prototype.setAttentionActive = function ( value ) {
+	if ( this.attentionActive === value ) {
+		return;
+	}
+	this.attentionActive = value;
+	this.emit( 'attentionActiveChange', value );
+};
+
+/**
+ * Set whether a suggestion icon's attention effect is active
+ *
+ * @param {boolean} value
+ * @fires EditCheckController#iconAttentionActiveChange
+ */
+Controller.prototype.setIconAttentionActive = function ( value ) {
+	if ( this.iconAttentionActive === value ) {
+		return;
+	}
+	this.iconAttentionActive = value;
+	this.emit( 'iconAttentionActiveChange', value );
+};
+
+/**
+ * Set whether the "View suggestions" button should be hidden entirely
+ *
+ * @param {boolean} value
+ * @fires EditCheckController#scrollIntoViewSuppressedChange
+ */
+Controller.prototype.setScrollIntoViewSuppressed = function ( value ) {
+	if ( this.scrollIntoViewSuppressed === value ) {
+		return;
+	}
+	this.scrollIntoViewSuppressed = value;
+	this.emit( 'scrollIntoViewSuppressedChange', value );
+	if ( !value ) {
+		// Restart idle countdown in case it elapsed while suppressed
+		this.scheduleAttentionIdleTimer();
+	}
+};
+
+/**
+ * Check whether the suggestion discoverability features are enabled for this session
+ *
+ * This considers the config/user preference, suggestion mode being enabled,
+ * and then any opt out.
+ *
+ * @return {boolean}
+ */
+Controller.prototype.isDiscoverabilityEnabled = function () {
+	return mw.editcheck.discoverabilityEnabled && this.suggestionsModeAvailable &&
+		!mw.editcheck.discoverabilityOptOut;
+};
+
+/**
+ * Permanently disable discoverability for this session and canceling any pending attention effect
+ */
+Controller.prototype.disableDiscoverability = function () {
+	mw.editcheck.discoverabilityOptOut = true;
+	this.setAttentionActive( false );
+	this.setIconAttentionActive( false );
+	clearTimeout( this.attentionIdleTimeout );
+	this.attentionIdleTimeout = null;
 };
 
 /**
@@ -1091,6 +1265,9 @@ Controller.prototype.onPosition = function ( passive ) {
 	// same reason. Without this, actions found while the surface had no layout box are never
 	// drawn. (E.g. while the mobile anonwarning was covering the surface.)
 	this.updatePositionsDebounced();
+	if ( !passive ) {
+		this.registerActivity();
+	}
 
 	if ( !passive && this.getActions().length && this.focusedAction && this.surface.getView().reviewMode ) {
 		this.scrollActionIntoViewDebounced( this.focusedAction, { alignToTop: !OO.ui.isMobile() } );
@@ -1104,6 +1281,7 @@ Controller.prototype.onPosition = function ( passive ) {
  */
 Controller.prototype.onUndoStackChange = function () {
 	if ( !this.inBeforeSave ) {
+		this.registerActivity();
 		this.dropStaleSystemMessages();
 		this.updateForListener( 'onDocumentChange' );
 	}
@@ -1220,6 +1398,7 @@ Controller.prototype.updateSuggestionIndicators = function ( actions ) {
 	}
 
 	this.lastAvailableSuggestionCount = availableSuggestionCount;
+	this.scheduleAttentionIdleTimer();
 };
 
 /**
@@ -1667,6 +1846,9 @@ Controller.prototype.onActionSeenOrShown = function ( action, seenOrShown ) {
 	const data = { action: `${ type }-${ seenOrShown }-${ moment }${ action.getTrackingIdSuffix() }` };
 	if ( action.isSuggestion() ) {
 		mw.editcheck.state.suggestions[ seenOrShown ][ name ] = true;
+		if ( seenOrShown === 'seen' ) {
+			this.markSuggestionDiscovered();
+		}
 	} else {
 		mw.editcheck.state.checks[ seenOrShown ][ name ] = true;
 	}
@@ -1758,6 +1940,24 @@ Controller.prototype.consumePublishPath = function () {
 	if ( !mw.user.isAnon() ) {
 		new mw.Api().saveOption( 'visualeditor-editcheck-showpublishpath', '0' );
 		mw.user.options.set( 'visualeditor-editcheck-showpublishpath', '0' );
+	}
+	return true;
+};
+
+/**
+ * Check if this is the user's first time encountering the discoverability features,
+ * and if so, record it so future sessions know not to show them again
+ *
+ * @return {boolean} If this is the user's first time encountering discoverability
+ */
+Controller.prototype.consumeDiscoverabilityHintsEnabled = function () {
+	if ( !mw.editcheck.enableDiscoverabilityHints ) {
+		return false;
+	}
+	mw.editcheck.enableDiscoverabilityHints = false;
+	if ( !mw.user.isAnon() ) {
+		new mw.Api().saveOption( 'visualeditor-editcheck-enablediscoverabilityhints', '0' );
+		mw.user.options.set( 'visualeditor-editcheck-enablediscoverabilityhints', '0' );
 	}
 	return true;
 };

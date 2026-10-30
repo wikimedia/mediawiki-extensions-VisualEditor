@@ -123,6 +123,11 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.updateSticky = function () {
  * Handle click events
  */
 mw.editcheck.EditCheckGutterSectionWidget.prototype.onClick = function () {
+	if ( this.iconWidget.attentionActive ) {
+		ve.track( 'activity.editCheckGutterIcon', { action: 'click-pulsing' } );
+	} else {
+		ve.track( 'activity.editCheckGutterIcon', { action: 'click' } );
+	}
 	if ( this.acting ) {
 		return;
 	}

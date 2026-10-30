@@ -63,7 +63,8 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.initialize = function () {
 	this.scrollIntoView = new ve.ui.EditCheckScrollIntoViewWidget();
 	this.scrollIntoView.connect( this, {
 		showClick: 'onScrollIntoViewShowClick',
-		closeClick: 'onScrollIntoViewCloseClick'
+		closeClick: 'onScrollIntoViewCloseClick',
+		visibilityChange: 'onScrollIntoViewVisibilityChange'
 	} );
 
 	this.$element.append( this.scrollIntoView.$element );
@@ -104,7 +105,95 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewCloseClick = functi
  * @param {boolean} scrollTo
  */
 ve.ui.GutterSidebarEditCheckDialog.prototype.onFocusAction = function () {
+	// focusAction can fire from automatic highlighting during the discoverability
+	// flow (e.g. focusActionForSelection), not just a deliberate user click, so don't
+	// tear down the scroll-into-view button out from under that flow while it's active
+	if ( this.controller.isDiscoverabilityEnabled() && !this.controller.discoverySeen ) {
+		return;
+	}
 	this.onScrollIntoViewCloseClick();
+};
+
+/**
+ * Handle attentionActiveChange events from the controller
+ *
+ * @param {boolean} active
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.onAttentionActiveChange = function ( active ) {
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.setAttentionActive( active );
+	}
+};
+
+/**
+ * Handle scrollIntoViewSuppressedChange events from the controller
+ *
+ * @param {boolean} suppressed
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewSuppressedChange = function ( suppressed ) {
+	if ( this.scrollIntoView ) {
+		this.scrollIntoView.setSuppressed( suppressed );
+	}
+};
+
+/**
+ * Handle iconAttentionActiveChange events from the controller
+ *
+ * @param {boolean} active
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.onIconAttentionActiveChange = function ( active ) {
+	this.updateAttentionTargets( active );
+};
+
+/**
+ * Handle visibilityChange events from scrollIntoView widget
+ *
+ * An icon's attention state isn't reset by scrolling once initially triggered
+ * (unlike the button's attention state), so it needs to be updated as what's visible
+ * changes instead. scrollIntoView already computes this so we'll reuse that.
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.onScrollIntoViewVisibilityChange = function () {
+	if ( this.controller && this.controller.iconAttentionActive ) {
+		this.updateAttentionTargets( true );
+	}
+};
+
+/**
+ * Toggle the attention effect on whichever section
+ * is closest to the user's current position
+ *
+ * If suggestions are already visible, arbitrarily pick one;
+ * otherwise use the nearest suggestions both above and below
+ *
+ * @param {boolean} active
+ */
+ve.ui.GutterSidebarEditCheckDialog.prototype.updateAttentionTargets = function ( active ) {
+	( this.widgets || [] ).forEach( ( widget ) => {
+		widget.iconWidget.setAttentionActive( false );
+	} );
+	if ( !active ) {
+		return;
+	}
+	const visible = this.scrollIntoView && this.scrollIntoView.getVisibleElement();
+	if ( visible ) {
+		const widget = this.widgets.find( ( w ) => w.$element[ 0 ] === visible );
+		if ( widget ) {
+			widget.iconWidget.setAttentionActive( true );
+		}
+		return;
+	}
+	const nearest = this.findNearestActions();
+	if ( nearest ) {
+		[ nearest.above, nearest.below ].forEach( ( action ) => {
+			if ( !action ) {
+				return;
+			}
+			const widget = this.widgets.find( ( w ) => w.actions.includes( action ) );
+			if ( widget ) {
+				widget.iconWidget.setAttentionActive( true );
+			}
+		} );
+	}
 };
 
 /**
@@ -125,6 +214,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		this.controller.on( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, null, this );
 		this.controller.on( 'position', this.onPosition, null, this );
 		this.controller.on( 'focusAction', this.onFocusAction, null, this );
+		this.controller.on( 'attentionActiveChange', this.onAttentionActiveChange, null, this );
+		this.controller.on( 'iconAttentionActiveChange', this.onIconAttentionActiveChange, null, this );
+		this.controller.on( 'scrollIntoViewSuppressedChange', this.onScrollIntoViewSuppressedChange, null, this );
 
 		this.fromSection = !!this.controller.originSection;
 		if ( this.fromSection ) {
@@ -135,6 +227,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.getSetupProcess = function ( data )
 		if ( this.scrollIntoView ) {
 			const fullPageButton = this.controller.getTarget().switchToFullPageButtonBottom;
 			this.scrollIntoView.observeFullPageButton( fullPageButton.$element[ 0 ] );
+			// Sync with controller's attention state in case it changed while this dialog was closed
+			this.scrollIntoView.setAttentionActive( this.controller.attentionActive );
+			this.scrollIntoView.setSuppressed( this.controller.scrollIntoViewSuppressed );
 		}
 	}, this );
 };
@@ -364,6 +459,9 @@ ve.ui.GutterSidebarEditCheckDialog.prototype.renderActions = function ( newActio
 	}
 	this.setOutsideSectionState();
 	this.scrollToNearestActionDebounced();
+	// Sections may have just been rebuilt (and new widgets start with no attention
+	// effect), so reapply whatever the controller's current state is
+	this.updateAttentionTargets( this.controller.iconAttentionActive );
 };
 
 /**
