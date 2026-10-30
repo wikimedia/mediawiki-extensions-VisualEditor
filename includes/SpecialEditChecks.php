@@ -348,11 +348,11 @@ class SpecialEditChecks extends SpecialPage {
 		$widget = $this->buildWidgetPlaceholder( $checkData, $suggestions );
 		$this->addTocSubSection( $checkData['name'], 'rawmessage', $checkData['name'] );
 
-		$html .= Html::rawElement( 'tr', [],
+		$html .= Html::rawElement( 'tr', [
+			'id' => Sanitizer::escapeIdForLink( $checkData['name'] )
+		],
 			Html::rawElement( 'td', [],
-				Html::element( 'strong', [
-					'id' => Sanitizer::escapeIdForLink( $checkData['name'] )
-				], $checkData['name'] ) .
+				Html::element( 'strong', [], $checkData['name'] ) .
 				Html::element( 'div', [], basename( $checkData['file'] ) )
 			) .
 			Html::rawElement( 'td', [], $widget ) .

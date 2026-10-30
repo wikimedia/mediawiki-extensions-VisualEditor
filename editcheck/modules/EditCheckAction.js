@@ -302,6 +302,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		icon: this.icon,
 		name: this.getName(),
 		checkName: this.check.getName(),
+		ruleId: this.getRuleId(),
 		isSystemCheck: this.check.isSystemCheck(),
 		label: this.getTitle(),
 		message: this.getDescription(),

@@ -161,6 +161,7 @@
 	"editcheck-specialeditchecks-config-matchitem": "Subheading for the text match configuration block.",
 	"editcheck-suggestionfeedback-label-about": "Label for a menu item that opens a description of the feature in the edit check suggestion feedback widget",
 	"editcheck-suggestionfeedback-label-report": "Label for a menu item that opens the feedback form of the feature in the edit check suggestion feedback widget",
+	"editcheck-suggestionfeedback-label-configuration": "Label for a menu item that opens the section of Special:EditChecks describing how the current suggestion/check is configured.",
 	"editcheck-experimental-subheading-suggestion": "Subheading for experimental suggestions",
 	"editcheck-experimental-subheading-check": "Subheading for experimental edit checks",
 	"editcheck-suggestionfeedback-label-experimental": "Label for a menu item that opens a page of experimental suggestions",
