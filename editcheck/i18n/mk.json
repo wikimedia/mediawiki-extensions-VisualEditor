@@ -5,6 +5,7 @@
 		]
 	},
 	"editchecks": "Проверки на уредувања",
+	"editcheck-config-save-language-subpage": "Поставеноста на проверката на уредувања не може да има јазични потстранци. Наместо тоа, уредете ја [[MediaWiki:Editcheck-config.json]].",
 	"editcheck-toolbar-suggestions-title": "Прик./Скр. предлози",
 	"editcheck-suggestions-turned-on": "Предлозите се вклучени",
 	"editcheck-suggestions-turned-off": "Предлозите се исклучени",
@@ -106,6 +107,12 @@
 	"editcheck-headinglevel-title": "Прилагодете го нивото на заглавието",
 	"editcheck-headinglevel-description": "Нивото на ова заглавие може да не ја следи правилната последователна структура. Помогнете им на читателите да се снајдат полесно со употреба на правилното [{{int:editcheck-headinglevel-descriptionlink}} ниво на заглавие].",
 	"editcheck-headinglevel-action-adjust": "Прилагоди заглавие",
+	"editcheck-leadlength-title": "Подобрете ја читливоста",
+	"editcheck-leadlength-description": "Овој оддел е поголем од препорачаното во [{{int:editcheck-leadlength-descriptionlink}} напатствијата на {{SITENAME}}]. Скратете го со други постапки како преместување на информации во други оддели или со замена на долгите искази со попрости.",
+	"editcheck-leadlength-reject-appropriate": "Големината е прикладна за оваа статија",
+	"editcheck-leadlength-reject-uncertain": "Не знам како да го скратам",
+	"editcheck-leadlength-reject-other": "Друго",
+	"editcheck-leadlength-thank": "Ви благодариме што ја разгледавте големината на воведниот оддел!",
 	"editcheck-image-caption-title": "Додај опис на сликата",
 	"editcheck-image-caption-description": "Оваа слика нема опис. Помогнете им на другите да разберат зошто сликата е релевантна со додавање на [{{int:editcheck-image-caption-descriptionlink}} краток опис].",
 	"editcheck-convertreference-title": "Претвори навод",
@@ -141,5 +148,7 @@
 	"tag-editcheck-reference-decline-other": "Проверката на уредувањето (наводи) е одбиена (друго)",
 	"tag-editcheck-reference-decline-other-description": "Наводот со EditCheck е одбиен од ненаведена причина",
 	"tag-editcheck-reference-decline-uncertain": "Проверката на уредувањето (наводи) е одбиена (нејасно)",
-	"tag-editcheck-reference-decline-uncertain-description": "Наводот со EditCheck е одбиен бидејќи е неизвесен"
+	"tag-editcheck-reference-decline-uncertain-description": "Наводот со EditCheck е одбиен бидејќи е неизвесен",
+	"communityconfiguration-editcheck-title": "Проверка на уредувања",
+	"communityconfiguration-editcheck-description": "Задајте ги условите што ги активираат проверките на уредувања и предлозите, и одлучете кој ќе ги гледа"
 }
