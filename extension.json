@@ -179,7 +179,9 @@
 				"enabled": false,
 				"linked_artifact_url_template": "https://linked-artifacts.discovery.wmnet:30443/revisions/v1/edit_suggestions_counts/{wiki_id}/{page_id}/{revision_id}",
 				"linked_artifact_precompute_timeout": 50,
-				"namespaces_enabled": [ 0 ],
+				"namespaces_enabled": [
+					0
+				],
 				"page_sample_proportion": 1.0
 			}
 		}
@@ -422,7 +424,6 @@
 				"mediawiki.page.ready",
 				"mediawiki.storage",
 				"mediawiki.Title",
-				"web2017-polyfills",
 				"mediawiki.user",
 				"mediawiki.util",
 				"mediawiki.cookie",
@@ -457,7 +458,6 @@
 				"mediawiki.jqueryMsg",
 				"jquery.textSelection",
 				"mediawiki.api",
-				"web2017-polyfills",
 				"mediawiki.user",
 				"mediawiki.storage"
 			],
@@ -965,7 +965,6 @@
 				"mediawiki.language",
 				"mediawiki.storage",
 				"mediawiki.Title",
-				"web2017-polyfills",
 				"mediawiki.user",
 				"mediawiki.util",
 				"ext.visualEditor.base",
