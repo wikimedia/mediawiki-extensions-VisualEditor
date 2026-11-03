@@ -11,6 +11,10 @@
 			"Plaga med"
 		]
 	},
+	"tag-editcheck-newcontent-description": "Праверка правак мяркуе, што на старонку быў дададзены новы змест",
+	"tag-editcheck-newreference-description": "На старонку была дададзена зноска",
+	"tag-editcheck-references-description": "Праверка правак мяркуе, што магла спатрэбіцца зноска",
+	"tag-editcheck-references-activated-description": "Праверка правак палічыла, што магла спатрэбіцца зноска, і паказала інтэрфейс",
 	"tag-visualeditor": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальны рэдактар]]",
 	"tag-visualeditor-description": "Праўка зроблена з дапамогай [[{{MediaWiki:visualeditor-descriptionpagelink}}|візуальнага рэдактара]]",
 	"tag-visualeditor-needcheck": "[[{{MediaWiki:visualeditor-descriptionpagelink}}|Візуальная праўка: Праверыць]]",
