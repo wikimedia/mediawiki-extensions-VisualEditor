@@ -27,7 +27,7 @@
 	"editcheck-dialog-title": "پیش از انتشار",
 	"editcheck-copyvio-title": "متن چسبانده‌شده",
 	"editcheck-copyvio-description": "به‌عنوان یک قاعدهٔ کلی، متن را از سایر منابع کپی نکنید. چنین کاری معمولاً ترکیبی است از نقض حق تکثیر و سرقت ادبی.",
-	"editcheck-copyvio-prompt": "این متن رو خودت نوشتی؟",
+	"editcheck-copyvio-prompt": "آيا این متن را خودتان نوشتید؟",
 	"editcheck-copyvio-action-keep": "بله، نگهش دار",
 	"editcheck-copyvio-action-remove": "خیر، حذفش کن",
 	"editcheck-copyvio-keep-description": "لطفاً به دیگر ویراستاران این مقاله کمک کنید تا دلیل شما برای نگه داشتن متن قرار داده شده را درک کنند.",
