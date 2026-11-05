@@ -1077,7 +1077,27 @@ class Hooks implements
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
 			'pageVariantFallbacks' => $fallbacks,
+			'editCheckSuggestionsAvailable' => $this->isEditCheckSuggestionsAvailable( $out ),
 		];
+	}
+
+	/**
+	 * Whether Edit Check suggestion mode will be available for this user on this page.
+	 *
+	 * @param OutputPage $out
+	 * @return bool
+	 */
+	private function isEditCheckSuggestionsAvailable( OutputPage $out ): bool {
+		$ecenable = $out->getRequest()->getVal( 'ecenable' );
+		if ( $ecenable === '0' ) {
+			return false;
+		}
+		if ( $ecenable !== null && preg_match( '/^[\w,]+$/', $ecenable )
+			&& in_array( 'suggestions', explode( ',', $ecenable ), true )
+		) {
+			return true;
+		}
+		return (bool)$this->userOptionsManager->getOption( $out->getUser(), 'visualeditor-editcheck-suggestions' );
 	}
 
 	/**

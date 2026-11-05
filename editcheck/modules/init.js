@@ -9,12 +9,15 @@
  *
  * NOTE: everything here involving enabling edit check and experimental mode
  * needs to be kept in sync with ve.init.mw.ArticleTargetLoader, which is
- * responsible for actually loading the modules.
+ * responsible for actually loading the modules, and Hooks.php which is responsible
+ * for computing wether suggestion mode is available.
  */
 let ecenable = mw.libs.ve.initialUrl.searchParams.get( 'ecenable' );
+let forcedEcenable = false;
 if ( window.MWVE_FORCE_EDIT_CHECK_ENABLED && ecenable !== '0' ) {
 	// if edit check isn't forcibly disabled, override from this global
 	ecenable = window.MWVE_FORCE_EDIT_CHECK_ENABLED;
+	forcedEcenable = true;
 }
 
 if ( ecenable === '0' ) {
@@ -29,7 +32,7 @@ mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || experimentalPref || ecenable === '2' ),
-	suggestionsModeAvailable: !!mw.user.options.get( 'visualeditor-editcheck-suggestions' ),
+	suggestionsModeAvailable: !!mw.config.get( 'wgVisualEditor', {} ).editCheckSuggestionsAvailable,
 	showPublishPath: storedShowPublishPath !== null ?
 		!!+storedShowPublishPath :
 		mw.config.get( 'wgUserEditCount', 0 ) <= 10,
@@ -56,7 +59,9 @@ mw.editcheck.resetSessionState();
 if ( ecenable && /^[\w,]+$/.test( ecenable ) ) {
 	const ecenableFlags = ecenable.split( ',' );
 	mw.editcheck.experimental = mw.editcheck.experimental || ecenableFlags.includes( 'experimental' );
-	mw.editcheck.suggestionsModeAvailable = mw.editcheck.suggestionsModeAvailable || ecenableFlags.includes( 'suggestions' );
+	if ( forcedEcenable ) {
+		mw.editcheck.suggestionsModeAvailable = mw.editcheck.suggestionsModeAvailable || ecenableFlags.includes( 'suggestions' );
+	}
 }
 
 const abCheck = mw.config.get( 'wgVisualEditorConfig' ).editCheckABTest;
