@@ -13,6 +13,7 @@
 	"editcheck-suggestions-turned-on": "Suggestions turned on",
 	"editcheck-suggestions-turned-off": "Suggestions turned off",
 	"editcheck-suggestions-none": "No suggestions available",
+	"editcheck-mobile-loading-suggestions": "Looking for suggestions…",
 	"editcheck-dialog-action-no": "No",
 	"editcheck-dialog-action-yes": "Yes",
 	"editcheck-dialog-action-decline": "Decline",

@@ -1,0 +1,80 @@
+.ve-mobile-fakeToolbar-loading-label {
+	position: relative;
+	display: inline-grid;
+	overflow: hidden;
+	height: 1.4em;
+	line-height: 1.4em;
+}
+
+.ve-mobile-fakeToolbar-loading-label-text {
+	grid-area: 1 / 1;
+	white-space: nowrap;
+
+	// only animate when there's more than one to rotate between
+	&:not( :only-child ) {
+		opacity: 0;
+		transform: translateY( 100% );
+		animation: ve-mobile-fakeToolbar-loading-label-rotate 4s infinite;
+		// Start mid-cycle (at the visible 10% keyframe) to avoid a jump on append.
+		animation-delay: -0.4s;
+
+		&:last-child {
+			animation-delay: -2.4s;
+		}
+
+		@media ( prefers-reduced-motion: reduce ) {
+			// Fade between phrases, but don't move them
+			transform: none;
+			animation-name: ve-mobile-fakeToolbar-loading-label-fade;
+		}
+	}
+}
+
+@keyframes ve-mobile-fakeToolbar-loading-label-rotate {
+	0% {
+		opacity: 0;
+		transform: translateY( 100% );
+	}
+
+	10% {
+		opacity: 1;
+		transform: translateY( 0 );
+	}
+
+	40% {
+		opacity: 1;
+		transform: translateY( 0 );
+	}
+
+	50% {
+		opacity: 0;
+		transform: translateY( -100% );
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateY( 100% );
+	}
+}
+
+@keyframes ve-mobile-fakeToolbar-loading-label-fade {
+	0% {
+		opacity: 0;
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	40% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}

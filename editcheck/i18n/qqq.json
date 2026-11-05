@@ -16,6 +16,7 @@
 	"editcheck-suggestions-turned-on": "Auto-dismiss notification shown when the user turns on suggestions using the toolbar button.",
 	"editcheck-suggestions-turned-off": "Auto-dismiss notification shown when the user turns off suggestions using the toolbar button.",
 	"editcheck-suggestions-none": "Auto-dismiss notification shown when there are no suggestions available.",
+	"editcheck-mobile-loading-suggestions": "Second phrase in the rotating loading message shown on the mobile editor loading screen when the 'visualeditor-editcheck-loading-rotation' experiment preference is enabled and suggestion mode is available, alternating with {{msg-mw|mobile-frontend-editor-loading}} (from the MobileFrontend extension).",
 	"editcheck-dialog-action-no": "Label for the no option when asking users if they want to act on a check.\n\n{{Identical|No}}",
 	"editcheck-dialog-action-yes": "Label for the yes option when asking users if they want to act on a check.\n\n{{Identical|Yes}}",
 	"editcheck-dialog-action-decline": "Label for the decline option when asking users if they want to act on a check.\n\n{{Identical|Decline}}",

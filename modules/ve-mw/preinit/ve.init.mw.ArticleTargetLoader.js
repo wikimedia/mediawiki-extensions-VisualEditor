@@ -86,6 +86,13 @@
 			'ext.visualEditor.editCheck',
 			'ext.visualEditor.editCheck.checks'
 		);
+		// Load this tiny, dependency-light module independently (not added to `modules`,
+		// which is awaited as a single batch below) so its mobileFrontend.fakeToolbar.ready
+		// listener can attach well before the much heavier ext.visualEditor.editCheck bundle
+		// above has finished loading.
+		if ( mw.config.get( 'wgMFMode' ) && mw.config.get( 'wgVisualEditor', {} ).editCheckSuggestionsAvailable ) {
+			mw.loader.using( 'ext.visualEditor.editCheck.mobileLoadingLabel' ).catch( () => {} );
+		}
 	}
 
 	const namespaces = mw.config.get( 'wgNamespaceIds' );

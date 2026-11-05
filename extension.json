@@ -880,6 +880,17 @@
 				"last"
 			]
 		},
+		"ext.visualEditor.editCheck.mobileLoadingLabel": {
+			"packageFiles": [
+				"editcheck/modules/mobileLoadingLabel.js"
+			],
+			"styles": [
+				"editcheck/modules/styles/mobileLoadingLabel.less"
+			],
+			"messages": [
+				"editcheck-mobile-loading-suggestions"
+			]
+		},
 		"ext.visualEditor.editCheck.special": {
 			"styles": [
 				"editcheck/modules/editCheck.special/editchecks.less"
