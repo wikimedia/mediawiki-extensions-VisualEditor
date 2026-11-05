@@ -1,9 +1,0 @@
-{
-	"root": true,
-	"extends": [
-		"../../modules/.eslintrc"
-	],
-	"rules": {
-		"no-jquery/no-done-fail": "warn"
-	}
-}

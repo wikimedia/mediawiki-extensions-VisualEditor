@@ -50,6 +50,8 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 	// Note: Chainable methods (setContents/setSelection) must use
 	// non-arrow functions that return this. We can't just return
 	// this.$textbox either as the collection could be cloned.
+	// (Inline rule config applies to the whole file, as ESLint 9+
+	// doesn't allow us to configure a rule twice in one file)
 	/* eslint es-x/no-arrow-functions: error */
 	const surface = this;
 	// Backwards support for the textSelection API
@@ -93,7 +95,6 @@ ve.ui.MWWikitextSurface = function VeUiMWWikitextSurface() {
 			return this;
 		}
 	} );
-	/* eslint es-x/no-arrow-functions: off */
 };
 
 /* Inheritance */
