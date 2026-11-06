@@ -250,6 +250,15 @@ mw.editcheck.EditCheckAction.prototype.getRuleId = function () {
 };
 
 /**
+ * Get the anchor of this action's row on Special:EditChecks
+ *
+ * @return {string}
+ */
+mw.editcheck.EditCheckAction.prototype.getConfigAnchor = function () {
+	return this.check.getName();
+};
+
+/**
  * Whether this is a suggestion
  *
  * @return {boolean}
@@ -302,7 +311,7 @@ mw.editcheck.EditCheckAction.prototype.render = function ( collapsed, singleActi
 		icon: this.icon,
 		name: this.getName(),
 		checkName: this.check.getName(),
-		ruleId: this.getRuleId(),
+		configAnchor: this.getConfigAnchor(),
 		isSystemCheck: this.check.isSystemCheck(),
 		label: this.getTitle(),
 		message: this.getDescription(),

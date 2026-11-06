@@ -637,6 +637,14 @@ mw.editcheck.TextMatchEditCheckAction.prototype.getRuleId = function () {
 	return this.matchRuleId;
 };
 
+/**
+ * @inheritdoc
+ */
+mw.editcheck.TextMatchEditCheckAction.prototype.getConfigAnchor = function () {
+	// Keep the same as the row name in SpecialEditChecks::getMatchRuleChecks
+	return `${ this.check.getName() } (${ this.matchRuleId })`;
+};
+
 mw.editcheck.TextMatchEditCheckAction.prototype.isExperimental = function () {
 	return this.constructor.super.prototype.isExperimental.apply( this, arguments ) ||
 		( !this.suggestion && !this.ruleConfig.showAsCheck ) ||
