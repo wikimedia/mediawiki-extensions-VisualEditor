@@ -2419,7 +2419,6 @@
 		"localBasePath": "",
 		"remoteExtPath": "VisualEditor",
 		"veModules": [
-			"jsdifflib",
 			"visualEditor.test"
 		],
 		"veExcludeFiles": [
