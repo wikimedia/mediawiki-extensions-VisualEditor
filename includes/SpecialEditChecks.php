@@ -125,7 +125,7 @@ class SpecialEditChecks extends SpecialPage {
 		if ( $this->coreConfig->get( 'VisualEditorEnableEditCheckSuggestionsBeta' ) ) {
 			// Split beta and experimental checks based on if they are enabled by default
 			$this->addTocSection( 'betafeatures', 'editcheck-specialeditchecks-header-betafeatures' );
-			$out->addHTML( Html::rawElement( 'h2', [ 'id' => Sanitizer::escapeIdForLink( 'betafeatures' ) ],
+			$out->addHTML( Html::rawElement( 'h2', [ 'id' => Sanitizer::escapeIdForAttribute( 'betafeatures' ) ],
 				Html::element( 'a', [
 					'href' => $this->getTitleFor( 'Preferences' )->getLocalURL() . '#mw-prefsection-betafeatures',
 				],
@@ -178,7 +178,7 @@ class SpecialEditChecks extends SpecialPage {
 	 */
 	private function outputSection( string $id, string $label ): void {
 		$out = $this->getOutput();
-		$out->addHTML( Html::element( 'h2', [ 'id' => Sanitizer::escapeIdForLink( $id ) ], $label ) );
+		$out->addHTML( Html::element( 'h2', [ 'id' => Sanitizer::escapeIdForAttribute( $id ) ], $label ) );
 		$this->addTocSection( $id, 'rawmessage', $label );
 	}
 
@@ -271,6 +271,7 @@ class SpecialEditChecks extends SpecialPage {
 			}
 			$ruleChecks[] = [
 				'file' => '',
+				// TextMatchEditCheckAction#getConfigAnchor links to this name. Keep the format the same.
 				'name' => $checkData['name'] . " ($name)",
 				'matchRuleId' => (string)$name,
 				'parent' => $checkData,
@@ -357,7 +358,7 @@ class SpecialEditChecks extends SpecialPage {
 		$this->addTocSubSection( $checkData['name'], 'rawmessage', $checkData['name'] );
 
 		$html .= Html::rawElement( 'tr', [
-			'id' => Sanitizer::escapeIdForLink( $checkData['name'] )
+			'id' => Sanitizer::escapeIdForAttribute( $checkData['name'] )
 		],
 			Html::rawElement( 'td', [],
 				Html::element( 'strong', [], $checkData['name'] ) .

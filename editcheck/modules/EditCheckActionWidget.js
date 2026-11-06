@@ -8,7 +8,7 @@
  * @param {string} config.type Type of message (e.g., 'warning', 'error')
  * @param {string} config.name Unique name of the action
  * @param {string} [config.checkName] Registered name of the check that made the action
- * @param {string} [config.ruleId] ID of the community-defined rule that made the action, if any
+ * @param {string} [config.configAnchor] Anchor of the action's row on Special:EditChecks
  * @param {boolean} [config.isSystemCheck] The check that made the action is a system check
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.label Title
  * @param {string|jQuery|Function|OO.ui.HtmlSnippet} config.message Body message
@@ -30,7 +30,7 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 	this.name = config.name;
 	// this.name can hold a community rule ID. Metrics need the bounded name.
 	this.checkName = config.checkName || config.name;
-	this.ruleId = config.ruleId || null;
+	this.configAnchor = config.configAnchor || this.checkName;
 	this.isSystemCheck = !!config.isSystemCheck;
 
 	this.actions = new OO.ui.ActionSet();
@@ -118,10 +118,6 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 
 	// The feedback/report menu doesn't apply to a system-generated follow-up card
 	if ( this.suggestion && !this.isSystemCheck ) {
-		// This must match the anchor id that SpecialEditChecks.php generates for this
-		// check/rule's row
-		const configSection = ( this.checkName + ( this.ruleId ? ` (${ this.ruleId })` : '' ) )
-			.replace( /[\t\n\f\r ]/g, '_' );
 		this.suggestionFeedbackMenuSelect = new OO.ui.ButtonMenuSelectWidget( {
 			label: ve.msg( 'visualeditor-feedback-tool' ),
 			icon: 'ellipsis',
@@ -138,7 +134,8 @@ mw.editcheck.EditCheckActionWidget = function MWEditCheckActionWidget( config ) 
 						label: ve.msg( 'editcheck-suggestionfeedback-label-about' )
 					} ),
 					new OO.ui.MenuOptionWidget( {
-						data: 'Special:EditChecks#' + configSection,
+						// mw.Title escapes the fragment
+						data: 'Special:EditChecks#' + this.configAnchor,
 						label: ve.msg( 'editcheck-suggestionfeedback-label-configuration' )
 					} ),
 					...( config.experimental ? [ new OO.ui.MenuOptionWidget( {
