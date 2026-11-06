@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alex NB IT",
 			"Kareyac",
 			"Le Loi",
 			"Lvova",
@@ -75,6 +76,15 @@
 	"editcheck-tone-reject-uncertain": "Я не знаю, как пересмотреть тон",
 	"editcheck-tone-reject-other": "Другое",
 	"editcheck-tone-thank": "Спасибо за то, что вы учли тон!",
+	"editcheck-sourceveri-title": "Проверьте утверждение",
+	"editcheck-sourceveri-description": "Модель выявила это утверждение как возможно не подтверждаемое источником. Проверьте источник и содержимое и внесите соответствующие правки при необходимости.",
+	"editcheck-sourceveri-quote-label": "В источнике утверждается:",
+	"editcheck-sourceveri-go-to-source": "Перейти к источнику:",
+	"editcheck-sourceveri-model-comments": "Комментарии модели:",
+	"editcheck-sourceveri-footer": "Это сгенерированное предложение, выявленное [{{int:editcheck-sourceveri-footerlink}} AI Source Verifier].",
+	"editcheck-sourceveri-reject-irrelevant": "Предложение ошибочно. Источник подтверждает утверждение.",
+	"editcheck-sourceveri-reject-valid-nofix": "Предложение верно, но сейчас исправлять не буду.",
+	"editcheck-sourceveri-reject-other": "Другое",
 	"editcheck-yearlink-title": "Исправить ссылку на год",
 	"editcheck-yearlink-description": "Эта ссылка ведёт на год, который отличается от указанного в тексте. Помогите сделать статью точнее — исправьте год в тексте и в ссылке, чтобы они совпадали.",
 	"editcheck-yearlink-action-use": "Использовать $1",
@@ -125,6 +135,7 @@
 	"editcheck-specialeditchecks-config-matchitem": "Настройки работы с текстом",
 	"editcheck-suggestionfeedback-label-about": "О предложениях",
 	"editcheck-suggestionfeedback-label-report": "Сообщить о проблеме",
+	"editcheck-experimental-subheading-suggestion": "Экспериментальное предложение для тестирования",
 	"tag-editcheck-reference-decline-common-knowledge": "Проверка правок (источники) отклонена (общеизвестно)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Источник EditCheck был отклонён как общеизвестный факт",
 	"tag-editcheck-reference-decline-irrelevant": "Проверка правок (источники) отклонена (неуместно)",
