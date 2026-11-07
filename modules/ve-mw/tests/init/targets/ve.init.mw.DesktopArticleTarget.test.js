@@ -193,3 +193,23 @@ QUnit.test( 'init', ( assert ) => {
 	} );
 	target.activate( dataPromise );
 } );
+
+QUnit.test( 'tryTeardown during a mode switch', ( assert ) => {
+	// Avoid the constructor, which modifies the page
+	const target = Object.create( ve.init.mw.DesktopArticleTarget.prototype );
+	let teardownCount = 0;
+	target.active = true;
+	target.activating = true;
+	target.deactivating = false;
+	target.edited = true;
+	target.teardown = () => {
+		teardownCount++;
+		return ve.createDeferred().resolve().promise();
+	};
+
+	assert.strictEqual( target.tryTeardown( false, 'navigate-back' ).state(), 'rejected', 'Teardown with prompt is refused' );
+	assert.strictEqual( teardownCount, 0, 'Teardown with prompt does not tear down' );
+
+	target.tryTeardown( true );
+	assert.strictEqual( teardownCount, 1, 'Teardown without prompt continues' );
+} );

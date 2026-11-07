@@ -579,7 +579,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownNewSection = function ( surfac
  *
  * A prompt will not be shown if tryTeardown() is called while activation is still in progress.
  * If tryTeardown() is called while the target is deactivating, or while it's not active and
- * not activating, nothing happens.
+ * not activating, nothing happens. If it is called during a mode switch without noPrompt, it fails.
  */
 ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMechanism ) {
 	if ( this.deactivating || ( !this.active && !this.activating ) ) {
@@ -594,6 +594,13 @@ ve.init.mw.DesktopArticleTarget.prototype.tryTeardown = function ( noPrompt, tra
 		this.editingTabDialog.close();
 	}
 	this.editingTabDialog = null;
+
+	// During a mode switch the target is active and activating, and can have edits.
+	// The progress dialog prevents the abandon prompt, so do not tear down without it.
+	const switching = this.active && this.activating;
+	if ( switching && !noPrompt ) {
+		return ve.createDeferred().reject().promise();
+	}
 
 	// Parent method
 	return ve.init.mw.DesktopArticleTarget.super.prototype.tryTeardown.call( this, noPrompt || this.activating, trackMechanism );
@@ -733,6 +740,7 @@ ve.init.mw.DesktopArticleTarget.prototype.loadFail = function ( code, errorDetai
 			if ( this.getSurface() ) {
 				// Restore the mode of the current surface
 				this.setDefaultMode( this.getSurface().getMode() );
+				this.activating = false;
 				this.activatingDeferred.reject();
 			} else {
 				// We're switching from read mode or the 2010 wikitext editor:
