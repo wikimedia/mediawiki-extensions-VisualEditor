@@ -25,7 +25,7 @@
 	"editcheck-dialog-scroll-into-view": "View suggestions",
 	"editcheck-dialog-success-suggestion": "Suggestion completed!",
 	"editcheck-dialog-success-check": "Check completed!",
-	"editcheck-dialog-publish-path-message": "Your change is ready to go live on {{SITENAME}}. You can publish this change now or look for more to improve.",
+	"editcheck-dialog-publish-path-message": "You can publish this change now or look for more to improve.",
 	"editcheck-dialog-action-view-more-suggestions": "View more",
 	"editcheck-dialog-action-publish": "Publish",
 	"editcheck-dialog-toggle": "Toggle visibility",
