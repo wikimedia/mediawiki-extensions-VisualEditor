@@ -46,8 +46,8 @@ ve.ui.EditCheckScrollIntoViewWidget = function VeUiEditCheckScrollIntoViewWidget
 	this.closeButton.connect( this, { click: [ 'emit', 'closeClick' ] } );
 
 	this.connect( this, {
-		showClick: () => ve.track( 'activity.editCheckScrollIntoView', 'click-show' ),
-		closeClick: () => ve.track( 'activity.editCheckScrollIntoView', 'click-close' )
+		showClick: () => ve.track( 'activity.editCheckScrollIntoView', { action: 'click-show' } ),
+		closeClick: () => ve.track( 'activity.editCheckScrollIntoView', { action: 'click-close' } )
 	} );
 
 	this.target.connect( this, { virtualKeyboardChange: 'update' } );
@@ -188,7 +188,7 @@ ve.ui.EditCheckScrollIntoViewWidget.prototype.update = function () {
 		} );
 
 		if ( !this.loggedShown ) {
-			ve.track( 'activity.editCheckScrollIntoView', 'shown' );
+			ve.track( 'activity.editCheckScrollIntoView', { action: 'shown' } );
 			this.loggedShown = true;
 		}
 	} else {
