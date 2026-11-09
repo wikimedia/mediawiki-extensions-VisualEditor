@@ -82,7 +82,7 @@
 	"editcheck-yearlink-title": "اصلاح پیوند سال",
 	"editcheck-yearlink-description": "این پیوند به سالی متفاوت از آنچه در متن نشان داده شده است اشاره می‌کند. با به‌روزرسانی سال نمایش داده شده و سال پیوند داده شده برای مطابقت، به دقیق‌تر شدن مقاله کمک کنید.",
 	"editcheck-yearlink-action-use": "استفاده از $1",
-	"editcheck-action-update-link": "بروزرسانی پیوند",
+	"editcheck-action-update-link": "به‌روزرسانی پیوند",
 	"editcheck-action-merge-links": "ادغام پیوندها",
 	"editcheck-action-remove-link": "حذف پیوند",
 	"editcheck-action-dismiss": "نپذیرفتن",

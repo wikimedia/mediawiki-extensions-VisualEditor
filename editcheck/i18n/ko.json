@@ -25,7 +25,7 @@
 	"editcheck-dialog-scroll-into-view": "제안 보기",
 	"editcheck-dialog-success-suggestion": "제안 완료!",
 	"editcheck-dialog-success-check": "확인 완료!",
-	"editcheck-dialog-publish-path-message": "변경 사항이 {{SITENAME}}에 적용될 준비가 되었습니다. 지금 바로 변경 사항을 게시하거나, 더 많은 개선 사항을 찾아볼 수 있습니다.",
+	"editcheck-dialog-publish-path-message": "지금 바로 변경 사항을 게시하거나, 더 많은 개선 사항을 찾아볼 수 있습니다.",
 	"editcheck-dialog-action-view-more-suggestions": "더 보기",
 	"editcheck-dialog-action-publish": "게시",
 	"editcheck-dialog-toggle": "표시/숨기기 전환",
@@ -123,7 +123,7 @@
 	"editcheck-suggestionfeedback-label-report": "문제점 보고",
 	"editcheck-experimental-subheading-suggestion": "테스트를 위한 실험적 제안",
 	"editcheck-experimental-subheading-check": "테스트를 위한 실험적 편집 검사",
-	"editcheck-suggestionfeedback-label-experimental": "실험적 제안 보기",
+	"editcheck-suggestionfeedback-label-experimental": "다른 실험적 제안",
 	"tag-editcheck-reference-decline-common-knowledge": "편집 검사(출처)를 거부함 (상식)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "EditCheck 출처가 상식을 이유로 거부되었습니다",
 	"tag-editcheck-reference-decline-irrelevant": "편집 검사(출처)를 거부함 (부적절)",
@@ -131,5 +131,6 @@
 	"tag-editcheck-reference-decline-other": "편집 검사(출처)를 거부함 (기타 이유)",
 	"tag-editcheck-reference-decline-other-description": "EditCheck 출처가 미나열된 이유로 인해 거부되었습니다",
 	"tag-editcheck-reference-decline-uncertain": "편집 검사(출처)를 거부함 (이유 불확실)",
-	"tag-editcheck-reference-decline-uncertain-description": "EditCheck 출처가 불확실함을 이유로 거부되었습니다"
+	"tag-editcheck-reference-decline-uncertain-description": "EditCheck 출처가 불확실함을 이유로 거부되었습니다",
+	"communityconfiguration-editcheck-title": "편집 검사"
 }
