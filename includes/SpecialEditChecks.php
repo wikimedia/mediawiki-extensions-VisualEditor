@@ -66,8 +66,8 @@ class SpecialEditChecks extends SpecialPage {
 			'AsyncTextCheck.js',
 		];
 		$onWikiConfig = ResourceLoaderData::getConfig( $this->getContext() );
-		$baseCheck = $this->collectChecks( $baseDir . '/BaseEditCheck.js', [], true );
 		$this->parser = new EditCheckFileParser( $this->getContext() );
+		$baseCheck = $this->collectChecks( $baseDir . '/BaseEditCheck.js', [], true );
 		if ( isset( $baseCheck[0]['defaultConfig'] ) ) {
 			$baseDefaultConfig = $this->parser->tryJsonDecodeObjectString( $baseCheck[0]['defaultConfig'] );
 			$this->baseDefaultConfig = is_array( $baseDefaultConfig ) ? $baseDefaultConfig : [];
