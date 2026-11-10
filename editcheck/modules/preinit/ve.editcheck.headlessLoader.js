@@ -21,6 +21,10 @@
 
 let requestCounter = 0;
 let modulesPromise = null;
+let configPageRevIdPromise = null;
+let configIdPromise = null;
+
+const CONFIG_ID_NAMESPACE = '4b64b910-21e9-5fe0-bf6c-82aac297f605'; // uuid5( NAMESPACE_DNS, 'config-id.editcheck.mediawiki.org' )
 let runQueue = Promise.resolve();
 
 /**
@@ -122,18 +126,120 @@ function loadModules() {
 }
 
 /**
+ * Get the revision ID of MediaWiki:Editcheck-config.json, fetched once alongside
+ * the modules so it matches the config they loaded.
+ *
+ * @return {Promise<number|null>} Null if the page doesn't exist or the lookup failed
+ */
+function loadConfigPageRevId() {
+	if ( !configPageRevIdPromise ) {
+		configPageRevIdPromise = new mw.Api().get( {
+			action: 'query',
+			formatversion: 2,
+			prop: 'info',
+			titles: 'MediaWiki:Editcheck-config.json'
+		} ).then(
+			( response ) => {
+				const page = response && response.query && response.query.pages && response.query.pages[ 0 ];
+				return ( page && page.lastrevid ) || null;
+			},
+			() => null
+		);
+	}
+	return configPageRevIdPromise;
+}
+
+/**
+ * Encode a value as JSON with sorted object keys, so equal values have equal encodings.
+ *
+ * @param {any} value
+ * @return {string}
+ */
+function stableStringify( value ) {
+	if ( Array.isArray( value ) ) {
+		return `[${ value.map( stableStringify ).join( ',' ) }]`;
+	}
+	if ( value && typeof value === 'object' ) {
+		return `{${ Object.keys( value ).sort()
+			.filter( ( key ) => value[ key ] !== undefined )
+			.map( ( key ) => `${ JSON.stringify( key ) }:${ stableStringify( value[ key ] ) }` )
+			.join( ',' ) }}`;
+	}
+	return JSON.stringify( value === undefined ? null : value );
+}
+
+/**
+ * Make a name-based UUIDv5.
+ *
+ * @param {string} namespace Namespace UUID
+ * @param {string} name
+ * @return {Promise<string>}
+ */
+function uuidV5( namespace, name ) {
+	const nsBytes = namespace.replace( /-/g, '' ).match( /../g ).map( ( h ) => parseInt( h, 16 ) );
+	const nameBytes = Array.from( new TextEncoder().encode( name ) );
+	return crypto.subtle.digest( 'SHA-1', new Uint8Array( nsBytes.concat( nameBytes ) ) ).then( ( digest ) => {
+		const bytes = Array.from( new Uint8Array( digest ).slice( 0, 16 ) );
+		// Version 5
+		bytes[ 6 ] = ( bytes[ 6 ] % 16 ) + 0x50;
+		// Variant 10xx
+		bytes[ 8 ] = ( bytes[ 8 ] % 64 ) + 0x80;
+		const hex = bytes.map( ( b ) => b.toString( 16 ).padStart( 2, '0' ) ).join( '' );
+		return `${ hex.slice( 0, 8 ) }-${ hex.slice( 8, 12 ) }-${ hex.slice( 12, 16 ) }-` +
+			`${ hex.slice( 16, 20 ) }-${ hex.slice( 20 ) }`;
+	} );
+}
+
+/**
+ * Get the ID of the effective edit check config: the resolved config of each
+ * check, and the textMatch rules with imports resolved. These are loaded once,
+ * so the ID is computed once.
+ *
+ * @return {Promise<Object>} `configId`, and when it was computed (`configComputeDt`);
+ *  both are null if the config can't be read
+ */
+function loadConfigId() {
+	if ( !configIdPromise ) {
+		configIdPromise = loadModules().then( () => {
+			const checks = {};
+			for ( const checkName of getCheckNames() ) {
+				try {
+					checks[ checkName ] = mw.editcheck.editCheckFactory.create( checkName, null, {}, true ).config;
+				} catch ( e ) {
+					checks[ checkName ] = null;
+				}
+			}
+			return mw.editcheck.TextMatchEditCheck.static.ensureMatchRulesLoaded().then( ( cache ) => ( {
+				checks,
+				textMatchRules: cache ? cache.rawMatchRules : null
+			} ) );
+		} ).then(
+			( config ) => uuidV5( CONFIG_ID_NAMESPACE, stableStringify( config ) ).then( ( configId ) => ( {
+				configId,
+				configComputeDt: new Date().toISOString()
+			} ) )
+		).catch( ( error ) => {
+			mw.log.error( 'EditCheck headless loader could not compute config ID', error );
+			return { configId: null, configComputeDt: null };
+		} );
+	}
+	return configIdPromise;
+}
+
+/**
  * Load the HTML content for a page.
  *
  * @param {string} pageName The name of the page.
  * @param {number} requestId The request ID.
  * @param {string} [parsoidHtml] The Parsoid HTML content.
- * @return {jQuery.Promise<string>} A promise that resolves with the HTML content.
+ * @return {jQuery.Promise<Object>} A promise that resolves with the HTML content (`html`)
+ *  and the revision rendered (`revId`), which is null for posted HTML.
  */
 function loadHtml( pageName, requestId, parsoidHtml ) {
 	let htmlPromise;
 	if ( typeof parsoidHtml === 'string' ) {
 		publishHeadlessProgress( `Request ${ requestId } using posted Parsoid HTML`, requestId );
-		htmlPromise = Promise.resolve( parsoidHtml );
+		htmlPromise = Promise.resolve( { html: parsoidHtml, revId: null } );
 	} else {
 		publishHeadlessProgress( `Request ${ requestId } fetching Parsoid HTML`, requestId );
 		htmlPromise = mw.libs.ve.targetLoader.requestParsoidData(
@@ -149,7 +255,7 @@ function loadHtml( pageName, requestId, parsoidHtml ) {
 			if ( !data || typeof data.content !== 'string' ) {
 				throw new Error( 'Invalid or empty parsoid response' );
 			}
-			return data.content;
+			return { html: data.content, revId: data.oldid || null };
 		} );
 	}
 	return htmlPromise;
@@ -186,6 +292,21 @@ function loadConfig( pageName, requestId ) {
 }
 
 /**
+ * @return {string[]} Names of the checks that can run
+ */
+function getCheckNames() {
+	const checkNames = [];
+	[ 'onDocumentChange', 'onBranchNodeChange', 'onBeforeSave' ].forEach( ( listener ) => {
+		mw.editcheck.editCheckFactory.getNamesByListener( listener ).forEach( ( checkName ) => {
+			if ( !checkNames.includes( checkName ) ) {
+				checkNames.push( checkName );
+			}
+		} );
+	} );
+	return checkNames;
+}
+
+/**
  * Get the resolved per-check config, keyed by check name.
  *
  * This is independent of any particular page: it is derived from the global
@@ -206,17 +327,8 @@ function getCheckConfigs() {
 		maximumEditCount: getModeConfigValue( config.maximumEditCount, true )
 	} );
 
-	const checkNames = [];
-	[ 'onDocumentChange', 'onBranchNodeChange', 'onBeforeSave' ].forEach( ( listener ) => {
-		mw.editcheck.editCheckFactory.getNamesByListener( listener ).forEach( ( checkName ) => {
-			if ( !checkNames.includes( checkName ) ) {
-				checkNames.push( checkName );
-			}
-		} );
-	} );
-
 	const promises = [];
-	checkNames.forEach( ( checkName ) => {
+	getCheckNames().forEach( ( checkName ) => {
 		let check;
 		try {
 			check = mw.editcheck.editCheckFactory.create( checkName, null, {}, true );
@@ -276,8 +388,10 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 	return Promise.all( [
 		loadHtml( pageName, requestId, parsoidHtml ),
 		loadConfig( pageName, requestId ),
-		loadModules()
-	] ).then( ( [ html ] ) => {
+		loadModules(),
+		loadConfigPageRevId(),
+		loadConfigId()
+	] ).then( ( [ { html, revId }, , , configPageRevId, { configId, configComputeDt } ] ) => {
 		const targetClass = ve.init.mw.ArticleTarget;
 
 		// Bypass account checks so we get all possible suggestions. Account checks can be
@@ -286,6 +400,21 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 
 		publishHeadlessProgress( `Request ${ requestId } parsing document`, requestId );
 		const htmlDoc = targetClass.static.parseDocument( html, 'visual', null );
+		const getMeta = ( attribute, value ) => {
+			const meta = htmlDoc.querySelector( `meta[${ attribute }="${ value }"]` );
+			return ( meta && meta.getAttribute( 'content' ) ) || null;
+		};
+		const source = {
+			revId,
+			renderId: getMeta( 'http-equiv', 'x-mediawiki-render-id' ),
+			contentLanguage: getMeta( 'http-equiv', 'content-language' ),
+			htmlVersion: getMeta( 'property', 'mw:htmlVersion' ),
+			revDt: getMeta( 'property', 'dc:modified' ),
+			revSha1: getMeta( 'property', 'mw:revisionSHA1' ),
+			configPageRevId,
+			configId,
+			configComputeDt
+		};
 		// Parsoid links are relative (e.g. href="./Foo") and rely on the document's
 		// <base href> to resolve. VE's getTargetDataFromHref() resolves them against
 		// document.baseURI to recognise internal links. Some headless engines (e.g.
@@ -349,7 +478,9 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 				pageName,
 				data: {
 					suggestionCounts,
-					suggestions
+					suggestions,
+					source,
+					software: { name: 'VisualEditor', version: mw.config.get( 'wgVersion' ) }
 				}
 			};
 			publishHeadlessResult( result );
@@ -382,5 +513,7 @@ window.veEditCheckHeadlessGetConfigs = function () {
 
 // Start loading modules immediately
 loadModules();
+loadConfigPageRevId();
+loadConfigId();
 
 publishHeadlessResult( { status: 'idle' } );
