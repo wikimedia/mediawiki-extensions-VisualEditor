@@ -166,6 +166,10 @@
 			"value": false,
 			"description": "Enable the Edit Check Suggestions beta feature."
 		},
+		"VisualEditorEditCheckReadSuggestionsCount": {
+			"value": false,
+			"description": "Show the page's edit suggestion count in read mode. For the A/B test, the VisualEditorEditCheckReadSuggestionsIndicator hook can change or hide the indicator."
+		},
 		"VisualEditorEditCheckDefaultConfig": {
 			"value": {},
 			"description": "Override default Edit Check config. Same as editing [[MediaWiki:Editcheck-config.json]]."
@@ -273,7 +277,10 @@
 			"EditCheckHooks"
 		],
 		"SkinEditSectionLinks": "VisualEditorHooks",
-		"SkinTemplateNavigation::Universal": "VisualEditorHooks",
+		"SkinTemplateNavigation::Universal": [
+			"VisualEditorHooks",
+			"EditCheckHooks"
+		],
 		"UnitTestsList": "EditCheckHooks",
 		"UserLoggedIn": "VisualEditorHooks"
 	},
@@ -305,7 +312,11 @@
 			"services": [
 				"UserOptionsLookup",
 				"UserOptionsManager",
-				"MessageCache"
+				"MessageCache",
+				"VisualEditor.EditSuggestionsCountsLookup",
+				"VisualEditor.VisualEditorAvailabilityLookup",
+				"MainConfig",
+				"HookContainer"
 			]
 		},
 		"betapreferences": {
@@ -686,6 +697,19 @@
 			"group": "visualEditorA",
 			"scripts": "modules/ve-mw/ve.track.js",
 			"dependencies": "ext.visualEditor.ve"
+		},
+		"ext.visualEditor.editCheck.read.styles": {
+			"styles": [
+				"editcheck/modules/preinit/read.less"
+			]
+		},
+		"ext.visualEditor.editCheck.read": {
+			"packageFiles": [
+				"editcheck/modules/preinit/read.js"
+			],
+			"dependencies": [
+				"mediawiki.storage"
+			]
 		},
 		"ext.visualEditor.editCheck": {
 			"group": "visualEditorA",

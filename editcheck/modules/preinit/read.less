@@ -1,0 +1,128 @@
+@import 'mediawiki.skin.variables.less';
+@import 'mediawiki.mixins.less';
+
+// Progressive blue, as a colour value that fade() accepts
+@ext-editcheck-pulse-color: #36c;
+
+.ext-editcheck-suggestion-count( @content, @left, @bottom ) {
+	content: @content;
+	display: block;
+	position: absolute;
+	text-align: center;
+	padding: 1px;
+	min-width: 11px;
+	left: @left;
+	bottom: @bottom;
+	border: 1px solid @border-color-inverted;
+	border-radius: @border-radius-base;
+	background-color: @background-color-progressive;
+	color: @color-inverted;
+	font-size: @font-size-x-small;
+	font-weight: bold;
+	transition-property: background-color, border-color, color;
+	transition-duration: @transition-duration-base;
+}
+
+/* stylelint-disable selector-max-id */
+// Suggestions tab in skins other than Vector 2022 and Minerva
+#ca-suggestions {
+	position: relative;
+
+	[ data-count ]::after {
+		.ext-editcheck-suggestion-count( attr( data-count ), 23px, 1px );
+	}
+}
+
+// Indicator on an edit button. An <html> class selects the indicator, and another
+// pulses it on its first view.
+.ext-editcheck-read-indicator( @left, @bottom ) {
+	.ext-editcheck-read-indicator-position( @left, @bottom );
+
+	.ext-editcheck-read-suggestions-count &,
+	.ext-editcheck-read-suggestions-lightbulb & {
+		position: relative;
+		overflow: visible;
+	}
+
+	.ext-editcheck-read-suggestions-count &::after {
+		.ext-editcheck-suggestion-count( var( --ext-editcheck-suggestion-count ), @left, @bottom );
+	}
+
+	.ext-editcheck-read-suggestions-lightbulb &::after,
+	.ext-editcheck-read-suggestions-lightbulb.ext-editcheck-read-suggestions-pulse &::before {
+		content: '';
+		position: absolute;
+	}
+
+	.ext-editcheck-read-suggestions-lightbulb &::after {
+		.cdx-mixin-css-icon( @cdx-icon-lightbulb, @color-progressive, @size-icon-x-small );
+	}
+
+	// A dot in the middle of the lightbulb, with a ring that grows and fades
+	.ext-editcheck-read-suggestions-lightbulb.ext-editcheck-read-suggestions-pulse &::before {
+		width: 4px;
+		height: 4px;
+		margin: 0 0 4px 4px;
+		border-radius: @border-radius-circle;
+		background-color: fade( @ext-editcheck-pulse-color, 20% );
+		animation: ext-editcheck-read-suggestions-pulse 1.5s ease-out infinite;
+	}
+
+	.ext-editcheck-read-suggestions-count.ext-editcheck-read-suggestions-pulse &::after {
+		transform-origin: center;
+		animation: ext-editcheck-read-suggestions-badge-pulse 0.45s cubic-bezier( 0.36, 0.07, 0.19, 0.97 ) 1 forwards;
+	}
+
+	@media ( prefers-reduced-motion: reduce ) {
+		.ext-editcheck-read-suggestions-lightbulb.ext-editcheck-read-suggestions-pulse &::before,
+		.ext-editcheck-read-suggestions-count.ext-editcheck-read-suggestions-pulse &::after {
+			animation: none;
+		}
+	}
+}
+
+.ext-editcheck-read-indicator-position( @left, @bottom ) {
+	.ext-editcheck-read-suggestions-count &::after,
+	.ext-editcheck-read-suggestions-lightbulb &::after,
+	.ext-editcheck-read-suggestions-lightbulb.ext-editcheck-read-suggestions-pulse &::before {
+		left: @left;
+		bottom: @bottom;
+	}
+}
+
+@keyframes ext-editcheck-read-suggestions-pulse {
+	0% {
+		box-shadow: 0 0 0 0 fade( @ext-editcheck-pulse-color, 40% );
+	}
+
+	70% {
+		box-shadow: 0 0 0 14px fade( @ext-editcheck-pulse-color, 0% );
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 fade( @ext-editcheck-pulse-color, 0% );
+	}
+}
+
+@keyframes ext-editcheck-read-suggestions-badge-pulse {
+	50% {
+		transform: scale( 1.22 );
+	}
+}
+
+// Vector 2022 sticky header
+#ca-ve-edit-sticky-header {
+	.ext-editcheck-read-indicator( 18px, -3px );
+}
+
+// Minerva puts the ids of the edit buttons on the list items
+#page-actions-edit,
+#page-actions-ve-edit {
+	.ext-editcheck-read-indicator( 24px, 4px );
+
+	// Minerva shows the label from this width, so put the indicator after it
+	@media ( min-width: @min-width-breakpoint-desktop ) {
+		.ext-editcheck-read-indicator-position( calc( 100% - 8px ), 8px );
+	}
+}
+/* stylelint-enable selector-max-id */

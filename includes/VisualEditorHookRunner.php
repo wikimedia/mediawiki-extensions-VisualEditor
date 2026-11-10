@@ -21,6 +21,7 @@ class VisualEditorHookRunner implements
 	VisualEditorApiVisualEditorEditPreSaveHook,
 	VisualEditorApiVisualEditorEditPostSaveHook,
 	VisualEditorBeforeEditorHook,
+	VisualEditorEditCheckReadSuggestionsIndicatorHook,
 	VisualEditorRegisterChangeTagsHook
 {
 
@@ -83,5 +84,18 @@ class VisualEditorHookRunner implements
 			$output,
 			$skin
 		], [ 'abortable' => true ] );
+	}
+
+	/** @inheritDoc */
+	public function onVisualEditorEditCheckReadSuggestionsIndicator(
+		Skin $skin,
+		int $count,
+		?string &$indicator
+	): void {
+		$this->hookContainer->run( 'VisualEditorEditCheckReadSuggestionsIndicator', [
+			$skin,
+			$count,
+			&$indicator
+		], [ 'abortable' => false ] );
 	}
 }

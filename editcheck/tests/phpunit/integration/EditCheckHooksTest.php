@@ -22,7 +22,11 @@ class EditCheckHooksTest extends MediaWikiIntegrationTestCase {
 		return new Hooks(
 			$services->getUserOptionsLookup(),
 			$services->getUserOptionsManager(),
-			$services->getMessageCache()
+			$services->getMessageCache(),
+			$services->getService( 'VisualEditor.EditSuggestionsCountsLookup' ),
+			$services->getService( 'VisualEditor.VisualEditorAvailabilityLookup' ),
+			$services->getMainConfig(),
+			$services->getHookContainer()
 		);
 	}
 

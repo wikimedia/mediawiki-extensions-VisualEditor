@@ -11,9 +11,15 @@
 namespace MediaWiki\Extension\VisualEditor\EditCheck;
 
 use MediaWiki\CommentStore\CommentStoreComment;
+use MediaWiki\Config\Config;
 use MediaWiki\Content\TextContent;
+use MediaWiki\Extension\VisualEditor\EditCheck\EditSuggestionCounts\EditSuggestionsCountsLookup;
+use MediaWiki\Extension\VisualEditor\Hooks as VisualEditorHooks;
 use MediaWiki\Extension\VisualEditor\MediaWikiJsonSchemaValidator;
+use MediaWiki\Extension\VisualEditor\Services\VisualEditorAvailabilityLookup;
+use MediaWiki\Extension\VisualEditor\VisualEditorHookRunner;
 use MediaWiki\Hook\UnitTestsListHook;
+use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Language\MessageCache;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
@@ -21,6 +27,8 @@ use MediaWiki\Preferences\Hook\PreferencesFormPreSaveHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use MediaWiki\Revision\RenderedRevision;
+use MediaWiki\Skin\Hook\SkinTemplateNavigation__UniversalHook;
+use MediaWiki\Skin\SkinTemplate;
 use MediaWiki\Status\Status;
 use MediaWiki\Storage\Hook\MultiContentSaveHook;
 use MediaWiki\User\Options\UserOptionsLookup;
@@ -33,14 +41,22 @@ class Hooks implements
 	GetPreferencesHook,
 	PreferencesFormPreSaveHook,
 	MultiContentSaveHook,
+	SkinTemplateNavigation__UniversalHook,
 	UnitTestsListHook
 {
+
+	private readonly VisualEditorHookRunner $hookRunner;
 
 	public function __construct(
 		private readonly UserOptionsLookup $userOptionsLookup,
 		private readonly UserOptionsManager $userOptionsManager,
 		private readonly MessageCache $messageCache,
+		private readonly EditSuggestionsCountsLookup $editSuggestionsCountsLookup,
+		private readonly VisualEditorAvailabilityLookup $visualEditorAvailabilityLookup,
+		private readonly Config $config,
+		HookContainer $hookContainer,
 	) {
+		$this->hookRunner = new VisualEditorHookRunner( $hookContainer );
 	}
 
 	/**
@@ -166,5 +182,63 @@ class Hooks implements
 			dirname( __DIR__ ) . '/editcheck-config.schema.json',
 			$definition
 		);
+	}
+
+	/**
+	 * Shows the page's suggestion indicator: on the sticky header's edit button in
+	 * Vector 2022, on the edit button in Minerva, or on a Suggestions tab in other skins.
+	 *
+	 * $wgVisualEditorEditCheckReadSuggestionsCount enables this feature.
+	 * The VisualEditorEditCheckReadSuggestionsIndicator hook can show a lightbulb
+	 * instead of the count, or hide the indicator.
+	 *
+	 * @param SkinTemplate $skin The skin template on which the UI is built.
+	 * @param array &$links Navigation links.
+	 */
+	public function onSkinTemplateNavigation__Universal( $skin, &$links ): void {
+		if ( !$this->config->get( 'VisualEditorEditCheckReadSuggestionsCount' ) ) {
+			return;
+		}
+		$title = $skin->getTitle();
+		$request = $skin->getRequest();
+		$user = $skin->getUser();
+		if (
+			!in_array( $skin->getActionName(), [ 'view', 'edit' ], true ) ||
+			!VisualEditorHooks::isEditCheckSuggestionsAvailable( $request, $user, $this->userOptionsLookup ) ||
+			!$this->visualEditorAvailabilityLookup->isAvailable( $title, $request, $user )
+		) {
+			return;
+		}
+		$count = $this->editSuggestionsCountsLookup->getCount( $title, $user );
+		if ( !$count ) {
+			return;
+		}
+		$indicator = 'count';
+		$this->hookRunner->onVisualEditorEditCheckReadSuggestionsIndicator( $skin, $count, $indicator );
+		if ( !in_array( $indicator, [ 'count', 'lightbulb' ], true ) ) {
+			return;
+		}
+		$output = $skin->getOutput();
+		if ( in_array( $skin->getSkinName(), [ 'vector-2022', 'minerva' ], true ) ) {
+			// The edit buttons of these skins can't get attributes from here, so pass the indicator to CSS
+			$output->addHtmlClasses( "ext-editcheck-read-suggestions-$indicator" );
+			if ( $indicator === 'count' ) {
+				$output->addInlineStyle( ":root { --ext-editcheck-suggestion-count: '$count'; }" );
+			}
+			// Pulses the indicator on its first view
+			$output->addModules( 'ext.visualEditor.editCheck.read' );
+		} else {
+			// The tab has a lightbulb icon, so the lightbulb indicator is the tab without a count
+			$links['views']['suggestions'] = [
+				'text' => $skin->msg( 'editcheck-read-suggestions' )->text(),
+				'href' => $title->getLocalURL( [ 'veaction' => 'edit' ] ),
+				'icon' => 'lightbulb',
+				'class' => '',
+			];
+			if ( $indicator === 'count' ) {
+				$links['views']['suggestions']['data'] = [ 'count' => $count ];
+			}
+		}
+		$output->addModuleStyles( 'ext.visualEditor.editCheck.read.styles' );
 	}
 }

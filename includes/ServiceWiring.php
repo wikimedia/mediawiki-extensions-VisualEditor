@@ -12,8 +12,10 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Extension\VisualEditor\EditCheck\EditSuggestionCounts\EditSuggestionsCountsLookup;
 use MediaWiki\Extension\VisualEditor\Services\VisualEditorAvailabilityLookup;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\WikiMap\WikiMap;
 
 // PHP unit does not understand code coverage for this file
 // as the @covers annotation cannot cover a specific file
@@ -40,6 +42,19 @@ return [
 			$services->getNamespaceInfo(),
 			$services->getExtensionRegistry(),
 			$services->getUserOptionsLookup()
+		);
+	},
+	EditSuggestionsCountsLookup::SERVICE_NAME => static function (
+		MediaWikiServices $services
+	): EditSuggestionsCountsLookup {
+		return new EditSuggestionsCountsLookup(
+			$services->getExtensionRegistry()->isLoaded( 'EventBus' ) ?
+				$services->getService( 'EventBus.LinkedArtifactsClient' ) :
+				null,
+			$services->getPageStore(),
+			$services->getMainWANObjectCache(),
+			$services->getJobQueueGroup(),
+			WikiMap::getCurrentWikiId()
 		);
 	},
 ];

@@ -65,6 +65,7 @@ use MediaWiki\SpecialPage\Hook\RedirectSpecialArticleRedirectParamsHook;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\Title;
+use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
@@ -1077,18 +1078,24 @@ class Hooks implements
 			'pageLanguageCode' => $pageLanguage->getHtmlCode(),
 			'pageLanguageDir' => $pageLanguage->getDir(),
 			'pageVariantFallbacks' => $fallbacks,
-			'editCheckSuggestionsAvailable' => $this->isEditCheckSuggestionsAvailable( $out ),
+			'editCheckSuggestionsAvailable' => self::isEditCheckSuggestionsAvailable(
+				$out->getRequest(), $out->getUser(), $this->userOptionsManager
+			),
 		];
 	}
 
 	/**
 	 * Whether Edit Check suggestion mode will be available for this user on this page.
 	 *
-	 * @param OutputPage $out
+	 * @param WebRequest $request
+	 * @param UserIdentity $user
+	 * @param UserOptionsLookup $userOptionsLookup
 	 * @return bool
 	 */
-	private function isEditCheckSuggestionsAvailable( OutputPage $out ): bool {
-		$ecenable = $out->getRequest()->getVal( 'ecenable' );
+	public static function isEditCheckSuggestionsAvailable(
+		WebRequest $request, UserIdentity $user, UserOptionsLookup $userOptionsLookup
+	): bool {
+		$ecenable = $request->getVal( 'ecenable' );
 		if ( $ecenable === '0' ) {
 			return false;
 		}
@@ -1097,7 +1104,7 @@ class Hooks implements
 		) {
 			return true;
 		}
-		return (bool)$this->userOptionsManager->getOption( $out->getUser(), 'visualeditor-editcheck-suggestions' );
+		return (bool)$userOptionsLookup->getOption( $user, 'visualeditor-editcheck-suggestions' );
 	}
 
 	/**
