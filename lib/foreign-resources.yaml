@@ -26,7 +26,7 @@ DOMPurify:
   license: MPL-2.0 OR Apache-2.0
   homepage: https://github.com/cure53/DOMPurify
   authors: Mario Heiderich and other contributors
-  version: 2.5.7
+  version: 3.4.17
   type: doc-only
 
 Universal Language Selector data:
@@ -40,7 +40,7 @@ PapaParse:
   license: MIT
   homepage: https://www.papaparse.com/
   authors: Matthew Holt and other contributors
-  version: 5.3.2
+  version: 5.7.0
   type: doc-only
 
 PeerJS:
