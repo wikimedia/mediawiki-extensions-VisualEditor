@@ -434,7 +434,7 @@ mw.editcheck.showCitationDialog = function ( surface ) {
 		if ( citoidData && citoidData.action === 'manual-choose' ) {
 			// The plain reference dialog has been launched. Wait for the data from
 			// the basic Cite closing promise instead.
-			surface.getDialogs().once( 'closing', ( win, closed, citeData ) => {
+			surface.getModalDialogs().once( 'closing', ( win, closed, citeData ) => {
 				citoidOrCiteDataDeferred.resolve( citeData );
 			} );
 		} else {

@@ -59,7 +59,7 @@ module.exports = function () {
 
 			target.once( 'saveReview', () => {
 				setTimeout( () => {
-					const dialog = surface.dialogs.currentWindow;
+					const dialog = surface.getModalDialogs().currentWindow;
 					dialog.reviewModeButtonSelect.selectItemByData( 'visual' );
 
 					// Fake parsed edit summary

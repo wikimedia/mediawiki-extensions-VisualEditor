@@ -2048,7 +2048,7 @@ ve.init.mw.ArticleTarget.prototype.teardown = function () {
  */
 ve.init.mw.ArticleTarget.prototype.tryTeardown = function ( noPrompt, trackMechanism ) {
 	if ( !noPrompt && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
-		return this.getSurface().dialogs.openWindow( 'abandonedit' )
+		return this.getSurface().getModalDialogs().openWindow( 'abandonedit' )
 			.closed.then( ( data ) => {
 				if ( data && data.action === 'discard' ) {
 					return this.teardown( trackMechanism );
@@ -2188,7 +2188,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 		return;
 	}
 
-	const currentWindow = this.getSurface().getDialogs().getCurrentWindow();
+	const currentWindow = this.getSurface().getModalDialogs().getCurrentWindow();
 	if ( currentWindow && currentWindow.constructor.static.name === 'mwSave' && ( action === 'save' || action === null ) ) {
 		// The current window is the save dialog, and we've gotten here via
 		// the save action. If the save panel is not visible, go back to it so
@@ -2222,7 +2222,7 @@ ve.init.mw.ArticleTarget.prototype.showSaveDialog = function ( action, checkboxN
 
 		this.loadDeferredCheckboxes().then( () => {
 			// Get the save dialog
-			this.getSurface().getDialogs().getWindow( 'mwSave' ).then( ( win ) => {
+			this.getSurface().getModalDialogs().getWindow( 'mwSave' ).then( ( win ) => {
 				const windowAction = ve.ui.actionFactory.create( 'window', this.getSurface() );
 
 				if ( !this.saveDialog ) {
@@ -2668,7 +2668,7 @@ ve.init.mw.ArticleTarget.prototype.switchToWikitextSection = function ( section,
 	}
 	let promise;
 	if ( !noPrompt && this.edited && mw.user.options.get( 'useeditwarning' ) ) {
-		promise = this.getSurface().dialogs.openWindow( 'abandonedit' )
+		promise = this.getSurface().getModalDialogs().openWindow( 'abandonedit' )
 			.closed.then( ( data ) => data && data.action === 'discard' );
 	} else {
 		promise = ve.createDeferred().resolve( true ).promise();

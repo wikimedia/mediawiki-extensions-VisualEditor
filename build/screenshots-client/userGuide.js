@@ -114,12 +114,12 @@ module.exports = {
 		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
-		surface.dialogs.once( 'opening', ( win, opening ) => {
+		surface.getModalDialogs().once( 'opening', ( win, opening ) => {
 			opening.then( () => {
 				setTimeout( () => {
 					done(
 						seleniumUtils.getBoundingRect( [
-							ve.init.target.surface.dialogs.currentWindow.$frame[ 0 ]
+							ve.init.target.surface.getModalDialogs().currentWindow.$frame[ 0 ]
 						] )
 					);
 				}, 500 );
@@ -130,7 +130,7 @@ module.exports = {
 	saveTeardown: function () {
 		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
-		surface.dialogs.currentWindow.close().closed.then( done );
+		surface.getModalDialogs().currentWindow.close().closed.then( done );
 	},
 	specialCharacters: function () {
 		const done = arguments[ arguments.length - 1 ],
@@ -159,7 +159,7 @@ module.exports = {
 		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
-		surface.dialogs.once( 'opening', ( win, opening ) => {
+		surface.getModalDialogs().once( 'opening', ( win, opening ) => {
 			opening.then( () => {
 				win.previewElement.once( 'render', () => {
 					win.previewElement.$element.find( 'img' ).on( 'load', () => {
@@ -178,13 +178,13 @@ module.exports = {
 	formulaTeardown: function () {
 		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
-		surface.dialogs.currentWindow.close().closed.then( done );
+		surface.getModalDialogs().currentWindow.close().closed.then( done );
 	},
 	referenceList: function () {
 		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
 
-		surface.dialogs.once( 'opening', ( win, opening ) => {
+		surface.getModalDialogs().once( 'opening', ( win, opening ) => {
 			opening.then( () => {
 				setTimeout( () => {
 					done(
@@ -202,7 +202,7 @@ module.exports = {
 	referenceListTeardown: function () {
 		const done = arguments[ arguments.length - 1 ],
 			surface = ve.init.target.surface;
-		surface.dialogs.currentWindow.close().closed.then( () => {
+		surface.getModalDialogs().currentWindow.close().closed.then( () => {
 			// Remove the reference list
 			surface.getModel().undo();
 			done();

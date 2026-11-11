@@ -149,7 +149,7 @@ ve.dm.MWWikitextSurfaceFragment.prototype.convertToSource = function ( doc ) {
 			} else {
 				deferred.reject();
 			}
-		}, ve.init.target.getSurface().dialogs.getTeardownDelay() );
+		}, ve.init.target.getSurface().getModalDialogs().getTeardownDelay() );
 		return deferred.promise();
 	} );
 };

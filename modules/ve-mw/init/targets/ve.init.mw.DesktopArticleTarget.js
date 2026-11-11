@@ -925,7 +925,7 @@ ve.init.mw.DesktopArticleTarget.prototype.serialize = function () {
  * @param {jQuery.Event} e Mouse click event
  */
 ve.init.mw.DesktopArticleTarget.prototype.onToolbarMetaButtonClick = function () {
-	this.getSurface().getDialogs().openWindow( 'meta' );
+	this.getSurface().getModalDialogs().openWindow( 'meta' );
 };
 
 /**
@@ -1304,7 +1304,7 @@ ve.init.mw.DesktopArticleTarget.prototype.teardownUnloadHandlers = function () {
  */
 ve.init.mw.DesktopArticleTarget.prototype.maybeShowWelcomeDialog = function () {
 	const editorMode = this.getDefaultMode(),
-		windowManager = this.getSurface().dialogs;
+		windowManager = this.getSurface().getModalDialogs();
 
 	this.welcomeDialogPromise = ve.createDeferred();
 

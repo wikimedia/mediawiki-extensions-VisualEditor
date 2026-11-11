@@ -146,7 +146,7 @@ QUnit.test( 'init', ( assert ) => {
 			// Open the save dialog and examine it (this bypasses a bunch of stuff, and may fail in funny
 			// ways, but #showSaveDialog has many dependencies that I don't want to simulate here).
 			await target.loadDeferredCheckboxes();
-			const dialogs = target.getSurface().getDialogs();
+			const dialogs = target.getSurface().getModalDialogs();
 			const instance = dialogs.openWindow( 'mwSave', target.getSaveDialogOpeningData() );
 			await instance.opened;
 			const dialog = dialogs.getCurrentWindow();

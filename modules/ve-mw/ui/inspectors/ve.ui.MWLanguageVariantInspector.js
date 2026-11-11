@@ -374,7 +374,7 @@ ve.ui.MWLanguageVariantNameInspector.static.title = OO.ui.deferMsg(
 ve.ui.MWLanguageVariantNameInspector.prototype.initialize = function () {
 	ve.ui.MWLanguageVariantNameInspector.super.prototype.initialize.call( this );
 	this.languageInput = new ve.ui.LanguageInputWidget( {
-		dialogManager: this.manager.getSurface().getDialogs(),
+		dialogManager: this.manager.getSurface().getModalDialogs(),
 		dirInput: 'none'
 	} );
 	this.form.$element.append( this.languageInput.$element );
@@ -582,7 +582,7 @@ ve.ui.MWLanguageVariantTwoWayInspector.prototype.getSetupProcess = function ( da
  */
 ve.ui.MWLanguageVariantTwoWayInspector.prototype.createItem = function ( lang, content ) {
 	const languageInput = new ve.ui.LanguageInputWidget( {
-		dialogManager: this.manager.getSurface().getDialogs(),
+		dialogManager: this.manager.getSurface().getModalDialogs(),
 		dirInput: 'none'
 	} );
 	const textTarget = this.createTextTarget( ve.msg(
@@ -729,7 +729,7 @@ ve.ui.MWLanguageVariantOneWayInspector.prototype.createItem = function ( from, l
 		'visualeditor-mwlanguagevariantinspector-oneway-from-text-placeholder'
 	) );
 	const languageInput = new ve.ui.LanguageInputWidget( {
-		dialogManager: this.manager.getSurface().getDialogs(),
+		dialogManager: this.manager.getSurface().getModalDialogs(),
 		dirInput: 'none'
 	} );
 	const toTextTarget = this.createTextTarget( ve.msg(
