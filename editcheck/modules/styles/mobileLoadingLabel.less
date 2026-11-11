@@ -13,13 +13,13 @@
 	// only animate when there's more than one to rotate between
 	&:not( :only-child ) {
 		opacity: 0;
-		transform: translateY( 100% );
+		transform: translateY( 12px );
 		animation: ve-mobile-fakeToolbar-loading-label-rotate 4s infinite;
-		// Start mid-cycle (at the visible 10% keyframe) to avoid a jump on append.
-		animation-delay: -0.4s;
+		// Start right as the phrase finishes entering, to avoid a jump on append.
+		animation-delay: -300ms;
 
 		&:last-child {
-			animation-delay: -2.4s;
+			animation-delay: -2300ms;
 		}
 
 		@media ( prefers-reduced-motion: reduce ) {
@@ -33,41 +33,45 @@
 @keyframes ve-mobile-fakeToolbar-loading-label-rotate {
 	0% {
 		opacity: 0;
-		transform: translateY( 100% );
+		transform: translateY( 12px );
+		animation-timing-function: ease-out;
 	}
 
-	10% {
+	7.5% {
 		opacity: 1;
 		transform: translateY( 0 );
 	}
 
-	40% {
+	43.75% {
 		opacity: 1;
 		transform: translateY( 0 );
+		animation-timing-function: ease-in;
 	}
 
 	50% {
 		opacity: 0;
-		transform: translateY( -100% );
+		transform: translateY( -12px );
 	}
 
 	100% {
 		opacity: 0;
-		transform: translateY( 100% );
+		transform: translateY( 12px );
 	}
 }
 
 @keyframes ve-mobile-fakeToolbar-loading-label-fade {
 	0% {
 		opacity: 0;
+		animation-timing-function: ease-out;
 	}
 
-	10% {
+	7.5% {
 		opacity: 1;
 	}
 
-	40% {
+	43.75% {
 		opacity: 1;
+		animation-timing-function: ease-in;
 	}
 
 	50% {
