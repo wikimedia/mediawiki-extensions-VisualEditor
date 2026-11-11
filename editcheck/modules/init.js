@@ -311,11 +311,21 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 			discoverabilityDeadlineTimeout = null;
 		} );
 		target.on( 'surfaceReady', () => {
-			if ( discoverabilityDeadlineStarted ) {
+			if (
+				discoverabilityDeadlineStarted ||
+				target.getSurface().getMode() !== 'visual' ||
+				!controller.editChecksArePossible()
+			) {
 				return;
 			}
 			discoverabilityDeadlineStarted = true;
 			discoverabilityDeadlineTimeout = setTimeout( () => {
+				if ( mw.editcheck.suggestionsModeAvailable ) {
+					// Mark that the decision window for showing the onboarding dialog has closed,
+					// and send regardless of if discoverability is actually enabled.
+					// Used by the suggestion mode onboarding experiment.
+					ve.track( 'activity.editCheck', { action: 'discoverability-deadline-reached' } );
+				}
 				if (
 					discoverabilityWelcomeShownThisSession ||
 					!mw.editcheck.showDiscoverabilityWelcome ||
@@ -324,9 +334,12 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 					return;
 				}
 				discoverabilityWelcomeTimedOut = true;
-				if ( controller.getActions().some( ( action ) => action.isSuggestion() ) ) {
-					ve.track( 'activity.editCheck', { action: 'discoverability-welcome-timed-out' } );
-				}
+				// At this point we don't know *why* the welcome dialog timed out,
+				// we just know that it was supposed to be shown and wasn't
+				// If we can combine this event with initial suggestion count,
+				// we can figure out if it timed out because suggestions took too
+				// long to load or because none existed at all
+				ve.track( 'activity.editCheck', { action: 'discoverability-welcome-timed-out' } );
 			}, 2000 );
 			controller.on( 'actionsUpdated', () => {
 				if (
