@@ -149,5 +149,6 @@
 	"tag-editcheck-reference-decline-other-description": "Muokkaustarkistimen ehdotus hylättiin muusta syystä",
 	"tag-editcheck-reference-decline-uncertain": "Muokkaustarkistin (lähteet) hylätty (epävarma)",
 	"tag-editcheck-reference-decline-uncertain-description": "Muokkaustarkistimen ehdotus hylättiin, koska käyttäjä oli epävarma",
-	"communityconfiguration-editcheck-title": "Muokkaustarkistin"
+	"communityconfiguration-editcheck-title": "Muokkaustarkistin",
+	"communityconfiguration-editcheck-description": "Määritä ehdot, joiden perusteella muokkaustarkistimet ja -ehdotukset aktivoituvat, ja ketkä näkevät ne"
 }

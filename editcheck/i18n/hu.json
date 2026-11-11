@@ -17,7 +17,9 @@
 	"editcheck-dialog-action-replace": "Csere",
 	"editcheck-dialog-action-back": "Vissza",
 	"editcheck-dialog-action-submit": "Elküldés",
+	"editcheck-dialog-action-done": "Kész",
 	"editcheck-dialog-scroll-into-view": "Javaslatok megtekintése",
+	"editcheck-dialog-action-publish": "Közzététel",
 	"editcheck-dialog-toggle": "Láthatóság kapcsolása",
 	"editcheck-dialog-addref-description": "Forráshivatkozás hozzáadásával segíts az olvasóknak megérteni, honnan származik ez az információ.",
 	"editcheck-dialog-addref-reject-question": "Miért nem adsz hozzá forráshivatkozást?",
@@ -39,6 +41,9 @@
 	"editcheck-copyvio-keep-permission": "Ez a tartalom szabad licenc alatt áll.",
 	"editcheck-copyvio-keep-other": "A fentiek egyike sem érvényes.",
 	"editcheck-copyvio-keep-notify": "Köszönjük, hogy megosztottad, miért tartod meg a beillesztett szöveget!",
+	"editcheck-copyvio-llm-title": "A potenciális AI-generált tartalom",
+	"editcheck-copyvio-llm-keep-edited": "Ezt a szöveget én írtam, és AI-t használtam a kisebb szerkesztésekhez.",
+	"editcheck-copyvio-llm-keep-notify": "Köszönjük, hogy megosztottad, miért tartod meg a beillesztett szöveget!",
 	"editcheck-double-bold-title": "A szükségtelen félkövér formázás eltávolítása",
 	"editcheck-double-bold-description": "Az alcímek, a definíciós listák címszavai és a táblázatfejlécek automatikusan félkövérrel jelennek meg. Segíts az olvasóknak azzal, hogy eltávolítod ezekről az elemekről a [{{int:editcheck-double-bold-descriptionlink}} szükségtelen félkövér formázást].",
 	"editcheck-double-bold-action-remove": "Félkövér formázás eltávolítása",
@@ -112,5 +117,6 @@
 	"tag-editcheck-reference-decline-other": "Szerkesztési ellenőrzés (forráshivatkozások) elutasítva (egyéb ok)",
 	"tag-editcheck-reference-decline-other-description": "A szerkesztési ellenőrzés forráshivatkozás-javaslata nem felsorolt okból lett elutasítva.",
 	"tag-editcheck-reference-decline-uncertain": "Szerkesztési ellenőrzés (forráshivatkozások) elutasítva (bizonytalanság)",
-	"tag-editcheck-reference-decline-uncertain-description": "A szerkesztési ellenőrzés forráshivatkozás-javaslata bizonytalanság miatt lett elutasítva."
+	"tag-editcheck-reference-decline-uncertain-description": "A szerkesztési ellenőrzés forráshivatkozás-javaslata bizonytalanság miatt lett elutasítva.",
+	"communityconfiguration-editcheck-title": "Szerkesztési ellenőrzés"
 }
