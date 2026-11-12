@@ -10,6 +10,7 @@
 
 namespace MediaWiki\Extension\VisualEditor;
 
+use MediaWiki\Message\Message;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\Context as ResourceLoaderContext;
 use MediaWiki\ResourceLoader\FileModule;
@@ -70,7 +71,7 @@ class VisualEditorDataModule extends ResourceLoaderModule {
 	/**
 	 * @param ResourceLoaderContext $context Object containing information about the state of this
 	 *   specific loader request.
-	 * @return array[] Messages in various states of parsing
+	 * @return array<string,Message[]> Messages in various states of parsing
 	 */
 	protected function getMessageInfo( ResourceLoaderContext $context ) {
 		$editSubmitButtonLabelPublish = $this->getConfig()
