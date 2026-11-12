@@ -201,6 +201,9 @@ Controller.prototype.clearState = function () {
 	this.focusedAction = null;
 	this.inSetup = null;
 	this.ignoreNextSelectionChange = null;
+	this.ignoreVirtualKeyboardChange = false;
+	clearTimeout( this.ignoreVirtualKeyboardChangeTimeout );
+	this.ignoreVirtualKeyboardChangeTimeout = null;
 	// Checks keep a reference to the store, so empty it and do not replace it
 	if ( this.tags ) {
 		this.tags.clear();
@@ -1054,7 +1057,10 @@ Controller.prototype.getActions = function ( listener ) {
  */
 Controller.prototype.onVirtualKeyboardChange = function () {
 	// On mobile we want to close the drawer if the keyboard is shown
-	if ( this.surface && OO.ui.isMobile() && !this.inBeforeSave && this.target.isVirtualKeyboardOpen() ) {
+	if (
+		this.surface && OO.ui.isMobile() && !this.inBeforeSave &&
+		!this.ignoreVirtualKeyboardChange && this.target.isVirtualKeyboardOpen()
+	) {
 		this.closeDialog( 'mobile-keyboard' );
 	}
 };
@@ -1238,6 +1244,15 @@ Controller.prototype.focusActionForSelection = function () {
  */
 Controller.prototype.setIgnoreNextSelectionChange = function ( ignore = true ) {
 	this.ignoreNextSelectionChange = ignore;
+};
+
+/**
+ * Whether to ignore virtualKeyboardChange events
+ *
+ * @param {boolean} [ignore=true]
+ */
+Controller.prototype.setIgnoreVirtualKeyboardChange = function ( ignore = true ) {
+	this.ignoreVirtualKeyboardChange = ignore;
 };
 
 /**
@@ -1741,10 +1756,22 @@ Controller.prototype.scrollActionIntoView = function ( action, scrollConfig ) {
 	// want the very beginning to be in view, so collapse it:
 	const selection = action.getHighlightSelections()[ 0 ].collapseToStart();
 
-	return this.surface.scrollSelectionIntoView( selection, ve.extendObject( {
+	// Ignore virtualKeyboardChange events during the scroll
+	clearTimeout( this.ignoreVirtualKeyboardChangeTimeout );
+	this.setIgnoreVirtualKeyboardChange( true );
+
+	const scrollPromise = this.surface.scrollSelectionIntoView( selection, ve.extendObject( {
 		animate: true,
 		extraPadding: { top: 10, bottom: OO.ui.isMobile() ? 200 : 10 }
 	}, scrollConfig ) );
+
+	scrollPromise.always( () => {
+		this.ignoreVirtualKeyboardChangeTimeout = setTimeout( () => {
+			this.setIgnoreVirtualKeyboardChange( false );
+		}, 300 );
+	} );
+
+	return scrollPromise;
 };
 
 /**

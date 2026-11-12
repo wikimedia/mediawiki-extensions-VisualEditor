@@ -138,6 +138,9 @@ ve.ui.EditCheckDialog.prototype.onScrollIntoViewCloseClick = function () {
  * @param {boolean} isOpen The virtual keyboard is open
  */
 ve.ui.EditCheckDialog.prototype.onVirtualKeyboardChange = function ( isOpen ) {
+	if ( this.controller && this.controller.ignoreVirtualKeyboardChange ) {
+		return;
+	}
 	this.toggle( !isOpen );
 };
 

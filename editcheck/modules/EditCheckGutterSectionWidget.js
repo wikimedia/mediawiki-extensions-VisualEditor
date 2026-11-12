@@ -192,32 +192,28 @@ mw.editcheck.EditCheckGutterSectionWidget.prototype.showDialogWithAction = funct
 	action.select( surface, false, false );
 	const currentWindow = surface.getToolbarDialogs( ve.ui.MobileEditCheckDialog.static.position ).getCurrentWindow();
 	if ( !currentWindow || currentWindow.constructor.static.name !== 'mobileEditCheckDialog' ) {
-		let scrollPromise;
-		if ( scrollConfig && scrollConfig.alignToTop ) {
+		const alignToTop = !!( scrollConfig && scrollConfig.alignToTop );
+		if ( alignToTop ) {
 			// Scroll immediately, because we don't need to wait for the padding to settle
-			scrollPromise = controller.focusAction( action, true, scrollConfig );
-		} else {
-			scrollPromise = ve.createDeferred().resolve().promise();
+			controller.focusAction( action, true, scrollConfig );
 		}
 		const windowAction = ve.ui.actionFactory.create( 'window', this.controller.surface, 'check' );
-		scrollPromise.then( () => (
-			windowAction.open(
-				'mobileEditCheckDialog',
-				{
-					controller,
-					inBeforeSave: false,
-					scope: this.navigableActions,
-					newActions: [ action ],
-					sectionActions: this.actions,
-					footer: true
-				}
-			).then(
-				// Note: windowAction.open returns a thenable window lifecycle instance... which
-				// resolves when the window closes. Get `opening` from the instance:
-				( instance ) => instance.opened
-			)
-		) ).then( () => {
-			if ( scrollConfig && scrollConfig.alignToTop ) {
+		windowAction.open(
+			'mobileEditCheckDialog',
+			{
+				controller,
+				inBeforeSave: false,
+				scope: this.navigableActions,
+				newActions: [ action ],
+				sectionActions: this.actions,
+				footer: true
+			}
+		).then(
+			// Note: windowAction.open returns a thenable window lifecycle instance... which
+			// resolves when the window closes. Get `opening` from the instance:
+			( instance ) => instance.opened
+		).then( () => {
+			if ( alignToTop ) {
 				// We already focused and scrolled because it was safe to do so
 				return;
 			}
