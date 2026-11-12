@@ -1,3 +1,7 @@
 'use strict';
 
-module.exports = require( './lib/ve/.eslint-plugin-local' );
+module.exports = {
+	rules: {
+		'no-unsanitized-href': require( './lib/ve/build/eslint/no-unsanitized-href' )
+	}
+};

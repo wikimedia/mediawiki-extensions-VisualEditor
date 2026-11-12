@@ -2,7 +2,7 @@
 	"$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
 	"bomFormat": "CycloneDX",
 	"specVersion": "1.6",
-	"serialNumber": "urn:uuid:6053e617-2cdb-4ae0-892d-d7f5e5156d67",
+	"serialNumber": "urn:uuid:cb1a9cb1-ef57-4523-aa8d-6a6d1143cd76",
 	"version": 1,
 	"components": [
 		{
@@ -122,7 +122,7 @@
 		{
 			"type": "library",
 			"name": "PeerJS",
-			"version": "1.4.7",
+			"version": "1.5.5",
 			"licenses": [
 				{
 					"license": {
@@ -171,7 +171,7 @@
 		{
 			"type": "library",
 			"name": "socket.io-client",
-			"version": "4.4.0",
+			"version": "4.8.4",
 			"licenses": [
 				{
 					"license": {

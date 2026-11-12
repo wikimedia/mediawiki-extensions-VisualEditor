@@ -47,7 +47,7 @@ PeerJS:
   license: MIT
   homepage: https://peerjs.com/
   authors: Michelle Bu, Eric Zhang and other contributors
-  version: 1.4.7
+  version: 1.5.5
   type: doc-only
 
 RangeFix:
@@ -61,7 +61,7 @@ socket.io-client:
   license: MIT
   homepage: https://socket.io/
   authors: Guillermo Rauch and other contributors
-  version: 4.4.0
+  version: 4.8.4
   type: doc-only
 
 Tree Differ:
