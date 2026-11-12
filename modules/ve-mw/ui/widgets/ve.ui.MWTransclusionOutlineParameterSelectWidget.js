@@ -54,7 +54,7 @@ OO.mixinClass( ve.ui.MWTransclusionOutlineParameterSelectWidget, ve.ui.MWAriaDes
  *
  * @event ve.ui.MWTransclusionOutlineParameterSelectWidget#templateParameterSpaceDown
  * @param {ve.ui.MWTransclusionOutlineParameterWidget} item
- * @param {boolean} selected Current state of the checkbox; same as in the {@event choose} event
+ * @param {boolean} selected Current state of the checkbox; same as in the {@link OO.ui.SelectWidget#event:choose choose} event
  */
 
 /* Static Methods */

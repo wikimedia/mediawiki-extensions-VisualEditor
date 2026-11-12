@@ -185,7 +185,7 @@ mw.editcheck.SourceVerificationEditCheck.prototype.onBranchNodeChange = function
 					return null;
 				}
 				const footnotes = refNodePairs.map( ( pair ) => ( {
-					footnoteLabel: pair.node.getFormattedRefLinkLabel(),
+					$footnoteLabel: pair.node.getFormattedRefLinkLabel(),
 					url: pair.url
 				} ) );
 
@@ -219,7 +219,7 @@ mw.editcheck.SourceVerificationEditCheck.prototype.onBranchNodeChange = function
  * Build the message shown in the action card
  *
  * @param {Object} suggestion
- * @param {Array<{footnoteLabel: jQuery, url: string}>} footnotes
+ * @param {Array<{$footnoteLabel: jQuery, url: string}>} footnotes
  * @return {jQuery|string}
  */
 mw.editcheck.SourceVerificationEditCheck.prototype.buildDialogMessage = function ( suggestion, footnotes ) {
@@ -239,21 +239,21 @@ mw.editcheck.SourceVerificationEditCheck.prototype.buildDialogMessage = function
 	}
 
 	if ( footnotes && footnotes.length ) {
+		// eslint-disable-next-line no-jquery/no-append-html
 		const $sourceLinks = $( '<div>' )
 			.addClass( 've-ui-editCheckActionWidget-sourceVerification-link' )
 			.append(
 				$( '<span>' ).text( ve.msg( 'editcheck-sourceveri-go-to-source' ) ),
 				document.createTextNode( ' ' )
 			);
-		footnotes.forEach( ( { footnoteLabel, url }, index ) => {
-			const $footnoteLink = $( '<a>' )
-				.append( footnoteLabel );
+		footnotes.forEach( ( { $footnoteLabel, url }, index ) => {
+			const $footnoteLink = $( '<a>' ).append( $footnoteLabel );
 			ve.setAttributeSafe( $footnoteLink[ 0 ], 'href', url );
 
 			$sourceLinks.append( $footnoteLink );
 
 			if ( index < footnotes.length - 1 ) {
-				$sourceLinks.append( document.createTextNode( ' ' ) );
+				$sourceLinks.append( ' ' );
 			}
 		} );
 
@@ -268,7 +268,7 @@ mw.editcheck.SourceVerificationEditCheck.prototype.buildDialogMessage = function
 					$( '<strong>' )
 						.addClass( 've-ui-editCheckActionWidget-sourceVerification-comments-label' )
 						.text( ve.msg( 'editcheck-sourceveri-model-comments' ) ),
-					document.createTextNode( ' ' ),
+					' ',
 					$( '<span>' )
 						.addClass( 've-ui-editCheckActionWidget-sourceVerification-comments-text' )
 						.text( suggestion.comments )
@@ -420,7 +420,7 @@ mw.editcheck.SourceVerificationEditCheck.prototype.act = function ( choice, acti
  *
  * @param {ve.dm.LinearFragment} fragment Fragment after which the template should be inserted
  * @param {string} templateToInsert Name of template to insert to communicate the source doesn't support the claim
- * @return {JQuery.Promise} promise that will resolve after template is inserted
+ * @return {jQuery.Promise} promise that will resolve after template is inserted
  */
 mw.editcheck.SourceVerificationEditCheck.prototype.insertFailedVerificationTemplate = function ( fragment, templateToInsert ) {
 	const transclusionModel = new ve.dm.MWTransclusionModel( fragment.getDocument() );
@@ -450,7 +450,7 @@ mw.editcheck.editCheckFactory.register( mw.editcheck.SourceVerificationEditCheck
  * @constructor
  * @param {Object} config Configuration options
  * @param {Object} config.suggestionData Suggestion data from the API
- * @param {Array<{footnoteLabel: jQuery, url: string}>} config.footnotes Footnote data computed when creating the action
+ * @param {Array<{$footnoteLabel: jQuery, url: string}>} config.footnotes Footnote data computed when creating the action
  */
 mw.editcheck.SourceVerificationEditCheckAction = function MWSourceVerificationEditCheckAction( config ) {
 	mw.editcheck.SourceVerificationEditCheckAction.super.call( this, config );
@@ -476,7 +476,7 @@ mw.editcheck.SourceVerificationEditCheckAction.prototype.updateFrom = function (
 	// Update the action description when footnote indices change
 	if ( this.footnotes.length === action.footnotes.length &&
 		// Compare the raw label text for each footnote (i.e., the citation number)
-		this.footnotes.every( ( { footnoteLabel }, i ) => footnoteLabel.text() === action.footnotes[ i ].footnoteLabel.text() ) ) {
+		this.footnotes.every( ( { $footnoteLabel }, i ) => $footnoteLabel.text() === action.footnotes[ i ].$footnoteLabel.text() ) ) {
 		return false;
 	}
 	this.footnotes = action.footnotes;
