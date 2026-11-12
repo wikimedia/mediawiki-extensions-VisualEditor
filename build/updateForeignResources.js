@@ -1,20 +1,21 @@
 /**
  * Generates lib/foreign-resources.yaml (Special:Version credits and SBOM) from
- * lib/ve/lib/foreign-resources.yaml.
+ * lib/ve/lib/foreign-resources.yaml, and regenerates lib/foreign-resources.cdx.json
+ * from it with MediaWiki core's manageForeignResources make-cdx.
  *
  * A library is credited if the extension ships any of its files: by path in extension.json
  * or includes/, or via a veModules entry. Others (e.g. jquery, OOUI) are provided by MediaWiki.
  *
  * Usage: node build/updateForeignResources.js [--check]
  *
- * Then regenerate lib/foreign-resources.cdx.json from MediaWiki core:
- *   php maintenance/run.php manageForeignResources make-cdx --extension=VisualEditor
+ * --check compares the YAML only. Core is found at MW_INSTALL_PATH, ../.. or ../../core.
  */
 
 'use strict';
 
 const fs = require( 'fs' );
 const path = require( 'path' );
+const { execFileSync } = require( 'child_process' );
 const yaml = require( 'js-yaml' );
 
 const ROOT = path.resolve( __dirname, '..' );
@@ -88,12 +89,30 @@ function generate() {
 			.join( '\n' );
 }
 
+function makeCdx() {
+	const command = 'php maintenance/run.php manageForeignResources make-cdx --extension=VisualEditor';
+	const mwDir = [ process.env.MW_INSTALL_PATH, '../..', '../../core' ]
+		.filter( Boolean )
+		.map( ( dir ) => path.resolve( ROOT, dir ) )
+		.find( ( dir ) => fs.existsSync( path.join( dir, 'maintenance/run.php' ) ) );
+	if ( !mwDir ) {
+		console.error( `MediaWiki not found. Set MW_INSTALL_PATH, or run \`${ command }\` from core.` );
+		process.exitCode = 1;
+		return;
+	}
+	const [ php, ...args ] = command.split( ' ' );
+	execFileSync( php, args, { cwd: mwDir, stdio: 'inherit' } );
+}
+
 const output = generate();
+const current = fs.readFileSync( OUTPUT, 'utf8' );
 if ( process.argv.includes( '--check' ) ) {
-	if ( fs.readFileSync( OUTPUT, 'utf8' ) !== output ) {
-		console.error( 'lib/foreign-resources.yaml is out of date. Run `node build/updateForeignResources.js`.' );
+	if ( current !== output ) {
+		console.error( 'lib/foreign-resources.yaml is out of date. Run `npm run foreign-resources`.' );
 		process.exitCode = 1;
 	}
-} else {
+} else if ( current !== output ) {
 	fs.writeFileSync( OUTPUT, output );
+	// make-cdx writes a new serial number on each run, so run it only when the YAML changes
+	makeCdx();
 }
