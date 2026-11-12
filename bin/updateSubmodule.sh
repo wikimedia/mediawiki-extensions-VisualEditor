@@ -119,10 +119,13 @@ $TASKS"
 
 # Check out master of VE core
 git checkout $TARGET
+cd ../..
+
+# Regenerate foreign resources from VE core's registry
+npm run foreign-resources
 
 # Commit
-cd ../..
-git commit lib/ve -m "$COMMITMSG" > /dev/null
+git commit lib/ve lib/foreign-resources.yaml lib/foreign-resources.cdx.json -m "$COMMITMSG" > /dev/null
 if [ "$?" == "1" ]
 then
 	echo >&2 "No changes"
