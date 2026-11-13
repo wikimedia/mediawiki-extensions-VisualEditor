@@ -446,10 +446,9 @@ ve.ui.EditCheckDialog.prototype.updateNavigationState = function () {
  * Handle focusAction events from the controller
  *
  * @param {mw.editcheck.EditCheckAction} action Action
- * @param {number} index Index of the action in #getActions
  * @param {boolean} scrollTo Scroll the action's selection into view
  */
-ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scrollTo ) {
+ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, scrollTo ) {
 	if ( this.singleAction && action === null ) {
 		// Can't unset the offset in single-action mode, because it hides the sidebar contents
 		return;

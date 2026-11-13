@@ -958,7 +958,7 @@ Controller.prototype.focusAction = function ( action, scrollTo, scrollConfig ) {
 		scrollPromise = this.scrollActionIntoView( action, scrollConfig );
 	}
 
-	this.emit( 'focusAction', action, this.getActions().indexOf( action ), scrollTo );
+	this.emit( 'focusAction', action, scrollTo );
 
 	this.updatePositionsDebounced();
 
