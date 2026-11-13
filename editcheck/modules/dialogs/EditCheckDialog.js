@@ -468,11 +468,11 @@ ve.ui.EditCheckDialog.prototype.onFocusAction = function ( action, index, scroll
 ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 	return process.first( () => {
 		this.controller = data.controller;
-		this.controller.on( 'actionsUpdated', this.onActionsUpdated, false, this );
-		this.controller.on( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, false, this );
-		this.controller.on( 'focusAction', this.onFocusAction, false, this );
-		this.controller.on( 'attentionActiveChange', this.onAttentionActiveChange, false, this );
-		this.controller.on( 'scrollIntoViewSuppressedChange', this.onScrollIntoViewSuppressedChange, false, this );
+		this.controller.on( 'actionsUpdated', this.onActionsUpdated, null, this );
+		this.controller.on( 'actionsUpdatedProgress', this.onActionsUpdatedProgress, null, this );
+		this.controller.on( 'focusAction', this.onFocusAction, null, this );
+		this.controller.on( 'attentionActiveChange', this.onAttentionActiveChange, null, this );
+		this.controller.on( 'scrollIntoViewSuppressedChange', this.onScrollIntoViewSuppressedChange, null, this );
 
 		if ( !Object.prototype.hasOwnProperty.call( data, 'inBeforeSave' ) ) {
 			throw new Error( 'inBeforeSave argument required' );
@@ -488,7 +488,7 @@ ve.ui.EditCheckDialog.prototype.getSetupProcess = function ( data, process ) {
 		this.currentAction = null;
 
 		this.toggle( !this.surface.getTarget().isVirtualKeyboardOpen() );
-		this.surface.getTarget().on( 'virtualKeyboardChange', this.onVirtualKeyboardChange, false, this );
+		this.surface.getTarget().on( 'virtualKeyboardChange', this.onVirtualKeyboardChange, null, this );
 
 		this.closeButtonVisible = OO.ui.isMobile() && !this.inBeforeSave;
 		this.closeButton.toggle( this.closeButtonVisible );
