@@ -377,6 +377,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 						} else if ( data && data.action === 'nothanks' ) {
 							controller.disableDiscoverability();
 						} else {
+							controller.armAttentionHints();
 							// track which attention target is visible
 							const currentWindow = controller.surface.getSidebarDialogs().getCurrentWindow();
 							const scrollIntoView = currentWindow && currentWindow.scrollIntoView;

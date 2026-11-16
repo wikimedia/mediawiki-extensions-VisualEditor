@@ -93,6 +93,7 @@ function Controller( target, config ) {
 	this.discoverySeen = false;
 	// Hide the "View suggestions" button entirely
 	this.scrollIntoViewSuppressed = false;
+	this.attentionHintsArmed = false;
 
 	this.clearState();
 
@@ -537,12 +538,15 @@ Controller.prototype.registerActivity = function () {
  * (Re)start the idle countdown that brings the attention effect back after a delay
  *
  * Does nothing if discoverability isn't active, no suggestion exists anywhere on the
- * page, or once a suggestion has been opened
+ * page, a suggestion has already been opened, or the hints haven't been armed yet
  */
 Controller.prototype.scheduleAttentionIdleTimer = function () {
 	clearTimeout( this.attentionIdleTimeout );
 	this.attentionIdleTimeout = null;
-	if ( !this.isDiscoverabilityEnabled() || this.discoverySeen || !this.getActions().some( ( action ) => action.isSuggestion() ) ) {
+	if (
+		!this.isDiscoverabilityEnabled() || this.discoverySeen || !this.attentionHintsArmed ||
+		!this.getActions().some( ( action ) => action.isSuggestion() )
+	) {
 		return;
 	}
 	if ( this.attentionIdleDelay === null ) {
@@ -564,6 +568,17 @@ Controller.prototype.scheduleAttentionIdleTimer = function () {
 		this.setAttentionActive( true );
 		this.setIconAttentionActive( true );
 	}, this.attentionIdleDelay );
+};
+
+/**
+ * Allow the attention effects to start appearing
+ */
+Controller.prototype.armAttentionHints = function () {
+	if ( this.attentionHintsArmed ) {
+		return;
+	}
+	this.attentionHintsArmed = true;
+	this.scheduleAttentionIdleTimer();
 };
 
 /**
