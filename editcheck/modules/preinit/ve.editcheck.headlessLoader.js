@@ -143,7 +143,11 @@ function loadConfigPageRevId() {
 				const page = response && response.query && response.query.pages && response.query.pages[ 0 ];
 				return ( page && page.lastrevid ) || null;
 			},
-			() => null
+			() => {
+				// Try again on the next request
+				configPageRevIdPromise = null;
+				return null;
+			}
 		);
 	}
 	return configPageRevIdPromise;
@@ -209,10 +213,16 @@ function loadConfigId() {
 					checks[ checkName ] = null;
 				}
 			}
-			return mw.editcheck.TextMatchEditCheck.static.ensureMatchRulesLoaded().then( ( cache ) => ( {
-				checks,
-				textMatchRules: cache ? cache.rawMatchRules : null
-			} ) );
+			return mw.editcheck.TextMatchEditCheck.static.ensureMatchRulesLoaded().then( ( cache ) => {
+				// ensureMatchRulesLoaded resolves with nothing when it fails
+				if ( !cache ) {
+					throw new Error( 'Could not load textMatch rules' );
+				}
+				return {
+					checks,
+					textMatchRules: cache.rawMatchRules
+				};
+			} );
 		} ).then(
 			( config ) => uuidV5( CONFIG_ID_NAMESPACE, stableStringify( config ) ).then( ( configId ) => ( {
 				configId,
@@ -220,6 +230,8 @@ function loadConfigId() {
 			} ) )
 		).catch( ( error ) => {
 			mw.log.error( 'EditCheck headless loader could not compute config ID', error );
+			// Try again on the next request
+			configIdPromise = null;
 			return { configId: null, configComputeDt: null };
 		} );
 	}
