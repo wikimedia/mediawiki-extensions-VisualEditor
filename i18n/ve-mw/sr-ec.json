@@ -333,6 +333,7 @@
 	"visualeditor-section-body-placeholder": "Нови одељак",
 	"visualeditor-section-title-placeholder": "Тема",
 	"visualeditor-sourceswitch-popup-dismiss": "Не сада",
+	"visualeditor-sourceswitch-popup-trysource": "Пробајте изворно уређивање",
 	"visualeditor-loaderror-wrongmode": "Учитавање уређивача у погрешном режиму (тип података: „$1“, уређивачки режим: „$2“).",
 	"visualeditor-settings-tool": "Подешавања странице",
 	"visualeditor-special-characters-group-other": "Често коришћени",
