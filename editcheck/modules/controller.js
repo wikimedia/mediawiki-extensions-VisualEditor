@@ -280,7 +280,12 @@ Controller.prototype.setup = function () {
 
 		// Run on load (e.g. recovering from auto-save)
 		this.inSetup = true;
-		setTimeout( () => this.refresh().always( () => {
+		setTimeout( () => this.refresh().done( ( actions ) => {
+			if ( mw.editcheck.suggestionsModeAvailable ) {
+				const suggestionCount = actions.filter( ( action ) => action.isSuggestion() ).length;
+				ve.track( 'activity.editCheck', { action: 'initial-suggestions-loaded-' + suggestionCount } );
+			}
+		} ).always( () => {
 			this.inSetup = null;
 		} ), 100 );
 
