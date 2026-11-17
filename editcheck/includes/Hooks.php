@@ -218,11 +218,19 @@ class Hooks implements
 			return;
 		}
 		$output = $skin->getOutput();
+		// Matches edit mode: 100 or more shows as "99+"
+		$label = $skin->msg( 'editcheck-toolbar-suggestions-count', min( 100, $count ) )->text();
 		if ( in_array( $skin->getSkinName(), [ 'vector-2022', 'minerva' ], true ) ) {
 			// The edit buttons of these skins can't get attributes from here, so pass the indicator to CSS
 			$output->addHtmlClasses( "ext-editcheck-read-suggestions-$indicator" );
 			if ( $indicator === 'count' ) {
-				$output->addInlineStyle( ":root { --ext-editcheck-suggestion-count: '$count'; }" );
+				$cssLabel = preg_replace_callback(
+					'/[^0-9A-Za-z +]/u',
+					static fn ( $m ) => sprintf( '\\%x ', mb_ord( $m[0] ) ),
+					$label
+				);
+				// @phan-suppress-next-line SecurityCheck-XSS $cssLabel only has escapes and safe characters
+				$output->addInlineStyle( ":root { --ext-editcheck-suggestion-count: '$cssLabel'; }" );
 			}
 			// Pulses the indicator on its first view
 			$output->addModules( 'ext.visualEditor.editCheck.read' );
@@ -235,7 +243,7 @@ class Hooks implements
 				'class' => '',
 			];
 			if ( $indicator === 'count' ) {
-				$links['views']['suggestions']['data'] = [ 'count' => $count ];
+				$links['views']['suggestions']['data'] = [ 'count' => $label ];
 			}
 		}
 		$output->addModuleStyles( 'ext.visualEditor.editCheck.read.styles' );

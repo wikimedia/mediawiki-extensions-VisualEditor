@@ -27,8 +27,6 @@ class EditCheckHooksSkinTemplateNavigationTest extends MediaWikiUnitTestCase {
 	private function newSkin(
 		OutputPage $output, string $skinName = 'monobook', string $action = 'view', array $query = []
 	): SkinTemplate {
-		$message = $this->createMock( Message::class );
-		$message->method( 'text' )->willReturn( '(editcheck-read-suggestions)' );
 		$skin = $this->createMock( SkinTemplate::class );
 		$skin->method( 'getTitle' )->willReturn( $this->createMock( Title::class ) );
 		$skin->method( 'getRequest' )->willReturn( new FauxRequest( $query ) );
@@ -36,7 +34,15 @@ class EditCheckHooksSkinTemplateNavigationTest extends MediaWikiUnitTestCase {
 		$skin->method( 'getActionName' )->willReturn( $action );
 		$skin->method( 'getSkinName' )->willReturn( $skinName );
 		$skin->method( 'getOutput' )->willReturn( $output );
-		$skin->method( 'msg' )->with( 'editcheck-read-suggestions' )->willReturn( $message );
+		$skin->method( 'msg' )->willReturnCallback( function ( $key, ...$params ) {
+			$message = $this->createMock( Message::class );
+			$message->method( 'text' )->willReturn(
+				$key === 'editcheck-toolbar-suggestions-count' ?
+					( $params[0] >= 100 ? '99+' : "<$params[0]>" ) :
+					"($key)"
+			);
+			return $message;
+		} );
 		return $skin;
 	}
 
@@ -70,7 +76,7 @@ class EditCheckHooksSkinTemplateNavigationTest extends MediaWikiUnitTestCase {
 		$links = [ 'views' => [] ];
 		$this->newHooks()->onSkinTemplateNavigation__Universal( $this->newSkin( $output ), $links );
 		$this->assertSame( '(editcheck-read-suggestions)', $links['views']['suggestions']['text'] );
-		$this->assertSame( [ 'count' => 3 ], $links['views']['suggestions']['data'] );
+		$this->assertSame( [ 'count' => '<3>' ], $links['views']['suggestions']['data'] );
 	}
 
 	public function testVector2022(): void {
@@ -78,12 +84,26 @@ class EditCheckHooksSkinTemplateNavigationTest extends MediaWikiUnitTestCase {
 		$output->expects( $this->once() )->method( 'addHtmlClasses' )
 			->with( 'ext-editcheck-read-suggestions-count' );
 		$output->expects( $this->once() )->method( 'addInlineStyle' )
-			->with( ":root { --ext-editcheck-suggestion-count: '3'; }" );
+			->with( ":root { --ext-editcheck-suggestion-count: '\\3c 3\\3e '; }" );
 		$links = [ 'views' => [] ];
 		$this->newHooks()->onSkinTemplateNavigation__Universal(
 			$this->newSkin( $output, 'vector-2022' ), $links
 		);
 		$this->assertSame( [ 'views' => [] ], $links );
+	}
+
+	public function testCountCap(): void {
+		$output = $this->createMock( OutputPage::class );
+		$output->expects( $this->once() )->method( 'addInlineStyle' )
+			->with( ":root { --ext-editcheck-suggestion-count: '99+'; }" );
+		$links = [ 'views' => [] ];
+		$this->newHooks( true, true, 150 )->onSkinTemplateNavigation__Universal(
+			$this->newSkin( $output, 'vector-2022' ), $links
+		);
+		$this->newHooks( true, true, 150 )->onSkinTemplateNavigation__Universal(
+			$this->newSkin( $this->createMock( OutputPage::class ) ), $links
+		);
+		$this->assertSame( [ 'count' => '99+' ], $links['views']['suggestions']['data'] );
 	}
 
 	public function testEditAction(): void {
