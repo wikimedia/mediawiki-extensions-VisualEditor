@@ -355,6 +355,10 @@ function getCheckConfigs() {
 		if ( check instanceof mw.editcheck.TextMatchEditCheck ) {
 			promises.push(
 				check.constructor.static.ensureMatchRulesLoaded().then( ( cache ) => {
+					// ensureMatchRulesLoaded resolves with nothing when it fails
+					if ( !cache ) {
+						throw new Error( 'Could not load textMatch rules' );
+					}
 					check.instantiateMatchRules( cache.rawMatchRules );
 					for ( const matchRule of check.matchRules ) {
 						configs[ `${ checkName }/${ matchRule.id }` ] = summarize( matchRule.config );
@@ -379,7 +383,8 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 	publishHeadlessProgress( `Preparing request for ${ pageNameRaw }`, requestId );
 	const title = mw.Title.newFromText( pageNameRaw );
 	if ( !title ) {
-		throw new Error( `Invalid page title: ${ pageNameRaw }` );
+		return Promise.reject( new Error( `Invalid page title: ${ pageNameRaw }` ) )
+			.catch( ( error ) => handleRunError( error, requestId, pageNameRaw ) );
 	}
 	const pageName = title.getPrefixedDb();
 
@@ -454,6 +459,7 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 		const surfaceModel = new ve.dm.Surface( dmDoc );
 		publishHeadlessProgress( `Request ${ requestId } running edit checks`, requestId );
 
+		// The target binds handlers to document and window. Destroy it after the run to remove them.
 		const dummyTarget = new ve.init.mw.ArticleTarget();
 
 		// No tags, so nothing is dismissed. ExternalLinkEditCheck uses the target to test interwiki URLs.
@@ -497,19 +503,28 @@ function runHeadlessForPage( pageNameRaw, requestId, parsoidHtml ) {
 			};
 			publishHeadlessResult( result );
 			return result;
-		} );
-	} ).catch( ( error ) => {
-		publishHeadlessProgress( `Request ${ requestId } failed: ${ String( error ) }`, requestId );
-		const result = {
-			status: 'error',
-			requestId,
-			pageName,
-			error: String( error )
-		};
-		publishHeadlessResult( result );
-		mw.log.error( 'EditCheck headless loader error', error );
-		throw error;
+		} ).finally( () => dummyTarget.destroy() );
+	} ).catch( ( error ) => handleRunError( error, requestId, pageName ) );
+}
+
+/**
+ * Publish the error result of a failed run.
+ *
+ * @param {Error} error
+ * @param {number} requestId
+ * @param {string} pageName
+ * @throws {Error} Always throws the error again
+ */
+function handleRunError( error, requestId, pageName ) {
+	publishHeadlessProgress( `Request ${ requestId } failed: ${ String( error ) }`, requestId );
+	publishHeadlessResult( {
+		status: 'error',
+		requestId,
+		pageName,
+		error: String( error )
 	} );
+	mw.log.error( 'EditCheck headless loader error', error );
+	throw error;
 }
 
 window.veEditCheckHeadlessStart = function ( pageName, parsoidHtml ) {
