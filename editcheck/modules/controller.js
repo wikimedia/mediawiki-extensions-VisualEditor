@@ -1987,20 +1987,20 @@ Controller.prototype.consumePublishPath = function () {
 };
 
 /**
- * Check if this is the user's first time encountering the discoverability features,
- * and if so, record it so future sessions know not to show them again
+ * Check if the discoverability hints have already fired this page load,
+ * and if not, record that they have so later edit sessions in the same page
+ * load don't show them again
  *
- * @return {boolean} If this is the user's first time encountering discoverability
+ * Not persisted server-side: the hints can only ever be armed via the way a user acts
+ * on the welcome dialog.
+ *
+ * @return {boolean} If this is the first time this page load the hints have fired
  */
 Controller.prototype.consumeDiscoverabilityHintsEnabled = function () {
 	if ( !mw.editcheck.enableDiscoverabilityHints ) {
 		return false;
 	}
 	mw.editcheck.enableDiscoverabilityHints = false;
-	if ( !mw.user.isAnon() ) {
-		new mw.Api().saveOption( 'visualeditor-editcheck-enablediscoverabilityhints', '0' );
-		mw.user.options.set( 'visualeditor-editcheck-enablediscoverabilityhints', '0' );
-	}
 	return true;
 };
 

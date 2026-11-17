@@ -30,17 +30,13 @@ const experimentalPref = !!mw.user.options.get( 'visualeditor-editcheck-experime
 const storedShowPublishPath = mw.user.options.get( 'visualeditor-editcheck-showpublishpath' );
 // if user should be shown the discoverability welcome dialog
 const storedShowDiscoverabilityWelcome = mw.user.options.get( 'visualeditor-editcheck-showdiscoverabilitywelcome' );
-// if user should be shown discoverability hints
-const storedEnableDiscoverabilityHints = mw.user.options.get( 'visualeditor-editcheck-enablediscoverabilityhints' );
 mw.editcheck = {
 	config: require( './config.json' ),
 	forceEnable: !!ecenable,
 	experimental: !!( mw.config.get( 'wgVisualEditorConfig' ).enableEditCheckExperimental || experimentalPref || ecenable === '2' ),
 	suggestionsModeAvailable: !!mw.config.get( 'wgVisualEditor', {} ).editCheckSuggestionsAvailable ||
 		!!+mw.user.options.get( 'visualeditor-editcheck-suggestions' ),
-	enableDiscoverabilityHints: storedEnableDiscoverabilityHints !== null ?
-		!!+storedEnableDiscoverabilityHints :
-		true,
+	enableDiscoverabilityHints: true,
 	discoverabilityEnabled: !!+mw.user.options.get( 'visualeditor-editcheck-discoverability' ),
 	showDiscoverabilityWelcome: storedShowDiscoverabilityWelcome !== null ?
 		!!+storedShowDiscoverabilityWelcome :

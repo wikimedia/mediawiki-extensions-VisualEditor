@@ -102,7 +102,6 @@ class Hooks implements
 		$preferences['visualeditor-editcheck-showpublishpath'] = $api;
 		$preferences['visualeditor-editcheck-discoverability'] = $api;
 		$preferences['visualeditor-editcheck-showdiscoverabilitywelcome'] = $api;
-		$preferences['visualeditor-editcheck-enablediscoverabilityhints'] = $api;
 
 		if ( $this->userOptionsLookup->getOption( $user, 'visualeditor-editcheck-suggestions' ) ) {
 			$preferences['visualeditor-editcheck-experimental'] = [
