@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"NathanRUZO"
+		]
+	},
+	"editcheck-dialog-action-no": "Oya",
+	"editcheck-dialog-action-yes": "Ego",
+	"editcheck-dialog-addref-description": "Nufashe abasomyi gutahura aho ivyo bintu vyavuye mu kwongera amajambo yo mu gisomwa.",
+	"editcheck-dialog-addref-reject-question": "Kubera iki utongera amajambo?",
+	"editcheck-dialog-addref-reject-irrelevant": "Sinzi ko ibivugwa bifitaniye isano n'ihinduka ndiko ndagira",
+	"editcheck-dialog-addref-reject-common-knowledge": "Amakuru ndiko ndashirako arazwi cane",
+	"editcheck-dialog-addref-reject-uncertain": "Sinzi neza ico nokwongerako",
+	"editcheck-dialog-addref-reject-other": "Iyindi",
+	"editcheck-dialog-addref-title": "Kwongerako ikivugwa",
+	"editcheck-dialog-title": "Imbere yo gusohora",
+	"tag-editcheck-reference-decline-common-knowledge": "Guhindura isuzuma (ivyo wisunze) vyanse (ubumenyi rusangi)",
+	"tag-editcheck-reference-decline-irrelevant": "Guhindura isuzuma (ivyo wisunze) vyanse (ntaco bimaze)",
+	"tag-editcheck-reference-decline-other": "Guhindura isuzuma (ivyo wasubiyeko) vyanse (ibindi)",
+	"tag-editcheck-reference-decline-uncertain": "Guhindura isuzuma (ivyo wisunze) vyanse (ntaco bimaze)"
+}

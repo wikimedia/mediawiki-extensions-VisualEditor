@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Orokbest1"
+		]
+	},
+	"editcheck-dialog-action-no": "Iyo",
+	"editcheck-dialog-action-yes": "Ehh",
+	"editcheck-dialog-addref-description": "Wam mme andikood ediongo nte iko ami atoadi ke adidian itie nte eben iko ami edi",
+	"editcheck-dialog-addref-reject-question": "Nsinam ku'dian itie nte edad iko ami eto",
+	"editcheck-dialog-addref-reject-irrelevant": "Nkereke ke adidian itie nte eben iko eto aba ufon ke se ami ñnam",
+	"editcheck-dialog-addref-reject-common-knowledge": " Iko se ami ndian ado iko ediongo ke yak awak owo eti eti",
+	"editcheck-dialog-addref-reject-uncertain": "Ñnekeke ndiongo añke itie Ebenezer iko eto se mkpe adian",
+	"editcheck-dialog-addref-reject-other": "Mfen",
+	"editcheck-dialog-addref-title": "Dian nte eben iko eto",
+	"editcheck-dialog-title": "Mbemiso asin iko ke afvm",
+	"tag-editcheck-reference-decline-irrelevant-description": " itie nte edad iko newd eto  ifono nko eduok anye",
+	"tag-editcheck-reference-decline-other": "Esio (nte edad iko nwed) efep (mfen)",
+	"tag-editcheck-reference-decline-other-description": "Esio  itie nte eben iko eto efpe, ado owo inoho ntak"
+}

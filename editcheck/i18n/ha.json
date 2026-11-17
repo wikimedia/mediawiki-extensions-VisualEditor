@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abdulwahabameenu",
+			"Dev ammar",
+			"Rofiatmustapha12",
+			"Umar Rabiuu",
+			"Umar2z",
+			"Ummabruka",
+			"Yusuf Sa'adu"
+		]
+	},
+	"editcheck-dialog-action-no": "A'a",
+	"editcheck-dialog-action-yes": "Eh",
+	"editcheck-dialog-addref-description": "Taimaka wa masu karatu su fahimci inda wannan bayanin ya fito ta hanyar ƙara ambato.",
+	"editcheck-dialog-addref-reject-question": "Me ya sa ba ka ƙara ambato ba?",
+	"editcheck-dialog-addref-reject-irrelevant": "Ba na tsammanin ambaton ya dace da canjin da nake yi",
+	"editcheck-dialog-addref-reject-common-knowledge": "Bayanin da nake ƙarawa sananne ne sosai",
+	"editcheck-dialog-addref-reject-uncertain": "Bani da tabbacin wani ambato zan kara",
+	"editcheck-dialog-addref-reject-other": "Wasu",
+	"editcheck-dialog-addref-title": "Ƙara Manazarta",
+	"editcheck-dialog-title": "Kafin wallafawa",
+	"tag-editcheck-reference-decline-common-knowledge": "Gyara Bincike (masu ambaton) ya ƙi (sani na yau da kuma kullun)",
+	"tag-editcheck-reference-decline-common-knowledge-description": "An ƙi bayanin kyara binciken a matsayin sanarwa ta kowa",
+	"tag-editcheck-reference-decline-irrelevant": "An ƙi  Duba (Manazarta) (basu da alaka)",
+	"tag-editcheck-reference-decline-irrelevant-description": "An ƙi amincewa da duba kyaran manazartan saboda rashin alaka.",
+	"tag-editcheck-reference-decline-other": "Anki duba Nassoshi (wani dalili)",
+	"tag-editcheck-reference-decline-other-description": "An ƙi yin amfani da EditCheck saboda dalilin da ba a lissafa ba",
+	"tag-editcheck-reference-decline-uncertain": "An ƙi  Duba (nassoshi) (ba a tabbatar ba)",
+	"tag-editcheck-reference-decline-uncertain-description": "An ƙi amincewa da duba kyaran manazartan saboda rashin alaka."
+}

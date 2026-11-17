@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"IGANZE",
+			"Musindi250",
+			"Ndahiro Derrick",
+			"Yves umuganwa"
+		]
+	},
+	"editcheck-dialog-action-no": "Oya",
+	"editcheck-dialog-action-yes": "Yego",
+	"editcheck-dialog-addref-description": "Fasha abasomyi kumenya aho aya makuru yavuye wongeraho iriburiro",
+	"editcheck-dialog-addref-reject-question": "Kuki udashyiraho iriburiro?",
+	"editcheck-dialog-addref-reject-irrelevant": "Ntekereza ko guhyiraho iriburiro nta mumaro bifite ku mpinduka nkoze",
+	"editcheck-dialog-addref-reject-common-knowledge": "Amakuru nshyizeho arazwi cyane",
+	"editcheck-dialog-addref-reject-uncertain": "Sinzi neza iriburiro nakongeraho",
+	"editcheck-dialog-addref-reject-other": "ibindi",
+	"editcheck-dialog-addref-title": "Ongera isoko",
+	"editcheck-dialog-title": "Mbere yo gusakaza"
+}
