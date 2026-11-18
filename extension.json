@@ -168,7 +168,7 @@
 		},
 		"VisualEditorEditCheckReadSuggestionsCount": {
 			"value": false,
-			"description": "Show the page's edit suggestion count in read mode. For the A/B test, the VisualEditorEditCheckReadSuggestionsIndicator hook can change or hide the indicator."
+			"description": "Show the page's edit suggestion count in read mode. For the A/B test, the VisualEditorEditCheckReadSuggestionsIndicator hook can change or hide the indicator, or show it to users who do not have suggestion mode enabled."
 		},
 		"VisualEditorEditCheckDefaultConfig": {
 			"value": {},

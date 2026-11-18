@@ -89,12 +89,10 @@ class VisualEditorHookRunner implements
 	/** @inheritDoc */
 	public function onVisualEditorEditCheckReadSuggestionsIndicator(
 		Skin $skin,
-		int $count,
 		?string &$indicator
 	): void {
 		$this->hookContainer->run( 'VisualEditorEditCheckReadSuggestionsIndicator', [
 			$skin,
-			$count,
 			&$indicator
 		], [ 'abortable' => false ] );
 	}

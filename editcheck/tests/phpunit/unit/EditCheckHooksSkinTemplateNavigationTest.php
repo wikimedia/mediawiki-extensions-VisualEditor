@@ -48,7 +48,7 @@ class EditCheckHooksSkinTemplateNavigationTest extends MediaWikiUnitTestCase {
 
 	private function newHooks(
 		bool $suggestionsPref = true, bool $veAvailable = true, ?int $count = 3,
-		bool $featureFlag = true, array $hookHandlers = []
+		bool $featureFlag = true, array $hookHandlers = [], ?EditSuggestionsCountsLookup $countsLookup = null
 	): Hooks {
 		$userOptionsLookup = $this->createMock( UserOptionsLookup::class );
 		$userOptionsLookup->method( 'getOption' )
@@ -56,8 +56,10 @@ class EditCheckHooksSkinTemplateNavigationTest extends MediaWikiUnitTestCase {
 			->willReturn( $suggestionsPref ? 1 : 0 );
 		$veAvailability = $this->createMock( VisualEditorAvailabilityLookup::class );
 		$veAvailability->method( 'isAvailable' )->willReturn( $veAvailable );
-		$countsLookup = $this->createMock( EditSuggestionsCountsLookup::class );
-		$countsLookup->method( 'getCount' )->willReturn( $count );
+		if ( !$countsLookup ) {
+			$countsLookup = $this->createMock( EditSuggestionsCountsLookup::class );
+			$countsLookup->method( 'getCount' )->willReturn( $count );
+		}
 		return new Hooks(
 			$userOptionsLookup,
 			$this->createMock( UserOptionsManager::class ),
@@ -134,12 +136,27 @@ class EditCheckHooksSkinTemplateNavigationTest extends MediaWikiUnitTestCase {
 		yield 'zero count' => [ [ 'count' => 0 ] ];
 		yield 'feature flag off' => [ [ 'featureFlag' => false ] ];
 		yield 'hidden by hook' => [ [ 'hookHandlers' => [
-			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, $count, &$indicator ) {
+			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, &$indicator ) {
 				$indicator = null;
 			},
 		] ] ];
+		yield 'shown by hook, VisualEditor not available' => [ [
+			'suggestionsPref' => false,
+			'veAvailable' => false,
+			'hookHandlers' => self::countHandler(),
+		] ];
+		yield 'shown by hook, no count' => [ [
+			'suggestionsPref' => false,
+			'count' => null,
+			'hookHandlers' => self::countHandler(),
+		] ];
+		yield 'hidden indicator' => [ [ 'hookHandlers' => [
+			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, &$indicator ) {
+				$indicator = 'hidden';
+			},
+		] ] ];
 		yield 'unknown indicator' => [ [ 'hookHandlers' => [
-			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, $count, &$indicator ) {
+			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, &$indicator ) {
 				$indicator = 'unknown';
 			},
 		] ] ];
@@ -166,24 +183,88 @@ class EditCheckHooksSkinTemplateNavigationTest extends MediaWikiUnitTestCase {
 		$this->assertSame( [ 'views' => [] ], $links );
 	}
 
-	public function testHookArguments(): void {
+	public static function provideHookArguments(): iterable {
+		yield 'suggestions enabled' => [ true, 'count' ];
+		yield 'suggestions not enabled' => [ false, null ];
+	}
+
+	/**
+	 * @dataProvider provideHookArguments
+	 */
+	public function testHookArguments( bool $suggestionsPref, ?string $expected ): void {
 		$skin = $this->newSkin( $this->createMock( OutputPage::class ) );
 		$links = [ 'views' => [] ];
-		$this->newHooks( true, true, 3, true, [
+		$called = false;
+		$this->newHooks( $suggestionsPref, true, 3, true, [
 			'VisualEditorEditCheckReadSuggestionsIndicator' => function (
-				$hookSkin, $count, $indicator
-			) use ( $skin ) {
+				$hookSkin, $indicator
+			) use ( $skin, $expected, &$called ) {
 				$this->assertSame( $skin, $hookSkin );
-				$this->assertSame( 3, $count );
-				$this->assertSame( 'count', $indicator );
+				$this->assertSame( $expected, $indicator );
+				$called = true;
 			},
 		] )->onSkinTemplateNavigation__Universal( $skin, $links );
-		$this->assertArrayHasKey( 'suggestions', $links['views'] );
+		$this->assertTrue( $called );
+	}
+
+	public function testNoCountLookupWithoutIndicator(): void {
+		$countsLookup = $this->createMock( EditSuggestionsCountsLookup::class );
+		$countsLookup->expects( $this->never() )->method( 'getCount' );
+		$links = [ 'views' => [] ];
+		$this->newHooks( false, true, 3, true, [], $countsLookup )->onSkinTemplateNavigation__Universal(
+			$this->newSkin( $this->createMock( OutputPage::class ) ), $links
+		);
+	}
+
+	public function testShownByHook(): void {
+		$links = [ 'views' => [] ];
+		$this->newHooks( false, true, 3, true, self::countHandler() )->onSkinTemplateNavigation__Universal(
+			$this->newSkin( $this->createMock( OutputPage::class ) ), $links
+		);
+		$this->assertSame( [ 'count' => '<3>' ], $links['views']['suggestions']['data'] );
+	}
+
+	public static function provideJsConfigVars(): iterable {
+		yield 'count' => [ 'count', 3, [ 'indicator' => 'count', 'count' => 3 ] ];
+		yield 'lightbulb' => [ 'lightbulb', 3, [ 'indicator' => 'lightbulb', 'count' => 3 ] ];
+		yield 'hidden' => [ 'hidden', 3, [ 'indicator' => 'hidden', 'count' => 3 ] ];
+		yield 'zero count' => [ 'count', 0, [ 'indicator' => 'count', 'count' => 0 ] ];
+		yield 'no count' => [ 'hidden', null, [ 'indicator' => 'hidden', 'count' => null ] ];
+		yield 'no indicator' => [ null, 3, null ];
+	}
+
+	/**
+	 * @dataProvider provideJsConfigVars
+	 */
+	public function testJsConfigVars( ?string $indicator, ?int $count, ?array $expected ): void {
+		$output = $this->createMock( OutputPage::class );
+		if ( $expected === null ) {
+			$output->expects( $this->never() )->method( 'addJsConfigVars' );
+		} else {
+			$output->expects( $this->once() )->method( 'addJsConfigVars' )
+				->with( 'wgVisualEditorEditCheckReadSuggestions', $expected );
+		}
+		$links = [ 'views' => [] ];
+		$this->newHooks( false, true, $count, true, [
+			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, &$hookIndicator ) use (
+				$indicator
+			) {
+				$hookIndicator = $indicator;
+			},
+		] )->onSkinTemplateNavigation__Universal( $this->newSkin( $output ), $links );
+	}
+
+	private static function countHandler(): array {
+		return [
+			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, &$indicator ) {
+				$indicator = 'count';
+			},
+		];
 	}
 
 	private static function lightbulbHandler(): array {
 		return [
-			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, $count, &$indicator ) {
+			'VisualEditorEditCheckReadSuggestionsIndicator' => static function ( $skin, &$indicator ) {
 				$indicator = 'lightbulb';
 			},
 		];

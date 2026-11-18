@@ -189,7 +189,11 @@ class Hooks implements
 	 *
 	 * $wgVisualEditorEditCheckReadSuggestionsCount enables this feature.
 	 * The VisualEditorEditCheckReadSuggestionsIndicator hook can show a lightbulb
-	 * instead of the count, or hide the indicator.
+	 * instead of the count, hide the indicator, or show it to users who do not have
+	 * suggestion mode enabled.
+	 *
+	 * If the count is looked up, wgVisualEditorEditCheckReadSuggestions tells the client
+	 * the indicator and the count.
 	 *
 	 * @param SkinTemplate $skin The skin template on which the UI is built.
 	 * @param array &$links Navigation links.
@@ -201,23 +205,29 @@ class Hooks implements
 		$title = $skin->getTitle();
 		$request = $skin->getRequest();
 		$user = $skin->getUser();
+		if ( !in_array( $skin->getActionName(), [ 'view', 'edit' ], true ) ) {
+			return;
+		}
+		$indicator = VisualEditorHooks::isEditCheckSuggestionsAvailable( $request, $user, $this->userOptionsLookup ) ?
+			'count' :
+			null;
+		// Run the hook before the count lookup, so that the lookup only happens if the hook needs it
+		$this->hookRunner->onVisualEditorEditCheckReadSuggestionsIndicator( $skin, $indicator );
 		if (
-			!in_array( $skin->getActionName(), [ 'view', 'edit' ], true ) ||
-			!VisualEditorHooks::isEditCheckSuggestionsAvailable( $request, $user, $this->userOptionsLookup ) ||
+			!in_array( $indicator, [ 'count', 'lightbulb', 'hidden' ], true ) ||
 			!$this->visualEditorAvailabilityLookup->isAvailable( $title, $request, $user )
 		) {
 			return;
 		}
 		$count = $this->editSuggestionsCountsLookup->getCount( $title, $user );
-		if ( !$count ) {
-			return;
-		}
-		$indicator = 'count';
-		$this->hookRunner->onVisualEditorEditCheckReadSuggestionsIndicator( $skin, $count, $indicator );
-		if ( !in_array( $indicator, [ 'count', 'lightbulb' ], true ) ) {
-			return;
-		}
 		$output = $skin->getOutput();
+		$output->addJsConfigVars( 'wgVisualEditorEditCheckReadSuggestions', [
+			'indicator' => $indicator,
+			'count' => $count,
+		] );
+		if ( !$count || $indicator === 'hidden' ) {
+			return;
+		}
 		// Matches edit mode: 100 or more shows as "99+"
 		$label = $skin->msg( 'editcheck-toolbar-suggestions-count', min( 100, $count ) )->text();
 		if ( in_array( $skin->getSkinName(), [ 'vector-2022', 'minerva' ], true ) ) {
