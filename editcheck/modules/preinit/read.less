@@ -54,6 +54,13 @@
 		position: absolute;
 	}
 
+	// Minerva draws the indicator on the list item, outside the link
+	.ext-editcheck-read-suggestions-count &::after,
+	.ext-editcheck-read-suggestions-lightbulb &::after,
+	.ext-editcheck-read-suggestions-lightbulb.ext-editcheck-read-suggestions-pulse &::before {
+		pointer-events: none;
+	}
+
 	.ext-editcheck-read-suggestions-lightbulb &::after {
 		.cdx-mixin-css-icon( @cdx-icon-lightbulb, @color-progressive, @size-75 );
 	}
