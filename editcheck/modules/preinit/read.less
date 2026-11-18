@@ -55,7 +55,7 @@
 	}
 
 	.ext-editcheck-read-suggestions-lightbulb &::after {
-		.cdx-mixin-css-icon( @cdx-icon-lightbulb, @color-progressive, @size-icon-x-small );
+		.cdx-mixin-css-icon( @cdx-icon-lightbulb, @color-progressive, @size-75 );
 	}
 
 	// A dot in the middle of the lightbulb, with a ring that grows and fades
@@ -112,17 +112,12 @@
 
 // Vector 2022 sticky header
 #ca-ve-edit-sticky-header {
-	.ext-editcheck-read-indicator( 18px, -3px );
+	.ext-editcheck-read-indicator( 18px, 3px );
 }
 
 // Minerva puts the ids of the edit buttons on the list items
 #page-actions-edit,
 #page-actions-ve-edit {
-	.ext-editcheck-read-indicator( 24px, 4px );
-
-	// Minerva shows the label from this width, so put the indicator after it
-	@media ( min-width: @min-width-breakpoint-desktop ) {
-		.ext-editcheck-read-indicator-position( calc( 100% - 8px ), 8px );
-	}
+	.ext-editcheck-read-indicator( 24px, 12px );
 }
 /* stylelint-enable selector-max-id */
