@@ -8,6 +8,7 @@
 	"editchecks": "Redaktə yoxlanışları",
 	"editcheck-config-save-language-subpage": "Redaktə yoxlama konfiqurasiyasında dil alt səhifələri ola bilməz. Bunun əvəzinə [[MediaWiki:Editcheck-config.json]] faylını redaktə edin.",
 	"editcheck-toolbar-suggestions-title": "Təklifləri aç/bağla",
+	"editcheck-read-suggestions": "Təkliflər",
 	"editcheck-suggestions-turned-on": "Təkliflər aktivdir",
 	"editcheck-suggestions-turned-off": "Təkliflər deaktivdir",
 	"editcheck-suggestions-none": "Heç bir təklif yoxdur",

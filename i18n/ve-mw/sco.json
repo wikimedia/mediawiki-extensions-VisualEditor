@@ -6,6 +6,7 @@
 			"Foxj",
 			"John Reid",
 			"MJL",
+			"Monospaced",
 			"TMg"
 		]
 	},
@@ -13,7 +14,7 @@
 	"tooltip-ca-editsource": "Eedit the soorce code o this page",
 	"tooltip-ca-createsource": "Mak the soorce code o this page",
 	"visualeditor-advancedsettings-tool": "Advanced settins",
-	"visualeditor-ca-createlocaldescriptionsource": "Eik local descreeption soorce",
+	"visualeditor-ca-createlocaldescriptionsource": "Add local description soorce",
 	"visualeditor-ca-createsource": "Mak soorce",
 	"visualeditor-ca-editlocaldescriptionsource": "Eedit the local descreeption soorce",
 	"visualeditor-ca-editsource": "Edit soorce",

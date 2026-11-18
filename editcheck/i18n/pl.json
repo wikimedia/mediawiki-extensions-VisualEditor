@@ -13,6 +13,7 @@
 	"editchecks": "Kontrole edycji",
 	"editcheck-config-save-language-subpage": "Konfiguracja kontroli edycji nie może zawierać podstron językowych. Zamiast tego edytuj [[MediaWiki:Editcheck-config.json]].",
 	"editcheck-toolbar-suggestions-title": "Widoczność sugestii",
+	"editcheck-read-suggestions": "Propozycje zmian",
 	"editcheck-suggestions-turned-on": "Sugestie są włączone",
 	"editcheck-suggestions-turned-off": "Sugestie są wyłączone",
 	"editcheck-suggestions-none": "Brak dostępnych sugestii",

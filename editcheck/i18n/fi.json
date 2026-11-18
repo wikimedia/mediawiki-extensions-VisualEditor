@@ -9,6 +9,7 @@
 	"editchecks": "Muokkaustarkistimet",
 	"editcheck-config-save-language-subpage": "Muokkaustarkistimien asetuksilla ei voi olla kielikohtaisia alasivuja. Muokkaa sivua [[MediaWiki:Editcheck-config.json]].",
 	"editcheck-toolbar-suggestions-title": "Näytä/piilota ehdotukset",
+	"editcheck-read-suggestions": "Ehdotukset",
 	"editcheck-suggestions-turned-on": "Ehdotukset käytössä",
 	"editcheck-suggestions-turned-off": "Ehdotukset pois käytöstä",
 	"editcheck-suggestions-none": "Ei ehdotuksia saatavilla",

@@ -9,6 +9,7 @@
 	"editchecks": "Bearbeitungsprüfungen",
 	"editcheck-config-save-language-subpage": "Die Konfiguration für die Bearbeitungsprüfung darf keine Sprachunterseiten enthalten. Bearbeite stattdessen die Seite [[MediaWiki:Editcheck-config.json]].",
 	"editcheck-toolbar-suggestions-title": "Vorschläge umschalten",
+	"editcheck-read-suggestions": "Vorschläge",
 	"editcheck-suggestions-turned-on": "Vorschläge aktiviert",
 	"editcheck-suggestions-turned-off": "Vorschläge deaktiviert",
 	"editcheck-suggestions-none": "Keine Vorschläge verfügbar",
