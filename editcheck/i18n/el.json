@@ -20,6 +20,10 @@
 	"editcheck-dialog-action-submit": "Υποβολή",
 	"editcheck-dialog-action-done": "Έγινε",
 	"editcheck-dialog-scroll-into-view": "Προβολή προτάσεων",
+	"editcheck-dialog-success-suggestion": "Η πρόταση ολοκληρώθηκε!",
+	"editcheck-dialog-success-check": "Ο έλεγχος ολοκληρώθηκε!",
+	"editcheck-dialog-action-view-more-suggestions": "Δείτε περισσότερες",
+	"editcheck-dialog-action-publish": "Δημοσίευση",
 	"editcheck-dialog-toggle": "Εναλλαγή ορατότητας",
 	"editcheck-dialog-addref-description": "Βοηθήστε τους αναγνώστες να κατανοήσουν από πού προέρχονται αυτές οι πληροφορίες προσθέτοντας μια παραπομπή.",
 	"editcheck-dialog-addref-reject-question": "Γιατί δεν προσθέτεις μια παραπομπή;",
@@ -102,6 +106,12 @@
 	"editcheck-headinglevel-title": "Προσαρμογή επιπέδου επικεφαλίδας",
 	"editcheck-headinglevel-description": "Αυτό το επίπεδο επικεφαλίδας ενδέχεται να μην ακολουθεί τη σωστή διαδοχική δομή. Βοηθήστε τους αναγνώστες να πλοηγηθούν στο περιεχόμενο πιο εύκολα χρησιμοποιώντας το σωστό [{{int:editcheck-headinglevel-descriptionlink}} επίπεδο επικεφαλίδας].",
 	"editcheck-headinglevel-action-adjust": "Προσαρμογή επικεφαλίδας",
+	"editcheck-leadlength-title": "Βελτίωση της αναγνωσιμότητας",
+	"editcheck-leadlength-description": "Αυτή η ενότητα είναι μεγαλύτερη από ό,τι προτείνουν οι [{{int:editcheck-leadlength-descriptionlink}} οδηγίες  της {{SITENAME}}]. Σκεφτείτε να την κάνετε πιο σύντομη κάνοντας πράγματα όπως η μετακίνηση πληροφοριών σε άλλες ενότητες ή η αντικατάσταση μεγάλων φράσεων με απλούστερες.",
+	"editcheck-leadlength-reject-appropriate": "Το μήκος είναι κατάλληλο για αυτό το λήμμα",
+	"editcheck-leadlength-reject-uncertain": "Δεν είμαι σίγουρος πώς να το κάνω πιο σύντομο",
+	"editcheck-leadlength-reject-other": "Άλλο",
+	"editcheck-leadlength-thank": "Σας ευχαριστούμε που λάβατε υπόψη το μήκος της εισαγωγικής ενότητας!",
 	"editcheck-image-caption-title": "Προσθήκη λεζάντας εικόνας",
 	"editcheck-image-caption-description": "Αυτή η εικόνα δεν έχει λεζάντα. Βοηθήστε τους αναγνώστες να κατανοήσουν γιατί η εικόνα είναι σχετική προσθέτοντας μια [{{int:editcheck-image-caption-descriptionlink}} σύντομη λεζάντα].",
 	"editcheck-convertreference-title": "Μετατροπή αναφοράς",
@@ -137,5 +147,6 @@
 	"tag-editcheck-reference-decline-other": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε (άλλο)",
 	"tag-editcheck-reference-decline-other-description": "Η αναφορά EditCheck απορρίφθηκε για μη καταχωρημένο λόγο.",
 	"tag-editcheck-reference-decline-uncertain": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε =(αβέβαιο)",
-	"tag-editcheck-reference-decline-uncertain-description": "Η αναφορά EditCheck απορρίφθηκε ως αβέβαιη"
+	"tag-editcheck-reference-decline-uncertain-description": "Η αναφορά EditCheck απορρίφθηκε ως αβέβαιη",
+	"communityconfiguration-editcheck-title": "Έλεγχοι επεξεργασιών"
 }

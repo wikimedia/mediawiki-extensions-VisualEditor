@@ -5,11 +5,13 @@
 			"Kopmil",
 			"Meno25",
 			"Mohammed Qays",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"علاء"
 		]
 	},
 	"editchecks": " فحص التحرير",
 	"editcheck-toolbar-suggestions-title": "إظهار/إخفاء الاقتراحات",
+	"editcheck-toolbar-suggestions-count": "{{PLURAL:$1|$1|100={{formatnum:99}}+}}",
 	"editcheck-suggestions-turned-on": "تم تفعيل الاقتراحات",
 	"editcheck-suggestions-turned-off": "تم إيقاف الاقتراحات",
 	"editcheck-suggestions-none": "لا توجد اقتراحات متاحة",
@@ -102,7 +104,7 @@
 	"editcheck-external-link-title": "إزالة الرابط الخارجي",
 	"editcheck-external-link-description": "يشير هذا الرابط إلى موقع ويب خارجي. ساعدوا القراء على التركيز على المحتوى بإزالة هذا الرابط، ونقله إلى قسم «الروابط الخارجية»، أو تحويله إلى مرجع إذا كان ذلك مناسبًا.",
 	"editcheck-duplicate-link-title": "إزالة الرابط المتكرر",
-	"editcheck-duplicate-link-description": "يظهر هذا الرابط أكثر من مرة في هذا القسم. ساعدوا القراء على تصفح أسهل بواسطة إزالة [{{int:editcheck-duplicate-link-descriptionlink}} الروابط المنكررة].",
+	"editcheck-duplicate-link-description": "يظهر هذا الرابط أكثر من مرة في هذا القسم. ساعدوا القراء على تصفح أسهل بواسطة إزالة [{{int:editcheck-duplicate-link-descriptionlink}} الروابط المتكررة].",
 	"editcheck-adjacent-link-title": "دمج الروابط المتجاورة",
 	"editcheck-adjacent-link-description": "هذه الروابط المتطابقة متجاورة أو مفصولة بمسافات بيضاء فقط. ساعدوا القراء على التنقل بسهولة أكبر عبر دمجها في رابط واحد.",
 	"editcheck-disambiguation-title": "رابط إلى صفحة أكثر تحديدًا",

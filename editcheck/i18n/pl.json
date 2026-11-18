@@ -25,6 +25,10 @@
 	"editcheck-dialog-action-submit": "Wyślij",
 	"editcheck-dialog-action-done": "Gotowe",
 	"editcheck-dialog-scroll-into-view": "Pokaż sugestie",
+	"editcheck-dialog-success-suggestion": "Zrealizowano sugestię!",
+	"editcheck-dialog-success-check": "Zakończono kontrolę!",
+	"editcheck-dialog-action-view-more-suggestions": "Zobacz więcej",
+	"editcheck-dialog-action-publish": "Opublikuj",
 	"editcheck-dialog-toggle": "Zmieniono widoczność",
 	"editcheck-dialog-addref-description": "Pomóż czytelnikom, dodając przypis mówiący, skąd pochodzą te informacje.",
 	"editcheck-dialog-addref-reject-question": "Dlaczego nie dodajesz przypisu?",
@@ -107,8 +111,12 @@
 	"editcheck-headinglevel-title": "Popraw poziom nagłówka",
 	"editcheck-headinglevel-description": "Ten poziom nagłówka może nie zgadzać się z prawidłową strukturą sekwencyjną. Ułatwiaj czytelnikom nawigację po treści, używając prawidłowego [{{int:editcheck-headinglevel-descriptionlink}} poziomu nagłówka].",
 	"editcheck-headinglevel-action-adjust": "Dostosuj nagłówek",
+	"editcheck-leadlength-title": "Popraw czytelność",
+	"editcheck-leadlength-description": "Ta sekcja jest dłuższa niż zalecają [{{int:editcheck-leadlength-descriptionlink}} wytyczne {{GRAMMAR:D.lp|{{SITENAME}}}}]. Rozważ jej skrócenie, np. przenosząc informacje do innych sekcji lub zastępując długie frazy prostszymi.",
+	"editcheck-leadlength-reject-appropriate": "Ta długość jest odpowiednia dla tego artykułu",
 	"editcheck-leadlength-reject-uncertain": "Nie wiem, jak skrócić ten tekst",
 	"editcheck-leadlength-reject-other": "Inny powód",
+	"editcheck-leadlength-thank": "Dziękujemy za sprawdzenie długości wprowadzenia!",
 	"editcheck-image-caption-title": "Dodaj podpis ilustracji",
 	"editcheck-image-caption-description": "Ta ilustracja nie ma podpisu. Pomóż czytelnikom zrozumieć, co ona przedstawia, dodając [{{int:editcheck-image-caption-descriptionlink}} krótki podpis].",
 	"editcheck-convertreference-title": "Konwertuj przypis",
@@ -145,5 +153,6 @@
 	"tag-editcheck-reference-decline-other-description": "Kontrola edycji: osoba odrzuciła sugestię dodania przypisu z innego powodu",
 	"tag-editcheck-reference-decline-uncertain": "Kontrola edycji (przypisy): odrzucono (niepewność)",
 	"tag-editcheck-reference-decline-uncertain-description": "Kontrola edycji: osoba odrzuciła sugestię dodania przypisu, ponieważ nie była pewna, jaki przypis dodać",
-	"communityconfiguration-editcheck-title": "Kontrola edycji"
+	"communityconfiguration-editcheck-title": "Kontrola edycji",
+	"communityconfiguration-editcheck-description": "Określ warunki aktywujące kontrole i sugestie edycji oraz zdecyduj, kto ma je widzieć"
 }
