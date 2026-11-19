@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Orokbest1"
+		]
+	},
+	"editcheck-dialog-action-no": "Iyo",
+	"editcheck-dialog-action-yes": "Ehh",
+	"editcheck-dialog-action-decline": "Esin",
+	"editcheck-dialog-action-revise": "Ekaedem",
+	"editcheck-dialog-action-recheck": "Emanna ese",
+	"editcheck-dialog-action-back": "Edem",
+	"editcheck-dialog-action-submit": "Ben dinim",
+	"editcheck-dialog-addref-description": "Wam mme andikood ediongo nte iko ami atoadi ke adidian itie nte eben iko ami edi",
+	"editcheck-dialog-addref-reject-question": "Nsinam ku'dian itie nte edad iko ami eto",
+	"editcheck-dialog-addref-reject-irrelevant": "Nkereke ke adidian itie nte eben iko eto aba ufon ke se ami ñnam",
+	"editcheck-dialog-addref-reject-common-knowledge": " Iko se ami ndian ado iko ediongo ke yak awak owo eti eti",
+	"editcheck-dialog-addref-reject-uncertain": "Ñnekeke ndiongo añke itie Ebenezer iko eto se mkpe adian",
+	"editcheck-dialog-addref-reject-other": "Mfen",
+	"editcheck-dialog-addref-title": "Dian nte eben iko eto",
+	"editcheck-dialog-title": "Mbemiso asin iko ke afvm",
+	"editcheck-copyvio-title": "Aben iko nwed adisin",
+	"editcheck-copyvio-prompt": "Afo ake awed iko ami?",
+	"editcheck-copyvio-action-keep": "Ehh, nim anye",
+	"editcheck-copyvio-action-remove": "Iyo, sio anye",
+	"editcheck-copyvio-keep-description": "Mbok wam mme awed mkpo nfem ewedte mkpo ebanga ikpekghe ami ediongo ntak afo ayaka yak iko afo asine mi aba.",
+	"editcheck-copyvio-keep-wrote": "Ami nkewed iko nwed  nko iko ami ibaga ke afvm ke itie mfen",
+	"editcheck-copyvio-keep-permission": "Iko mwed ami ado ke mfon",
+	"editcheck-copyvio-keep-other": "Mkpak keed ke esid ado isineke",
+	"editcheck-copyvio-keep-notify": "Sonsongo ñnaga atank ntak asine iko nwed",
+	"editcheck-tone-title": "Sio usung uwed iko fep",
+	"editcheck-tone-title-acted": "Wed iko ke usung sifon",
+	"editcheck-tone-reject-appropriate": "Usung uwed iko ami ifono",
+	"editcheck-tone-reject-other": "Mfen",
+	"editcheck-review-title": "Manan se mkpo s'ikpugho",
+	"tag-editcheck-reference-decline-irrelevant-description": " itie nte edad iko newd eto  ifono nko eduok anye",
+	"tag-editcheck-reference-decline-other": "Esio (nte edad iko nwed) efep (mfen)",
+	"tag-editcheck-reference-decline-other-description": "Esio  itie nte eben iko eto efpe, ado owo inoho ntak"
+}

@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yaw tuba"
+		]
+	},
+	"editcheck-dialog-action-no": "Daabi",
+	"editcheck-dialog-action-yes": "Aane",
+	"editcheck-dialog-action-decline": "Te kɔ fam",
+	"editcheck-dialog-action-revise": "Hwɛ mu bio",
+	"editcheck-dialog-action-recheck": "Yɛsan hwɛ",
+	"editcheck-dialog-action-back": "Akyire",
+	"editcheck-dialog-action-submit": "Fa kɔ",
+	"editcheck-dialog-addref-reject-other": "Nea ɛka ho",
+	"editcheck-dialog-addref-title": "Fa asɛmti ka ho",
+	"editcheck-dialog-title": "Ansa na wode ato dwa",
+	"editcheck-copyvio-title": "Nsɛm a wɔde aka",
+	"editcheck-copyvio-prompt": "So wo na ɛkyerɛw saa asɛm yi?",
+	"editcheck-copyvio-action-keep": "Yiw, ma ne wɔ hɔ",
+	"editcheck-copyvio-action-remove": "Daabi, yi fi hɔ",
+	"editcheck-tone-title": "Tone nsakrae?",
+	"editcheck-tone-title-acted": "Tone nsakrae",
+	"editcheck-tone-reject-other": "Nea ɛka ho"
+}

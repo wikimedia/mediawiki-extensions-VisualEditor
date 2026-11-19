@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"IGANZE",
+			"Musindi250",
+			"Ndahiro Derrick",
+			"Yves umuganwa"
+		]
+	},
+	"editcheck-dialog-action-no": "Oya",
+	"editcheck-dialog-action-yes": "Yego",
+	"editcheck-dialog-action-decline": "Kugabanuka",
+	"editcheck-dialog-action-revise": "Subiramo",
+	"editcheck-dialog-action-recheck": "ongera ugenzure",
+	"editcheck-dialog-action-back": "Inyuma",
+	"editcheck-dialog-action-submit": "Ohereza",
+	"editcheck-dialog-addref-description": "Fasha abasomyi kumenya aho aya makuru yavuye wongeraho iriburiro",
+	"editcheck-dialog-addref-reject-question": "Kuki udashyiraho iriburiro?",
+	"editcheck-dialog-addref-reject-irrelevant": "Ntekereza ko guhyiraho iriburiro nta mumaro bifite ku mpinduka nkoze",
+	"editcheck-dialog-addref-reject-common-knowledge": "Amakuru nshyizeho arazwi cyane",
+	"editcheck-dialog-addref-reject-uncertain": "Sinzi neza iriburiro nakongeraho",
+	"editcheck-dialog-addref-reject-other": "ibindi",
+	"editcheck-dialog-addref-title": "Ongera isoko",
+	"editcheck-dialog-title": "Mbere yo gusakaza",
+	"editcheck-copyvio-title": "Ibikubiye mu byashyizwemo",
+	"editcheck-copyvio-prompt": "waba wanditse uyu mwandiko",
+	"editcheck-copyvio-action-keep": "Yego, bigumane",
+	"editcheck-copyvio-action-remove": "Oya, bikureho",
+	"editcheck-copyvio-keep-description": "Nyamuneka fasha abandi banditsi b’iyi nyandiko gusobanukirwa impamvu yatumye ugumishaho iyo nyandiko Yashyizeho .",
+	"editcheck-copyvio-keep-wrote": "nanditse iyi nyandiko ariko ntahandi yigeze isakazwa",
+	"editcheck-copyvio-keep-permission": "Iyi nyandiko yemewe gukoreshwa n'abantu bose",
+	"editcheck-copyvio-keep-other": "Ntanakimwe mubyavuzwe hejuru",
+	"editcheck-copyvio-keep-notify": "Urakoze kubwo gutanga impamvu yo kugumana amagambo wimuriye aha!",
+	"editcheck-tone-title": "Ongera Ijwi",
+	"editcheck-tone-title-acted": "Gusubiramo Ijwi",
+	"editcheck-tone-reject-appropriate": "Imvugo irakwiye",
+	"editcheck-tone-reject-uncertain": "Sinzi neza uko nshobora guhindura imvugo",
+	"editcheck-tone-reject-other": "Ibindi",
+	"editcheck-tone-thank": "Murakoze cyane kubwo kwita ku mvugo yanyu",
+	"editcheck-review-title": "Suzuma impinduka"
+}

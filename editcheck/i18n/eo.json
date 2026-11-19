@@ -1,11 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ziko"
+			"Ziko",
+			"Afrib"
 		]
 	},
 	"editcheck-dialog-action-no": "Ne",
 	"editcheck-dialog-action-yes": "Jes",
+	"editcheck-dialog-action-decline": "Forlasi",
+	"editcheck-dialog-action-revise": "Revizii",
+	"editcheck-dialog-action-recheck": "Re-kontroli",
+	"editcheck-dialog-action-back": "Reen",
+	"editcheck-dialog-action-submit": "Sendi",
 	"editcheck-dialog-addref-description": "Helpu al la legantoj kompreni, de kie venas tiu informo, per aldono de citaĵo.",
 	"editcheck-dialog-addref-reject-question": "Kial vi ne aldonas citaĵon?",
 	"editcheck-dialog-addref-reject-description": "Aliaj redaktantoj ŝatus lerni pli pri via decido malakcepti la citaĵon.",
@@ -16,6 +22,22 @@
 	"editcheck-dialog-addref-success-notify": "Dankon pro aldoni citaĵon!",
 	"editcheck-dialog-addref-title": "Aldoni citaĵon",
 	"editcheck-dialog-title": "Antaŭ publikigo",
+	"editcheck-copyvio-title": "Enmetita enhavo",
+	"editcheck-copyvio-prompt": "Ĉu vi verkis ĉi tiun tekston?",
+	"editcheck-copyvio-action-keep": "Jes, gardu ĝin",
+	"editcheck-copyvio-action-remove": "Ne, forigu ĝin",
+	"editcheck-copyvio-keep-description": "Bonvolu helpi aliajn redaktantojn de ĉi tiu artikolo kompreni vian kialon konservi la enmetitan tekston.",
+	"editcheck-copyvio-keep-wrote": "Mi verkis ĉi tiun enhavon, kaj ĝi ne estas publikigita aliloke.",
+	"editcheck-copyvio-keep-permission": "Ĉi tiu enhavo estas libere licencita",
+	"editcheck-copyvio-keep-other": "Nenio el la supre menciita validas",
+	"editcheck-copyvio-keep-notify": "Dankon pro tio, ke vi dividis vian kialon konservi la enmetitan tekston!",
+	"editcheck-tone-title": "Ĉu revizii tonon?",
+	"editcheck-tone-title-acted": "Reviziante Tonon",
+	"editcheck-tone-description-acted": "Atentu pri esprimoj, kiuj estas laŭdaj, malestimaj, neklaraj, kliŝaj, aŭ kiuj subtenas specifan vidpunkton.",
+	"editcheck-tone-reject-appropriate": "La tono taŭgas",
+	"editcheck-tone-reject-uncertain": "Mi ne certas kiel revizii la tonon",
+	"editcheck-tone-reject-other": "Alia",
+	"editcheck-tone-thank": "Dankon pro la konsiderado de la tono!",
 	"tag-editcheck-reference-decline-common-knowledge": "Redakto-kontrolo (referencoj) malakceptita (komuna scio)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Redakto-kontrola referenco estis malakceptita kiel komuna scio",
 	"tag-editcheck-reference-decline-irrelevant": "Redakto-kontrolo (referencoj) malakceptita (negrava)",
