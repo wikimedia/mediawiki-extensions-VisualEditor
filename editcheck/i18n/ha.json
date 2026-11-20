@@ -3,6 +3,7 @@
 		"authors": [
 			"Abdulwahabameenu",
 			"Dev ammar",
+			"Em-em",
 			"Rofiatmustapha12",
 			"Umar Rabiuu",
 			"Umar2z",
@@ -100,7 +101,7 @@
 	"editcheck-action-dismiss": "yi watsi da",
 	"editcheck-suggestedlink-title": "Ƙara Mahaɗa",
 	"editcheck-suggestedlink-description": "Wannan rubutun bai haɗu da wani labari ba. Ƙara hanyar haɗi zuwa [{{int:editcheck-suggestedlink-descriptionlink}} taimaka wa masu karatu su kara koyo] game da wannan batu.",
-	"editcheck-suggestedlink-prompt": "Haɗa \" $1 \" zuwa [[$2]]?",
+	"editcheck-suggestedlink-prompt": "Mahaɗa \" $1 \" zuwa [[$2]]?",
 	"editcheck-suggestedlink-action-add-link": "Ƙara mahaɗa",
 	"editcheck-suggestedlink-footer": "Hanyoyin da aka ba da shawarar an samar da su ne ta hanyar inji. Bincike kafin ƙarawa.",
 	"editcheck-action-add-caption": "Ƙara take",

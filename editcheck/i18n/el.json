@@ -8,6 +8,7 @@
 	"editchecks": "Έλεγχοι επεξεργασιών",
 	"editcheck-config-save-language-subpage": "Η διαμόρφωση ελέγχου επεξεργασίας δεν μπορεί να έχει υποσελίδες γλώσσας. Επεξεργαστείτε αντ' αυτού το [[MediaWiki:Editcheck-config.json]].",
 	"editcheck-toolbar-suggestions-title": "Εναλλαγή προτάσεων",
+	"editcheck-read-suggestions": "Προτάσεις",
 	"editcheck-suggestions-turned-on": "Οι προτάσεις ενεργοποιήθηκαν",
 	"editcheck-suggestions-turned-off": "Οι προτάσεις απενεργοποιήθηκαν",
 	"editcheck-suggestions-none": "Δεν υπάρχουν διαθέσιμες προτάσεις",
@@ -28,7 +29,7 @@
 	"editcheck-dialog-action-view-more-suggestions": "Δείτε περισσότερες",
 	"editcheck-dialog-action-publish": "Δημοσίευση",
 	"editcheck-dialog-discoverability-title": "Ανακαλύψτε τρόπους για να βελτιώσετε αυτό το λήμμα",
-	"editcheck-dialog-discoverability-message": "Υπάρχουν ορισμένες προτάσεις για τη βελτίωση αυτού του λήμματος. Πρόκειται για προαιρετικές καθοδηγούμενες εργασίες που μπορείτε να ολοκληρώσετε ή να παραβλέψετε.",
+	"editcheck-dialog-discoverability-message": "Υπάρχουν ορισμένες προτάσεις για τη βελτίωση αυτού του λήμματος. Είναι προαιρετικές καθοδηγούμενες εργασίες που μπορείτε να ολοκληρώσετε ή να παραβλέψετε.",
 	"editcheck-dialog-action-nothanks": "Όχι, ευχαριστώ",
 	"editcheck-dialog-toggle": "Εναλλαγή ορατότητας",
 	"editcheck-dialog-addref-description": "Βοηθήστε τους αναγνώστες να κατανοήσουν από πού προέρχονται αυτές οι πληροφορίες προσθέτοντας μια παραπομπή.",
@@ -155,5 +156,6 @@
 	"tag-editcheck-reference-decline-other-description": "Η αναφορά EditCheck απορρίφθηκε για μη καταχωρημένο λόγο.",
 	"tag-editcheck-reference-decline-uncertain": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε =(αβέβαιο)",
 	"tag-editcheck-reference-decline-uncertain-description": "Η αναφορά EditCheck απορρίφθηκε ως αβέβαιη",
-	"communityconfiguration-editcheck-title": "Έλεγχοι επεξεργασιών"
+	"communityconfiguration-editcheck-title": "Έλεγχοι επεξεργασιών",
+	"communityconfiguration-editcheck-description": "Ορίστε τις συνθήκες που ενεργοποιούν τους ελέγχους επεξεργασίας και τις προτάσεις και αποφασίστε ποιος τις βλέπει"
 }
