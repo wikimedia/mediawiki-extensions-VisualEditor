@@ -27,7 +27,7 @@
 	"editcheck-dialog-action-back": "戻る",
 	"editcheck-dialog-action-submit": "送信",
 	"editcheck-dialog-scroll-into-view": "おすすめの編集を見る",
-	"editcheck-dialog-toggle": "表示/非表示",
+	"editcheck-dialog-toggle": "表示/非表示の切り替え",
 	"editcheck-dialog-addref-description": "出典を追加することで、読者がこの情報の根拠や情報源を理解できるようにしてください。",
 	"editcheck-dialog-addref-reject-question": "出典を追加しない理由はなんですか。",
 	"editcheck-dialog-addref-reject-description": "出典を追加しなくてもよいと判断した理由を、さらに詳しく教えてください。",

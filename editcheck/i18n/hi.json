@@ -7,6 +7,8 @@
 	},
 	"editchecks": "सम्पादन जाँचें",
 	"editcheck-toolbar-suggestions-title": "सुझाव टॉगल करें",
+	"editcheck-suggestions-turned-on": "सुझाव चालू कर दिए गए हैं",
+	"editcheck-suggestions-turned-off": "सुझाव बंद कर दिए गए हैं",
 	"editcheck-dialog-action-no": "नहीं",
 	"editcheck-dialog-action-yes": "हाँ",
 	"editcheck-dialog-action-decline": "अस्वीकार करें",
