@@ -1,6 +1,14 @@
 @import 'mediawiki.skin.variables.less';
 
 .ve-ui-editCheckDiscoverabilityDialog {
+
+	// bring close button to the top right
+	.oo-ui-processDialog-actions-safe,
+	.oo-ui-processDialog-actions-primary {
+		left: unset;
+		right: 0;
+	}
+
 	.oo-ui-processDialog.oo-ui-isMobile & {
 		.oo-ui-processDialog-location {
 			padding: 1em;
@@ -11,14 +19,6 @@
 		.oo-ui-processDialog-title {
 			line-height: 1em;
 			white-space: normal;
-		}
-
-		// bring close button to the top right
-		.oo-ui-processDialog-actions-safe,
-		.oo-ui-processDialog-actions-primary {
-			align-items: flex-start;
-			left: unset;
-			right: 0;
 		}
 
 		.oo-ui-processDialog-actions-other .oo-ui-actionWidget.oo-ui-labelElement > .oo-ui-buttonElement-button {
