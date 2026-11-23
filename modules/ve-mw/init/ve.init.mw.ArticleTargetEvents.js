@@ -243,6 +243,21 @@ ve.init.mw.ArticleTargetEvents.prototype.onSurfaceReady = function () {
 	this.target.surface.getModel().getDocument().connect( this, {
 		transact: 'recordLastTransactionTime'
 	} ).once( 'transact', this.onFirstTransaction.bind( this ) );
+	this.target.surface.getView().connect( this, { paste: 'onPaste' } );
+};
+
+/**
+ * Count pastes by detected source, to show when a paste source detector stops matching
+ *
+ * @param {Object} details See ve.ce.Surface#paste
+ */
+ve.init.mw.ArticleTargetEvents.prototype.onPaste = function ( details ) {
+	mw.track( 'stats.mediawiki_ve_paste_total', 1, {
+		wiki: mw.config.get( 'wgDBname' ),
+		target: this.target.constructor.static.trackingName,
+		mode: this.target.surface.getMode(),
+		source: details.source ? details.source.name : 'unknown'
+	} );
 };
 
 /**
