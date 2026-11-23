@@ -36,17 +36,19 @@ ve.dm.MWCategoryMetaItem.static.toDataElement = function ( domElements, converte
 	// Parsoid: LinkHandlerUtils::serializeAsWikiLink
 	// Parses the URL to retrieve the page (category) it points to.
 	// Handles long (query-based) wiki links, similar to how internal links in wiki text are resolved.
-	const targetData = mw.libs.ve.getTargetDataFromHref(
-			domElements[ 0 ].getAttribute( 'href' ),
+	// Parse the sortkey separately: getTargetDataFromHref decodes it and changes underscores to spaces.
+	const href = domElements[ 0 ].getAttribute( 'href' ),
+		hashIndex = href.indexOf( '#' ),
+		targetData = mw.libs.ve.getTargetDataFromHref(
+			hashIndex === -1 ? href : href.slice( 0, hashIndex ),
 			converter.getHtmlDocument()
-		),
-		titleAndFragment = targetData.title.match( /^(.*?)(?:#(.*))?\s*$/ );
+		);
 
 	return {
 		type: this.name,
 		attributes: {
-			category: titleAndFragment[ 1 ],
-			sortkey: titleAndFragment[ 2 ] ? decodeURIComponent( titleAndFragment[ 2 ] ) : ''
+			category: targetData.title.trim(),
+			sortkey: hashIndex === -1 ? '' : ve.safeDecodeURIComponent( href.slice( hashIndex + 1 ) )
 		}
 	};
 };
