@@ -442,7 +442,7 @@ if ( mw.config.get( 'wgVisualEditorConfig' ).editCheck || mw.editcheck.forceEnab
 					// The check would be shown for the current viewer, and there's enough content that we care about it:
 					if ( data.source ) {
 						// Known-source pastes that we're not showing regardless of the check being enabled/disabled
-						ve.track( 'activity.editCheck-paste', { action: 'ignored-paste-' + data.source } );
+						ve.track( 'activity.editCheck-paste', { action: 'ignored-paste-' + data.source.name } );
 					} else if ( !defaults.showAsCheck ) {
 						// The check is disabled, and there's no source so we would have shown the check otherwise
 						ve.track( 'activity.editCheck-paste', { action: 'relevant-paste' } );
