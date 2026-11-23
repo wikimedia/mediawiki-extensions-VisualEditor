@@ -79,6 +79,39 @@ QUnit.test( 'toDataElement', ( assert ) => {
 					sortkey: 'MySortkey'
 				}
 			}
+		},
+		{
+			msg: 'Sortkey with encoded percent sign',
+			element: createLink( './Category:Some_Category#100%25' ),
+			expected: {
+				type: 'mwCategory',
+				attributes: {
+					category: 'Category:Some Category',
+					sortkey: '100%'
+				}
+			}
+		},
+		{
+			msg: 'Sortkey with percent sign that looks like an escape',
+			element: createLink( './Category:Some_Category#50%2541' ),
+			expected: {
+				type: 'mwCategory',
+				attributes: {
+					category: 'Category:Some Category',
+					sortkey: '50%41'
+				}
+			}
+		},
+		{
+			msg: 'Sortkey with underscore and encoded hash',
+			element: createLink( './Category:Some_Category#a_b%20c%23d' ),
+			expected: {
+				type: 'mwCategory',
+				attributes: {
+					category: 'Category:Some Category',
+					sortkey: 'a_b c#d'
+				}
+			}
 		}
 	] );
 
