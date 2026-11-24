@@ -513,7 +513,9 @@ QUnit.test( 'applyCase', ( assert ) => {
 		{ message: 'Han+Latin title', phrase: '你partner最鐘意Uniqlo定GOD？', model: 'Qux', expected: '你Partner最鐘意Uniqlo定GOD？' },
 		{ message: 'Han+Latin lower', phrase: '你partner最鐘意Uniqlo定GOD？', model: 'qux', expected: '你partner最鐘意Uniqlo定GOD？' },
 		{ message: 'Han+Latin mixed', phrase: '你partner最鐘意Uniqlo定GOD？', model: 'qUX', expected: '你partner最鐘意Uniqlo定GOD？' },
-		{ message: 'Combining accents title', phrase: 'I like Caersw\u0302s cafe\u0301s', model: 'Qux', expected: 'I Like Caersw\u0302s Cafe\u0301s' }
+		{ message: 'Combining accents title', phrase: 'I like Caersw\u0302s cafe\u0301s', model: 'Qux', expected: 'I Like Caersw\u0302s Cafe\u0301s' },
+		{ message: 'Titlecase digraph title', phrase: 'my \u01C5ungla', model: 'Qux', expected: 'My \u01C5ungla' },
+		{ message: 'Braces title', phrase: '{my}pal', model: 'Qux', expected: '{My}Pal' }
 	];
 	tests.forEach( ( test ) => {
 		const observed = mw.editcheck.applyCase( test.phrase, test.model, test.lang );

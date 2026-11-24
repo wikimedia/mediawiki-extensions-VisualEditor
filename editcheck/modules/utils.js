@@ -413,8 +413,8 @@ mw.editcheck.applyCase = function ( phrase, model, lang ) {
 
 // Match any lowercase letter, unless preceded by a letter that can have case (or a combining mark)
 // We must compile the RegExp at runtime because eslint does not understand \p yet
-// eslint-disable-next-line prefer-regex-literals, no-useless-escape
-mw.editcheck.applyCase.lowerFirst = new RegExp( '(^|[^\\p{Lu}\\p{Ll}\p{Lt}\\p{M}])(\\p{Ll})', 'gu' );
+// eslint-disable-next-line prefer-regex-literals
+mw.editcheck.applyCase.lowerFirst = new RegExp( '(^|[^\\p{Lu}\\p{Ll}\\p{Lt}\\p{M}])(\\p{Ll})', 'gu' );
 
 /**
  * Show a citation dialog
