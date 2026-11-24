@@ -105,7 +105,7 @@ mw.editcheck.LLMSuggestionEditCheck.static.fetchSuggestions = function ( surface
 
 mw.editcheck.LLMSuggestionEditCheck.prototype.onBranchNodeChange = function ( surfaceModel ) {
 	if ( !this.includeSuggestions ) {
-		return;
+		return [];
 	}
 	const documentModel = surfaceModel.getDocument();
 	const modified = this.getModifiedRanges( documentModel );
