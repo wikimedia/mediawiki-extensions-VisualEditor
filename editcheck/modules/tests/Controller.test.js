@@ -146,6 +146,70 @@ QUnit.test( 'getActions gives the actions for the current mode', ( assert ) => {
 	} );
 } );
 
+QUnit.test( 'editChecksArePossible', ( assert ) => {
+	const cases = [
+		{
+			msg: 'Check can be shown',
+			asCheck: true,
+			asSuggestion: false,
+			suggestionsModeAvailable: false,
+			expected: true
+		},
+		{
+			msg: 'Nothing can be shown',
+			asCheck: false,
+			asSuggestion: false,
+			suggestionsModeAvailable: true,
+			expected: false
+		},
+		{
+			msg: 'Suggestion can be shown in suggestion mode',
+			asCheck: false,
+			asSuggestion: true,
+			suggestionsModeAvailable: true,
+			expected: true
+		},
+		{
+			msg: 'Suggestion is ignored without suggestion mode',
+			asCheck: false,
+			asSuggestion: true,
+			suggestionsModeAvailable: false,
+			expected: false
+		},
+		{
+			msg: 'Suggestion can be shown before the surface is ready',
+			asCheck: false,
+			asSuggestion: true,
+			suggestionsModeAvailable: true,
+			noSurface: true,
+			expected: true
+		}
+	];
+
+	const doc = new ve.dm.Document( [ { type: 'paragraph' }, { type: '/paragraph' } ] );
+	const originalFactory = mw.editcheck.editCheckFactory;
+	try {
+		cases.forEach( ( caseItem ) => {
+			const StubCheck = function () {};
+			OO.inheritClass( StubCheck, mw.editcheck.BaseEditCheck );
+			StubCheck.static.name = 'stub';
+			StubCheck.prototype.canBeShown = ( documentModel, suggestion ) => (
+				suggestion ? caseItem.asSuggestion : caseItem.asCheck
+			);
+			StubCheck.prototype.onDocumentChange = () => [];
+			mw.editcheck.editCheckFactory = new mw.editcheck.EditCheckFactory();
+			mw.editcheck.editCheckFactory.register( StubCheck );
+
+			const controller = Object.create( mw.editcheck.Controller.prototype );
+			controller.suggestionsModeAvailable = caseItem.suggestionsModeAvailable;
+			controller.surface = caseItem.noSurface ? null : { getModel: () => ( { getDocument: () => doc } ) };
+			assert.strictEqual( controller.editChecksArePossible(), caseItem.expected, caseItem.msg );
+		} );
+	} finally {
+		mw.editcheck.editCheckFactory = originalFactory;
+	}
+} );
+
 /**
  * Make a controller that runs one stub check
  *

@@ -373,13 +373,10 @@ Controller.prototype.onSidebarDialogsOpeningOrClosing = function ( win, openingO
  * @return {boolean}
  */
 Controller.prototype.editChecksArePossible = function () {
-	if ( mw.editcheck.suggestionsModeAvailable ) {
-		// Suggestions override user checks so assume something can be shown
-		return true;
-	}
 	return [ 'onBeforeSave', 'onDocumentChange', 'onBranchNodeChange' ].some(
 		( listener ) => mw.editcheck.editCheckFactory.getNamesByListener( listener ).some(
-			( checkName ) => this.canBeShown( checkName )
+			( checkName ) => this.canBeShown( checkName ) ||
+				( this.suggestionsModeAvailable && this.canBeShown( checkName, true ) )
 		)
 	);
 };
@@ -393,8 +390,10 @@ Controller.prototype.editChecksArePossible = function () {
  */
 Controller.prototype.canBeShown = function ( checkName, suggestion = false ) {
 	const check = mw.editcheck.editCheckFactory.create( checkName, this.getCheckState() );
+	// Before surfaceReady there is no document, so the check skips its document conditions
+	const documentModel = this.surface ? this.surface.getModel().getDocument() : undefined;
 	try {
-		return check.canBeShown( this.surface.getModel().getDocument(), suggestion );
+		return check.canBeShown( documentModel, suggestion );
 	} catch ( e ) {
 		mw.log.error( `Error checking canBeShown for ${ checkName }`, e );
 		return false;
