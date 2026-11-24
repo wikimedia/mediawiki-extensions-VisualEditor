@@ -55,7 +55,7 @@ mw.editcheck.MaintenanceTemplateEditCheck.prototype.canBeShown = function ( ...a
 		return false;
 	}
 
-	return mw.editcheck.ToneCheck.super.prototype.canBeShown.call( this, ...args );
+	return mw.editcheck.MaintenanceTemplateEditCheck.super.prototype.canBeShown.call( this, ...args );
 };
 
 mw.editcheck.MaintenanceTemplateEditCheck.prototype.onDocumentChange = function ( surfaceModel ) {
