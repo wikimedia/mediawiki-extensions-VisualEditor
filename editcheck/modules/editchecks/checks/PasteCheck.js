@@ -78,6 +78,20 @@ mw.editcheck.PasteCheck.static.trustedPasteCategories = [
 ];
 
 /**
+ * Individual paste sources that have a lower plagiarism risk
+ *
+ * Can be used when only some sources in a category are trusted.
+ *
+ * @static
+ * @property {string[]}
+ */
+mw.editcheck.PasteCheck.static.trustedPasteSources = [
+	// Allow local wiki and wikimedia wikis, but not other MediaWiki wikis
+	'localwiki',
+	'wikimedia'
+];
+
+/**
  * Category of paste source that mw.editcheck.LLMPasteCheck acts on
  *
  * @static
@@ -91,12 +105,13 @@ mw.editcheck.PasteCheck.static.llmPasteCategory = 'ai';
  * Find out if a paste is in the scope of this check
  *
  * @param {string[]} categories Categories of the paste source
+ * @param {string} [name] Name of the paste source
  * @return {boolean}
  */
-mw.editcheck.PasteCheck.prototype.isRelevantPaste = function ( categories ) {
+mw.editcheck.PasteCheck.prototype.isRelevantPaste = function ( categories, name ) {
 	const staticProps = this.constructor.static;
 	// Trusted sources have a low plagiarism risk. LLMPasteCheck acts on the LLM pastes.
-	return !categories.some( ( category ) => (
+	return !staticProps.trustedPasteSources.includes( name ) && !categories.some( ( category ) => (
 		staticProps.trustedPasteCategories.includes( category ) ||
 		category === staticProps.llmPasteCategory
 	) );
@@ -131,7 +146,7 @@ mw.editcheck.PasteCheck.prototype.onDocumentChange = function ( surfaceModel ) {
 			return;
 		}
 		const source = annotation.getAttribute( 'source' );
-		if ( !this.isRelevantPaste( source ? source.categories : [] ) ) {
+		if ( !this.isRelevantPaste( source ? source.categories : [], source && source.name ) ) {
 			return;
 		}
 		const id = annotation.getAttribute( 'eventId' );

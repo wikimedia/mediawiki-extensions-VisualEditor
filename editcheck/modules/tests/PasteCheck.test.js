@@ -121,6 +121,31 @@ QUnit.test( 'onDocumentChange', ( assert ) => {
 			expectedActions: 0
 		},
 		{
+			msg: 'Wikimedia wiki paste is ignored',
+			getData: () => [
+				{ type: 'paragraph' },
+				...importedText( 60, { name: 'wikimedia', categories: [ 'mediawiki' ] } ),
+				{ type: '/paragraph' }
+			],
+			expectedData: noChange,
+			config: { minimumCharacters: 50 },
+			expectedActions: 0
+		},
+		{
+			msg: 'Other MediaWiki wiki paste triggers action',
+			getData: () => [
+				{ type: 'paragraph' },
+				...importedText( 60, { name: 'mediawiki', categories: [ 'mediawiki' ] } ),
+				{ type: '/paragraph' }
+			],
+			expectedData: ( data ) => {
+				data.splice( 1, 60 );
+			},
+			config: { minimumCharacters: 50 },
+			expectedActions: 1,
+			expectedFragments: 1
+		},
+		{
 			msg: 'AI paste is left to LLMPasteCheck',
 			getData: () => [
 				{ type: 'paragraph' },
