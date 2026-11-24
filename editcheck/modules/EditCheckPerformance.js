@@ -10,14 +10,7 @@ const maxCheckMetrics = 1000; // TODO this should live elsewhere
  */
 mw.editcheck.EditCheckPerformance = function EditCheckPerformance( controller ) {
 	this.controller = controller;
-	this.timings = {
-		typingLag: {
-			minMs: null,
-			maxMs: null,
-			rawLags: []
-		},
-		allChecks: []
-	};
+	this.resetTimings();
 	this.pendingChecks = new WeakMap();
 	this.checksRun = {};
 	// Randomly select 1% of sessions in which to instrument action generation
@@ -51,8 +44,24 @@ mw.editcheck.EditCheckPerformance.prototype.trackTiming = function ( topic, dura
 	}
 };
 
+/**
+ * Clear the timings of the previous session
+ */
+mw.editcheck.EditCheckPerformance.prototype.resetTimings = function () {
+	this.timings = {
+		typingLag: {
+			minMs: null,
+			maxMs: null,
+			rawLags: []
+		},
+		allChecks: []
+	};
+};
+
 mw.editcheck.EditCheckPerformance.prototype.onSurfaceReady = function () {
 	const surface = this.controller.target.getSurface();
+	// The target and this object stay for the next session
+	this.resetTimings();
 	this.timings.sessionStart = ve.now();
 	surface.getView().eventSequencer.on( {
 		input: this.onInput.bind( this )
