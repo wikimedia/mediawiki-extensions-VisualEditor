@@ -11,12 +11,15 @@
 namespace MediaWiki\Extension\VisualEditor;
 
 use MediaWiki\Content\WikitextContent;
+use MediaWiki\Edit\ParsoidRenderID;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler\Helper\HtmlInputTransformHelper;
 use MediaWiki\Rest\Handler\Helper\HtmlOutputRendererHelper;
 use MediaWiki\Rest\Handler\Helper\PageRestHelperFactory;
+use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
@@ -196,7 +199,24 @@ class DirectParsoidClient implements ParsoidClient {
 	public function transformHTML(
 		PageIdentity $page, Bcp47Code $targetLanguage, string $html, ?int $oldid, ?string $etag
 	): array {
-		$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, $etag, $targetLanguage );
+		try {
+			$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, $etag, $targetLanguage );
+		} catch ( LocalizedHttpException $e ) {
+			$renderId = $etag ? ParsoidRenderID::newFromETag( $etag ) : null;
+			// The stash entry can expire (24h) or be evicted from memcached (large pages) before the
+			// user saves. If it belongs to the base revision, re-render that revision for selser instead
+			// of blocking the edit (LOREE-199). Stashes of unsaved wikitext (revision 0) can't be rebuilt.
+			if ( $e->getCode() !== 412 || $e->getMessageValue()->getKey() !== 'rest-no-stashed-content'
+				|| !$oldid || !$renderId || $renderId->getRevisionID() !== $oldid
+			) {
+				throw $e;
+			}
+			LoggerFactory::getInstance( 'VisualEditor' )->warning(
+				'Parsoid stash entry missing, falling back to revision rendering',
+				[ 'etag' => $etag, 'oldid' => $oldid, 'htmlBytes' => strlen( $html ) ]
+			);
+			$helper = $this->getHtmlInputTransformHelper( $page, $html, $oldid, null, $targetLanguage );
+		}
 
 		$content = $helper->getContent();
 		$format = $content->getDefaultFormat();

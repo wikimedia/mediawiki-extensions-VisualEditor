@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\VisualEditor\Tests;
 
 use MediaWiki\Extension\VisualEditor\DirectParsoidClient;
+use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWikiIntegrationTestCase;
 use Wikimedia\Bcp47Code\Bcp47CodeValue;
@@ -190,6 +191,54 @@ class DirectParsoidClientTest extends MediaWikiIntegrationTestCase {
 		$updatedWikitext = $transformHtmlResponse['body'];
 		$this->assertStringContainsString( $originalWikitext, $updatedWikitext );
 		$this->assertStringContainsString( 'More Text', $updatedWikitext );
+	}
+
+	/** @covers ::transformHTML */
+	public function testRoundTripSelserWithExpiredStash() {
+		$directClient = $this->createDirectClient();
+
+		$originalWikitext = '*a\n* b\n*  <i>c</I>';
+
+		/** @var RevisionRecord $revision */
+		$revision = $this->editPage( 'RoundTripSelserWithExpiredStash', $originalWikitext )
+			->getValue()['revision-record'];
+
+		$oldHtml = $directClient->getPageHtml( $revision )['body'];
+		$updatedHtml = str_replace( '</body>', '<p>More Text</p></body>', $oldHtml );
+		// Same revision, but a stash entry that no longer exists (expired or evicted).
+		$missingETag = '"' . $revision->getId() . '/00000000-0000-0000-0000-000000000000/stash"';
+
+		$transformHtmlResponse = $directClient->transformHTML(
+			$revision->getPage(),
+			new Bcp47CodeValue( 'qqx' ),
+			$updatedHtml,
+			$revision->getId(),
+			$missingETag
+		);
+
+		$updatedWikitext = $transformHtmlResponse['body'];
+		$this->assertStringContainsString( $originalWikitext, $updatedWikitext );
+		$this->assertStringContainsString( 'More Text', $updatedWikitext );
+	}
+
+	/** @covers ::transformHTML */
+	public function testMissingStashOfUnsavedWikitextStillFails() {
+		$directClient = $this->createDirectClient();
+
+		/** @var RevisionRecord $revision */
+		$revision = $this->editPage( 'MissingStashOfUnsavedWikitext', 'Text' )
+			->getValue()['revision-record'];
+
+		$this->expectException( LocalizedHttpException::class );
+		$this->expectExceptionCode( 412 );
+
+		$directClient->transformHTML(
+			$revision->getPage(),
+			new Bcp47CodeValue( 'qqx' ),
+			'<p>Text</p>',
+			$revision->getId(),
+			'"0/00000000-0000-0000-0000-000000000000/stash"'
+		);
 	}
 
 }
