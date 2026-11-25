@@ -81,24 +81,33 @@ mw.editcheck.LeadLengthEditCheck.static.wordSegmenters = new Map();
  * @return {number}
  */
 mw.editcheck.LeadLengthEditCheck.static.countWords = function ( text, lang ) {
-	// Intl.Segmenter also finds words in languages that do not use spaces
-	if ( typeof Intl.Segmenter === 'function' ) {
-		const segmenters = this.wordSegmenters;
-		if ( !segmenters.has( lang ) ) {
-			segmenters.set( lang, new Intl.Segmenter( lang, { granularity: 'word' } ) );
-		}
-		let count = 0;
-		for ( const segment of segmenters.get( lang ).segment( text ) ) {
-			if ( segment.isWordLike ) {
-				count++;
-			}
-		}
-		return count;
+	const segmenters = this.wordSegmenters;
+	if ( !segmenters.has( lang ) ) {
+		segmenters.set( lang, new Intl.Segmenter( lang, { granularity: 'word' } ) );
 	}
-	return text.split( /\s+/ ).filter( ( word ) => word ).length;
+	let count = 0;
+	for ( const segment of segmenters.get( lang ).segment( text ) ) {
+		if ( segment.isWordLike ) {
+			count++;
+		}
+	}
+	return count;
 };
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+mw.editcheck.LeadLengthEditCheck.prototype.canBeShown = function ( ...args ) {
+	// Without Intl.Segmenter, words can not be counted correctly in all languages,
+	// so best not to show this check at all, rather than risk a false positive via
+	// some other method of counting.
+	if ( typeof Intl.Segmenter !== 'function' ) {
+		return false;
+	}
+	return mw.editcheck.LeadLengthEditCheck.super.prototype.canBeShown.call( this, ...args );
+};
 
 /**
  * Get the paragraphs of the lead section

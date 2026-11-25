@@ -11,6 +11,17 @@ QUnit.module( 'mw.editcheck.LeadLengthEditCheck', ve.test.utils.newEditCheckEnvi
 		assert.strictEqual( countWords( '', 'en' ), 0, 'Empty string' );
 	} );
 
+	QUnit.test( 'canBeShown without Intl.Segmenter', ( assert ) => {
+		const check = new mw.editcheck.LeadLengthEditCheck( null, {}, true );
+		const segmenter = Intl.Segmenter;
+		Intl.Segmenter = undefined;
+		try {
+			assert.false( check.canBeShown(), 'Check is disabled' );
+		} finally {
+			Intl.Segmenter = segmenter;
+		}
+	} );
+
 	QUnit.test( 'onBranchNodeChange', ( assert ) => {
 		const cases = [
 			{
