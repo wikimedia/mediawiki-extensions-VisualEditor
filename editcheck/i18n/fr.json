@@ -20,7 +20,8 @@
 			"Urhixidur",
 			"Wladek92",
 			"M Conte2003",
-			"Uriel"
+			"Uriel",
+			"Eihel"
 		]
 	},
 	"editchecks": "Vérifications de modifications",
@@ -156,6 +157,7 @@
 	"editcheck-specialeditchecks-config-matchitem": "Configuration des correspondances de texte",
 	"editcheck-suggestionfeedback-label-about": "à propos des suggestions",
 	"editcheck-suggestionfeedback-label-report": "Signaler un problème",
+	"editcheck-suggestionfeedback-label-configuration": "Suggestion de configuration",
 	"editcheck-experimental-subheading-suggestion": "Suggestion expérimentale pour les tests",
 	"editcheck-experimental-subheading-check": "Vérification d'édition expérimentale pour les tests",
 	"editcheck-suggestionfeedback-label-experimental": "Afficher les suggestions expérimentales",

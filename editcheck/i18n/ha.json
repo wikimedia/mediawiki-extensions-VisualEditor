@@ -7,7 +7,8 @@
 			"Umar Rabiuu",
 			"Umar2z",
 			"Ummabruka",
-			"Yusuf Sa'adu"
+			"Yusuf Sa'adu",
+			"Em-em"
 		]
 	},
 	"editchecks": "Duba gyara",
@@ -27,6 +28,7 @@
 	"editcheck-dialog-scroll-into-view": "Duba shawarwari",
 	"editcheck-dialog-success-suggestion": "An kammala shawara!",
 	"editcheck-dialog-success-check": "An kammala dubawa",
+	"editcheck-dialog-publish-path-message": "Za ka iya wallafa wannan sauyi yanzu ko kuma ka nemi ƙari don ingantawa.",
 	"editcheck-dialog-action-view-more-suggestions": "Dubi ƙari",
 	"editcheck-dialog-action-publish": "Wallafa",
 	"editcheck-dialog-toggle": "Canja ganuwa",
@@ -94,7 +96,7 @@
 	"editcheck-action-dismiss": "yi watsi da",
 	"editcheck-suggestedlink-title": "Ƙara Mahaɗa",
 	"editcheck-suggestedlink-description": "Wannan rubutun bai haɗu da wani labari ba. Ƙara hanyar haɗi zuwa [{{int:editcheck-suggestedlink-descriptionlink}} taimaka wa masu karatu su kara koyo] game da wannan batu.",
-	"editcheck-suggestedlink-prompt": "Haɗa \" $1 \" zuwa [[$2]]?",
+	"editcheck-suggestedlink-prompt": "Mahaɗa \" $1 \" zuwa [[$2]]?",
 	"editcheck-suggestedlink-action-add-link": "Ƙara mahaɗa",
 	"editcheck-suggestedlink-footer": "Hanyoyin da aka ba da shawarar an samar da su ne ta hanyar inji. Bincike kafin ƙarawa.",
 	"editcheck-action-add-caption": "Ƙara take",
@@ -142,8 +144,10 @@
 	"editcheck-specialeditchecks-config-matchitem": "Tsarin daidaitawar rubutu",
 	"editcheck-suggestionfeedback-label-about": "Daidaita shawarwari",
 	"editcheck-suggestionfeedback-label-report": "Bada rahoton matsala",
+	"editcheck-suggestionfeedback-label-configuration": "Tsarin shawarwari",
 	"editcheck-experimental-subheading-suggestion": "Shawarwarin gwaji don gwaji",
 	"editcheck-experimental-subheading-check": "Binciken gyare-gyaren na gwaji don gwaji",
+	"editcheck-suggestionfeedback-label-experimental": "Sauran shawarwarin gwaji",
 	"tag-editcheck-reference-decline-common-knowledge": "Gyara Bincike (masu ambaton) ya ƙi (sani na yau da kuma kullun)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "An ƙi bayanin kyara binciken a matsayin sanarwa ta kowa",
 	"tag-editcheck-reference-decline-irrelevant": "An ƙi  Duba (Manazarta) (basu da alaka)",

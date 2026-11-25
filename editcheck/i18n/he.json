@@ -5,7 +5,8 @@
 			"Neriah",
 			"YaronSh",
 			"מקף",
-			"ערן"
+			"ערן",
+			"A100Star"
 		]
 	},
 	"editchecks": "בדיקות עריכה",
@@ -25,7 +26,7 @@
 	"editcheck-dialog-scroll-into-view": "הצגת הצעות",
 	"editcheck-dialog-success-suggestion": "ההצעה הושלמה!",
 	"editcheck-dialog-success-check": "הבדיקה הושלמה!",
-	"editcheck-dialog-publish-path-message": "השינוי שלך מוכן לפרסום באתר {{SITENAME}}. אפשר לפרסם את השינוי הזה כעת או לחפש שיפורים נוספים.",
+	"editcheck-dialog-publish-path-message": "אפשר לפרסם את השינוי הזה כעת, או להמשיך לחפש דברים נוספים שאפשר לשפר.",
 	"editcheck-dialog-action-view-more-suggestions": "להציג עוד",
 	"editcheck-dialog-action-publish": "פרסום",
 	"editcheck-dialog-toggle": "הצגה או הסתרה",
@@ -143,7 +144,7 @@
 	"editcheck-suggestionfeedback-label-report": "דיווח על תקלה",
 	"editcheck-experimental-subheading-suggestion": "הצעה ניסיונית לבדיקה",
 	"editcheck-experimental-subheading-check": "הצעה ניסיונית לבדיקה",
-	"editcheck-suggestionfeedback-label-experimental": "צפייה בהצעות ניסיוניות",
+	"editcheck-suggestionfeedback-label-experimental": "הצעות ניסיוניות אחרות",
 	"tag-editcheck-reference-decline-common-knowledge": "מערכת בדיקת עריכה (הערות שוליים) – נדחה (ידוע לכול)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "הערת שוליים שהוצעה דרך מערכת בדיקת עריכה נדחתה בשל היותה ידועה לכול",
 	"tag-editcheck-reference-decline-irrelevant": "מערכת בדיקת עריכה (הערות שוליים) – נדחה (לא רלוונטי)",

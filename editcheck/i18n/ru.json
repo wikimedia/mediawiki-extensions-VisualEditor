@@ -135,6 +135,7 @@
 	"editcheck-specialeditchecks-config-matchitem": "Настройки работы с текстом",
 	"editcheck-suggestionfeedback-label-about": "О предложениях",
 	"editcheck-suggestionfeedback-label-report": "Сообщить о проблеме",
+	"editcheck-suggestionfeedback-label-configuration": "Настройки предложения",
 	"editcheck-experimental-subheading-suggestion": "Экспериментальное предложение для тестирования",
 	"editcheck-experimental-subheading-check": "Тестируемая проверка",
 	"tag-editcheck-reference-decline-common-knowledge": "Проверка правок (источники) отклонена (общеизвестно)",

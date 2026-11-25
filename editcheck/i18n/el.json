@@ -22,6 +22,7 @@
 	"editcheck-dialog-scroll-into-view": "Προβολή προτάσεων",
 	"editcheck-dialog-success-suggestion": "Η πρόταση ολοκληρώθηκε!",
 	"editcheck-dialog-success-check": "Ο έλεγχος ολοκληρώθηκε!",
+	"editcheck-dialog-publish-path-message": "Μπορείτε να δημοσιεύσετε αυτήν την αλλαγή τώρα ή να αναζητήσετε περισσότερες βελτιώσεις.",
 	"editcheck-dialog-action-view-more-suggestions": "Δείτε περισσότερες",
 	"editcheck-dialog-action-publish": "Δημοσίευση",
 	"editcheck-dialog-toggle": "Εναλλαγή ορατότητας",
@@ -137,9 +138,10 @@
 	"editcheck-specialeditchecks-config-matchitem": "Ρύθμιση αντιστοίχισης κειμένου",
 	"editcheck-suggestionfeedback-label-about": "Σχετικά με τις προτάσεις",
 	"editcheck-suggestionfeedback-label-report": "Αναφορά προβλήματος",
+	"editcheck-suggestionfeedback-label-configuration": "Ρύθμιση παραμέτρων πρότασεων",
 	"editcheck-experimental-subheading-suggestion": "Πειραματική πρόταση για δοκιμή",
 	"editcheck-experimental-subheading-check": "Πειραματικός έλεγχος επεξεργασίας για δοκιμή",
-	"editcheck-suggestionfeedback-label-experimental": "Δείτε πειραματικές προτάσεις",
+	"editcheck-suggestionfeedback-label-experimental": "Άλλες πειραματικές προτάσεις",
 	"tag-editcheck-reference-decline-common-knowledge": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε (κοινή γνώση)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Η αναφορά EditCheck απορρίφθηκε ως κοινή γνώση.",
 	"tag-editcheck-reference-decline-irrelevant": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε (άσχετο)",
@@ -148,5 +150,6 @@
 	"tag-editcheck-reference-decline-other-description": "Η αναφορά EditCheck απορρίφθηκε για μη καταχωρημένο λόγο.",
 	"tag-editcheck-reference-decline-uncertain": "Ο Έλεγχος Επεξεργασίας (παραπομπές) απορρίφθηκε =(αβέβαιο)",
 	"tag-editcheck-reference-decline-uncertain-description": "Η αναφορά EditCheck απορρίφθηκε ως αβέβαιη",
-	"communityconfiguration-editcheck-title": "Έλεγχοι επεξεργασιών"
+	"communityconfiguration-editcheck-title": "Έλεγχοι επεξεργασιών",
+	"communityconfiguration-editcheck-description": "Ορίστε τις συνθήκες που ενεργοποιούν τους ελέγχους επεξεργασίας και τις προτάσεις και αποφασίστε ποιος τις βλέπει"
 }

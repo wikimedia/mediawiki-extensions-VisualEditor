@@ -7,7 +7,8 @@
 			"Jeroen N",
 			"Mainframe98",
 			"McDutchie",
-			"Siebrand"
+			"Siebrand",
+			"Sjoerddebruin"
 		]
 	},
 	"editchecks": "Bewerkingscontroles",
@@ -27,7 +28,7 @@
 	"editcheck-dialog-scroll-into-view": "Suggesties bekijken",
 	"editcheck-dialog-success-suggestion": "Voorstel uitgevoerd!",
 	"editcheck-dialog-success-check": "Controle voltooid!",
-	"editcheck-dialog-publish-path-message": "Uw wijziging is klaar om op {{SITENAME}} te verschijnen. U kunt de wijziging nu publiceren of eerst nog andere dingen verbeteren.",
+	"editcheck-dialog-publish-path-message": "U kunt de wijziging nu publiceren of eerst nog andere dingen verbeteren.",
 	"editcheck-dialog-action-view-more-suggestions": "Meer weergeven",
 	"editcheck-dialog-action-publish": "Publiceren",
 	"editcheck-dialog-toggle": "Zichtbaarheid in-/uitschakelen",
@@ -143,9 +144,10 @@
 	"editcheck-specialeditchecks-config-matchitem": "Tekstovereenkomstinstellingen",
 	"editcheck-suggestionfeedback-label-about": "Over suggesties",
 	"editcheck-suggestionfeedback-label-report": "Een probleem melden",
+	"editcheck-suggestionfeedback-label-configuration": "Suggestieconfiguratie",
 	"editcheck-experimental-subheading-suggestion": "Experimenteel voorstel om te testen",
 	"editcheck-experimental-subheading-check": "Experimentele bewerkingscontrole om te testen",
-	"editcheck-suggestionfeedback-label-experimental": "Experimentele voorstellen weergeven",
+	"editcheck-suggestionfeedback-label-experimental": "Andere experimentele voorstellen",
 	"tag-editcheck-reference-decline-common-knowledge": "Edit Check (referenties) afgewezen (algemene kennis)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "De EditCheck-referentie is afgewezen als algemeen bekend",
 	"tag-editcheck-reference-decline-irrelevant": "Edit Check (referenties) afgewezen (niet relevant)",

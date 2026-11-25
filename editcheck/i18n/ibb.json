@@ -21,6 +21,7 @@
 	"editcheck-dialog-scroll-into-view": "Se ikpekghe unam mkpo",
 	"editcheck-dialog-success-suggestion": "Ema ikpekghe adinam",
 	"editcheck-dialog-success-check": "Ese ema",
+	"editcheck-dialog-publish-path-message": "Ame akeme adisin se anam ami ke afvm imidoho ntro afo ase mme usung mfen aba se enam yak ofon",
 	"editcheck-dialog-action-view-more-suggestions": "Se yak awak",
 	"editcheck-dialog-action-publish": "Sin ke afvm",
 	"editcheck-dialog-toggle": "Adikid adinam",
@@ -107,8 +108,10 @@
 	"editcheck-specialeditchecks-config-matchitem": "Iko nwed ado keed ye usung unam mkpo",
 	"editcheck-suggestionfeedback-label-about": "Ke abanga me usung ye usung",
 	"editcheck-suggestionfeedback-label-report": "Doko mfina",
+	"editcheck-suggestionfeedback-label-configuration": "Mme usung ye usung unam mkpo",
 	"editcheck-experimental-subheading-suggestion": "Mme usung ye usung unam Mkpo yak ese mme afon",
 	"editcheck-experimental-subheading-check": "Mme usung unanga mkpo ekamaje ese mme mkpo afon",
+	"editcheck-suggestionfeedback-label-experimental": "Mme usung ye usung unam mkpo mfen",
 	"tag-editcheck-reference-decline-irrelevant-description": " itie nte edad iko newd eto  ifono nko eduok anye",
 	"tag-editcheck-reference-decline-other": "Esio (nte edad iko nwed) efep (mfen)",
 	"tag-editcheck-reference-decline-other-description": "Esio  itie nte eben iko eto efpe, ado owo inoho ntak"

@@ -21,6 +21,7 @@
 	"editcheck-dialog-scroll-into-view": "Raba ivyiyumviro",
 	"editcheck-dialog-success-suggestion": "Iciyumviro cararangiye!",
 	"editcheck-dialog-success-check": "Suzuma vyarangiye!",
+	"editcheck-dialog-publish-path-message": "Urashobora gusohora iryo hinduka ubu canke kurondera ayandi yo kuryohora.",
 	"editcheck-dialog-action-view-more-suggestions": "Raba ibindi",
 	"editcheck-dialog-action-publish": "Gutangaza",
 	"editcheck-dialog-toggle": "Guhindura ukuboneka",
@@ -132,12 +133,14 @@
 	"editcheck-specialeditchecks-config-summary": "Ingene ibintu bihindurwa",
 	"editcheck-suggestionfeedback-label-about": "Ivyerekeye ivyiyumviro",
 	"editcheck-suggestionfeedback-label-report": "Nenyesha ingorane",
+	"editcheck-suggestionfeedback-label-configuration": "Gushirako ivyiyumviro",
 	"editcheck-experimental-subheading-suggestion": "Ingingo y'ugupima",
 	"editcheck-experimental-subheading-check": "Gusuzuma ivyigwa vy'ubushakashatsi",
+	"editcheck-suggestionfeedback-label-experimental": "Ibindi vyiyumviro vy'igerageza",
 	"tag-editcheck-reference-decline-common-knowledge": "Guhindura isuzuma (ivyo wisunze) vyanse (ubumenyi rusangi)",
 	"tag-editcheck-reference-decline-irrelevant": "Guhindura isuzuma (ivyo wisunze) vyanse (ntaco bimaze)",
-	"tag-editcheck-reference-decline-other": "Guhindura isuzuma (ivyo wasubiyeko) vyanse (ibindi)",
+	"tag-editcheck-reference-decline-other": "Guhindura isuzuma (ivyo wisunze) vyanse (ntaco bimaze)",
 	"tag-editcheck-reference-decline-uncertain": "Guhindura isuzuma (ivyo wisunze) vyanse (ntaco bimaze)",
 	"communityconfiguration-editcheck-title": "Guhindura",
-	"communityconfiguration-editcheck-description": "Niwishingire amategeko atuma abantu bahindura ibintu, uce uhitamwo uwubironka"
+	"communityconfiguration-editcheck-description": "Niwishingire amategeko atuma abantu bahindura ibintu, uce uhitamwo uwubibona"
 }
