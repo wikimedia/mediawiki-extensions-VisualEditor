@@ -15,20 +15,33 @@
 
 		// The icon is in EditCheckGutterSectionIconWidget.less
 
-		&-error {
-			border-left: 2px solid @color-error;
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 2.5px;
 		}
 
-		&-warning {
-			border-left: 2px solid @color-warning;
+		&-error::before {
+			background-color: @color-error;
 		}
 
-		&-progressive {
-			border-left: 2px solid @color-progressive;
+		&-warning::before {
+			background-color: @color-warning;
 		}
 
-		&-quickaction {
-			border-left: 0;
+		&-progressive::before {
+			background-color: @color-progressive;
+		}
+
+		&-inactive::before {
+			width: 1.5px;
+		}
+
+		&-quickaction::before {
+			content: none;
 		}
 	}
 }
