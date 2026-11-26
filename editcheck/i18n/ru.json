@@ -141,6 +141,7 @@
 	"editcheck-suggestionfeedback-label-configuration": "Настройки предложения",
 	"editcheck-experimental-subheading-suggestion": "Экспериментальное предложение для тестирования",
 	"editcheck-experimental-subheading-check": "Тестируемая проверка",
+	"editcheck-suggestionfeedback-label-experimental": "Другие экспериментальные предложения",
 	"tag-editcheck-reference-decline-common-knowledge": "Проверка правок (источники) отклонена (общеизвестно)",
 	"tag-editcheck-reference-decline-common-knowledge-description": "Источник EditCheck был отклонён как общеизвестный факт",
 	"tag-editcheck-reference-decline-irrelevant": "Проверка правок (источники) отклонена (неуместно)",
