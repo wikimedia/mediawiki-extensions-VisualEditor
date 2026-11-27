@@ -3,7 +3,8 @@
 		"authors": [
 			"Ainali",
 			"Stefan2255",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Sabelöga"
 		]
 	},
 	"editchecks": "Redigeringskontroller",
@@ -89,6 +90,7 @@
 	"editcheck-specialeditchecks-header-betafeatures": "Betafunktioner",
 	"editcheck-specialeditchecks-header-default": "Standardkontroller",
 	"editcheck-specialeditchecks-header-experimental": "Experimentella kontroller",
+	"editcheck-specialeditchecks-header-unsupported": "Kontroller som inte stöds",
 	"editcheck-specialeditchecks-col-title": "Titel",
 	"editcheck-specialeditchecks-col-name": "Namn",
 	"editcheck-specialeditchecks-col-appearance": "Utseende",
